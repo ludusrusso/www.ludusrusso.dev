@@ -1,22 +1,18 @@
-import { useQuery } from '@apollo/client';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import { InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { Footer } from '../components/footer';
 import { BlogIcon } from '../components/icon';
 import { PostPreview } from '../components/post-preview';
-import styles from '../styles/Home.module.css';
-import { apolloClient } from '../utils/apollo';
 import { getBlogData } from '../utils/getBlogData';
-import { TestDocument } from '../utils/graphql';
 import { navigation } from '../utils/nav';
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>@ludusrusso</title>
         <meta name="description" content="Ludusrusso è il sito di Ludovico Russo" />
@@ -45,7 +41,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 }
 
