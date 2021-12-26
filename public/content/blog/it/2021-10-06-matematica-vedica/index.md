@@ -1,17 +1,17 @@
 ---
-title: "Matematica Vedica: trucchi per essere più veloci di una calcolatrice (e perchè funzionano)!"
-layout: "post"
-date: "2021-10-05T00:00:00.000Z"
+title: 'Matematica Vedica: trucchi per essere più veloci di una calcolatrice (e perchè funzionano)!'
+layout: 'post'
+date: '2021-10-05T00:00:00.000Z'
 headerImage: true
 read-time: true
 tags:
-  - "Blog"
-  - "Math"
-category: "blog"
-author: "ludusrusso"
-description: "Come diventare supereroi facendo i conti a mente!"
-path: "/2021/10/05/matematica-vedica/"
-image: "./main.png"
+  - 'Blog'
+  - 'Math'
+category: 'blog'
+author: 'ludusrusso'
+description: 'Come diventare supereroi facendo i conti a mente!'
+path: '/2021/10/05/matematica-vedica/'
+image: './main.png'
 ---
 
 Chi mi conosce sa che sono sempre stato un tipo molto preso dalla matematica, al liceo sono sempre stato

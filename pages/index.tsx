@@ -1,15 +1,20 @@
 import { useQuery } from '@apollo/client';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { Footer } from '../components/footer';
+import { BlogIcon } from '../components/icon';
+import { PostPreview } from '../components/post-preview';
 import styles from '../styles/Home.module.css';
 import { apolloClient } from '../utils/apollo';
+import { getBlogData } from '../utils/getBlogData';
 import { TestDocument } from '../utils/graphql';
+import { navigation } from '../utils/nav';
 
-export default function Home(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,27 +25,49 @@ export default function Home(props: InferGetServerSidePropsType<typeof getServer
 
       <HeroSection />
 
+      <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+        <div className="absolute inset-0">
+          <div className="bg-white h-1/3 sm:h-2/3" />
+        </div>
+        <div className="relative max-w-7xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+              I miei ultimi post del Blog
+            </h2>
+            <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">Guarda i miei ultimi articoli</p>
+          </div>
+          <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+            {posts.map((post) => (
+              <PostPreview post={post.frontMatter} key={post.frontMatter.title} />
+            ))}
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
 }
 
-export const getServerSideProps = async () => {
-  const res = await apolloClient.query({ query: TestDocument });
-  return {
-    props: {
-      test: 'test',
-      res: res.data,
-    },
-  };
-};
+export async function getStaticProps() {
+  const blogData = await getBlogData();
+  const posts = blogData
+    .filter((p) => {
+      return p.file.startsWith('public/content/blog');
+    })
+    .sort((a, b) => b.frontMatter.published.getTime() - a.frontMatter.published.getTime())
+    .filter((_, idx) => idx < 6)
+    .map((d) => {
+      const { frontMatter } = d;
+      return {
+        frontMatter,
+      };
+    });
 
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-];
+  return {
+    props: { posts },
+  };
+}
 
 const icons = [
   {
@@ -93,15 +120,8 @@ const HeroSection = () => {
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                   <div className="flex items-center justify-between w-full md:w-auto">
                     <a href="#" className="text-indigo-600">
-                      <span className="sr-only">Workflow</span>
-                      <svg width="40" height="40" viewBox="0 0 211 211">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M180.1 30.9002L105.5 0L30.9002 30.9002L0 105.5L30.9002 180.1L105.5 211L180.1 180.1L211 105.5L180.1 30.9002ZM105 179C145.869 179 179 145.869 179 105C179 64.1309 145.869 31 105 31C64.1309 31 31 64.1309 31 105C31 145.869 64.1309 179 105 179Z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                      <span className="sr-only">@ludusrusso</span>
+                      <BlogIcon size={40} />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -113,13 +133,10 @@ const HeroSection = () => {
                 </div>
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                   {navigation.map((item) => (
-                    <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
-                      {item.name}
-                    </a>
+                    <Link key={item.name} href={item.href}>
+                      <a className="font-medium text-gray-500 hover:text-gray-900">{item.name}</a>
+                    </Link>
                   ))}
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Log in
-                  </a>
                 </div>
               </nav>
             </div>
@@ -139,12 +156,8 @@ const HeroSection = () => {
               >
                 <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                   <div className="px-5 pt-4 flex items-center justify-between">
-                    <div>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                        alt=""
-                      />
+                    <div className="text-indigo-600">
+                      <BlogIcon size={32} />
                     </div>
                     <div className="-mr-2">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -164,12 +177,6 @@ const HeroSection = () => {
                       </a>
                     ))}
                   </div>
-                  <a
-                    href="#"
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
-                  >
-                    Log in
-                  </a>
                 </div>
               </Popover.Panel>
             </Transition>

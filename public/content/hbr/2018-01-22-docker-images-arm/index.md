@@ -1,18 +1,18 @@
 ---
-title: "Come compilare Immagini Docker per ARM su host Intel"
+title: 'Come compilare Immagini Docker per ARM su host Intel'
 redirect_from:
-  - "/2018/01/22/docker-immagini-arm/"
-layout: "post"
-date: "2018-01-22T00:00:00.000Z"
+  - '/2018/01/22/docker-immagini-arm/'
+layout: 'post'
+date: '2018-01-22T00:00:00.000Z'
 tag:
-  - "Docker"
-  - "ARM"
-  - "qemu"
-author: "fiorellazza"
-starred: true
-description: "Buildare Immagini Docker per host ARM su Intel"
-path: "/hbr/come-compilare-immagini-docker-per-arm-su-host-intel/"
-image: "./Processor_ARM_anteprima.png"
+  - 'Docker'
+  - 'ARM'
+  - 'qemu'
+author: 'fiorellazza'
+featured: true
+description: 'Buildare Immagini Docker per host ARM su Intel'
+path: '/hbr/come-compilare-immagini-docker-per-arm-su-host-intel/'
+image: './Processor_ARM_anteprima.png'
 tags: []
 ---
 
