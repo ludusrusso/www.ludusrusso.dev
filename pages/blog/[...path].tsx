@@ -14,6 +14,16 @@ import { getBlogData } from '../../utils/getBlogData';
 export default function TestPage({ source, frontmatter }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
     img: ({ src, alt }) => <img alt={alt} src={path.join(frontmatter.imagePath, src)} />,
+    AmazonAffiliationLink: ({ src }: { src: string }) => (
+      <div className="m-auto">
+        <iframe
+          style={{ width: '120px', height: '240px', margin: 'auto' }}
+          scrolling="no"
+          frameBorder="0"
+          src={src}
+        ></iframe>
+      </div>
+    ),
   };
 
   return (
