@@ -90,6 +90,7 @@ const _getBlogData = async () => {
           description: data.description,
           href: path.join('/blog', postPath),
           image: path.join('/', file.replace('public/', '/'), '..', data.image),
+          imagePath: path.join('/', file.replace('public/', '/'), '..'),
         },
       };
     })

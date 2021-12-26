@@ -35,10 +35,7 @@ export default function Blog({ posts }: InferGetStaticPropsType<typeof getStatic
 export async function getStaticProps() {
   const blogData = await getBlogData();
   const posts = blogData
-    .filter((p) => {
-      console.log(p.file);
-      return p.file.startsWith('public/content/hbr');
-    })
+    .filter((p) => p.file.startsWith('public/content/hbr'))
     .sort((a, b) => b.frontMatter.published.getTime() - a.frontMatter.published.getTime())
     .map((d) => {
       const { frontMatter } = d;

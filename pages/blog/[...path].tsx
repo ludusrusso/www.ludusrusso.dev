@@ -13,7 +13,7 @@ import { getBlogData } from '../../utils/getBlogData';
 
 export default function TestPage({ source, frontmatter }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
-    img: ({ src }) => <img src={path + './' + src} />,
+    img: ({ src, alt }) => <img alt={alt} src={path.join(frontmatter.imagePath, src)} />,
   };
 
   return (
