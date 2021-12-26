@@ -1,0 +1,16 @@
+query GetAllParticipants {
+  getParticipants(skip: 0, take: 100) {
+    total
+    edges {
+      participant {
+        id
+        name
+        github
+        avatar
+        bio
+        twitter
+        linkedin
+      }
+    }
+  }
+}

@@ -1,6 +1,8 @@
 const { withSuperjson } = require('next-superjson');
 
-module.exports = withSuperjson({
+module.exports = withSuperjson()({
   reactStrictMode: true,
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'tsx'],
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
 });

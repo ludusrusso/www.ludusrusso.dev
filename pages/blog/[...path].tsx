@@ -1,3 +1,4 @@
+import { DiscussionEmbed } from 'disqus-react';
 import { InferGetStaticPropsType } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -10,6 +11,7 @@ import { Footer } from '../../components/footer';
 import { Nav } from '../../components/nav';
 import { SEO } from '../../components/seo';
 import { Tag } from '../../components/tag';
+import { config } from '../../utils/config';
 import { getBlogData } from '../../utils/getBlogData';
 
 export default function TestPage({ source, frontmatter }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -83,6 +85,18 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
 
         <div className="prose prose-lg m-auto mt-6 px-2 md:px-0">
           <MDXRemote {...source} components={components} />
+        </div>
+
+        <div className="prose prose-lg m-auto mt-6">
+          <DiscussionEmbed
+            shortname={config.disqus.shortname}
+            config={{
+              url: path.join(config.hostname, frontmatter.path),
+              identifier: frontmatter.path,
+              title: frontmatter.title,
+              language: 'it',
+            }}
+          />
         </div>
       </main>
       <Footer />
