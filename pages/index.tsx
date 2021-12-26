@@ -7,18 +7,14 @@ import { Fragment } from 'react';
 import { Footer } from '../components/footer';
 import { BlogIcon } from '../components/icon';
 import { PostPreview } from '../components/post-preview';
+import { SEO } from '../components/seo';
 import { getBlogData } from '../utils/getBlogData';
 import { navigation } from '../utils/nav';
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Head>
-        <title>@ludusrusso</title>
-        <meta name="description" content="Ludusrusso è il sito di Ludovico Russo" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <SEO title="Home" />
       <HeroSection />
 
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">

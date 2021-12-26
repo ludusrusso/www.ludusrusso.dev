@@ -8,6 +8,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { Footer } from '../../components/footer';
 import { Nav } from '../../components/nav';
+import { SEO } from '../../components/seo';
 import { Tag } from '../../components/tag';
 import { getBlogData } from '../../utils/getBlogData';
 
@@ -28,8 +29,10 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
 
   return (
     <>
+      <SEO title={frontmatter.title} description={frontmatter.description} image={frontmatter.image} />
+
       <Head>
-        <title>{frontmatter.title} </title>
+        <title>{frontmatter.title} | @ludusrusso </title>
         <meta name="description" content={frontmatter.description} />
         <link
           rel="stylesheet"

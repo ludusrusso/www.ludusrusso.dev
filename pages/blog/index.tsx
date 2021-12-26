@@ -2,11 +2,14 @@ import { InferGetStaticPropsType } from 'next';
 import { Footer } from '../../components/footer';
 import { Nav } from '../../components/nav';
 import { PostPreview } from '../../components/post-preview';
+import { SEO } from '../../components/seo';
 import { getBlogData } from '../../utils/getBlogData';
 
 export default function Blog({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <SEO title="Blog" />
+
       <Nav />
 
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
