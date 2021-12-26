@@ -75,9 +75,6 @@ const _getBlogData = async () => {
       const author = authors.find((a) => a.id === data.author) || authors[0];
       const readTime = readingTime(content);
       const postPath = data.path || extractPathFromFile(file);
-      if (file.startsWith('public/content/blog/it')) {
-        console.log(`https://ludusrusso.cc${data.path}, https://ludusrusso.space/blog${data.path}`);
-      }
       return {
         file,
         content,
