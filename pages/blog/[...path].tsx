@@ -29,7 +29,14 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
 
   return (
     <>
-      <SEO title={frontmatter.title} description={frontmatter.description} image={frontmatter.image} />
+      <SEO
+        title={frontmatter.title}
+        description={frontmatter.description}
+        image={frontmatter.image}
+        author={frontmatter.author.name}
+        date={frontmatter.published}
+        type="article"
+      />
 
       <Head>
         <title>{frontmatter.title} | @ludusrusso </title>
