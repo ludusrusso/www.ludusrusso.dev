@@ -15,7 +15,7 @@ export const Nav = () => {
   const router = useRouter();
 
   const linkActive = (path: string) => {
-    return router.pathname.startsWith(path);
+    return router.pathname === path;
   };
 
   return (
