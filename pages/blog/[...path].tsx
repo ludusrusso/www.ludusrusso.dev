@@ -91,7 +91,7 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
           <DiscussionEmbed
             shortname={config.disqus.shortname}
             config={{
-              url: 'https://' + path.join(config.hostname, frontmatter.path),
+              url: 'https://' + path.join(config.hostname, 'blog', frontmatter.path),
               identifier: frontmatter.path,
               title: frontmatter.title,
               language: 'it',
