@@ -1,14 +1,14 @@
 ---
-title: "Usare il braccio robotico Dobot con ROS"
-layout: "post"
-date: "2018-06-29T00:00:00.000Z"
-lang: "it"
+title: 'Usare il braccio robotico Dobot con ROS'
+layout: 'post'
+date: '2018-06-29T00:00:00.000Z'
+lang: 'it'
 tag:
-  - "ROS"
-author: "sgabello"
-description: "Come usare il braccio robotico con Robot Operating System"
-path: "/hbr/usare-il-braccio-robotico-dobot-con-ros/"
-image: "./rosdobot.jpg"
+  - 'ROS'
+author: 'sgabello'
+description: 'Come usare il braccio robotico con Robot Operating System'
+path: '/hbr/usare-il-braccio-robotico-dobot-con-ros/'
+image: './rosdobot.jpg'
 tags: []
 ---
 
@@ -22,7 +22,7 @@ Prima vediamo a grandi linee cos'è, e perchè mi piace un sacco!
 
 Dobot è un braccio robotico multifunzione prodotto dall'azienda cinese Shenzhen Yuejiang Technology Co. L'azienda naque nel 2015 a seguito di una campagna Kickstarter di grande successo (raccolsero più di 650 mila dollari). Da allora hanno già prodotto 5 modelli di robot diversi.
 
-<iframe width="900" height="500" src="https://www.youtube.com/embed/ggT4hz5tM_0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<YouTube videoId="ggT4hz5tM_0" frameborder="0" allow="autoplay; encrypted-media" />
 
 Dobot è un prodotto nato per l'education concepito sia per chi vuole muovere i primi passi nel coding fino ad arrivare anche ai più esperti. Non richiede alcun assemblaggio da parte dell'utente e nel kit ci sono un sacco di accessori per offrire funzionalità divertenti e che richiedono una precisione non banale come ad esempio: disegnare su carta, incidere al laser, stampare in 3D, posizionare piccoli oggetti. Si può programmare in Blockly (simil Scratch), in Python e da ora grazie al mio fantastico tutorial anche in ROS!
 
@@ -73,4 +73,4 @@ ed infine in un altro terminale ancora un semplice nodo che pubblica solo i punt
 
 E come risultato finale avremo questa fantastica spirale!
 
-<iframe width="900" height="500" src="https://www.youtube.com/embed/eXZgVXh3Phg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<YouTube videoId="eXZgVXh3Phg" />

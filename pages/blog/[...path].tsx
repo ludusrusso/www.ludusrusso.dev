@@ -13,6 +13,7 @@ import { SEO } from '../../components/seo';
 import { Tag } from '../../components/tag';
 import { config } from '../../utils/config';
 import { getBlogData } from '../../utils/getBlogData';
+import YouTube from 'react-youtube';
 
 export default function TestPage({ source, frontmatter }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
@@ -27,6 +28,7 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
         ></iframe>
       </div>
     ),
+    YouTube: ({ videoId }) => <YouTube className="w-full" opts={{}} videoId={videoId} />,
   };
 
   return (

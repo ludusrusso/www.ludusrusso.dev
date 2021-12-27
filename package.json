@@ -26,6 +26,7 @@
     "next-superjson": "^0.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-youtube": "^7.13.1",
     "rehype-katex": "^5.0.0",
     "remark-math": "^3.0.1",
     "superjson": "^1.8.0"
