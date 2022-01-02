@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { Form, FormSpy } from 'react-final-form';
-import { Navigate } from 'react-router-dom';
-import { z } from 'zod';
-import { BlogIcon } from '../../components/icon';
-import { LabeledTextField } from '../components/text-field';
-import { auth } from '../services/auth.service';
-import { zodValidate } from '../utils/zodValidation';
-import { useAuth } from './auth.provider';
+import { useState } from "react";
+import { Form, FormSpy } from "react-final-form";
+import { Navigate } from "react-router-dom";
+import { z } from "zod";
+import { BlogIcon } from "../../components/icon";
+import { LabeledTextField } from "../components/text-field";
+import { auth } from "../services/auth.service";
+import { zodValidate } from "../utils/zodValidation";
+import { useAuth } from "./auth.provider";
+import { trpc } from "../../utils/trpc";
 
 export const LoginPage = () => {
   return (
@@ -16,7 +17,9 @@ export const LoginPage = () => {
           <div className="mx-auto h-12 w-auto flex justify-center text-indigo-600">
             <BlogIcon />
           </div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Accedi con il tuo account</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Accedi con il tuo account
+          </h2>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -37,6 +40,7 @@ const LoginSchema = z.object({
 const LoginForm = () => {
   const [err, setErr] = useState<string>();
   const { currentUser } = useAuth();
+  const { mutate: login, data, error, isLoading } = trpc.useMutation("login");
 
   if (currentUser) {
     return <Navigate to="/" />;
@@ -44,14 +48,14 @@ const LoginForm = () => {
 
   return (
     <Form<{ email: string; password: string }>
-      initialValues={{ email: '', password: '' }}
-      onSubmit={async (value) => {
+      initialValues={{ email: "", password: "" }}
+      onSubmit={async ({ email, password }) => {
         setErr(undefined);
         try {
-          await auth.login(value.email, value.password);
+          login({ password, email });
         } catch (e) {
           console.log(e);
-          setErr('invalid login');
+          setErr("invalid login");
         }
       }}
       validate={zodValidate(LoginSchema)}
@@ -62,7 +66,11 @@ const LoginForm = () => {
           </div>
 
           <div className="mt-1">
-            <LabeledTextField label="Password" name="password" type="password" />
+            <LabeledTextField
+              label="Password"
+              name="password"
+              type="password"
+            />
           </div>
 
           {err && (
@@ -75,7 +83,10 @@ const LoginForm = () => {
             <div className="flex items-center"></div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a
+                href="#"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 Forgot your password?
               </a>
             </div>
@@ -87,9 +98,9 @@ const LoginForm = () => {
                 <button
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-100"
-                  disabled={invalid}
+                  disabled={invalid || isLoading}
                 >
-                  Sign in
+                  {isLoading ? "..." : "Sign in"}
                 </button>
               )}
             ></FormSpy>
