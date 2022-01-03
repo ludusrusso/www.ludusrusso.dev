@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { auth } from "services/auth.service";
 const prisma = new PrismaClient();
-
-import { AuthService } from "../src/services/auth.service";
-const auth = new AuthService(prisma);
 
 async function main() {
   const user = await auth.createUser("admin@admin.com", "admin");

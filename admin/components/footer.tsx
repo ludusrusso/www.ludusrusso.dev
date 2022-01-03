@@ -1,5 +1,11 @@
+import { SVGProps } from "react";
+
 /* This example requires Tailwind CSS v2.0+ */
-const navigation = [
+const navigation: {
+  name: string;
+  href: string;
+  icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+}[] = [
   //   {
   //     name: 'Facebook',
   //     href: '#',
@@ -27,8 +33,8 @@ const navigation = [
   //     ),
   //   },
   {
-    name: 'Twitter',
-    href: 'https://twitter.com/ludusrusso',
+    name: "Twitter",
+    href: "https://twitter.com/ludusrusso",
     icon: (props) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -36,8 +42,8 @@ const navigation = [
     ),
   },
   {
-    name: 'Twitch',
-    href: 'https://twitch.tv/ludusrusso',
+    name: "Twitch",
+    href: "https://twitch.tv/ludusrusso",
     icon: (props) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
@@ -45,8 +51,8 @@ const navigation = [
     ),
   },
   {
-    name: 'GitHub',
-    href: 'https://github.com/ludusrusso',
+    name: "GitHub",
+    href: "https://github.com/ludusrusso",
     icon: (props) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path
@@ -58,8 +64,8 @@ const navigation = [
     ),
   },
   {
-    name: 'YouTube',
-    href: 'https://youtube.com/c/ludusrusso',
+    name: "YouTube",
+    href: "https://youtube.com/c/ludusrusso",
     icon: (props) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -88,7 +94,8 @@ export const Footer = () => {
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
           <p className="text-center text-base text-gray-400">
-            &copy; 2016 - {new Date().getFullYear()} Ludovico Russo. All rights reserved.
+            &copy; 2016 - {new Date().getFullYear()} Ludovico Russo. All rights
+            reserved.
           </p>
         </div>
       </div>

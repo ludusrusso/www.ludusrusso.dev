@@ -1,12 +1,12 @@
-import { Disclosure } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { navigation } from '../utils/nav';
-import { BlogIcon } from './icon';
+import { Disclosure } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { navigation } from "../utils/nav";
+import { BlogIcon } from "./icon";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 export const Nav = () => {
@@ -47,10 +47,10 @@ export const Nav = () => {
                     <Link href={nav.href} key={nav.href}>
                       <a
                         className={classNames(
-                          'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium',
+                          "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
                           linkActive(nav.href)
-                            ? 'border-indigo-500 text-gray-900'
-                            : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                            ? "border-indigo-500 text-gray-900"
+                            : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                         )}
                       >
                         {nav.name}
@@ -133,10 +133,10 @@ export const Nav = () => {
                 <Disclosure.Button as={Link} href={nav.href} key={nav.href}>
                   <a
                     className={classNames(
-                      'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
+                      "block pl-3 pr-4 py-2 border-l-4 text-base font-medium",
                       linkActive(nav.href)
-                        ? 'bg-indigo-50 border-indigo-500 text-indigo-700'
-                        : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+                        ? "bg-indigo-50 border-indigo-500 text-indigo-700"
+                        : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
                     )}
                   >
                     {nav.name}

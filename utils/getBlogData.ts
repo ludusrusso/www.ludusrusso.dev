@@ -1,8 +1,8 @@
-import { glob } from 'glob';
-import { promises as fs } from 'fs';
-import matter from 'gray-matter';
-import { readingTime } from './readtime';
-import path from 'path';
+import { glob } from "glob";
+import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { readingTime } from "./readtime";
+import path from "path";
 
 export interface Author {
   id: string;
@@ -13,34 +13,34 @@ export interface Author {
 
 const authors: Author[] = [
   {
-    id: 'ludusrusso',
-    name: 'Ludovico Russo',
-    bio: 'Dev Passionate',
-    profile: '/imgs/authors/ludusrusso.jpg',
+    id: "ludusrusso",
+    name: "Ludovico Russo",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/ludusrusso.jpg",
   },
   {
-    id: 'sgabello',
-    name: 'Gabriele Ermacora',
-    bio: 'Dev Passionate',
-    profile: '/imgs/authors/sgabello.jpg',
+    id: "sgabello",
+    name: "Gabriele Ermacora",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/sgabello.jpg",
   },
   {
-    id: 'pietrochirio',
-    name: 'Pietro Chiro',
-    bio: 'Dev Passionate',
-    profile: '/imgs/authors/pietrochirio.jpg',
+    id: "pietrochirio",
+    name: "Pietro Chiro",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/pietrochirio.jpg",
   },
   {
-    id: 'fiorellazza',
-    name: 'Fiorella Sibona',
-    bio: 'Aspiring roboticist',
-    profile: '/imgs/authors/fiorellazza.jpg',
+    id: "fiorellazza",
+    name: "Fiorella Sibona",
+    bio: "Aspiring roboticist",
+    profile: "/imgs/authors/fiorellazza.jpg",
   },
   {
-    id: 'ruslan',
-    name: 'Ruslan',
-    bio: 'Dev Passionate',
-    profile: '/imgs/authors/ruslan.jpg',
+    id: "ruslan",
+    name: "Ruslan",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/ruslan.jpg",
   },
 ];
 
@@ -55,7 +55,7 @@ interface Data {
 }
 
 export type PostData = Awaited<ReturnType<typeof _getBlogData>>[number];
-export type PostFrontMatter = PostData['frontMatter'];
+export type PostFrontMatter = PostData["frontMatter"];
 
 let blogData: PostData[];
 
@@ -71,7 +71,10 @@ const _getBlogData = async () => {
   return Promise.all(
     files.map(async (file) => {
       const md = await fs.readFile(file);
-      const { data, content } = matter(md) as unknown as { data: Data; content: string };
+      const { data, content } = matter(md) as unknown as {
+        data: Data;
+        content: string;
+      };
       const author = authors.find((a) => a.id === data.author) || authors[0];
       const readTime = readingTime(content);
       const postPath = data.path || extractPathFromFile(file);
@@ -81,16 +84,16 @@ const _getBlogData = async () => {
         frontMatter: {
           path: postPath,
           author,
-          readTime: readTime === 1 ? '1 min' : `${readTime} mins`,
+          readTime: readTime === 1 ? "1 min" : `${readTime} mins`,
           published: new Date(data.date),
           publishedReadable: printDate(new Date(data.date)),
           featured: Boolean(data.featured) || false,
           tags: data.tags || [],
           title: data.title,
           description: data.description,
-          href: path.join('/blog', postPath),
-          image: path.join('/', file.replace('public/', '/'), '..', data.image),
-          imagePath: path.join('/', file.replace('public/', '/'), '..'),
+          href: path.join("/blog", postPath),
+          image: path.join("/", file.replace("public/", "/"), "..", data.image),
+          imagePath: path.join("/", file.replace("public/", "/"), ".."),
         },
       };
     })
@@ -99,19 +102,22 @@ const _getBlogData = async () => {
 
 const extractPathFromFile = (file: string) => {
   const filename = file
-    .replace(/index.md[x]?$/, '')
-    .split('/')
+    .replace(/index.md[x]?$/, "")
+    .split("/")
     .filter((d) => !!d)
-    .pop()
-    .split('.')[0];
-  return filename.replace(/([0-9]*)-([0-9]*)-[0-9]*-(.*)$/, (_, yy, mm, slug: string) => {
-    return `${yy}/${mm}/${slug.toLowerCase()}`;
-  });
+    .pop()!
+    .split(".")[0];
+  return filename.replace(
+    /([0-9]*)-([0-9]*)-[0-9]*-(.*)$/,
+    (_, yy, mm, slug: string) => {
+      return `${yy}/${mm}/${slug.toLowerCase()}`;
+    }
+  );
 };
 
 async function getFiles() {
   return new Promise<string[]>((resolve, reject) => {
-    glob('public/content/**/*.{md, mdx}', (err, files) => {
+    glob("public/content/**/*.{md, mdx}", (err, files) => {
       if (err) {
         return reject(err);
       }
@@ -120,7 +126,20 @@ async function getFiles() {
   });
 }
 
-const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
+const months = [
+  "Gen",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mag",
+  "Giu",
+  "Lug",
+  "Ago",
+  "Set",
+  "Ott",
+  "Nov",
+  "Dic",
+];
 
 function printDate(date: Date) {
   return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
