@@ -1,8 +1,9 @@
-const { withSuperjson } = require('next-superjson');
+const { withSuperjson } = require("next-superjson");
 
 module.exports = withSuperjson()({
+  presets: ["next/babel"],
   reactStrictMode: true,
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ["avatars.githubusercontent.com"],
   },
 });
