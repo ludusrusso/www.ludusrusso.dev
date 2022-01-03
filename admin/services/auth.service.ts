@@ -11,9 +11,7 @@ export interface Token {
   uid: string;
 }
 
-const url = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}/api/trpc`
-  : "http://localhost:3000/api/trpc";
+const url = "/api/trpc";
 
 const client = createTRPCClient<AppRouter>({
   url: url,
