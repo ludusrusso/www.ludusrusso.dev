@@ -1,6 +1,6 @@
 import { PrismaClient, SignKey, User } from "@prisma/client";
 import { hashSync, genSaltSync, compareSync } from "bcrypt";
-import { nowPlusDays } from "utils/dates";
+import { datePlusDays } from "utils/dates";
 import { generateKeyPairSync } from "crypto";
 import jwt from "jsonwebtoken";
 import { db } from "./db";
@@ -162,7 +162,7 @@ class AuthService {
     const key = await this.db.signKey.findFirst({
       where: {
         expiresAt: {
-          gte: nowPlusDays(15),
+          gte: datePlusDays(15),
         },
       },
     });
@@ -189,7 +189,7 @@ class AuthService {
       data: {
         publicKey,
         privateKey,
-        expiresAt: nowPlusDays(30),
+        expiresAt: datePlusDays(30),
       },
     });
   }

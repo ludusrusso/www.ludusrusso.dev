@@ -1,4 +1,4 @@
-import { ParticipantForm } from "admin/participants/components/ParticipantForm";
+import { ParticipantForm } from "admin/participants/ParticipantForm";
 import { AdminLayout } from "layouts/admin";
 import Router from "next/router";
 import { trpc } from "utils/trpc";

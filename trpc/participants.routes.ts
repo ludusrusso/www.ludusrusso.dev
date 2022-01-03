@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { CreateParticipantSchema } from "./participants.validations";
-import { createRouter } from "./utils";
+import { authMiddleware, createRouter } from "./utils";
 
 export const GetParticipantsSchema = z.object({
   skip: z.number().default(0),
@@ -8,6 +8,7 @@ export const GetParticipantsSchema = z.object({
 });
 
 export const participantsRouter = createRouter()
+  .middleware(authMiddleware)
   .query("getAll", {
     input: GetParticipantsSchema,
     async resolve({ input: { skip, take }, ctx: { db } }) {

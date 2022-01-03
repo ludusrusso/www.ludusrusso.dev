@@ -1,6 +1,7 @@
 import * as trpc from "@trpc/server";
-import { inferAsyncReturnType } from "@trpc/server";
+import { inferAsyncReturnType, TRPCError } from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
+import { MiddlewareFunction } from "@trpc/server/dist/declarations/src/internals/middlewares";
 import { auth } from "services/auth.service";
 import { db } from "services/db";
 
@@ -31,3 +32,13 @@ export async function createContext({
     auth: auth,
   };
 }
+
+export const authMiddleware: MiddlewareFunction<Context, Context> = async ({
+  ctx,
+  next,
+}) => {
+  if (!ctx.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next();
+};

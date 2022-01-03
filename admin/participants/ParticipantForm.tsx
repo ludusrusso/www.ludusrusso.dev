@@ -1,8 +1,8 @@
 import { Form } from "react-final-form";
 import { CreateParticipantSchema } from "trpc/participants.validations";
 import { z } from "zod";
-import { LabeledTextField } from "../../components/text-field";
-import { zodValidate } from "../../utils/zodValidation";
+import { LabeledTextField } from "../components/text-field";
+import { zodValidate } from "../utils/zodValidation";
 
 type CreateParticipant = z.infer<typeof CreateParticipantSchema>;
 

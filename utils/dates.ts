@@ -1,15 +1,15 @@
-export const nowPlusSeconds = (secs: number) => {
-  return new Date(new Date().getTime() + secs * 1000);
+export const datePlusSeconds = (secs: number, date = new Date()) => {
+  return new Date(date.getTime() + secs * 1000);
 };
 
-export const nowPlusMinutes = (mins: number) => {
-  return nowPlusSeconds(mins * 60);
+export const datePlusMinutes = (mins: number, date = new Date()) => {
+  return datePlusSeconds(mins * 60, date);
 };
 
-export const nowPlusHours = (hours: number) => {
-  return nowPlusSeconds(hours * 60 * 60);
+export const datePlusHours = (hours: number, date = new Date()) => {
+  return datePlusSeconds(hours * 60 * 60, date);
 };
 
-export const nowPlusDays = (days: number) => {
-  return nowPlusSeconds(days * 24 * 60 * 60);
+export const datePlusDays = (days: number, date = new Date()) => {
+  return datePlusSeconds(days * 24 * 60 * 60, date);
 };

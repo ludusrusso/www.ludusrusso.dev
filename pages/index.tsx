@@ -1,8 +1,10 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { NextEpisode } from "components/next-episode";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { Fragment, SVGProps } from "react";
+import { trpc } from "utils/trpc";
 import { Footer } from "../components/footer";
 import { BlogIcon } from "../components/icon";
 import { PostPreview } from "../components/post-preview";
@@ -17,6 +19,8 @@ export default function Home({
     <>
       <SEO title="Home" />
       <HeroSection />
+
+      <NextEpisode />
 
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">

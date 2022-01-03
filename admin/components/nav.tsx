@@ -14,7 +14,7 @@ const baseNavigation = [{ name: "Home", href: "/" }];
 
 const loggedNavigation = [
   { name: "Participants", href: "/admin/participants" },
-  { name: "Events", href: "/admin/events" },
+  { name: "Episodes", href: "/admin/episodes" },
 ];
 
 export const Nav = () => {
