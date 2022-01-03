@@ -1,7 +1,7 @@
-import { apolloClient } from '../../utils/apollo';
-import { LoginDocument, RefreshDocument } from '../../utils/graphql';
-import { BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { createTRPCClient } from "@trpc/client";
+import { BehaviorSubject } from "rxjs";
+import { map } from "rxjs/operators";
+import { AppRouter } from "trpc/server";
 
 export interface Token {
   aud: string;
@@ -11,44 +11,57 @@ export interface Token {
   uid: string;
 }
 
+const url = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}/api/trpc`
+  : "http://localhost:3000/api/trpc";
+
+const client = createTRPCClient<AppRouter>({
+  url: url,
+});
+
 class Auth {
-  constructor() {}
+  constructor() {
+    if (process.browser) {
+      this.refresh();
+    }
+  }
 
-  private accessTokenSub = new BehaviorSubject<string | undefined | null>(undefined);
+  private accessTokenSub = new BehaviorSubject<string | undefined | null>(
+    undefined
+  );
 
-  currentUser$ = this.accessTokenSub.pipe(map((token) => getUserFromToken(token)));
+  currentUser$ = this.accessTokenSub.pipe(
+    map((token) => getUserFromToken(token))
+  );
 
   get currentUser() {
     return getUserFromToken(this.accessTokenSub.value);
   }
 
   private get refreshToken() {
-    return localStorage.getItem('refreshToken');
+    return localStorage?.getItem("refreshToken");
   }
 
   private set refreshToken(token: string | null) {
     if (token === null || token === undefined) {
-      localStorage.removeItem('refreshToken');
+      localStorage.removeItem("refreshToken");
       return;
     }
-    localStorage.setItem('refreshToken', token);
+    localStorage.setItem("refreshToken", token);
   }
 
   signOut() {
-    console.log('sing out');
     this.refreshToken = null;
     this.accessTokenSub.next(null);
   }
 
   async login(email: string, password: string) {
-    const { data } = await apolloClient.mutate({
-      mutation: LoginDocument,
-      variables: { email, password },
+    const res = await client.mutation("auth.login", {
+      email,
+      password,
     });
-    if (data) {
-      this.accessTokenSub.next(data.login.accessToken);
-      this.refreshToken = data.login.refreshToken;
-    }
+    this.accessTokenSub.next(res.accessToken);
+    this.refreshToken = res.refreshToken;
   }
 
   async refresh() {
@@ -58,7 +71,10 @@ class Auth {
     }
     let user: Token;
     try {
-      const headerStr = Buffer.from(refreshToken.split('.')[1], 'base64').toString();
+      const headerStr = Buffer.from(
+        refreshToken.split(".")[1],
+        "base64"
+      ).toString();
       user = JSON.parse(headerStr) as Token;
     } catch {
       this.accessTokenSub.next(null);
@@ -77,18 +93,18 @@ class Auth {
       return;
     }
 
-    const { data } = await apolloClient.mutate({
-      mutation: RefreshDocument,
-      variables: { refreshToken },
-    });
+    const data = await client.mutation("auth.refresh", { refreshToken });
     if (data) {
-      this.accessTokenSub.next(data.refresh);
+      this.accessTokenSub.next(data.accessToken);
       setTimeout(this.refresh, (user.exp - now - 60) * 1000);
+      return;
     }
+    this.accessTokenSub.next(null);
+    this.refreshToken = null;
   }
 }
 
-export const auth = new Auth();
+export const authCli = new Auth();
 
 const getUserFromToken = (token: string | null | undefined) => {
   if (token === null) {
@@ -97,7 +113,7 @@ const getUserFromToken = (token: string | null | undefined) => {
   if (token === undefined) {
     return { token: undefined, user: undefined };
   }
-  const headerStr = Buffer.from(token.split('.')[1], 'base64').toString();
+  const headerStr = Buffer.from(token.split(".")[1], "base64").toString();
   const user = JSON.parse(headerStr) as Token;
   const now = new Date().getTime() / 1000;
   if (user.iat < now && user.exp > now) {

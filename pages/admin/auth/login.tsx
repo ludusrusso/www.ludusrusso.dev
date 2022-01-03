@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
+import { useAuth } from "admin/auth/auth.provider";
+import { LabeledTextField } from "admin/components/text-field";
+import { authCli } from "admin/services/auth.service";
+import { zodValidate } from "admin/utils/zodValidation";
+import { BlogIcon } from "components/icon";
+import { useCallback, useEffect, useState } from "react";
 import { Form, FormSpy } from "react-final-form";
-import { Navigate } from "react-router-dom";
 import { LoginSchema } from "trpc/auth.validations";
-import { BlogIcon } from "../../components/icon";
-import { LabeledTextField } from "../components/text-field";
-import { authCli } from "../services/auth.service";
-import { zodValidate } from "../utils/zodValidation";
-import { useAuth } from "./auth.provider";
+import Router from "next/router";
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -31,10 +31,18 @@ export const LoginPage = () => {
   );
 };
 
+export default LoginPage;
+
 const LoginForm = () => {
   const [err, setErr] = useState<string>();
   const { currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (currentUser) {
+      Router.push("/admin");
+    }
+  }, [currentUser]);
 
   const onSubmit = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
@@ -44,15 +52,11 @@ const LoginForm = () => {
         await authCli.login(email, password);
       } catch (e) {
         setErr("invalid login");
+        setIsLoading(false);
       }
-      setIsLoading(false);
     },
     [setErr, setIsLoading]
   );
-
-  if (currentUser) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <Form<{ email: string; password: string }>

@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  hashedPassword String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  lastConn       DateTime?
+}
+
+model SignKey {
+  id         String   @id @default(cuid())
+  privateKey String   @db.VarChar(2000)
+  publicKey  String   @db.VarChar(1000)
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+}
+
+model Participant {
+  id              String         @id @default(cuid())
+  name            String
+  email           String         @unique
+  github          String         @unique
+  bio             String
+  avatar          String?
+  twitter         String?
+  linkedin        String?
+  hostedEpisodes  Episode[]
+  guestedEpisodes EpisodeGuest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Episode {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  body        String      @default("")
+  resources   String?
+  image       String
+  host        Participant @relation(fields: [hostId], references: [id])
+  hostId      String
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  scheduledTime DateTime
+
+  guests EpisodeGuest[]
+}
+
+model EpisodeGuest {
+  id        Int         @id @default(autoincrement())
+  episode   Episode     @relation(fields: [episodeId], references: [id])
+  guest     Participant @relation(fields: [guestId], references: [id])
+  episodeId String
+  guestId   String
+
+  @@unique([episodeId, guestId])
+}

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `SignKey` MODIFY `privateKey` VARCHAR(1000) NOT NULL,
+    MODIFY `publicKey` VARCHAR(1000) NOT NULL;

@@ -1,34 +1,45 @@
-import { DiscussionEmbed } from 'disqus-react';
-import { InferGetStaticPropsType } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
-import Head from 'next/head';
-import Image from 'next/image';
-import path from 'path';
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import { Footer } from '../../components/footer';
-import { Nav } from '../../components/nav';
-import { SEO } from '../../components/seo';
-import { Tag } from '../../components/tag';
-import { config } from '../../utils/config';
-import { getBlogData } from '../../utils/getBlogData';
-import YouTube from 'react-youtube';
+import { DiscussionEmbed } from "disqus-react";
+import {
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  InferGetStaticPropsType,
+} from "next";
+import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import Head from "next/head";
+import Image from "next/image";
+import path from "path";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import { Footer } from "../../components/footer";
+import { Nav } from "../../components/nav";
+import { SEO } from "../../components/seo";
+import { Tag } from "../../components/tag";
+import { config } from "../../utils/config";
+import { getBlogData } from "../../utils/getBlogData";
+import YouTube from "react-youtube";
 
-export default function TestPage({ source, frontmatter }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function TestPage({
+  source,
+  frontmatter,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
-    img: ({ src, alt }) => <img alt={alt} src={path.join(frontmatter.imagePath, src)} />,
+    img: ({ src, alt }: { src: string; alt: string }) => (
+      <img alt={alt} src={path.join(frontmatter.imagePath, src)} />
+    ),
     AmazonAffiliationLink: ({ src }: { src: string }) => (
       <div className="m-auto">
         <iframe
-          style={{ width: '120px', height: '240px', margin: 'auto' }}
+          style={{ width: "120px", height: "240px", margin: "auto" }}
           scrolling="no"
           frameBorder="0"
           src={src}
         ></iframe>
       </div>
     ),
-    YouTube: ({ videoId }) => <YouTube className="w-full" opts={{}} videoId={videoId} />,
+    YouTube: ({ videoId }: { videoId: string }) => (
+      <YouTube className="w-full" opts={{}} videoId={videoId} />
+    ),
   };
 
   return (
@@ -56,23 +67,31 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
 
       <main className="wrapper py-10">
         <h1 className="text-4xl md:text-6xl text-center py-2 sm:py-0 max-w-[900px] m-auto font-bold mt-10">
-          {' '}
+          {" "}
           {frontmatter.title}
         </h1>
 
         <div className="flex flex-col items-center mt-10">
           <div className="flex-shrink-0">
-            <a href={'#'}>
+            <a href={"#"}>
               <span className="sr-only">{frontmatter.author.name}</span>
-              <Image width={60} height={60} className="rounded-full" src={frontmatter.author.profile} alt="" />
+              <Image
+                width={60}
+                height={60}
+                className="rounded-full"
+                src={frontmatter.author.profile}
+                alt=""
+              />
             </a>
           </div>
           <div className="text-center">
             <p className="text-sm font-medium text-gray-900">
-              <a href={'#'}>{frontmatter.author.name}</a>
+              <a href={"#"}>{frontmatter.author.name}</a>
             </p>
             <div className="flex space-x-1 text-sm text-gray-500">
-              <time dateTime={frontmatter.published.toISOString()}>{frontmatter.publishedReadable}</time>
+              <time dateTime={frontmatter.published.toISOString()}>
+                {frontmatter.publishedReadable}
+              </time>
               <span aria-hidden="true">&middot;</span>
               <span>{frontmatter.readTime} min read</span>
             </div>
@@ -93,10 +112,12 @@ export default function TestPage({ source, frontmatter }: InferGetStaticPropsTyp
           <DiscussionEmbed
             shortname={config.disqus.shortname}
             config={{
-              url: 'https://' + path.join(config.hostname, 'blog', frontmatter.path),
+              url:
+                "https://" +
+                path.join(config.hostname, "blog", frontmatter.path),
               identifier: frontmatter.path,
               title: frontmatter.title,
-              language: 'it',
+              language: "it",
             }}
           />
         </div>
@@ -111,7 +132,7 @@ export async function getStaticPaths() {
   const paths = blogData.map((d) => {
     return {
       params: {
-        path: d.frontMatter.path.split('/').filter((p) => !!p),
+        path: d.frontMatter.path.split("/").filter((p) => !!p),
         file: d.file,
       },
     };
@@ -123,9 +144,14 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
-  const post = (await getBlogData()).find((p) => p.frontMatter.path.includes(params.path.join('/')));
-  const mdxSource = await serialize(post.content, {
+export async function getStaticProps({
+  params,
+}: GetStaticPropsContext<{ path: string[] }>) {
+  const post = (await getBlogData()).find((p) =>
+    p.frontMatter.path.includes(params!.path.join("/"))
+  );
+
+  const mdxSource = await serialize(post!.content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],
@@ -135,7 +161,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       source: mdxSource,
-      frontmatter: post.frontMatter,
+      frontmatter: post!.frontMatter,
     },
   };
 }
