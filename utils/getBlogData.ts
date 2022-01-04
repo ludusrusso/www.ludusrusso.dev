@@ -67,7 +67,7 @@ export const getBlogData = async () => {
 };
 
 const _getBlogData = async () => {
-  const files = (await getFiles()).filter((_, idx) => idx < 20);
+  const files = await getFiles();
   return Promise.all(
     files.map(async (file) => {
       const md = await fs.readFile(file);
