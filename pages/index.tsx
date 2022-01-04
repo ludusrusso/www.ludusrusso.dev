@@ -4,8 +4,6 @@ import { NextEpisode } from "components/next-episode";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { Fragment, SVGProps } from "react";
-import { db } from "services/db";
-import { datePlusHours } from "utils/dates";
 import { Footer } from "../components/footer";
 import { BlogIcon } from "../components/icon";
 import { PostPreview } from "../components/post-preview";

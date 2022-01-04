@@ -1,13 +1,16 @@
 // src/pages/_document.js
 
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { Head, Html, Main, NextScript } from "next/document";
 
 export default function D() {
   return (
     <Html className="h-full bg-gray-50">
       <Head>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

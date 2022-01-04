@@ -1,8 +1,7 @@
-import type { Episode, EpisodeGuest, Participant } from "@prisma/client";
 import dayjs from "dayjs";
+import "dayjs/locale/it";
 import { getParticipantImage } from "utils/participants";
 import { trpc } from "utils/trpc";
-import "dayjs/locale/it";
 
 export const NextEpisode = () => {
   const { data: episode } = trpc.useQuery(["open.getNextEpisode"]);
