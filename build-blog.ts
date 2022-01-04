@@ -159,6 +159,8 @@ async function build() {
     __dirname + "/blog.ts",
     "export const data = " + JSON.stringify(data)
   );
+
+  console.log("blog created!");
 }
 
 build();
