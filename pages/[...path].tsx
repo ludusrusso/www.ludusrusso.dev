@@ -131,7 +131,6 @@ export async function getStaticPaths() {
     return {
       params: {
         path: d.frontMatter.path.split("/").filter((p) => !!p),
-        file: d.file,
       },
     };
   });
@@ -145,7 +144,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ path: string[] }>) {
-  const post = (await getBlogData()).find((p) =>
+  const post = getBlogData().find((p) =>
     p.frontMatter.path.includes(params!.path.join("/"))
   );
 

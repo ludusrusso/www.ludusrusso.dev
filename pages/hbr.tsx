@@ -43,14 +43,9 @@ export default function Blog({
 }
 
 export async function getStaticProps() {
-  const blogData = await getBlogData();
+  const blogData = getBlogData();
   const posts = blogData
-    .filter((p) => p.file.includes("public/content/hbr"))
-    .sort(
-      (a, b) =>
-        b.frontMatter.published.getTime() - a.frontMatter.published.getTime()
-    )
-    .filter((_, idx) => idx < 6)
+    .filter((p) => p.file.includes("/hbr/"))
     .map((d) => {
       const { frontMatter } = d;
       return {
