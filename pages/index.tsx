@@ -15,14 +15,13 @@ import { navigation } from "../utils/nav";
 
 export default function Home({
   posts,
-  nextEpisode,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <SEO title="Home" />
       <HeroSection />
 
-      <NextEpisode episode={nextEpisode} />
+      <NextEpisode />
 
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
@@ -71,28 +70,8 @@ export async function getStaticProps() {
       };
     });
 
-  const nextEpisode = await db.episode.findFirst({
-    where: {
-      scheduledTime: {
-        gte: datePlusHours(-1.5),
-      },
-    },
-    orderBy: {
-      scheduledTime: "asc",
-    },
-    include: {
-      host: true,
-      guests: {
-        include: {
-          guest: true,
-        },
-      },
-    },
-  });
-
   return {
-    props: { posts, nextEpisode: nextEpisode || undefined },
-    revalidate: 600,
+    props: { posts },
   };
 }
 
