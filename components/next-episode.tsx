@@ -1,11 +1,12 @@
 import type { Episode, EpisodeGuest, Participant } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/it";
+import { useEffect, useState } from "react";
 import { getParticipantImage } from "utils/participants";
 import { trpc } from "utils/trpc";
 
 interface NextEpisodeProps {
-  episode?: Episode & {
+  episode: Episode & {
     host: Participant;
     guests: (EpisodeGuest & {
       guest: Participant;
@@ -14,16 +15,18 @@ interface NextEpisodeProps {
 }
 
 export const NextEpisode = ({ episode }: NextEpisodeProps) => {
-  if (!episode) {
-    return null;
-  }
+  const [time, setTime] = useState(getTimeToEpisode(episode.scheduledTime));
+
+  useEffect(() => {
+    setTime(getTimeToEpisode(episode.scheduledTime));
+  }, [setTime, episode]);
 
   return (
     <div className="mx-2 my-10">
       <div className="relative bg-white py-10 shadow-xl lg:max-w-3xl mx-auto  rounded">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-3xl">
           <h2 className="text-base font-semibold tracking-wider text-indigo-600 uppercase">
-            Il prossimo episodio è {getTimeToEpisode(episode.scheduledTime)}
+            Il prossimo episodio è {time}
           </h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             {episode.title}

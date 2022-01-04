@@ -104,14 +104,12 @@ export default function TestPage({
           <MDXRemote {...source} components={components} />
         </div>
 
-        {process.env.PRODUCTION && (
+        {process.env.NODE_ENV === "production" && (
           <div className="prose prose-lg m-auto mt-6">
             <DiscussionEmbed
               shortname={config.disqus.shortname}
               config={{
-                url:
-                  "https://" +
-                  path.join(config.hostname, "blog", frontmatter.path),
+                url: "https://" + path.join(config.hostname, frontmatter.path),
                 identifier: frontmatter.path,
                 title: frontmatter.title,
                 language: "it",
