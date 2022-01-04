@@ -92,17 +92,8 @@ const _getBlogData = async () => {
           title: data.title,
           description: data.description,
           href: path.join("/", postPath),
-          image: path.join(
-            "/",
-            file.replace(process.cwd() + "/public", "/"),
-            "..",
-            data.image
-          ),
-          imagePath: path.join(
-            "/",
-            file.replace(process.cwd() + "/public", "/"),
-            ".."
-          ),
+          image: path.join("/", file.replace("public/", "/"), "..", data.image),
+          imagePath: path.join("/", file.replace("public/", "/"), ".."),
         },
       };
     })
@@ -126,8 +117,7 @@ const extractPathFromFile = (file: string) => {
 
 async function getFiles() {
   return new Promise<string[]>((resolve, reject) => {
-    const contentDir = path.resolve(process.cwd(), "public/content");
-    glob(contentDir + "/**/*.{md, mdx}", (err, files) => {
+    glob("public/content/**/*.{md, mdx}", (err, files) => {
       if (err) {
         return reject(err);
       }

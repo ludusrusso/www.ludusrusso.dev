@@ -45,7 +45,7 @@ export default function Blog({
 export async function getStaticProps() {
   const blogData = await getBlogData();
   const posts = blogData
-    .filter((p) => p.file.includes("public/content/blog"))
+    .filter((p) => p.file.startsWith("public/content/blog"))
     .sort(
       (a, b) =>
         b.frontMatter.published.getTime() - a.frontMatter.published.getTime()

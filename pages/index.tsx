@@ -54,7 +54,7 @@ export async function getStaticProps() {
   const blogData = await getBlogData();
   const posts = blogData
     .filter((p) => {
-      return p.file.includes("public/content/blog");
+      return p.file.startsWith("public/content/blog");
     })
     .sort(
       (a, b) =>
