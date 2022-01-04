@@ -91,7 +91,7 @@ const _getBlogData = async () => {
           tags: data.tags || [],
           title: data.title,
           description: data.description,
-          href: path.join("/blog", postPath),
+          href: path.join("/", postPath),
           image: path.join("/", file.replace("public/", "/"), "..", data.image),
           imagePath: path.join("/", file.replace("public/", "/"), ".."),
         },

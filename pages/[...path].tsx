@@ -1,23 +1,19 @@
 import { DiscussionEmbed } from "disqus-react";
-import {
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
-} from "next";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import Image from "next/image";
 import path from "path";
+import YouTube from "react-youtube";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import { Footer } from "../../components/footer";
-import { Nav } from "../../components/nav";
-import { SEO } from "../../components/seo";
-import { Tag } from "../../components/tag";
-import { config } from "../../utils/config";
-import { getBlogData } from "../../utils/getBlogData";
-import YouTube from "react-youtube";
+import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
+import { SEO } from "../components/seo";
+import { Tag } from "../components/tag";
+import { config } from "../utils/config";
+import { getBlogData } from "../utils/getBlogData";
 
 export default function TestPage({
   source,
@@ -108,19 +104,21 @@ export default function TestPage({
           <MDXRemote {...source} components={components} />
         </div>
 
-        <div className="prose prose-lg m-auto mt-6">
-          <DiscussionEmbed
-            shortname={config.disqus.shortname}
-            config={{
-              url:
-                "https://" +
-                path.join(config.hostname, "blog", frontmatter.path),
-              identifier: frontmatter.path,
-              title: frontmatter.title,
-              language: "it",
-            }}
-          />
-        </div>
+        {process.env.PRODUCTION && (
+          <div className="prose prose-lg m-auto mt-6">
+            <DiscussionEmbed
+              shortname={config.disqus.shortname}
+              config={{
+                url:
+                  "https://" +
+                  path.join(config.hostname, "blog", frontmatter.path),
+                identifier: frontmatter.path,
+                title: frontmatter.title,
+                language: "it",
+              }}
+            />
+          </div>
+        )}
       </main>
       <Footer />
     </>
