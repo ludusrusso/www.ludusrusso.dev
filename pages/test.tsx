@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import { Footer } from "../components/footer";
 import { Nav } from "../components/nav";
 import { PostPreview } from "../components/post-preview";
@@ -7,7 +7,7 @@ import { getBlogData } from "../utils/getBlogData";
 
 export default function Blog({
   posts,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <SEO title="Blog" />
@@ -42,10 +42,11 @@ export default function Blog({
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const blogData = await getBlogData();
   const posts = blogData
     .filter((p) => p.file.includes("public/content/blog"))
+
     .sort(
       (a, b) =>
         b.frontMatter.published.getTime() - a.frontMatter.published.getTime()
@@ -59,5 +60,6 @@ export async function getServerSideProps() {
 
   return {
     props: { posts },
+    revalidate: 10,
   };
 }
