@@ -50,6 +50,7 @@ export async function getStaticProps() {
       (a, b) =>
         b.frontMatter.published.getTime() - a.frontMatter.published.getTime()
     )
+    .filter((_, idx) => idx < 6)
     .map((d) => {
       const { frontMatter } = d;
       return {
