@@ -1,11 +1,13 @@
-import { InferGetStaticPropsType } from 'next';
-import { Footer } from '../components/footer';
-import { Nav } from '../components/nav';
-import { PostPreview } from '../components/post-preview';
-import { SEO } from '../components/seo';
-import { getBlogData } from '../utils/getBlogData';
+import { InferGetStaticPropsType } from "next";
+import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
+import { PostPreview } from "../components/post-preview";
+import { SEO } from "../components/seo";
+import { getBlogData } from "../utils/getBlogData";
 
-export default function Blog({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Blog({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <SEO title="Archivio HotBlack Robotics" />
@@ -27,7 +29,10 @@ export default function Blog({ posts }: InferGetStaticPropsType<typeof getStatic
           </div>
           <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
             {posts.map((post) => (
-              <PostPreview post={post.frontMatter} key={post.frontMatter.title} />
+              <PostPreview
+                post={post.frontMatter}
+                key={post.frontMatter.title}
+              />
             ))}
           </div>
         </div>
@@ -40,8 +45,11 @@ export default function Blog({ posts }: InferGetStaticPropsType<typeof getStatic
 export async function getStaticProps() {
   const blogData = await getBlogData();
   const posts = blogData
-    .filter((p) => p.file.startsWith('public/content/hbr'))
-    .sort((a, b) => b.frontMatter.published.getTime() - a.frontMatter.published.getTime())
+    .filter((p) => p.file.includes("public/content/hbr"))
+    .sort(
+      (a, b) =>
+        b.frontMatter.published.getTime() - a.frontMatter.published.getTime()
+    )
     .map((d) => {
       const { frontMatter } = d;
       return {

@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { PostFrontMatter } from '../utils/getBlogData';
-import { Tag } from './tag';
+import Image from "next/image";
+import { PostFrontMatter } from "../utils/getBlogData";
+import { Tag } from "./tag";
 
 interface PostPreviewProps {
   post: PostFrontMatter;
@@ -8,9 +8,18 @@ interface PostPreviewProps {
 
 export const PostPreview = ({ post }: PostPreviewProps) => {
   return (
-    <div key={post.title} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+    <div
+      key={post.title}
+      className="flex flex-col rounded-lg shadow-lg overflow-hidden"
+    >
       <div className="flex-shrink-0">
-        <Image height={250} width={550} className="h-52 w-full object-cover" src={post.image} alt="" />
+        <Image
+          height={250}
+          width={550}
+          className="h-52 w-full object-cover"
+          src={post.image}
+          alt=""
+        />
       </div>
       <div className="flex-1 bg-white p-6 flex flex-col justify-between">
         <div className="flex-1 ">
@@ -28,7 +37,13 @@ export const PostPreview = ({ post }: PostPreviewProps) => {
           <div className="flex-shrink-0">
             <div>
               <span className="sr-only">{post.author.name}</span>
-              <Image width={40} height={40} className="h-10 w-10 rounded-full" src={post.author.profile} alt="" />
+              <Image
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full"
+                src={post.author.profile}
+                alt=""
+              />
             </div>
           </div>
           <div className="ml-3">
@@ -36,7 +51,9 @@ export const PostPreview = ({ post }: PostPreviewProps) => {
               <span className="hover:underline">{post.author.name}</span>
             </p>
             <div className="flex space-x-1 text-sm text-gray-500">
-              <time dateTime={post.published.toISOString()}>{post.publishedReadable}</time>
+              <time dateTime={post.published.toISOString()}>
+                {post.publishedReadable}
+              </time>
               <span aria-hidden="true">&middot;</span>
               <span>{post.readTime} read</span>
             </div>
