@@ -1,9 +1,9 @@
 import { InferGetStaticPropsType } from "next";
-import { Footer } from "../../components/footer";
-import { Nav } from "../../components/nav";
-import { PostPreview } from "../../components/post-preview";
-import { SEO } from "../../components/seo";
-import { getBlogData } from "../../utils/getBlogData";
+import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
+import { PostPreview } from "../components/post-preview";
+import { SEO } from "../components/seo";
+import { getBlogData } from "../utils/getBlogData";
 
 export default function Blog({
   posts,
