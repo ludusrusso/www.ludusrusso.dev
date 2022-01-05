@@ -1,8 +1,11 @@
 import { Participant } from "@prisma/client";
 
 export const getParticipantImage = (
-  participant: Pick<Participant, "github">,
+  participant: Pick<Participant, "github" | "avatar">,
   size: number = 500
 ) => {
-  return `https://avatars.githubusercontent.com/${participant.github}?s=${size}`;
+  if (!participant.avatar) {
+    return `https://avatars.githubusercontent.com/${participant.github}?s=${size}`;
+  }
+  return participant.avatar;
 };

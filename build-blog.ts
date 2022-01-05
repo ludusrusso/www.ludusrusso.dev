@@ -114,7 +114,7 @@ const extractPathFromFile = (file: string) => {
 async function getFiles() {
   return new Promise<string[]>((resolve, reject) => {
     const contentDir = path.resolve(__dirname, "public/content");
-    glob(contentDir + "/**/*.{md, mdx}", (err, files) => {
+    glob(contentDir + "/**/*.{md,mdx}", (err, files) => {
       if (err) {
         return reject(err);
       }
