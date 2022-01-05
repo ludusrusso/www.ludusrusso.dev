@@ -11,7 +11,7 @@ import { getParticipantImage } from "utils/participants";
 import { slug } from "utils/slug";
 import { z } from "zod";
 
-type ParticipantData = Pick<Participant, "id" | "name" | "github">;
+type ParticipantData = Pick<Participant, "id" | "name" | "github" | "avatar">;
 
 type CreateEpisode = z.infer<typeof CreateEpisodeSchema>;
 
