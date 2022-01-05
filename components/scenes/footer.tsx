@@ -19,7 +19,7 @@ export const Footer = ({ episode }: FooterProps) => {
   return (
     <FooterStyled className="bg-gray-900">
       <div>
-        <h2 className="text-gray-200 text-4xl">{""}</h2>
+        <h2 className="text-gray-200 text-4xl">{episode.category}</h2>
         <p className="text-gray-500 mt-4">{episode.title}</p>
         {episode.guests[0] && (
           <p className="text-gray-400 mt-4 text-xl">
@@ -30,7 +30,7 @@ export const Footer = ({ episode }: FooterProps) => {
           </p>
         )}
       </div>
-      <Chat />
+      <Chat twitchChannel={episode.twitch} />
     </FooterStyled>
   );
 };

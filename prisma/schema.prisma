@@ -56,7 +56,8 @@ model Episode {
   host        Participant @relation(fields: [hostId], references: [id])
   hostId      String
   youtube     String?
-  twitch      String
+  twitch      String      @default("ludusrusso")
+  category    String      @default("livefun")
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

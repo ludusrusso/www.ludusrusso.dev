@@ -35,6 +35,9 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
             {episode.title}
           </p>
+          <p className="mt-2 text-base font-semibold tracking-wider text-indigo-600 ">
+            {episode.category}
+          </p>
           <p className="mt-1 max-w-prose mx-auto text-lg text-gray-900">
             {dayjs(scheduledTime)
               .tz("europe/rome")

@@ -60,7 +60,7 @@ export default function WaitingScene() {
             </span>
           </div>
         </ImageCnt>
-        <h2 className="text-gray-200 text-8xl">{""}</h2>
+        <h2 className="text-gray-200 text-8xl">{episode.category}</h2>
         <p className="text-gray-500 mt-4 text-6xl">{episode.title}</p>
         {episode.guests[0] && (
           <p className="text-gray-400 mt-4 text-3xl">

@@ -41,8 +41,8 @@ export const apolloClient = new ApolloClient({
 });
 
 const COMMENTS_SUBSCRIPTION = gql`
-  subscription {
-    message(channel: "ludusrusso") {
+  subscription TwitchChat($channel: String!) {
+    message(channel: $channel) {
       id
       message
       author {
@@ -60,10 +60,17 @@ interface ChatMessage {
 
 const MAX_CHAT_SIZE = 5;
 
-const ChatBase = () => {
+interface ChatProps {
+  twitchChannel: string;
+}
+
+const ChatBase = ({ twitchChannel }: ChatProps) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
   useSubscription(COMMENTS_SUBSCRIPTION, {
+    variables: {
+      channel: twitchChannel,
+    },
     onSubscriptionData: (data) => {
       const newMsg: ChatMessage = {
         author: data.subscriptionData.data.message.author.username,
@@ -114,10 +121,10 @@ const ChatList = styled.ul`
   }
 `;
 
-const Chat = () => {
+const Chat = (props: ChatProps) => {
   return (
     <ApolloProvider client={apolloClient}>
-      <ChatBase />
+      <ChatBase {...props} />
     </ApolloProvider>
   );
 };
