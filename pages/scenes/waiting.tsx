@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db } from "services/db";
 import { getParticipantImage } from "utils/participants";
+import { trpc } from "utils/trpc";
 
 const Scene = styled.div`
   height: 100vh;
@@ -18,16 +19,16 @@ const ImageCnt = styled.div`
   gap: 20px;
 `;
 
-export default function WaitingScene({
-  episode,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function WaitingScene() {
+  const { data: episode } = trpc.useQuery(["open.getNextEpisode"]);
+
   const [time, setTime] = useState(new Date());
   useEffect(() => {
     setInterval(() => setTime(new Date()), 1000);
   }, []);
 
   if (!episode) {
-    return <p></p>;
+    return null;
   }
 
   return (
@@ -78,8 +79,10 @@ const padString = (d: string | number) => {
   return `00${d}`.slice(-2);
 };
 
-const getWaitTime = (startTime: Date, time: Date) => {
-  const seconds = Math.trunc((startTime.getTime() - time.getTime()) / 1000);
+const getWaitTime = (startTime: string | Date, time: Date) => {
+  const seconds = Math.trunc(
+    (new Date(startTime).getTime() - time.getTime()) / 1000
+  );
   if (seconds < 0) {
     return <> Arriviamo</>;
   }
@@ -93,43 +96,3 @@ const getWaitTime = (startTime: Date, time: Date) => {
     </>
   );
 };
-
-export async function getStaticPaths() {
-  const episodes = await db.episode.findMany({
-    select: { id: true },
-  });
-  const paths = episodes.map((e) => {
-    return {
-      params: {
-        episodeId: e.id,
-      },
-    };
-  });
-
-  return {
-    paths: paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({
-  params,
-}: GetStaticPropsContext<{ episodeId: string }>) {
-  const episode = await db.episode.findUnique({
-    where: { id: params!.episodeId },
-    include: {
-      host: true,
-      guests: {
-        include: {
-          guest: true,
-        },
-      },
-    },
-  });
-
-  return {
-    props: {
-      episode,
-    },
-  };
-}
