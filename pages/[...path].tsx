@@ -124,7 +124,7 @@ export default function TestPage({
 }
 
 export async function getStaticPaths() {
-  const blogData = await getBlogData();
+  const blogData = getBlogData();
   const paths = blogData.map((d) => {
     return {
       params: {
