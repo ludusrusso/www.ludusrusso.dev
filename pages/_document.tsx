@@ -4,23 +4,7 @@ export default function D() {
   return (
     <Html className="h-full bg-gray-50">
       <Head>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-              page_path: window.location.pathname,
-            });
-          `,
-          }}
-        />
+        <GAHeader />
       </Head>
       <body className="h-full">
         <Main />
@@ -29,3 +13,29 @@ export default function D() {
     </Html>
   );
 }
+
+export const GAHeader = () => {
+  if (process.env.NODE_ENV !== "production") {
+    return null;
+  }
+  return (
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+      page_path: window.location.pathname,
+    });
+  `,
+        }}
+      />
+    </>
+  );
+};
