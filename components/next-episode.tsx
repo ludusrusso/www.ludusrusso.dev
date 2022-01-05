@@ -1,9 +1,13 @@
 import type { Episode, EpisodeGuest, Participant } from "@prisma/client";
 import dayjs from "dayjs";
 import "dayjs/locale/it";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { useEffect, useState } from "react";
 import { getParticipantImage } from "utils/participants";
-import { trpc } from "utils/trpc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 interface NextEpisodeProps {
   episode: Episode & {
@@ -33,6 +37,7 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
           </p>
           <p className="mt-1 max-w-prose mx-auto text-lg text-gray-900">
             {dayjs(scheduledTime)
+              .tz("europe/rome")
               .locale("it")
               .format("dddd DD MMMM YYYY ore HH:mm")}
           </p>
