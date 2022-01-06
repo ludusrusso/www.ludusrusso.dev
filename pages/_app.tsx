@@ -16,9 +16,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      ga.pageview(url);
-    };
+    const handleRouteChange =
+      process.env.NODE_ENV === "production"
+        ? (url: string) => {
+            ga.pageview(url);
+          }
+        : (url: string) => {};
     router.events.on("routeChangeComplete", handleRouteChange);
 
     return () => {

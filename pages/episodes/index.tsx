@@ -39,7 +39,7 @@ const EpisodesPage = ({
                 <div className="mt-3">
                   <Link href={`/episodes/${episode.id}`}>
                     <a className="text-base font-semibold text-indigo-600 hover:text-indigo-500">
-                      Read full story
+                      Leggi le info
                     </a>
                   </Link>
                 </div>
