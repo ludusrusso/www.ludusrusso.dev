@@ -9,12 +9,25 @@ export default function D() {
       <body className="h-full">
         <Main />
         <NextScript />
+        <IubendaCookieBanner />
       </body>
     </Html>
   );
 }
 
-export const GAHeader = () => {
+const IubendaCookieBanner = () => {
+  if (process.env.NODE_ENV !== "production") {
+    return null;
+  }
+  const script = `<script type="text/javascript">
+  var _iub = _iub || [];
+  _iub.csConfiguration = {"lang":"it","siteId":676905,"whitelabel":false,"cookiePolicyId":7981809};
+  </script>
+  <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>`;
+  return <div dangerouslySetInnerHTML={{ __html: script }}></div>;
+};
+
+const GAHeader = () => {
   if (process.env.NODE_ENV !== "production") {
     return null;
   }

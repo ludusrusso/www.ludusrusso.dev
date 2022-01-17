@@ -22,7 +22,7 @@ const EpisodesPage = ({
           </div>
           <div className="mt-6 pt-10 grid gap-16 lg:gap-x-5 lg:gap-y-12">
             {episodes.map((episode) => (
-              <div key={episode.title}>
+              <div key={episode.id}>
                 <p className="text-sm text-gray-500">
                   <time dateTime={episode.scheduledTime.toISOString()}>
                     {formatDate(episode.scheduledTime)}
@@ -74,5 +74,6 @@ export const getStaticProps = async () => {
     props: {
       episodes,
     },
+    revalidate: 60 * 60,
   };
 };

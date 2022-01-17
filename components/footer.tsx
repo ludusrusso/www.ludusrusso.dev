@@ -99,6 +99,22 @@ export const Footer = () => {
           </p>
         </div>
       </div>
+      <div className="justify-center pb-10 flex space-x-3 text-sm ">
+        <a
+          href="https://www.iubenda.com/privacy-policy/7981809"
+          className="text-gray-400 hover:text-gray-800"
+          title="Privacy Policy"
+        >
+          Privacy Policy
+        </a>
+        <a
+          href="https://www.iubenda.com/privacy-policy/7981809/cookie-policy"
+          className="text-gray-400 hover:text-gray-800"
+          title="Cookie Policy"
+        >
+          Cookie Policy
+        </a>
+      </div>
     </footer>
   );
 };
