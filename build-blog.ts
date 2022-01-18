@@ -49,13 +49,14 @@ interface Data {
   image: string;
   date: string;
   path?: string;
+  draft?: boolean;
   tags: string[];
   [key: string]: any;
 }
 
 const getBlogData = async () => {
   const files = await getFiles();
-  return Promise.all(
+  const datas = await Promise.all(
     files.map(async (file) => {
       const md = await fs.readFile(file);
       const { data, content } = matter(md) as unknown as {
@@ -71,6 +72,7 @@ const getBlogData = async () => {
         frontMatter: {
           path: postPath,
           author,
+          draft: data.draft || false,
           readTime: readTime === 1 ? "1 min" : `${readTime} mins`,
           published: new Date(data.date),
           publishedReadable: printDate(new Date(data.date)),
@@ -94,6 +96,7 @@ const getBlogData = async () => {
       };
     })
   );
+  return datas.filter((d) => !d.frontMatter.draft);
 };
 
 const extractPathFromFile = (file: string) => {
