@@ -34,7 +34,7 @@ export default function TestPage({
       </div>
     ),
     YouTube: ({ videoId }: { videoId: string }) => (
-      <YouTube className="w-full" opts={{}} videoId={videoId} />
+      <YouTube className="w-full aspect-video" videoId={videoId} />
     ),
   };
 

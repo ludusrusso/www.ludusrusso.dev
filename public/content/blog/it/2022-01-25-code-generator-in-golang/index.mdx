@@ -1,0 +1,270 @@
+---
+title: Implementare un semplice codegenerator in golang
+date: "2022-01-25T00:00:00.000Z"
+tags:
+  - "Blog"
+  - golang
+  - dev
+category: "blog"
+author: "ludusrusso"
+description: Ecco il mio primo test nello scrivere un codegenerator in golang
+image: "./main.jpg"
+---
+
+Diciamocelo, _Go_ è un linguaggio molto interessante ma non lascia molto spazio all'astrazione,
+ha pochissime feature e molte cose che in altri linguaggi verrebbero quasi automatici o semplici da fare
+in go diventano un problema. Ad esempio, il mapping tra due tipi "simili" in go richiede di scrivere ed implementare
+manualmente la funzione, e il cast automatico è possibile solo se le due strutture sono esattamente identiche.
+
+Per questo motivo il concetto di metaprogrammazione in go è un po' deviato rispetto a come viene usato negli altri programmi,
+e golang incoraggia tantissimo l'utilizzo di generatori di codice che creano automaticamente parti di codice che sono
+noiose e ripetitive da scrivere a mano.
+
+Inizialmente questo concetto non lo vedevo di buon occhio, ma mi rendo conto dopo anni di sviluppo professionale in
+go (e anche in altri linguaggi) che ha un'enorme vantaggio rispetto all'astrazione spinta spesso preferita da noi sviluppatori:
+
+1. **è molto più semplice**: astrarre è un concetto complesso, scrivere un code generator che invece di astrarre crea tantissime funzioni o tipi tutti simili tra
+   loro come se lo avessimo fatto a mano è molto più semplice.
+2. **è molto più efficiente**: l'astrazione richiede potenza di calcolo o di memeoria per essere eseguita,
+   un programma che implementa 1000 funzioni tutte simili tra di loro
+   risulta essere molto ma molto più efficiente di un programma che implementa una
+   sola fuzione in grado di fare introspection a runtime per capire cosa deve fare.
+
+In questo articolo vi voglio parlare di alcuni code generator per go che sono entrati nel mio flusso di sviluppo
+quotidiano e che al momento reputo esenziali nel mio stack, e di un piccolo esperimento fatto con Jaga poco tempo
+fa per l'implementazione di un semplice.
+
+## Ma cosa è un code generator?
+
+Un code generator è un qualcosa che prende degli input e genera un programma, o parte di un programma. Di fatto
+tutti i programmatori sono per definizione code generator, ma solitamente con questo termine indichiamo un programma
+automatico che, grazie a degli input (configurazioni, altri parti del programma, ecc.) è in grado di generare del codice.
+
+Nel mio stack di sviluppo in go attuamente ne sto utilizzando due in modo super estensivo:
+
+- [SQLC](https://github.com/kyleconroy/sqlc)
+- [protoc](https://developers.google.com/protocol-buffers)
+
+### SQLC: SQL first development
+
+Non sono mai andato molto d'accordo con gli ORM per i database, sono comodissimi da utilizzare ma arriva sempre
+il momento in cui è necessario usare API SQL native perchè l'ORM specifico non implementa una certa funzionalità,
+oppure non si ha troppa possibilità di ottimizzare una certa query.
+
+Per questo motivo quando ho scoperto [SQLC](https://github.com/kyleconroy/sqlc) e l'approccio
+SQL first mi si è aperto un mondo. L'idea di SQLC (e di altri tool simili presenti in altri linguaggi),
+è quella di implementare le query verso il database nativamente in SQL, e poi sfruttare
+un code generator (SQLC appunto) per generare API nel linguaggio di programmazione specifico
+(Go in questo caso) che implementano quelle query. Tutto ovviamente nel modo più
+efficiente possibile.
+
+Di fatto SQL prende in input un file di configurazione, una lista di query e lo schema
+del database verso cui queste query devono andare, e genera una API per ogni query
+comoddisma da utilizzare e completamente tipizzata. Il progetto è veramente ben fatto,
+la scenta di non essere lanciato verso un db vero ma verso uno schema pronto lo rende
+velocissimo. Ogni tanto per query complesse ha bisogno di aiuto (non è sempre in grado di capire
+i tipe dei parametri di input o output), ma in generale è veramente un progetto
+essenziale per lavorare con GO e un database SQL.
+
+### Protoc - Protocol buffer compiler
+
+[Protovuf](https://developers.google.com/protocol-buffers) e [GRPC](https://grpc.io/)
+è un altro progetto per me essenziale. L'idea di base è quella di definire delle data structure
+con un linguaggio specifico (protocol buffer appunto) e di sfruttare un tool di code generation
+in grado di scrivere automaticamente l'implementazione di queste strutture nel linguaggio
+specifico! Con gRPC si possono anche definire delle interfacce per delle API ed avere
+l'implementazione automatica del client di queste API e la definizione della struttura del server.
+
+Questo ci permette di essere di nuovo super veloci nello sviluppo :D
+
+### Altri codegenerator degni di nota (non necessariamente in go)
+
+- [Graphql Code Generator](https://www.graphql-code-generator.com/), per generare implementazioni client e server di chiamate GraphQL
+- Go test è in effetti un tool di codegen, che genera ed esegue un programma che implementa i test che abbiamo scritto
+- [Mockery](https://github.com/vektra/mockery), molto utile per definire velocemente i mocks di una struttura in go.
+
+## Come implementare un semplice Code Generator in golang
+
+Dato che come avete capito ultimamente mi sono preso molto bene con i tool di codegeneration,
+qualche giorno fa insieme a [Jaga](https://jagasantagostino.com/) abbiamo provato ad
+implementare un nostro generatore di codice per una specifica esigenza che ho nel mio lavoro.
+
+In particolare l'idea era quella di definire automaticamente delle variabili che implementano
+le metriche [prometheus](https://prometheus.io/) senza dover fare troppi switch sul codice.
+
+La particolarità delle metriche prometheus è che queste solitamente sono usate sono una volta
+nel codice, e la definizione della variabile è molto ma molto semplice. Solitamente lavoro
+su un file molto lungo all'interno di ogni package golang che definisce le varie variabili che
+poi vengono usate nel codice, il problema è che nel lungo periodo questo file tende a crescere
+in modo indefinito e spesso metriche che non uso più rimangono li dentro dimenticate.
+
+Abbiamo pensato, quindi, che sarebbe molto figo "taggare" con un commento le variabili nel momento
+in cui vengono usate e generare in modo automatico la definizione. In questo se una di queste
+variabili non viene più usata al successivo lancio del code generator questa verrà cancellata.
+
+Trovate i passaggi dello sviluppo nel video qui sotto, ma in questo post voglio ripassare le parti essenziali.
+
+<YouTube videoId="iTMLCsAI038" />
+
+### Specifiche
+
+Quindi, cosa deve fare il nostro code generator? Smeplice, quando trova una riga di questo tipo:
+
+```golang
+//+prom:metric:counter name:myapp_processed_ops_total
+opsProcessed.Inc()
+```
+
+In code generator deve definire la variabile `opsProcessed` come metrica di tipo counter con il nome della metrica a `myapp_processed_ops_total`.
+
+```golang
+var opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
+	Name: "myapp_processed_ops_total",
+})
+```
+
+Il trigger del code generator è il commento nella forma
+
+```golang
+//+prom:metric:<METRIC TYPE> name:<METRIC NAME>
+```
+
+### File parsing
+
+La prima cosa da fare per implementare il nostro code generator è quello di parsare
+il file in ingresso per trovare il commento e parsare il file successivo.
+Dopo un po' di dubbi su come fare abbiamo deciso di usare l'approccio più
+semplice possibile, cioè leggere le righe ad una ad una e giocare un po' con
+gli `strings.Split`!
+
+```golang
+const commentPrefix = "//+prom:metric"
+
+func isCodegenLine(line string) (metricType string, metricName string, found bool) {
+	line = strings.TrimSpace(line)
+	if strings.HasPrefix(line, commentPrefix) {
+		found = true
+		metricName = strings.Split(strings.Split(line, "name:")[1], " ")[0]
+		metricType = strings.Split(strings.Split(line, "+prom:metric:")[1], " ")[0]
+		return
+	}
+	return "", "", false
+}
+```
+
+Questa funzione viene usata all'interno di un loop su tutte le righe del file:
+
+```golang
+for scanner.Scan() {
+		line := scanner.Text()
+		metricType, metricName, found := isCodegenLine(line)
+		if found {
+			if ok := scanner.Scan(); !ok {
+				return "", fmt.Errorf("not expected EOF")
+			}
+			nextLine := strings.TrimSpace(scanner.Text())
+			varName := strings.Split(nextLine, ".")[0]
+			variabels.Metrics = append(variabels.Metrics, Metric{
+				Name:     metricName,
+				Variable: varName,
+				Type:     metricType,
+			})
+		}
+	}
+```
+
+Alla fine del ciclo, dovremmo trovare dentro variables (che per la cronata è definito così)
+
+```golang
+type Variables struct {
+	PackageName string
+	Metrics     []Metric
+}
+
+type Metric struct {
+	Name     string
+	Variable string
+	Type     string
+}
+
+var variables Variables
+```
+
+tutte le informazioni relative alle variabili da creare.
+
+### Code generation
+
+Una volta parsato il file, dobbiamo semplicemente generare il codice in base alle
+informazioni contenutea all'interno di `variables`.
+
+Per fare questo, dopo alcuni esperimenti, abbiamo optato per usare i template go! Il
+tutto viene fuori lanciando variables su questo template molto semplice:
+
+```
+// Code generated by "livefun codegen"; DO NOT EDIT.
+
+package {{ .PackageName }}
+
+import (
+        "github.com/prometheus/client_golang/prometheus"
+        "github.com/prometheus/client_golang/prometheus/promauto"
+)
+
+{{ range .Metrics }}
+{{ if eq .Type "counter" }}
+var {{ .Variable }} = promauto.NewCounter(prometheus.CounterOpts{
+        Name: "{{ .Name }}",
+})
+{{ else if eq .Type "gauge"}}
+var {{ .Variable }} = promauto.NewGauge(prometheus.GaugeOpts{
+        Name: "{{ .Name }}",
+})
+{{ end }}
+{{ end }}
+```
+
+Con il seguente codice
+
+```golang
+  if err := tmp.Execute(buf, variabels); err != nil {
+		return "", err
+	}
+```
+
+### Piccole note
+
+Il template renderizzato che viene fuori al 99% avrà una formattazione un po' bruttina. Invece di perdere
+tempo a cercare di formattare il template, go ci mette a disposizione il pacchetto `go/format`
+che ci permette di lanciage `go fmt` sulla stringa in output al template, come fatto qui:
+
+```golang
+	formattedOut, err := format.Source(buf.Bytes())
+	if err != nil {
+		return "", err
+	}
+```
+
+Il template è un buonissimo esempio di come possiamo sfruttare la libreria `embed` di go (che tra l'altro è un code generator).
+Invece di dover gestire a run time l'apertura e la lettura del template, possiamo embeddarlo
+all'intenro di una variabile facendo questo:
+
+```golang
+//go:embed template.txt
+var templateString string
+```
+
+Quello che succede dietro le quinti è che, in fase di build, go generarà un codice dove essenzialmente
+prendere il contenuto del file `template.txt` e lo mette dentro la variabile `templateString`.
+La figata è che goembed fa check dell'esistenza del file a build time e non dobbiamo preoccuparti
+di gestire gli errori in cui il file non viene trovato.
+
+## Conclusioni
+
+Il codice che abbiamo implementato durante la live, con alcune aggiustatine, lo potete trovare
+in questa repo github: [livefun-dev/code-generation-go](https://github.com/livefun-dev/code-generation-go).
+
+Io personalmente d'ora in avanti cercherò di sfruttare ancora di più i tool di code generation e di
+scrivermene alcuni personalmente dato la semplicità di implementazione e la potentissima produttività
+che questi tool ci possono dare.
+
+E voi cosa ne pensate dei tool di code generation? Lasciatemi un commento qui sotto!!

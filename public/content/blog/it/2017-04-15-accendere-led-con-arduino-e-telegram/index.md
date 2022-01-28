@@ -17,7 +17,7 @@ image: "./telegram_esempio.png"
 
 A poche ore dal corso che ho tenuto ieri al mio vecchio Liceo, già iniziano ad nascere progetti interessanti dei partecipanti. Alcuni ragazzi, in particolare, mi hanno stupito, in quanto in pochissimo tempo e con poco supporto sono riusciti a realizzare un bot telegram in grado di mandare comandi ad Arduino.
 
-<iframe width="100%" height="400px" src="https://www.youtube-nocookie.com/embed/PHGNhq8j1JU" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="PHGNhq8j1JU" />
 
 Ho chiesto loro di scrivere questo breve tutorial per realizzare il progetto.
 

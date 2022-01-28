@@ -352,4 +352,4 @@ Nell'ultimo anno le cose si sono molto semplificate. In particolare Docker sta l
 
 Ho realizzato un video dove la nuova funzionalità viene descritta!
 
-<iframe width="100%" height="400px" src="https://www.youtube-nocookie.com/embed/bY3X3Sc5s9A" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="bY3X3Sc5s9A" />

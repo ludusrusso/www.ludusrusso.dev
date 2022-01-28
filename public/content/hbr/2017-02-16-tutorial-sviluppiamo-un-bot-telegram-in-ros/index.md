@@ -221,4 +221,4 @@ class Node(dotbot_ros.DotbotNode):
 
 Provate quindi a rilanciare il programma e far muovere un robot. Ecco qui un video che mostra il risultato finale!
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/uoY_GEP8YFw" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="uoY_GEP8YFw" />

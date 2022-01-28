@@ -226,16 +226,12 @@ palmo che molte volte veniva scambiata per il pollice chiuso.
 Agli inizi di dicembre, comunque, eravamo pronti con la demo per i primi test.
 Trovate il primo video dimostrativo da noi realizzato qui:
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/6MGJb_GqauU?rel=0"></iframe>
-</div>
+<YouTube videoId="6MGJb_GqauU" />
 
 Che poi venne presentato, a metà Dicembre 2013, come lavoro finale presso l'Alta Scuola
 Politecnica.
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/TRvEjpxtARM?rel=0"></iframe>
-</div>
+<YouTube videoId="TRvEjpxtARM" />
 
 Ad oggi, cosa di cui vado molto fiero, questo progetto è considerato uno dei migliori progetti
 usciti dall'ASP, e spesso viene citato nella opening delle nuovi cicli!
@@ -284,9 +280,8 @@ Ad ogni modo, Andrea ottenne punteggio pieno sulla tesi e la presentazione, ma
 volle andare avanti. Alla fine della tesi, abbiamo creato un secondo video demo
 che mostra i nostri avanzamenti (e che vede me come attore principale).
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/EJ5-uBt7rHs?rel=0"></iframe>
-</div>
+<YouTube videoId="EJ5-uBt7rHs" />
+
 Tra le cose più belle che sono successe dopo il [rilascio Open Source](https://www.thingiverse.com/thing:701446) della mano,
 è stata quella di essere contattati da Elena dell'Antonia, una ragazza di Treviso
 che ha realizzato un gioco didattico per aiutare i bambini ad apprendere la Lingua

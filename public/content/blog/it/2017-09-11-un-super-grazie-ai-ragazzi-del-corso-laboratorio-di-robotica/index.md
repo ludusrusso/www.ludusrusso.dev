@@ -1,5 +1,5 @@
 ---
-title: "Un super grazie ai ragazzi del corso \"Laboratorio di Robotica\""
+title: 'Un super grazie ai ragazzi del corso "Laboratorio di Robotica"'
 layout: "post"
 date: "2017-09-11T00:00:00.000Z"
 headerImage: false
@@ -24,10 +24,7 @@ Un ringraziamento particolare va al Preside Mauro Polimento, alla professoressa 
 
 Vi lascio con un video, realizzato da [Davide Marra](https://www.youtube.com/channel/UCX0qIlG6xtKAzsXIl1uGrhg), ed alcune foto del corso.
 
-<div class="rwd-video">
-  <iframe width="100%" src="https://www.youtube.com/embed/NG4cZG6Y9Wo" frameborder="0">
-</iframe>
-</div>
+<YouTube videoId="NG4cZG6Y9Wo" />
 
 ![](./1.jpg)
 ![](./2.jpg)

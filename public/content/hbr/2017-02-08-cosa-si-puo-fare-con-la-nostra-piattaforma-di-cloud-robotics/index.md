@@ -77,7 +77,7 @@ In parole tecniche: La Cloud Robotics è un protocollo che permette a tutti i di
 
 Questo è il nostro progettino natalizio.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h13exqL9tbw" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="h13exqL9tbw" />
 
 ### Applicazioni di Robotica di Servizio
 
@@ -87,14 +87,14 @@ Vi linko alcuni video di applicazioni sviluppate negli anni da noi:
 
 #### Robot@CED
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HlUB0oHuXrc" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="HlUB0oHuXrc" />
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VH0q-UsDiQY" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="VH0q-UsDiQY" />
 
 #### PARLOMA
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/6MGJb_GqauU" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="6MGJb_GqauU" />
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GS6_jwnSgWA" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="GS6_jwnSgWA" />
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EJ5-uBt7rHs" frameborder="0" allowfullscreen></iframe>
+<YouTube videoId="EJ5-uBt7rHs" />
