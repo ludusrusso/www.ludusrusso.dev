@@ -27,7 +27,7 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
             Il prossimo episodio è {getTimeToEpisode(scheduledTime)}
           </h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            {episode.title.replaceAll("*", "")}
+            {episode.title.replace(/\*/g, "")}
           </p>
           <p className="mt-2 text-base font-semibold tracking-wider text-indigo-600 ">
             {episode.category}

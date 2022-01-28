@@ -57,7 +57,7 @@ const EpisodeLink = ({ episode }: { episode: Episode }) => {
 
       <a href="#" className="mt-2 block">
         <p className="text-xl font-semibold text-gray-900">
-          {episode.title.replaceAll("*", "")}
+          {episode.title.replace(/\*/g, "")}
         </p>
         <p className="mt-3 text-base text-gray-500">{episode.description}</p>
       </a>
