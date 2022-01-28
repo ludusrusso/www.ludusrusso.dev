@@ -27,7 +27,7 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
             Il prossimo episodio è {getTimeToEpisode(scheduledTime)}
           </h2>
           <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-            {episode.title}
+            {episode.title.replaceAll("*", "")}
           </p>
           <p className="mt-2 text-base font-semibold tracking-wider text-indigo-600 ">
             {episode.category}
@@ -81,7 +81,8 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
 };
 
 const getTimeToEpisode = (date: Date) => {
-  const daysToEpisode = dayjs(date).diff(new Date(), "day");
+  const startOfToday = new Date(new Date().setHours(0, 0));
+  const daysToEpisode = dayjs(date).diff(startOfToday, "day");
   if (daysToEpisode > 1) {
     return `tra ${daysToEpisode} giorni`;
   }

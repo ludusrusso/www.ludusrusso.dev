@@ -1,1 +1,1 @@
-pscale connect db-ludusrusso-dev dev --port 3309
+pscale connect db-ludusrusso-dev main --port 3309
