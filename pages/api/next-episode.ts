@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 import { db } from "services/db";
-import { getNextEpisode } from "trpc/open.routes";
+import { getNextEpisode } from "utils/getNextEpisode";
 
 export default async function handler(
   req: NextApiRequest,
