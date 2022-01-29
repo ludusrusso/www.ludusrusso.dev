@@ -24,7 +24,7 @@ interface Data {
 
 async function getFiles() {
   return new Promise<string[]>((resolve, reject) => {
-    const contentDir = path.resolve(__dirname, "..", "hackaiblity-dev-events");
+    const contentDir = path.resolve(__dirname, "..", "hackability-dev-events");
     console.log(contentDir);
     glob(contentDir + "/**/*.{md,mdx}", (err, files) => {
       if (err) {
