@@ -14,7 +14,6 @@ import { SEO } from "../components/seo";
 import { Tag } from "../components/tag";
 import { config } from "../utils/config";
 import { getBlogData } from "../utils/getBlogData";
-import rehypeHighlight from "rehype-highlight";
 
 export default function TestPage({
   source,
@@ -153,7 +152,7 @@ export async function getStaticProps({
   const mdxSource = await serialize(post!.content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex, rehypeHighlight as any],
+      rehypePlugins: [rehypeKatex],
     },
   });
 

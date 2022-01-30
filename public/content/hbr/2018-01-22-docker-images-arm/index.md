@@ -1,18 +1,18 @@
 ---
-title: 'Come compilare Immagini Docker per ARM su host Intel'
+title: "Come compilare Immagini Docker per ARM su host Intel"
 redirect_from:
-  - '/2018/01/22/docker-immagini-arm/'
-layout: 'post'
-date: '2018-01-22T00:00:00.000Z'
+  - "/2018/01/22/docker-immagini-arm/"
+layout: "post"
+date: "2018-01-22T00:00:00.000Z"
 tag:
-  - 'Docker'
-  - 'ARM'
-  - 'qemu'
-author: 'fiorellazza'
+  - "Docker"
+  - "ARM"
+  - "qemu"
+author: "fiorellazza"
 featured: true
-description: 'Buildare Immagini Docker per host ARM su Intel'
-path: '/hbr/come-compilare-immagini-docker-per-arm-su-host-intel/'
-image: './Processor_ARM_anteprima.png'
+description: "Buildare Immagini Docker per host ARM su Intel"
+path: "/hbr/come-compilare-immagini-docker-per-arm-su-host-intel/"
+image: "./Processor_ARM_anteprima.png"
 tags: []
 ---
 
@@ -51,7 +51,7 @@ In ogni caso è possibile usare un'Immagine "semplice" per Raspberry e poi copia
 
 Supponiamo che partiate dall'Immagine Docker "ufficiale" per Ubuntu su piattaforme ARMv7(armhf), disponibile [qui](https://hub.docker.com/r/armv7/armhf-ubuntu/), e che abbiate fatto una copia dell'eseguibile di cui abbiamo bisogno, _qemu-arm-static_, nel vostro build context (cartella contenente il Dockerfile, i.e. "."). Le prime righe del vostro Dockerfile saranno:
 
-```Dockerfile
+```dockerfile
 FROM armv7/armhf-ubuntu:16.04
 
 COPY ./qemu-arm-static /usr/bin/qemu-arm-static
@@ -59,7 +59,7 @@ COPY ./qemu-arm-static /usr/bin/qemu-arm-static
 
 Nel mio caso, per l'[Immagine Base di NTBD](https://github.com/HotBlackRobotics/ntbd/blob/devel/NTBD_base/Dockerfile.rpi3), ho usato come immagine di partenza l'[Immagine HotBlack Robotics hbrobotics/ros-base:rpi3](https://hub.docker.com/r/hbrobotics/ros-base/), basata sull'Immagine "ufficiale" per ARM citata sopra, con installato ROS Kinetic. Ho quindi copiato il binary ARM di QEMU, ottenendo:
 
-```Dockerfile
+```dockerfile
 FROM  hbrobotics/ros-base:rpi3
 
 COPY ./qemu-arm-static /usr/bin/qemu-arm-static

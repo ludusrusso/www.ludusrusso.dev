@@ -60,7 +60,7 @@ I concetti di Docker Image e Docker Container, per un nuovo utente, possono esse
 Una Immagine Docker viene costruita a partire da una "pila" di strati definiti in un file chiamato _Dockerfile_. La tipica Immagine è definita partendo dall'immagine di un sistema operativo di base su cui viene installato software e vengono eseguite operazioni, che possono essere definite utilizzando linguaggio BASH e seguendo un certa [sintassi](https://docs.docker.com/engine/reference/builder/).
 Vediamo un esempio breve di Dockerfile:
 
-```Dockerfile
+```dockerfile
 # Pull dell'immagine di base
 FROM ubuntu:16.04
 SHELL ["/bin/bash","-c"]
@@ -106,7 +106,7 @@ Questo comando cercherà (di default) il file chiamato Dockerfile nel path speci
 
 Il build context è la cartella contenente il Dockerfile per la creazione di un'Immagine. Quando si deve copiare un file dall'Host al container il path relativo deve riferirsi a questa cartella, per esempio:
 
-```Dockerfile
+```dockerfile
 COPY ./src/file/da/copiare /path/file/nel/container
 ```
 

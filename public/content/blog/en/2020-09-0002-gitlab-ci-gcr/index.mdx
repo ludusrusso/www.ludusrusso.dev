@@ -29,29 +29,29 @@ available [download here](https://gitlab.com/ludusrusso/gitlab-ci-to-gcr).
 The server is implemented in typescript and consist in a simple file `src/main.ts`:
 
 ```typescript
-import express from "express"
-import { ApolloServer, gql } from "apollo-server-express"
+import express from "express";
+import { ApolloServer, gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
     hello: String!
   }
-`
+`;
 
 const resolvers = {
   Query: {
     hello: () => "Hello Gitlab CI",
   },
-}
+};
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ typeDefs, resolvers });
 
-const app = express()
-server.applyMiddleware({ app, path: "/graphql" })
+const app = express();
+server.applyMiddleware({ app, path: "/graphql" });
 
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-)
+);
 ```
 
 To test locally, we can run it with `npm run start`, and open the browser on the url you
@@ -90,7 +90,7 @@ This will create a `dist/` folder with the compiled code inside.
 Dockerize this app is really simple, just create a `Dockerfile`
 in the root of the project and add the following code
 
-```Dockerfile
+```dockerfile
 FROM node:12-alpine
 
 COPY package*.json /
