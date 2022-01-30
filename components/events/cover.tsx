@@ -151,7 +151,7 @@ const days = [
   "Sabato",
 ];
 
-const date2EventCoverTime = (d: string) => {
+const date2EventCoverTime = (d: string | Date) => {
   const date = new Date(d);
   console.log("date.getDay() - 1", date.getDay());
   return `${days[date.getDay()]} ${date.getDate()} ${
