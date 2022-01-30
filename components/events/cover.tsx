@@ -1,15 +1,19 @@
 import styled from "@emotion/styled";
-import { Episode, Participant } from "@prisma/client";
-import Image from "next/image";
+import { Episode, EpisodeGuest, Participant } from "@prisma/client";
 import { getParticipantImage } from "utils/participants";
 
-interface EventCoverProps {
-  event: Episode;
-  host: Participant;
-  guests: Participant[];
+export interface EventCoverProps {
+  episode: Episode & {
+    host: Participant;
+    guests: (EpisodeGuest & {
+      guest: Participant;
+    })[];
+  };
 }
 
-export const EventCover = ({ event, host, guests }: EventCoverProps) => {
+export const EventCover = ({ episode }: EventCoverProps) => {
+  const host = episode.host;
+  const guests = episode.guests.map((g) => g.guest);
   return (
     <div className="aspect-video relative w-[1024px] bg-zinc-100 grid grid-rows-[1fr_auto]">
       <CoverStyled />
@@ -18,7 +22,7 @@ export const EventCover = ({ event, host, guests }: EventCoverProps) => {
           <h2 className="text-blue-800 text-5xl leading-tight font-bold pl-10 ">
             <div
               dangerouslySetInnerHTML={{
-                __html: event.title.replace(
+                __html: episode.title.replace(
                   /\*([^\*]+)\*/g,
                   (data, ar) => `<span class="px-2 bg-green-300">${ar}</span>`
                 ),
@@ -54,8 +58,8 @@ export const EventCover = ({ event, host, guests }: EventCoverProps) => {
         )}
       </div>
       <div className="relative bg-blue-800 h-12 px-4 text-green-300 flex justify-between items-center">
-        <p className="text-xl">{date2EventCoverTime(event.scheduledTime)}</p>
-        <p className="text-2xl font-bold">{event.category}</p>
+        <p className="text-xl">{date2EventCoverTime(episode.scheduledTime)}</p>
+        <p className="text-2xl font-bold">{episode.category}</p>
       </div>
     </div>
   );
@@ -138,17 +142,19 @@ const mounths = [
 ];
 
 const days = [
+  "Domenica",
   "Lunedì",
   "Martedì",
   "Mercoledì",
   "Giovedì",
   "Venerdì",
   "Sabato",
-  "Domenica",
 ];
 
-const date2EventCoverTime = (date: Date) => {
-  return `${days[date.getDay() - 1]} ${date.getDate()} ${
+const date2EventCoverTime = (d: string) => {
+  const date = new Date(d);
+  console.log("date.getDay() - 1", date.getDay());
+  return `${days[date.getDay()]} ${date.getDate()} ${
     mounths[date.getMonth()]
   } ${date.getFullYear()} - ${padTime(date.getHours())}.${padTime(
     date.getMinutes()

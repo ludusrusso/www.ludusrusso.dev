@@ -29,6 +29,27 @@ export const episodesRouter = createRouter()
       return { episodes, total };
     },
   })
+  .query("getById", {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ input: { id }, ctx: { db } }) {
+      const episode = await db.episode.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          host: true,
+          guests: {
+            include: {
+              guest: true,
+            },
+          },
+        },
+      });
+      return episode;
+    },
+  })
   .mutation("create", {
     input: CreateEpisodeSchema,
     async resolve({
