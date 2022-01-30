@@ -17,6 +17,6 @@ export default async function handler(
     if (next) {
       return res.status(200).json(next);
     }
-    res.status(404);
+    res.status(404).json({ msg: "no episode are scheduled" });
   }
 }
