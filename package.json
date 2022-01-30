@@ -4,12 +4,12 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "ts-node build-blog.ts",
-    "postbuild": "next-sitemap",
+    "postbuild": "next-sitemap && ts-node build-feed.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.yml",
-    "vercel-build": "prisma generate && ts-node build-blog.ts && next build && next-sitemap",
+    "vercel-build": "prisma generate && ts-node build-blog.ts && next build && next-sitemap  && ts-node build-feed.ts",
     "create-admin": "NODE_PATH='.' ts-node scripts/create-admin.ts"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "bcrypt": "^5.0.1",
     "dayjs": "^1.10.7",
     "disqus-react": "^1.1.2",
+    "feed": "^4.2.2",
     "final-form": "^4.20.4",
     "glob": "^7.1.7",
     "graphql": "^15.8.0",
