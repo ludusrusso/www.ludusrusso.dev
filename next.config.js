@@ -1,9 +1,9 @@
-const { withSuperjson } = require('next-superjson');
+const { withSuperjson } = require("next-superjson");
 
 module.exports = withSuperjson()({
   swcMinify: false,
-  reactStrictMode: true,
+  generateRobotsTxt: true, // (optional)
   images: {
-    domains: ['avatars.githubusercontent.com', 'res.cloudinary.com'],
+    domains: ["avatars.githubusercontent.com", "res.cloudinary.com"],
   },
 });

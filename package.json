@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "ts-node build-blog.ts",
+    "postbuild": "next-sitemap",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -66,6 +68,7 @@
     "autoprefixer": "^10.4.0",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
+    "next-sitemap": "^2.1.5",
     "postcss": "^8.2.15",
     "prisma": "^3.7.0",
     "tailwindcss": "^3.0.7",
