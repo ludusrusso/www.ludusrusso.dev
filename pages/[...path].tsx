@@ -14,6 +14,7 @@ import { SEO } from "../components/seo";
 import { Tag } from "../components/tag";
 import { config } from "../utils/config";
 import { getBlogData } from "../utils/getBlogData";
+import rehypeHighlight from "rehype-highlight";
 
 export default function TestPage({
   source,
@@ -58,6 +59,10 @@ export default function TestPage({
           integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
           crossOrigin="anonymous"
         />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css"
+        />
       </Head>
       <Nav />
 
@@ -99,7 +104,7 @@ export default function TestPage({
           ))}
         </div>
 
-        <div className="prose prose-lg m-auto mt-6 px-2 md:px-0">
+        <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">
           <MDXRemote {...source} components={components} />
         </div>
 
@@ -148,7 +153,7 @@ export async function getStaticProps({
   const mdxSource = await serialize(post!.content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
+      rehypePlugins: [rehypeKatex, rehypeHighlight as any],
     },
   });
 

@@ -1,5 +1,4 @@
 import { EpisodeForm } from "admin/episodes/episodes.form";
-import { EventCover } from "components/events/cover";
 import { AdminLayout } from "layouts/admin";
 import dynamic from "next/dynamic";
 import Router from "next/router";

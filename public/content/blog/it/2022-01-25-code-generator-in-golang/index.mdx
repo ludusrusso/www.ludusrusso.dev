@@ -110,14 +110,14 @@ Trovate i passaggi dello sviluppo nel video qui sotto, ma in questo post voglio 
 
 Quindi, cosa deve fare il nostro code generator? Smeplice, quando trova una riga di questo tipo:
 
-```golang
+```go
 //+prom:metric:counter name:myapp_processed_ops_total
 opsProcessed.Inc()
 ```
 
 In code generator deve definire la variabile `opsProcessed` come metrica di tipo counter con il nome della metrica a `myapp_processed_ops_total`.
 
-```golang
+```go
 var opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
 	Name: "myapp_processed_ops_total",
 })
@@ -125,7 +125,7 @@ var opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
 
 Il trigger del code generator è il commento nella forma
 
-```golang
+```go
 //+prom:metric:<METRIC TYPE> name:<METRIC NAME>
 ```
 
@@ -137,7 +137,7 @@ Dopo un po' di dubbi su come fare abbiamo deciso di usare l'approccio più
 semplice possibile, cioè leggere le righe ad una ad una e giocare un po' con
 gli `strings.Split`!
 
-```golang
+```go
 const commentPrefix = "//+prom:metric"
 
 func isCodegenLine(line string) (metricType string, metricName string, found bool) {
@@ -154,7 +154,7 @@ func isCodegenLine(line string) (metricType string, metricName string, found boo
 
 Questa funzione viene usata all'interno di un loop su tutte le righe del file:
 
-```golang
+```go
 for scanner.Scan() {
 		line := scanner.Text()
 		metricType, metricName, found := isCodegenLine(line)
@@ -175,7 +175,7 @@ for scanner.Scan() {
 
 Alla fine del ciclo, dovremmo trovare dentro variables (che per la cronata è definito così)
 
-```golang
+```go
 type Variables struct {
 	PackageName string
 	Metrics     []Metric
@@ -225,7 +225,7 @@ var {{ .Variable }} = promauto.NewGauge(prometheus.GaugeOpts{
 
 Con il seguente codice
 
-```golang
+```go
   if err := tmp.Execute(buf, variabels); err != nil {
 		return "", err
 	}
@@ -237,7 +237,7 @@ Il template renderizzato che viene fuori al 99% avrà una formattazione un po' b
 tempo a cercare di formattare il template, go ci mette a disposizione il pacchetto `go/format`
 che ci permette di lanciage `go fmt` sulla stringa in output al template, come fatto qui:
 
-```golang
+```go
 	formattedOut, err := format.Source(buf.Bytes())
 	if err != nil {
 		return "", err
@@ -248,7 +248,7 @@ Il template è un buonissimo esempio di come possiamo sfruttare la libreria `emb
 Invece di dover gestire a run time l'apertura e la lettura del template, possiamo embeddarlo
 all'intenro di una variabile facendo questo:
 
-```golang
+```go
 //go:embed template.txt
 var templateString string
 ```
