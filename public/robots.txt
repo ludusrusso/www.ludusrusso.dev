@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.ludusrusso.dev
+
+# Sitemaps
+Sitemap: https://www.ludusrusso.dev/sitemap.xml
+Sitemap: https://www.ludusrusso.dev/sitemap-0.xml
