@@ -109,7 +109,7 @@ export default function TestPage({
           <MDXRemote {...source} components={components} />
         </div>
 
-        {process.env.NODE_ENV === "production" && (
+        {process.env.VERCEL_ENV === "production" && (
           <div className="prose prose-lg m-auto mt-6">
             <DiscussionEmbed
               shortname={config.disqus.shortname}
