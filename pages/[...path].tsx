@@ -115,7 +115,7 @@ export default function TestPage({
         </div>
 
         <div className="prose prose-lg">
-          {process.env.VERCEL_ENV === "production" && (
+          {process.env.NODE_ENV === "production" && (
             <DiscussionEmbed
               shortname={config.disqus.shortname}
               config={{

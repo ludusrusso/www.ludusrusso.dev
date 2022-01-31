@@ -16,7 +16,7 @@ export default function D() {
 }
 
 const IubendaCookieBanner = () => {
-  if (process.env.VERCEL_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production") {
     return null;
   }
   const script = `<script type="text/javascript">
@@ -28,7 +28,7 @@ const IubendaCookieBanner = () => {
 };
 
 const GAHeader = () => {
-  if (process.env.VERCEL_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production") {
     return null;
   }
   return (
