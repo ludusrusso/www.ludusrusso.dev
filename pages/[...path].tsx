@@ -1,4 +1,3 @@
-import { DiscussionEmbed } from "disqus-react";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -17,6 +16,11 @@ import { getBlogData } from "../utils/getBlogData";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
 import { Mailchimp } from "components/mailchimp";
+import dynamic from "next/dynamic";
+
+const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
+  ssr: false,
+});
 
 export default function TestPage({
   source,
@@ -110,8 +114,8 @@ export default function TestPage({
           <MDXRemote {...source} components={components} />
         </div>
 
-        {process.env.VERCEL_ENV === "production" && (
-          <div className="prose prose-lg m-auto mt-6">
+        <div className="prose prose-lg">
+          {process.env.VERCEL_ENV === "production" && (
             <DiscussionEmbed
               shortname={config.disqus.shortname}
               config={{
@@ -121,11 +125,11 @@ export default function TestPage({
                 language: "it",
               }}
             />
-          </div>
-        )}
-
-        <Mailchimp title="Ti è piaciuto questo post?" />
+          )}
+        </div>
       </main>
+      <Mailchimp title="Ti è piaciuto questo post?" />
+
       <Footer />
     </>
   );
