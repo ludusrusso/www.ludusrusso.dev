@@ -14,6 +14,9 @@ import { SEO } from "../components/seo";
 import { Tag } from "../components/tag";
 import { config } from "../utils/config";
 import { getBlogData } from "../utils/getBlogData";
+import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { Mailchimp } from "components/mailchimp";
 
 export default function TestPage({
   source,
@@ -107,7 +110,7 @@ export default function TestPage({
           <MDXRemote {...source} components={components} />
         </div>
 
-        {process.env.NODE_ENV === "production" && (
+        {process.env.VERCEL_ENV === "production" && (
           <div className="prose prose-lg m-auto mt-6">
             <DiscussionEmbed
               shortname={config.disqus.shortname}
@@ -120,6 +123,8 @@ export default function TestPage({
             />
           </div>
         )}
+
+        <Mailchimp title="Ti è piaciuto questo post?" />
       </main>
       <Footer />
     </>
@@ -149,7 +154,13 @@ export async function getStaticProps({
     p.frontMatter.path.includes(params!.path.join("/"))
   );
 
-  const mdxSource = await serialize(post!.content, {
+  if (!post) {
+    throw new Error("post not found????");
+  }
+
+  const md = await fs.readFile(post!.file);
+  const { content } = matter(md);
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],

@@ -1,5 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Mailchimp } from "components/mailchimp";
 import { NextEpisode } from "components/next-episode";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
@@ -48,6 +49,7 @@ export default function Home({
         </div>
       </div>
 
+      <Mailchimp title="Ti piacciono i miei contenuti?" />
       <Footer />
     </>
   );

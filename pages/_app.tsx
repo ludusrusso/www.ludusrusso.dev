@@ -17,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const handleRouteChange =
-      process.env.NODE_ENV === "production"
+      process.env.VERCEL_ENV === "production"
         ? (url: string) => {
             ga.pageview(url);
           }
