@@ -67,7 +67,6 @@ const getBlogData = async () => {
       const readTime = readingTime(content);
       const postPath = data.path || extractPathFromFile(file);
       return {
-        content,
         file,
         frontMatter: {
           path: postPath,

@@ -14,6 +14,8 @@ import { SEO } from "../components/seo";
 import { Tag } from "../components/tag";
 import { config } from "../utils/config";
 import { getBlogData } from "../utils/getBlogData";
+import { promises as fs } from "fs";
+import matter from "gray-matter";
 
 export default function TestPage({
   source,
@@ -149,7 +151,13 @@ export async function getStaticProps({
     p.frontMatter.path.includes(params!.path.join("/"))
   );
 
-  const mdxSource = await serialize(post!.content, {
+  if (!post) {
+    throw new Error("post not found????");
+  }
+
+  const md = await fs.readFile(post!.file);
+  const { content } = matter(md);
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],
