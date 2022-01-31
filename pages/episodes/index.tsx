@@ -41,19 +41,18 @@ const EpisodeLink = ({ episode }: { episode: Episode }) => {
         <time dateTime={episode.scheduledTime.toISOString()}>
           {formatDate(episode.scheduledTime)}
         </time>
-
-        <div className="flex gap-x-4">
-          {participants.map((p) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={p.id}
-              className="rounded-full mt-2 w-7 h-7"
-              src={getParticipantImage(p, 28)}
-              alt={p.name}
-            />
-          ))}
-        </div>
       </p>
+      <div className="flex gap-x-4">
+        {participants.map((p) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={p.id}
+            className="rounded-full mt-2 w-7 h-7"
+            src={getParticipantImage(p, 28)}
+            alt={p.name}
+          />
+        ))}
+      </div>
 
       <div className="mt-2 block">
         <p className="text-xl font-semibold text-gray-900">
