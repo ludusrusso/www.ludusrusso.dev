@@ -102,6 +102,7 @@ const MailchimpForm = ({
                     <a
                       href="https://www.iubenda.com/privacy-policy/7981809"
                       target="_blank"
+                      rel="noreferrer"
                       className="text-white font-medium underline"
                     >
                       Privacy Policy.
