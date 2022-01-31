@@ -16,6 +16,7 @@ import { config } from "../utils/config";
 import { getBlogData } from "../utils/getBlogData";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
+import { Mailchimp } from "components/mailchimp";
 
 export default function TestPage({
   source,
@@ -122,6 +123,8 @@ export default function TestPage({
             />
           </div>
         )}
+
+        <Mailchimp title="Ti è piaciuto questo post?" />
       </main>
       <Footer />
     </>
