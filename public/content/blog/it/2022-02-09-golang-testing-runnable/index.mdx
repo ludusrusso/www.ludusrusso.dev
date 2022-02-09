@@ -1,0 +1,336 @@
+---
+title: Come si testa in go una "Runnable" interface in Golang?
+date: "2022-02-09T00:00:00.000Z"
+tags:
+  - golang
+  - testing
+category: "blog"
+author: "ludusrusso"
+description: Ho bisogno di aiuto! Qual è il modo migliore per testare l'interfaccia Runnable che vi propongo in questo articolo?
+image: "./runnable.png"
+---
+
+Nell'ultimo periodo sto lavorando tantissimo con `golang`, un linguaggio che nonostante reputo molto
+brutto (si fa schifo, non è che c'è molto da dire), mi sta dando tantissime soddisfazioni grazie
+alla sua semplicità e immediatezza.
+
+In questo articolo voglio parlare di un problema che ultimamente sto affrontando riguado a come
+testare degli oggetti specifici in golang, a cui ho già trovato una soluzione che però non mi soddisfa
+molto, e magari qualche lettore può darmi una mano a scrivere meglio il test.
+
+## Testare la mia runnable interface
+
+Nel mio codice ho definito un'interfaccia chiamata `Runnable` che rappresenta un ciclo infinito,
+un programma che deve girare infinitamente almeno finchè non viene spento da fuori.
+
+```golang
+type Runnable interface {
+  Run(context.Context) error
+}
+```
+
+Come vedete l'interfaccia è molto semplice e la utilizzo in questo modo:
+
+```golang
+package main
+
+func main() {
+  ctx, cancel := context.WithCancel(context.Background())
+
+  // gestisco qui in qualche modo la chiusura del programma che chiama cancel
+
+  r := NewMyRunner(...)
+  err := r.Run(ctx)
+  if err != nil {
+    panic(err)
+  }
+}
+```
+
+Quello che fa la mia interfaccia è rimanere in ascolto su degli eventi (di solito che si popoli una certa colonna nel database)
+e poi processare i dati che vengono generati.
+Questo viene risolto con l'implementazione di almeno due loop separati:
+
+- Il primo si occupa di preparare i dati e inserirli all'iterno di
+  una coda (un channel in go).
+- Il secondo pesca dal channel i dati uno alla volta e li elabora.
+
+Ho molti oggetti che implementano l'interfaccia `Runnable` e (come detto)
+all'interno di questi oggetti vengono gestiti più loop infiniti
+che svolgono una certa operazione.
+
+Il problema si presenta quando voglio scrivere un test in grado di testare il funzionamento
+di Runnable in quanto, data l'interfaccia, non ho modo a priori di sapere
+quando ha finito di fare quello che deve fare.
+
+## Esempio concreto
+
+Proviamo a fare un esempio per capire meglio il problema.
+
+Implementiamo un semplice esempio di `Runnable` che loopa su uno slice di stutture e li elabora uno a uno.
+Ci saranno due loop, il primo loop prende gli oggetti da elaborare e li manda dentro un channel dove
+un secondo loop si occupa di elabolarsi e marcarli come "elaborati".
+
+Partiamo dalla struct dei nostri dati che sarà definita così
+
+```golang
+package demo
+
+type DataStatus string
+
+const (
+	DataStatusPending DataStatus = "pending"
+	DataStatusLoading DataStatus = "loading"
+	DataStatusDone    DataStatus = "done"
+)
+
+type Data struct {
+	value         int
+	Status        DataStatus
+	ComputedValue int
+}
+
+func NewData(value int) Data {
+	return Data{
+		value:  value,
+		Status: DataStatusPending,
+	}
+}
+```
+
+Quando creiamo la nostra variabile `data` inizializziamo lo stato a `DataStatusPending`.
+
+Dobbiamo quindi implementare la nostra interfaccia `Runnable` a partire da una struct
+che contiene uno slice di tipi `Data` al suo interno.
+
+```golang
+type demo struct {
+	data     []Data
+	dataChan chan *Data
+}
+```
+
+La nostra struct avrà due loop, il primo legge ad uno ad uno le variabili contenute nello slice `data` e seleziona
+quelle che sono in stato `DataStatusPending`. Queste vengono messe in stato `DataStatusLoading` e mandate sul canale
+`dataChan`.
+
+```golang
+func (d *demo) loopPickData(ctx context.Context) {
+	done := false
+	go func() {
+		<-ctx.Done()
+		done = true
+	}()
+
+	for !done {
+		for idx, datum := range d.data {
+			if datum.Status == DataStatusPending {
+				d.data[idx].Status = DataStatusLoading
+				d.dataChan <- &d.data[idx]
+			}
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+```
+
+Il secondo loop elabora ad uno ad uno gli oggetti messi nel canale riempiendo il campo `ComputedData` e
+settando lo status a `DataStatusDone`:
+
+```golang
+func (d *demo) loopElaborate(ctx context.Context) {
+	for {
+		select {
+		case datum := <-d.dataChan:
+			datum.ComputedValue = datum.value * 2
+			datum.Status = DataStatusDone
+		case <-ctx.Done():
+			return
+		}
+	}
+}
+```
+
+E finalmente a questo punto possiamo implementare il metodo `Run` che farà girare in parallelo
+i due loop e aspetterà che entrambi finiscano.
+
+```golang
+func (d *demo) Run(ctx context.Context) error {
+	var wg sync.WaitGroup
+
+	wg.Add(2)
+	go func() {
+		d.loopPickData(ctx)
+		wg.Done()
+	}()
+
+	go func() {
+		d.loopElaborate(ctx)
+		wg.Done()
+	}()
+
+	wg.Wait()
+
+	return nil
+}
+```
+
+Con il costrutture
+
+```golang
+func NewDemoRunnable(data []Data) runnable.Runnable {
+	return &demo{
+		data:     data,
+		dataChan: make(chan *Data, 1),
+	}
+}
+```
+
+Abbiamo completato il nostro pacchetto, ecco il codice completo:
+
+```golang
+// demo.go
+
+package demo
+
+import (
+	"context"
+	"sync"
+	"time"
+
+	"github.com/ludusrusso/runnable-demo/pkg/runnable"
+)
+
+func NewDemoRunnable(data []Data) runnable.Runnable {
+	return &demo{
+		data:     data,
+		dataChan: make(chan *Data, 1),
+	}
+}
+
+type demo struct {
+	data     []Data
+	dataChan chan *Data
+}
+
+func (d *demo) loopPickData(ctx context.Context) {
+	done := false
+	go func() {
+		<-ctx.Done()
+		done = true
+	}()
+
+	for !done {
+		for idx, datum := range d.data {
+			if datum.Status == DataStatusPending {
+				d.data[idx].Status = DataStatusLoading
+				d.dataChan <- &d.data[idx]
+			}
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+
+func (d *demo) loopElaborate(ctx context.Context) {
+	for {
+		select {
+		case datum := <-d.dataChan:
+			datum.ComputedValue = datum.value * 2
+			datum.Status = DataStatusDone
+		case <-ctx.Done():
+			return
+		}
+	}
+}
+
+func (d *demo) Run(ctx context.Context) error {
+	var wg sync.WaitGroup
+
+	wg.Add(2)
+	go func() {
+		d.loopPickData(ctx)
+		wg.Done()
+	}()
+
+	go func() {
+		d.loopElaborate(ctx)
+		wg.Done()
+	}()
+
+	wg.Wait()
+
+	return nil
+}
+```
+
+```golang
+// data.go
+
+package demo
+
+type DataStatus string
+
+const (
+	DataStatusPending DataStatus = "pending"
+	DataStatusLoading DataStatus = "loading"
+	DataStatusDone    DataStatus = "done"
+)
+
+type Data struct {
+	value         int
+	Status        DataStatus
+	ComputedValue int
+}
+
+func NewData(value int) Data {
+	return Data{
+		value:  value,
+		Status: DataStatusPending,
+	}
+}
+```
+
+## E i test?
+
+Se voglio testare questa funzione ho solo esportato il metodo `Run(context.Context)` dal pacchetto, quindi
+per vedere se funziona dovrò creare un nuovo Runnable usando la funzione `NewDemoRunnable` con dei dati inizializzati,
+quindi dovrò far girare per **almeno** un ciclo entrambi i loop e poi vedere se lo stato ed il valore
+nello slice è stato modificato come mi aspetto. Questo è quello che mi è venuto in mente:
+
+```golang
+package demo_test
+
+// imports ....
+
+func TestDemo(t *testing.T) {
+	data := []demo.Data{demo.NewData(2)}
+	s := demo.NewDemoRunnable(data)
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+	s.Run(ctx)
+
+	assert.Equal(t, demo.DataStatusDone, data[0].Status)
+	assert.Equal(t, 4, data[0].ComputedValue)
+}
+```
+
+Come vedete, usando il metodo `context.WithTimeout` mi assicuro che `s.Run(ctx)` si spenga dopo un secondo,
+e a questo punto posso verificare che il contenuto di `data[0]` sia stato modificato a dovere.
+
+> Il source code di questo esempio lo trovate su Github [github.com/ludusrusso/runnable-demo](https://github.com/ludusrusso/runnable-demo)
+
+Ma è il modo più corretto per farlo? Sicuramente ho un problema che non so se il tempo che stabilisco
+mi basta per essettuare almeno i cicli che necessito per far completare un ciclo dell'algoritmo. In teoria
+1 secondo (il tempo che ho settato in questo test), è molto lungo e mi basta, ma rende il test più lento!
+
+L'ottimo sarebbe trovare un modo per permettermi di controllare il numero di cicli che la mia interfaccia
+deve svolgere prima di spegnersi, ma non mi vengono in mente modi puliti per farlo senza esporre troppo
+il funzionamento interno dell'interfaccia e rendere il tutto molto più complesso.
+
+## Conclusioni
+
+Qual è, secondo voi, il modo più corretto per gestire questo test? Come posso modificare il codice
+per renderlo più testabile senza però esporre troppo del funzionamento interno e lasciare
+un'interfaccia generica come quella di Runnable?
+
+Se qualcuno può autarmi gliene sarei grato!
