@@ -64,13 +64,13 @@ Tramite il comando `/newbot` si avvierà la procedura di creazione che consiste 
 Aprire Anaconda Navigator (che non useremo direttamente) e Spyder, su cui scriveremo il codice vero e proprio.
 Se è la prima volta che si usa Spyder, bisogna installare la libreria nanpy. Per fare ciò è sufficiente inserire nella IPython console (in basso a destra) il codice
 
-```sh
+```bash
 ! pip install telepot nanpy
 ```
 
 Una volta installata, viene la parte di vera e propria programmazione (in Python). Bisogna infatti scrivere nell'editor principale di Spyder il codice che detta il comportamento del bot. nel nostro caso il codice è questo:
 
-```sh
+```bash
 import telepot
 import time
 from nanpy import ArduinoApi, SerialManager

@@ -51,7 +51,7 @@ In questo modo sarà sufficiente collegare l'Arduino al Raspberry attraverso una
 
 Procediamo ora a scrivere il codice di un semplice pulisher per pubblicare una stringa testuale sulla console ROS. Apriamo quindi l'Arduino IDE e iniziamo un nuovo progetto. Andiamo ad includere immediatamente le librerie che utilizzeremo e la stringa `ros::NodeHandle nh;` che permetterà al nostro programma di creare publisher e subscriber:
 
-```c++
+```cpp
 #include <ros.h>
 #include <std_msgs/String.h>
 
@@ -60,14 +60,14 @@ ros::NodeHandle nh;
 
 Ora dobbiamo definire il nostro publisher/subscriber. In questo caso lavoriamo su un publisher chiamato **chatter** che pubblicherà un messaggio di tipo **&str_msg**
 
-```c++
+```cpp
 std_msgs::String str_msg;
 ros::Publisher chatter("chatter", &str_msg);
 ```
 
 Nel **setup** inizializziamo il nostro nodo ROS e definiamo i topic a cui vogliamo sottoscriverci utilizzando la stringa `nh.subscribe(nomedeltopic)` e quelli che vogliamo pubblicare, come nel nostro caso, con la stringa `nh.advertise(nomedeltopic)`
 
-```c++
+```cpp
 void setup()
 {
   nh.initNode();
@@ -77,7 +77,7 @@ void setup()
 
 Come ultimo passo nella funzione **loop** il nodo pubblica la stringa "Hello World" e si chiama la funzione `ros::spinOnce()` con la quale si gestiscono tutte le **callback**
 
-```c++
+```cpp
 void loop()
   {
     str_msg.data = hello;
@@ -89,7 +89,7 @@ void loop()
 
 ## Codice completo
 
-```c++
+```cpp
 #include <ros.h>
 #include <std_msgs/String.h>
 

@@ -59,7 +59,7 @@ Per vagrant, ogni macchina virtuale corrisponde ad una cartella nel nostro compu
 
 Accediamo quindi alla cartella e creiamo una nuova cartella chiamata `ubuntu-xenial64` in cui metteremo la nostra macchina.
 
-```shell
+```bash
 $ cd ~/develop/vagrant_machines
 $ mkdir ubuntu-xenial64
 $ cd ubuntu-xenial64
@@ -67,13 +67,13 @@ $ cd ubuntu-xenial64
 
 Una volta all'interno della cartella, lanciamo il comando per la creazione della nostra macchia virtuale:
 
-```shell
+```bash
 $ vagrant init ubuntu/xenial64
 ```
 
 il cui output sarà il seguente:
 
-```shell
+```bash
 A `Vagrantfile` has been placed in this directory. You are now
 ready to `vagrant up` your first virtual environment! Please read
 the comments in the Vagrantfile as well as documentation on
@@ -94,7 +94,7 @@ end
 
 A questo punto, siamo pronti per far partire la nostra macchina virtuale. Per farlo, basta eseguire il comando
 
-```shell
+```bash
 $ vagrant up
 ```
 

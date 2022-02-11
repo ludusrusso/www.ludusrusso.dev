@@ -502,7 +502,7 @@ NOTA: i valori per i servo possono essere solo interi, l'interpolazione quindi g
 Per poter controllare il manipolatore è necessario controllarne i motori con una scheda Arduino su cui verrà eseguito un nodo ROS seriale che leggerà i messaggi sui topic da noi specificati.
 Caricate sulla vostra scheda Arduino il seguente sketch:
 
-```c++
+```cpp
 /*
  * siBOT servo control
  */

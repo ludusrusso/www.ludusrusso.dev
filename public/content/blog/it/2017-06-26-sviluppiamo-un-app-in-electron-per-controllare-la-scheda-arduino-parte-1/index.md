@@ -83,7 +83,7 @@ Vediamo quindi come implementare questo semplice codice. Apriamo questo file con
 Per prima cosa, importiamo gli oggetti `app` e `BrowserWindow` da `electron`:
 
 ```typescript
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow } from "electron";
 ```
 
 `app` reppresenta l'istanza dell'applicazione che stiamo creando, mentre `BrowserWindow` è una classe necessaria per la creazione di finestre grafiche.
@@ -93,7 +93,7 @@ A questo punto, è necessario aspettare che l'applicazione venga correttamente c
 ```typescript
 app.on("ready", () => {
   // codice da implementare
-})
+});
 ```
 
 Come vedete, il secondo argomento della funzione è un'altra funzione (callback), che verrà eseguita solo quando l'app sarà pronta.
@@ -102,18 +102,18 @@ All'interno della callback, creiamo la nostra finestra, usando l'oggetto `Browse
 
 ```typescript
 app.on("ready", () => {
-  let mainWindow = new BrowserWindow({ width: 800, height: 600 })
+  let mainWindow = new BrowserWindow({ width: 800, height: 600 });
   // codice da implementare
-})
+});
 ```
 
 Per finire, carichiamo all'interno della finestra il file `index.html`:
 
 ```typescript
 app.on("ready", () => {
-  let mainWindow = new BrowserWindow({ width: 800, height: 600 })
-  mainWindow.loadURL("file://" + __dirname + "/index.html")
-})
+  let mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow.loadURL("file://" + __dirname + "/index.html");
+});
 ```
 
 Si noti l'utilizzo della variabile `__dirname`, che contiene al suo interno il path globale della cartella all'interno della quale ci troviamo.
@@ -121,12 +121,12 @@ Si noti l'utilizzo della variabile `__dirname`, che contiene al suo interno il p
 Ecco il codice completo sviluppato:
 
 ```typescript
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow } from "electron";
 
 app.on("ready", () => {
-  let mainWindow = new BrowserWindow({ width: 800, height: 600 })
-  mainWindow.loadURL("file://" + __dirname + "/index.html")
-})
+  let mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow.loadURL("file://" + __dirname + "/index.html");
+});
 ```
 
 ### Il file `index.html`
@@ -185,8 +185,8 @@ Il fatto di avere due file può sembrare confusionario, ma questa scelta si comp
 Capito (spero) questo concetto di Electron, iniziamo ad implementare un semplice file `index.ts` che cambia il contenuto del tag `h1`, per vedere se tutto fuonziona correttamente. Apriamo il file `index.ts` e sviluppiamo il seguente codice:
 
 ```typescript
-let title_h1 = document.getElementById("title_id")
-title_h1.innerHTML = "Sono il processo di render"
+let title_h1 = document.getElementById("title_id");
+title_h1.innerHTML = "Sono il processo di render";
 ```
 
 La prima riga, serve per selezionare dal documento html (il file `index.html`) l'elemento avente **id** pari a _title_id_.
@@ -199,7 +199,7 @@ Come è possibile immaginare, prima di testare l'applicazione, dobbiamo modifica
 
 ```html
 <script>
-  require("./index.ts")
+  require("./index.ts");
 </script>
 ```
 
@@ -214,7 +214,7 @@ Il file `index.html` dovrà quindi avere la seguente forma:
     <h1 id="title_id">Funziona</h1>
   </body>
   <script>
-    require("./index.ts")
+    require("./index.ts");
   </script>
 </html>
 ```
@@ -233,7 +233,7 @@ La nostra applicazione è funzionante ma poco interessante da un punto di vista 
 
 Per prima cosa, installiamo `boostrap` nella nostra applicazione, in modo da poter utilizzare i pacchetti css definiti da questo progetto.
 
-```sh
+```bash
 $ npm install --save bootstrap
 ```
 

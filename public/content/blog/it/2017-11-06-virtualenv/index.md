@@ -89,7 +89,7 @@ $ source env/bin/activate
 
 A questo punto, su ogni riga del prompt dei comandi, apparirà la scritta `(env)` prima della solita stringa del prompt. Questo indica che l'ambiente è attivo. Possiamo quindi installare nuove librerie python (ulizzando pip), che esisteranno solo all'interno del nostro ambiente virtuale. In questo caso, non è necessario utilizzare il comando `sudo`, perchè ci troviamo all'interno di una cartella privata.
 
-```sh
+```bash
 (env)$ pip install flask
 ```
 

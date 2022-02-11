@@ -17,6 +17,9 @@ import { promises as fs } from "fs";
 import matter from "gray-matter";
 import { Mailchimp } from "components/mailchimp";
 import dynamic from "next/dynamic";
+// import prism from "remark-prism";
+// @ts-ignore
+import prism from "@mapbox/rehype-prism";
 
 const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
   ssr: false,
@@ -43,6 +46,7 @@ export default function TestPage({
     YouTube: ({ videoId }: { videoId: string }) => (
       <YouTube className="w-full aspect-video" videoId={videoId} />
     ),
+    pre: (props: any) => <pre {...props} className="no-prose" />,
   };
 
   return (
@@ -68,6 +72,10 @@ export default function TestPage({
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism-dark.min.css"
         />
       </Head>
       <Nav />
@@ -167,7 +175,7 @@ export async function getStaticProps({
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
+      rehypePlugins: [prism, rehypeKatex],
     },
   });
 

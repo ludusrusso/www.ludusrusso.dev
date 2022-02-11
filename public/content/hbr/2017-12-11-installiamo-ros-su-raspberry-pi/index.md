@@ -124,7 +124,7 @@ che lancia il cuore di ROS, ed è necessario per inizializzare una rete ROS.
 
 Dovreste vedere un output del tipo
 
-```shell
+```bash
 
 ... logging to /home/pi/.ros/log/e3e26302-d999-11e6-94cd-b827ebf7d5f2/roslaunch-raspberrypi-10902.log
 Checking log directory for disk usage. This may take awhile.

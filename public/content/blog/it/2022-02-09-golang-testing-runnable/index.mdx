@@ -23,7 +23,7 @@ molto, e magari qualche lettore può darmi una mano a scrivere meglio il test.
 Nel mio codice ho definito un'interfaccia chiamata `Runnable` che rappresenta un ciclo infinito,
 un programma che deve girare infinitamente almeno finchè non viene spento da fuori.
 
-```golang
+```go
 type Runnable interface {
   Run(context.Context) error
 }
@@ -31,7 +31,7 @@ type Runnable interface {
 
 Come vedete l'interfaccia è molto semplice e la utilizzo in questo modo:
 
-```golang
+```go
 package main
 
 func main() {
@@ -73,7 +73,7 @@ un secondo loop si occupa di elabolarsi e marcarli come "elaborati".
 
 Partiamo dalla struct dei nostri dati che sarà definita così
 
-```golang
+```go
 package demo
 
 type DataStatus string
@@ -103,7 +103,7 @@ Quando creiamo la nostra variabile `data` inizializziamo lo stato a `DataStatusP
 Dobbiamo quindi implementare la nostra interfaccia `Runnable` a partire da una struct
 che contiene uno slice di tipi `Data` al suo interno.
 
-```golang
+```go
 type demo struct {
 	data     []Data
 	dataChan chan *Data
@@ -114,7 +114,7 @@ La nostra struct avrà due loop, il primo legge ad uno ad uno le variabili conte
 quelle che sono in stato `DataStatusPending`. Queste vengono messe in stato `DataStatusLoading` e mandate sul canale
 `dataChan`.
 
-```golang
+```go
 func (d *demo) loopPickData(ctx context.Context) {
 	done := false
 	go func() {
@@ -137,7 +137,7 @@ func (d *demo) loopPickData(ctx context.Context) {
 Il secondo loop elabora ad uno ad uno gli oggetti messi nel canale riempiendo il campo `ComputedData` e
 settando lo status a `DataStatusDone`:
 
-```golang
+```go
 func (d *demo) loopElaborate(ctx context.Context) {
 	for {
 		select {
@@ -154,7 +154,7 @@ func (d *demo) loopElaborate(ctx context.Context) {
 E finalmente a questo punto possiamo implementare il metodo `Run` che farà girare in parallelo
 i due loop e aspetterà che entrambi finiscano.
 
-```golang
+```go
 func (d *demo) Run(ctx context.Context) error {
 	var wg sync.WaitGroup
 
@@ -177,7 +177,7 @@ func (d *demo) Run(ctx context.Context) error {
 
 Con il costrutture
 
-```golang
+```go
 func NewDemoRunnable(data []Data) runnable.Runnable {
 	return &demo{
 		data:     data,
@@ -188,7 +188,7 @@ func NewDemoRunnable(data []Data) runnable.Runnable {
 
 Abbiamo completato il nostro pacchetto, ecco il codice completo:
 
-```golang
+```go
 // demo.go
 
 package demo
@@ -263,7 +263,7 @@ func (d *demo) Run(ctx context.Context) error {
 }
 ```
 
-```golang
+```go
 // data.go
 
 package demo
@@ -297,7 +297,7 @@ per vedere se funziona dovrò creare un nuovo Runnable usando la funzione `NewDe
 quindi dovrò far girare per **almeno** un ciclo entrambi i loop e poi vedere se lo stato ed il valore
 nello slice è stato modificato come mi aspetto. Questo è quello che mi è venuto in mente:
 
-```golang
+```go
 package demo_test
 
 // imports ....

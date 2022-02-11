@@ -1,4 +1,5 @@
 import type { Episode, EpisodeGuest, Participant } from "@prisma/client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { dayjs, formatDate } from "utils/episodeDate";
 import { getParticipantImage } from "utils/participants";
@@ -12,7 +13,7 @@ interface NextEpisodeProps {
   };
 }
 
-export const NextEpisode = ({ episode }: NextEpisodeProps) => {
+export const NextEpisodeSection = ({ episode }: NextEpisodeProps) => {
   const [scheduledTime, setScheduledTime] = useState(episode.scheduledTime);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
 
   return (
     <div className="mx-2 my-10">
-      <div className="relative bg-white py-10 shadow-xl lg:max-w-3xl mx-auto  rounded">
+      <div className="relative  py-10   rounded">
         <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-3xl">
           <h2 className="text-base font-semibold tracking-wider text-indigo-600 uppercase">
             Il prossimo episodio è {getTimeToEpisode(scheduledTime)}
@@ -67,13 +68,24 @@ export const NextEpisode = ({ episode }: NextEpisodeProps) => {
             </div>
           </div>
 
-          <a
-            type="button"
-            className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            href={`https://twitch.tv/${episode.twitch}`}
-          >
-            Guarda su Twitch
-          </a>
+          <div className="flex justify-center gap-x-2">
+            <a
+              type="button"
+              className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-100 bg-indigo-600 hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              href={`https://twitch.tv/${episode.twitch}`}
+            >
+              Seguimi su Twitch
+            </a>
+            <Link href="/episodes">
+              <a
+                type="button"
+                className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                href={`https://twitch.tv/${episode.twitch}`}
+              >
+                Guarda Lista episodi
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

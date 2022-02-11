@@ -4,11 +4,19 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Mon, 31 Jan 2022 15:17:47 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 11 Feb 2022 14:01:41 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
         <copyright>2016 - 2022 Ludovico Russo. All rights reserved.</copyright>
+        <item>
+            <title><![CDATA[Come si testa una "Runnable" interface in Golang?]]></title>
+            <link>https://www.ludusrusso.dev/2022/02/golang-testing-runnable</link>
+            <guid>https://www.ludusrusso.dev/2022/02/golang-testing-runnable</guid>
+            <pubDate>Wed, 09 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ho bisogno di aiuto! Qual è il modo migliore per testare l'interfaccia Runnable che vi propongo in questo articolo?]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
         <item>
             <title><![CDATA[Passive income con Raspberry Pi e earnapp]]></title>
             <link>https://www.ludusrusso.dev/2022/01/raspberry-pi-passive-income-con-earnapp</link>
