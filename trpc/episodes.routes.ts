@@ -16,6 +16,9 @@ export const episodesRouter = createRouter()
       const episodes = await db.episode.findMany({
         skip,
         take,
+        orderBy: {
+          scheduledTime: "desc",
+        },
         include: {
           host: true,
           guests: {

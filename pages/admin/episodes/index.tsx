@@ -3,7 +3,7 @@ import Link from "next/link";
 import { trpc } from "utils/trpc";
 
 const EpisodesIndexPage = () => {
-  const { data, isLoading, error } = trpc.useQuery([
+  const { data, isLoading } = trpc.useQuery([
     "episodes.getAll",
     { skip: 0, take: 100 },
   ]);
@@ -14,7 +14,15 @@ const EpisodesIndexPage = () => {
   return (
     <AdminLayout>
       <Link href={"./episodes/new"}> Create New</Link>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <ul className="p-2">
+        {data?.episodes.map((e) => (
+          <li key={e.id} className="ml-9">
+            <Link href={`./episodes/${e.id}`}>
+              <a>{e.title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </AdminLayout>
   );
 };
