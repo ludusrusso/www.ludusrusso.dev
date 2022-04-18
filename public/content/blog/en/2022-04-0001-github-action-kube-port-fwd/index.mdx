@@ -1,0 +1,219 @@
+---
+title: Kubernetes Port Formward in a GitHub Action
+slug: github-action-kube-port-fwd
+public: true
+date: 2022-04-18
+description: Kubernetes port forwarding in a GitHub Action in a simple way with Github action services.
+image: ./main.jpeg
+author: ludusrusso
+tags:
+  - "kubernetes"
+  - "github"
+lang: en
+---
+
+[Github action](https://github.com/features/actions) is a powerful tool to automate the deployment of your code.
+It is very simple to use, however, in some case, you need to connect to exernal services
+to fully handle a build task.
+
+This is the case of a Build and Deployment pipeline using nextjs with a real database.
+In this case, connection to database is required to complete the build phase, and it is a little bit tricky
+to handle if your database is on a remote server not accessible directly to internet.
+
+Luckily, kubernetes provides a way to port forward a kubernetes port. And GitHub Actions provide a way,
+called [container services](https://docs.github.com/en/actions/using-containerized-services/about-service-containers), to
+easly deploy external services that runs parallel to the main action.
+
+Services main porpouse is to provide a simple and portable way for you to host services that you might need to test or operate your application in a workflow.
+But we can use it to run a port forward to a database server remotelly on kubernetes.
+
+This post has been mainly inspired from
+[How we connect to Kubernetes Pods from GitHub Actions](https://dev.to/richicoder1/how-we-connect-to-kubernetes-pods-from-github-actions-1mg):
+the instruction to create a custom service account with the only permission of
+enabling port forwarding to a kubernetes pod are practically the same of
+the original post, I just report them here to make this post self consistent.
+
+Difference from the original posts are in the deply phase. While they suggest to perform port forwarding in the main action before doing any
+operation, I prefer running it within a container service as suggested but github action team.
+
+## Creating a service account with port forwarding permission
+
+The main idea is to create a service account that can only perform port forwarding on the
+target port. The GitHub action will the use this service account to run the port forward service.
+
+Let suppose we want to open the port $PORT on the pod $POD in namespace $NAMESPACE.
+
+Let's create the service account
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: $POD-forward
+  namespace: $NAMESPACE
+```
+
+Then we need to create a custom role to with rules to port forwarding to the service account.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: $POD-forward
+  namespace: $NAMESPACE
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    resourceNames: ["$POD"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["pods/portforward"]
+    resourceNames: ["$POD"]
+    verbs: ["create"]
+```
+
+And finaly we can bind the role to the service account
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: $POD-forward
+  namespace: $NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: $POD-forward
+subjects:
+  - kind: ServiceAccount
+    name: $POD-forward
+    namespace: $NAMESPACE
+```
+
+## Create a kubeconfing file to call kubernetes api as the service account
+
+Now that we have a service account with the right permission, we need
+to find a way to call api with the given service account.
+
+So we need to create a kubeconfig file to connect to the kubernetes api using the
+service account token.
+
+We first need to get the token name using
+
+```bash
+$ TOKENNAME=`kubectl -n $NAMESPACE get serviceaccount/$POD-forward -o jsonpath='{.secrets[0].name}'`
+```
+
+The token is stored on a kubernetes secret, to retrive it, we can use the following
+command
+
+```bash
+$ TOKEN=`kubectl -n $NAMESPACE get secret/$TOKENNAME -o jsonpath='{.data.token}' | base64 -d`
+```
+
+We then need to extract the _Api server URL_ and _Cluster CA_ from the
+the current kubernetes context. This can be done with the following commands.
+
+```bash
+$ SERVER=`kubectl config view --minify --output jsonpath="{.clusters[*].cluster.server}"`
+$ CA=`kubectl config view --minify --flatten  --output jsonpath="{.clusters[*].cluster.certificate-authority-data}"`
+```
+
+And finally, we can create a kubeconfig file using the given token
+
+```yaml
+apiVersion: v1
+clusters:
+  - cluster:
+      server: $SERVER
+      certificate-authority-data: $CA
+    name: kubernetes
+contexts:
+  - context:
+      cluster: kubernetes
+      user: $POD-forward-sa
+    name: target-cluster
+current-context: target-cluster
+kind: Config
+preferences: {}
+users:
+  - name: $POD-forward-sa
+    user:
+      token: $TOKEN
+```
+
+Whis this kubeconfig file, we can now call the kubernetes api using the service account to port forward the given pod.
+
+## Creating the container service
+
+GitHub container service are really limitated, we cannot pass arguments to a container
+neither run a container with a custom scripts. So we need to create a custom
+container that is able to run `kubectl port-forward` and read kubeconfig from command line.
+Moreover, we can only pass data to the service using env variables.
+
+So I've prepared a custom Dockerfile starting from `bitnami/kubectl`. This container
+copies the `$KUBECONFIG` base64 encoded data to a file and then runs `kubectl port-forward`
+on `$POD` and `$NAMESPACE` also taken from env variables.
+
+Here is the Dockerfile
+
+```Dockerfile
+FROM bitnami/kubectl
+COPY ./entrypoint /entrypoint
+ENTRYPOINT ["/entrypoint"]
+```
+
+And the Entrypoint
+
+```bash
+#!/bin/sh
+
+echo $KUBECONFIG | base64 -d > $HOME/.kube/config
+export KUBECONFIG=$HOME/.kube/config
+kubectl port-forward -n $NAMESPACE $POD $PORTS --address='0.0.0.0'
+```
+
+I've prepared a [github repo](https://github.com/ludusrusso/kubectl-with-env-config)
+that created and build this container.
+
+The container is public avalable on the github containre registry `ghcr.io/ludusrusso/kubectl-with-env-config`.
+
+The repo also [contains a script](https://github.com/ludusrusso/kubectl-with-env-config/blob/main/get-config.bash) to generate the encoded kubeconfig file following
+the steps described in this post.
+
+## Running the service
+
+Now we have all the pieces to run the portforward service in our github action.
+
+We need to configure the pod, namespace and base64 kuneconfig file as github action secrets and finally
+we can open a port forward to the pod while running the action, here is an example.
+
+```yaml
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # run your actions
+    services:
+      db:
+        image: ghcr.io/ludusrusso/kubectl-with-env-config:958062ab64ccfa815aa2f931c03f72a2a670232a
+        env:
+          KUBECONFIG: "${{ secrets.KUBECONFIG }}"
+          NAMESPACE: "${{ secrets.NAMESPACE }}"
+          POD: "${{ secrets.POD }}"
+          PORTS: 5432:5432 # this is kubeconfig port parameter
+        ports:
+          - 5432:5432 # this is github service port parameter
+```
+
+You can find a real work example [here](https://github.com/farmaceutica-younger/www.farmaceuticayounger.science/blob/main/.github/workflows/deploy.yaml). In this case
+I open the port on a postgres database running on a kubernetes cluster to allow a nextjs build
+to query the database at compile time.
