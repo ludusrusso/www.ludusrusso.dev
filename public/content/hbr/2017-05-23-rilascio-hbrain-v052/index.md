@@ -5,7 +5,7 @@ date: "2017-05-23T11:32:38.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Updates"
   - "Hbrain"
 redirect_from:
@@ -14,7 +14,6 @@ redirect_from:
 author: "ludusrusso"
 description: ""
 path: "/hbr/rilascio-hbrain-v052/"
-tags: []
 ---
 
 Con piacere annunciamo il rilascio di una nuova versione del sistema HBRain: la v0.5.2.

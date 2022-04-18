@@ -3,7 +3,7 @@ title: "Sviluppare un rilevatore di fiamma con la visione artificiale"
 layout: "post"
 date: "2018-02-21T00:00:00.000Z"
 lang: "it"
-tag:
+tags:
   - "opencv"
   - "raspicam"
   - "Hbrain"
@@ -13,7 +13,6 @@ author: "sgabello"
 description: "Sviluppare un rilevatore di fiamma con la visione artificiale"
 path: "/hbr/sviluppare-un-rilevatore-di-fiamma-con-la-visione-artificiale/"
 image: "./incendio.jpg"
-tags: []
 ---
 
 In occasione dell'alternanza scuola-lavoro all'ITIS Pininfarina di Torino, dove lo scopo è inventare applicazioni robotiche in ambito agricolo, stavo pensando di inventare qualcosa per risolvere il problema del rilevamento incendi. Allora mi è venuto in mente di implementare una semplice applicazione di visione artificiale che rilevi le sfumature di rosso e ci comunichi quando il robot "vede" una fiamma.

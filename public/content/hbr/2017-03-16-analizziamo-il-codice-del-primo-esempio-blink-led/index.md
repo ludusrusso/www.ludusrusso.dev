@@ -5,7 +5,7 @@ date: "2017-03-16T22:01:37.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
 redirect_from:
   - "/2017/03/16/analizziamo-il-codice-del-primo-esempio-blink-led/"
@@ -13,7 +13,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/analizziamo-il-codice-del-primo-esempio-blink-led/"
-tags: []
 ---
 
 Analizziamo il codice di `dotbot_led_cnt`.

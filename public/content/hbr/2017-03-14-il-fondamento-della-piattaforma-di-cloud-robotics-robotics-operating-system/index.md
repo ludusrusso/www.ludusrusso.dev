@@ -3,7 +3,7 @@ title: "Il fondamento della piattaforma di Cloud Robotics: Robotics Operating Sy
 layout: "post"
 date: "2017-03-14T22:54:50.000Z"
 headerImage: false
-tag:
+tags:
   - "ROS"
 redirect_from:
   - "/2017/03/14/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system/"
@@ -12,7 +12,6 @@ author: "ludusrusso"
 description: ""
 lang: "it"
 path: "/hbr/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system/"
-tags: []
 image: "../hotblack.jpg"
 ---
 

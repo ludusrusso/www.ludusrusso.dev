@@ -5,7 +5,7 @@ date: "2017-03-16T22:09:28.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Hacking"
 redirect_from:
   - "/2017/03/16/come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud/"
@@ -13,7 +13,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud-/"
-tags: []
 ---
 
 Qui vi spiegherò come modificare un robot comprato da Tiger e collegarlo in piattaforma! Nel mio caso ho comprato uno Spider Robot per ben 7 Euro!:)

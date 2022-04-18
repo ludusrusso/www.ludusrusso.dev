@@ -10,7 +10,6 @@ author: "sgabello"
 description: ""
 lang: "it"
 path: "/hbr/come-creare-una-semplice-web-app-per-interagire-con-il-vostro-robot/"
-tags: []
 image: "./Schermata_2017-02-20_alle_18.36.52_txfrza.png"
 ---
 
@@ -93,7 +92,7 @@ var cmdVel = new ROSLIB.Topic({
   ros: ros,
   name: "/" + robot.name + "/command_velocity",
   messageType: "geometry_msgs/Twist",
-})
+});
 ```
 
 Riempiamo il messaggio così
@@ -110,13 +109,13 @@ var twist = new ROSLIB.Message({
     y: 0,
     z: 0,
   },
-})
+});
 ```
 
 e lo pubblichiamo
 
 ```javascript
-cmdVel.publish(twist)
+cmdVel.publish(twist);
 ```
 
 Per quanto riguara il subscriber, lo dichiariamo che rimanga in ascolto sul topic `'/<nome del vostro robot>/listener'` (messaggio std_msgs/String).
@@ -124,8 +123,8 @@ E la funzione di call back:
 
 ```javascript
 listener.subscribe(function (message) {
-  console.log("Received message on " + listener.name + ": " + message.data)
-})
+  console.log("Received message on " + listener.name + ": " + message.data);
+});
 ```
 
 Vedrete il risultato della funzione call back sul browser premendo col tasto destro del mouse e andando su console.

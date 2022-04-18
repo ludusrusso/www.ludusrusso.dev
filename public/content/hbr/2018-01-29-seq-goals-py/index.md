@@ -4,7 +4,7 @@ redirect_from:
   - "/2018/01/29/seq-goals-py-ita/"
 layout: "post"
 date: "2018-01-29T00:00:00.000Z"
-tag:
+tags:
   - "ROS"
   - "navigation"
   - "python"
@@ -12,7 +12,6 @@ author: "fiorellazza"
 description: "Inviare una sequenza di pose desiderate alla ROS Navigation Stack usando un nodo Python"
 path: "/hbr/inviare-una-sequenza-di-goals-alla-ros-navstack-usando-python/"
 image: "./cover_seq_ita.png"
-tags: []
 ---
 
 ![cover](./coverpost.png)

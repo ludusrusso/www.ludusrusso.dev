@@ -5,7 +5,7 @@ date: "2017-03-24T14:10:01.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "News"
 redirect_from:
   - "/2017/03/24/romecup-links-info/"
@@ -13,7 +13,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/romecup-links-and-info/"
-tags: []
 ---
 
 Benvenuto sul nostro sito Hotblack Robotics!

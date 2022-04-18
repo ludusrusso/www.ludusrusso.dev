@@ -5,7 +5,7 @@ date: "2017-03-16T17:04:59.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Raspberry"
   - "Hbrain"
@@ -15,7 +15,6 @@ redirect_from:
 author: "ludusrusso"
 description: ""
 path: "/hbr/installare-nuove-librerie-sul-hbrain-temporaneamente/"
-tags: []
 ---
 
 Un breve post per informarci su come installare nuove librerie Python sul robot utilizzabili dalla nostra interfaccia grafica.

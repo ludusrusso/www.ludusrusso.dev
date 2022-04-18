@@ -5,7 +5,7 @@ date: "2017-03-24T14:13:00.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Dotbot"
 redirect_from:
@@ -14,7 +14,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/configurare-il-robot-dotbot/"
-tags: []
 ---
 
 ## Getting started

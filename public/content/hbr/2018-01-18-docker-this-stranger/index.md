@@ -4,13 +4,12 @@ redirect_from:
   - "/2018/01/18/docker-questo-sconosciuto/"
 layout: "post"
 date: "2018-01-18T00:00:00.000Z"
-tag:
+tags:
   - "Docker"
 author: "fiorellazza"
 description: "Perchè utilizzare Docker e la mia esperienza"
 path: "/hbr/docker-questo-sconosciuto/"
 image: "./docker-facebook.png"
-tags: []
 ---
 
 ![docker logo](./docker-facebook.png)
@@ -185,7 +184,7 @@ docker rm $(docker ps -a -q)
 docker rmi ID_immagine
 ```
 
-- Rimuovere tutte le immagini senza tag:
+- Rimuovere tutte le immagini senza tags:
 
 ```bash
 docker rmi $(docker images | grep "^<none>" | awk "{print $3}")

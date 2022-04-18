@@ -4,7 +4,7 @@ redirect_from:
   - "/2018/01/22/docker-immagini-arm/"
 layout: "post"
 date: "2018-01-22T00:00:00.000Z"
-tag:
+tags:
   - "Docker"
   - "ARM"
   - "qemu"
@@ -13,7 +13,6 @@ featured: true
 description: "Buildare Immagini Docker per host ARM su Intel"
 path: "/hbr/come-compilare-immagini-docker-per-arm-su-host-intel/"
 image: "./Processor_ARM_anteprima.png"
-tags: []
 ---
 
 ![docker_arm_intel](./Processor_ARM.png)

@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-01-17T18:00:51.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Hbr"
   - "Hbrain"
@@ -18,7 +18,6 @@ author: "ludusrusso"
 description: "Iniziamo ad utilizzare la piattaforma di Cloud Robotics"
 path: "/hbr/hb-cloud-tutorial-1-uso-dei-led/"
 image: "./led.png"
-tags: []
 ---
 
 Ciao a tutti, iniziamo oggi questa serie di tutorial per insegnare a programmare i robot DotBot-ROS dalla piattaforma di cloud robotics che stiamo sviluppando: **HB Cloud**.

@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-02-03T17:58:13.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Robotics"
   - "Cloud"
   - "ROS"
@@ -18,7 +18,6 @@ author: "sgabello"
 description: "Avete problemi hardware? C'è il robot in cloud accessibile da remoto tramite il vostro PC o cellulare"
 path: "/hbr/avete-problemi-hardware-ce-il-robot-in-cloud-accessibile-da-remoto-tramite-il-vostro-pc-o-cellulare/"
 image: "./istanza_cloud_1_tdt5ho.jpg"
-tags: []
 ---
 
 Molti di voi vorrebbero iniziare subito a programmare in ROS tramite la piattaforma cloud ma sono bloccati (purtroppo) da rognosi problemi hardware. Probabilmente la scheda motori non funziona correttamente o state aspettando ancora il Raspberri Pi o un componente da qualche fornitore. Perchè quindi non saltate questo passaggio e iniziate a programmare subito in ROS con un robot remotizzato in cloud? Cosa significa esattamente lo affronteremo in questo post, ma in breve significa che potete iniziare ad usare la piattaforma soltanto con il vostro pc e una qualsiasi connessione internet (senza Raspberry Pi e altri dispositivi)! E... tutto ciò che abbiamo visto su come configurare una rete per Dotbot? Beh, ora abbiamo accesso ad un Dotbot in cloud!

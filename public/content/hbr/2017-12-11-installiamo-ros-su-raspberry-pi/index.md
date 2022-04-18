@@ -3,7 +3,7 @@ title: "Installiamo ROS su Raspberry Pi"
 layout: "post"
 date: "2017-12-11T00:00:00.000Z"
 headerImage: false
-tag:
+tags:
   - "ROS"
   - "Tutorial"
   - "Turtlesim"
@@ -18,7 +18,6 @@ lang: "it"
 description: "Un breve tutorial su come utilizzare ROS sul Raspberry Pi"
 path: "/hbr/installiamo-ros-su-raspberry-pi/"
 image: "./FPNU31FHBNXVG6G.jpg"
-tags: []
 ---
 
 ![ROS+Raspberry Logo](./FPNU31FHBNXVG6G.jpg)

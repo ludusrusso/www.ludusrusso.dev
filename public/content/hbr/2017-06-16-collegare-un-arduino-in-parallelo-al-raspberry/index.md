@@ -5,7 +5,7 @@ date: "2017-06-16T09:54:19.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Arduino"
   - "Raspberry"
 redirect_from:
@@ -14,7 +14,6 @@ redirect_from:
 author: "pietrochirio"
 description: ""
 path: "/hbr/collegare-un-arduino-in-parallelo-al-raspberry/"
-tags: []
 ---
 
 In questo tutorial vedremo come collegare un Arduino UNO al nostro Raspberry con ROS. In questo modo potremmo sfruttare l'alto livello del codice di programmazione di ROS in parallelo alla versatilità nel controllo di sensori/motori/periferiche di Arduino.

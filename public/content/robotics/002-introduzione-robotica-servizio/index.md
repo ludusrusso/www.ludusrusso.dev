@@ -6,7 +6,6 @@ description: "Iniziamo insieme un viaggio alla scoperta dei robot e della roboti
 date: "2018-01-10T00:00:00.000Z"
 path: "/robotica/002-introduzione-robotica-servizio"
 image: "./maxresdefault.jpg"
-tags: []
 ---
 
 Questo post riprende in parte un post scritto tempo fa per la community Rokers, che adesso purtroppo non è più online per il poco tempo che io, Gabriele e Basilio avevamo per dedicarci.

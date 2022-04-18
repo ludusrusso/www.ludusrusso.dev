@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-04-10T17:01:19.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Cloud"
   - "Robotics"
   - "Tutorial"
@@ -16,7 +16,6 @@ author: "ludusrusso"
 description: "Breve tutorial che spiega come abilitare la RaspiCam su ROS e la piattaforma di Cloud Robotics"
 path: "/hbr/utilizzare-la-raspicam-in-streaming-con-la-piattaforma-cloud/"
 image: "./streaming.png"
-tags: []
 ---
 
 In questo tutorial, vedremo molto brevemente come utilizzare la raspicam tramite il robot dotbot e fare streaming dell'immagine tramite ROS e la piattaforma cloud.

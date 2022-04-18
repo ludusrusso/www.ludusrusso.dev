@@ -6,7 +6,6 @@ description: "Iniziamo insieme un viaggio alla scoperta dei robot e della roboti
 date: "2018-01-10T00:00:00.000Z"
 path: "/robotica/001-introduzione-robotica/"
 image: "./robots.png"
-tags: []
 ---
 
 Negli ultimi anni il dibattito sulla robotica si è molto acceso ed è diventato comune anche tra l'opinione pubblica.

@@ -3,13 +3,12 @@ title: "Come creare messaggi custom in ROS"
 layout: "post"
 date: "2018-02-26T00:00:00.000Z"
 lang: "it"
-tag:
+tags:
   - "ROS"
 author: "fiorellazza"
 description: "Creare nuovi tipi di messaggio ROS"
 path: "/hbr/come-creare-messaggi-custom-in-ros/"
 image: "./ros_custom.png"
-tags: []
 ---
 
 Ciao a tutti! Oggi metterò insieme una serie di informazioni che ho raccolto mentre cercavo di creare un nuovo tipo di messaggio con ROS durante il mio progetto di tesi.

@@ -5,7 +5,7 @@ date: "2017-03-16T22:03:56.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Hacking"
 redirect_from:
   - "/2017/03/16/spiderbotcloud-20-la-vendetta-2-gradi-di-liberta-e-controllo-vocale/"
@@ -13,7 +13,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/spiderbot-cloud-20-la-vendetta-2-gradi-di-liberta-e-controllo-vocale/"
-tags: []
 ---
 
 Dopo il tutorial "Come collegare un robot comprato da Tiger (Spider Robot) in piattaforma cloud" vi avevo promesso che avrei comprato un secondo ragno robotico da Tiger così da costruire un robot in grado di muoversi in ogni direzione.

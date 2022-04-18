@@ -3,7 +3,7 @@ title: "Annunciamo il programma di Beta Testing di HBR Cloud API"
 layout: "post"
 date: "2017-10-07T08:13:27.000Z"
 headerImage: false
-tag:
+tags:
   - "Api"
   - "Hbr"
   - "Cloud"
@@ -15,7 +15,6 @@ lang: "it"
 description: ""
 path: "/hbr/annunciamo-il-programma-di-beta-testing-di-hbr-cloud-api/"
 image: "./betasting.png"
-tags: []
 ---
 
 ![Time Plot](./betasting.png)

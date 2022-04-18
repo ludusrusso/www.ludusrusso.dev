@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-05-03T07:09:39.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Community"
 redirect_from:
   - "/2017/05/03/apre-hbr-community-il-nuovo-sistema-per-la-condivisione-di-progetti-robotici/"
@@ -13,7 +13,6 @@ author: "ludusrusso"
 description: ""
 path: "/hbr/apre-hbr-community-il-nuovo-sistema-per-la-condivisione-di-progetti-robotici/"
 image: "./Schermata_2017-05-03_alle_19.14.29_ibixnv.png"
-tags: []
 ---
 
 In HotBlack Robotics, lavoriamo ogni giorno per creare una community di sviluppatori robotici. Ormai siete in tanti ad usare la nostra piattaforma, e per questo motivo abbiamo sviluppato una nuova piattaforma per la condivisione dei vostry progetti!

@@ -11,7 +11,6 @@ redirect_from:
 author: "ruslan"
 description: ""
 path: "/hbr/webapp-per-il-controllo-del-robot-via-frecce-su-webapp/"
-tags: []
 ---
 
 ![enter image description here](./7GYgCAW.png)
@@ -37,7 +36,7 @@ All'interno del file abbiamo la prima parte scritta in JavaScript che permette a
     "cyberbot",
     "192.168.0.108",
     "192.168.0.108/bridge/"
-  )
+  );
 </script>
 ```
 
@@ -53,14 +52,14 @@ La seconda parte di questo file JavaScript si occupa di gestire la velocità (ri
         ros: ros,
         name: "/" + robot.name + "/velocita",
         messageType: "std_msgs/Float32",
-      })
+      });
 
-      var tasks_time = $("#tasks_time").slider("value")
+      var tasks_time = $("#tasks_time").slider("value");
 
       var joy = new ROSLIB.Message({
         data: tasks_time,
-      })
-      cmdJoy.publish(joy)
+      });
+      cmdJoy.publish(joy);
     }
 
     $("#tasks_time").slider({
@@ -69,10 +68,10 @@ La seconda parte di questo file JavaScript si occupa di gestire la velocità (ri
       min: 0,
       max: 1,
       stop: function () {
-        update()
+        update();
       },
-    })
-  })
+    });
+  });
 </script>
 ```
 

@@ -4,14 +4,13 @@ layout: "post"
 date: "2018-03-01T00:00:00.000Z"
 lang: "it"
 headerImage: true
-tag:
+tags:
   - "ROS"
   - "ROS 2"
 author: "ludusrusso"
 description: "Primo contatto con ROS 2.0"
 path: "/hbr/benvenuto-a-ros-20/"
 image: "./main.png"
-tags: []
 ---
 
 Lo avevo provato qualche tempo fa, quando era ancora alla seconda release alpha, e poi mi sono disinteressato al progetto e l'ho seguito da molto lontano. Ma finalmente, all'inizio di quest'anno, la prima release stabile, [ROS Ardent Apalone](https://github.com/ros2/ros2/wiki/Release-Ardent-Apalone) e io ho finalmente la possibilità di metterci le mani sopra!

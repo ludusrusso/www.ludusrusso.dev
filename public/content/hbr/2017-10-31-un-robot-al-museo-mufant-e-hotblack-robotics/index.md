@@ -11,7 +11,6 @@ author: "sgabello"
 lang: "it"
 description: ""
 path: "/hbr/un-robot-al-museo-mufant-e-hotblack-robotics/"
-tags: []
 ---
 
 Hey! Se sei finito qui è perchè probabilmente ti interessa avere qualche info in più. Se vuoi sapere:

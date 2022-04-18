@@ -5,7 +5,7 @@ date: "2017-06-16T13:32:57.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Lego"
 redirect_from:
   - "/2017/06/16/collegare-in-cloud-i-lego-nxt-ed-estenderne-le-funzionalita/"
@@ -13,7 +13,6 @@ redirect_from:
 author: "pietrochirio"
 description: ""
 path: "/hbr/collegare-in-cloud-i-lego-nxt-ed-estenderne-le-funzionalita/"
-tags: []
 ---
 
 In questo tutorial vedremo come collegare un braccio a 3 gradi di libertà costruito con la piattaforma Lego NXT al cloud utilizzando il Raspberry pi3 e l'interfaccia Hbrain. Successivamente vedremo come scrivere una webapp che ci permetta di sfruttare le potenzialità del cloud per controllarlo.

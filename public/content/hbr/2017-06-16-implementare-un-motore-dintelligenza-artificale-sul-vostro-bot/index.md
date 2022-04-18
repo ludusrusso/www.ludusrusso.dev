@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-06-16T07:59:40.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Intelligenza"
   - "Artificiale"
 redirect_from:
@@ -14,7 +14,6 @@ author: "ruslan"
 description: ""
 path: "/hbr/implementare-un-motore-dintelligenza-artificale-sul-vostro-bot/"
 image: "./1iDEl1P.jpg"
-tags: []
 ---
 
 **In questo tutorial vedremo come implementare l'intelligenza artificiale sul proprio dotbot.**

@@ -24,6 +24,9 @@ export const PostPreview = ({ post }: PostPreviewProps) => {
       <div className="flex-1 bg-white p-6 flex flex-col justify-between">
         <div className="flex-1 ">
           <div className="flex flex-wrap gap-2">
+            <span className="text-2xl">
+              {post.lang === "en" ? "🇬🇧" : "🇮🇹"}{" "}
+            </span>
             {post.tags.map((tag) => (
               <Tag key={tag} tag={tag} />
             ))}

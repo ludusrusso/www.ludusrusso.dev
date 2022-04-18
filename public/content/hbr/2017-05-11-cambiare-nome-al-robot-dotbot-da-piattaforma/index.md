@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-05-11T15:09:55.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Dotbot"
   - "Hostname"
@@ -15,7 +15,6 @@ author: "ludusrusso"
 description: ""
 path: "/hbr/cambiare-nome-al-robot-dotbot-da-piattaforma/"
 image: "./change.png"
-tags: []
 ---
 
 Questo brevissimo post è un tutorial che spiega come cambiare nome al robot usando la piattaforma.

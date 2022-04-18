@@ -11,7 +11,6 @@ redirect_from:
 author: "ludusrusso"
 description: ""
 path: "/hbr/hackeriamo-oggetti-per-costruire-un-robot-completo/"
-tags: []
 ---
 
 In occasione della Cloud Roker Faire, vogliamo proporre un evento in cui makers un po' più skillati si riuniscono per costruire un robot funzionante a partire da oggetti di recupero.

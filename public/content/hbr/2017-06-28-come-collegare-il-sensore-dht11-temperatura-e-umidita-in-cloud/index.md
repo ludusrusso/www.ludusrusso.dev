@@ -11,7 +11,6 @@ author: "ruslan"
 description: ""
 path: "/hbr/come-collegare-il-sensore-dht11-temperatura-e-umidita-in-cloud/"
 image: "./az3Qd96.png"
-tags: []
 ---
 
 ![enter image description here](./az3Qd96.png)

@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-02-08T13:28:57.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Meccanica"
 category: "blog"
@@ -15,7 +15,6 @@ author: "sgabello"
 description: ""
 path: "/hbr/tutorial-hardware-come-costruire-il-robot-dotbot/"
 image: "./WhatsApp%20Image%202017-01-11%20at%2010.21.55.jpeg"
-tags: []
 ---
 
 Qui di seguito un breve tutorial su come assemblare il robot Dotbot. In questo tutorial ci dedichiamo ad assemblare il robot. Inoltre sono linkate le parti da stampare in 3D. **Un grazie speciale a Michele Maffucci da cui ho preso gran parte (o quasi tutto) per questo tutorial!** Vedi gli altri tutorial per la configurazione e la programmazione dei dotbot.

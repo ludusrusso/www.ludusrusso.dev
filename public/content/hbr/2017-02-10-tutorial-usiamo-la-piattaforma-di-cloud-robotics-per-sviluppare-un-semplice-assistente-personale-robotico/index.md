@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-02-10T17:48:31.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Cloud"
   - "Speech"
   - "To"
@@ -18,7 +18,6 @@ author: "sgabello"
 description: "Usiamo la piattaforma di Cloud Robotics per sviluppare un semplice assistente personale Robotico"
 path: "/hbr/tutorial-usiamo-la-piattaforma-di-cloud-robotics-per-sviluppare-un-semplice-assistente-personale-robotico/"
 image: "./Schermata_2017-02-10_alle_18.41.50_ury16w.png"
-tags: []
 ---
 
 Ciao a tutti, iniziamo con questo post una serie di tutorial più completi per lo sviluppo di semplici applicazioni Robotiche. In particolare, in questo tutorial vedremo come sfruttare la nostra piattaforma per sviluppare un'applicazione che permetta di inviare comandi al robot tremite voce e ricevedere informazioni vocali dal robot stesso.

@@ -5,7 +5,7 @@ redirect_from:
 layout: "post"
 date: "2017-12-13T00:00:00.000Z"
 headerImage: false
-tag:
+tags:
   - "ROS"
   - "Tutorial"
   - "Video"
@@ -15,7 +15,6 @@ lang: "it"
 description: "Sono disponibili online i video tutorial del corso di ROS partito dalla community Rokers"
 path: "/hbr/video-corso-ros-rokers-completati-i-video-di-introduzione/"
 image: "./main.png"
-tags: []
 ---
 
 Ciao a tutti,

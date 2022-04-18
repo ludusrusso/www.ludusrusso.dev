@@ -1,15 +1,14 @@
 ---
-title: 'Usare il braccio robotico Dobot con ROS'
-layout: 'post'
-date: '2018-06-29T00:00:00.000Z'
-lang: 'it'
-tag:
-  - 'ROS'
-author: 'sgabello'
-description: 'Come usare il braccio robotico con Robot Operating System'
-path: '/hbr/usare-il-braccio-robotico-dobot-con-ros/'
-image: './rosdobot.jpg'
-tags: []
+title: "Usare il braccio robotico Dobot con ROS"
+layout: "post"
+date: "2018-06-29T00:00:00.000Z"
+lang: "it"
+tags:
+  - "ROS"
+author: "sgabello"
+description: "Come usare il braccio robotico con Robot Operating System"
+path: "/hbr/usare-il-braccio-robotico-dobot-con-ros/"
+image: "./rosdobot.jpg"
 ---
 
 Ciao! In questo (primo) tutorial vi spiegherò come interfacciare ROS con Dobot e scrivere una semplice applicazione per disegnare. Un grazie speciale va all'azienda [Alumotion](http://www.alumotion.eu/), distributore italiano di Dobot, che ci ha donato il robot per progetti di ricerca e sviluppo su ROS (no no non li ho assolutamente messo pressione data la mia passione per la fabbricazione digitale :P ).

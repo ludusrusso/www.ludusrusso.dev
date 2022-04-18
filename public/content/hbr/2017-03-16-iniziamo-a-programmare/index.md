@@ -5,7 +5,7 @@ date: "2017-03-16T22:00:37.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Base"
 redirect_from:
@@ -14,7 +14,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/iniziamo-a-programmare/"
-tags: []
 ---
 
 Ok, abbiamo visto la parte teorica e ora è il momento di buttarsi nel vivo della programmazione! Questo tutorial spiega **una volta che il robot è configurato correttamente** come programmarlo (altrimenti seguite [**il tutorial di configurazione del kit minimale**](http://hotblackrobotics.github.io/forum/support/6)).

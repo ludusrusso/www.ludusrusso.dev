@@ -3,7 +3,7 @@ title: "Controllare siBOT dalla piattaforma HBR"
 layout: "post"
 date: "2018-02-14T00:00:00.000Z"
 lang: "it"
-tag:
+tags:
   - "sibot"
   - "Arduino"
   - "Hbrain"
@@ -13,7 +13,6 @@ author: "fiorellazza"
 description: "Come controllare il manipolatore siBOT utilizzando la piattaforma HBR"
 path: "/hbr/controllare-sibot-dalla-piattaforma-hbr/"
 image: "./cover.png"
-tags: []
 ---
 
 In questo tutorial vedremo come collegare il manipolatore antropomorfo, siBOT, alla piattaforma HBR.

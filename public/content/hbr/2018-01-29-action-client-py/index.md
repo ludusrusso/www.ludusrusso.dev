@@ -4,7 +4,7 @@ redirect_from:
   - "/2018/01/29/action-client-py-ita/"
 layout: "post"
 date: "2018-01-29T00:00:00.000Z"
-tag:
+tags:
   - "ROS"
   - "navigation"
   - "Python"
@@ -12,7 +12,6 @@ author: "fiorellazza"
 description: "Inviare un goal all ROS navigation stack utilizzando un nodo Python"
 path: "/hbr/inviare-goals-alla-navigation-stack-versione-nodo-ros-python/"
 image: "./cover.png"
-tags: []
 ---
 
 Ehilà!

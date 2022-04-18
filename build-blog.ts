@@ -79,6 +79,7 @@ const getBlogData = async () => {
           tags: data.tags || [],
           title: data.title,
           description: data.description,
+          lang: data.lang || "it",
           href: path.join("/", postPath),
           image: path.join(
             "/",

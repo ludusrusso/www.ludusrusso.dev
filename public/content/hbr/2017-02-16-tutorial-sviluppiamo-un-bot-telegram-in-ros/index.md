@@ -4,7 +4,7 @@ layout: "post"
 date: "2017-02-16T14:02:45.000Z"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "ROS"
   - "Telegram"
@@ -15,7 +15,6 @@ author: "ludusrusso"
 description: ""
 path: "/hbr/tutorial-sviluppiamo-un-bot-telegram-in-ros/"
 image: "./Schermata_2017-02-16_alle_15.01.01_k4kh7s.png"
-tags: []
 ---
 
 In questo tutorial vedremo come creare un semplice bot telegram in grado di controllare un robot in cloud.

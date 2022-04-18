@@ -11,7 +11,6 @@ author: "ludusrusso"
 description: ""
 path: "/hbr/accedere-al-terminale-linux-di-hbrain-da-browser/"
 image: "./shell.png"
-tags: []
 ---
 
 Dalla versione 0.5.2, come annunciato, è disponibile una nuova funzione che permette agli utenti di accedere al terminale linux di HBrain direttamente da browser, vediamo come fare.

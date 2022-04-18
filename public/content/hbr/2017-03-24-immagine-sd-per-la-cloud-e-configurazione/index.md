@@ -5,7 +5,7 @@ date: "2017-03-24T14:11:39.000Z"
 image: "../hotblack.jpg"
 headerImage: false
 lang: "it"
-tag:
+tags:
   - "Tutorial"
   - "Sd"
   - "Immagine"
@@ -15,7 +15,6 @@ redirect_from:
 author: "sgabello"
 description: ""
 path: "/hbr/immagine-sd-per-la-cloud-e-configurazione/"
-tags: []
 ---
 
 ## Immagine SD

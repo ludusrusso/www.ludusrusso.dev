@@ -2,7 +2,7 @@
 title: "NTBD: guida step by step"
 layout: "post"
 date: "2018-01-17T00:00:00.000Z"
-tag:
+tags:
   - "NTBD"
   - "Docker"
   - "ROS"
@@ -15,7 +15,6 @@ redirect_from:
   - "/2018/01/17/ntbd-guida-parte-III/"
 path: "/hbr/ntbd-guida-step-by-step/"
 image: "./sibot.png"
-tags: []
 ---
 
 Ciao a tutti! Sono di nuovo io, Fiorella e, con questo post, vorrei presentarvi il lavoro svolto per la mia Tesi di Laurea Magistrale in Ingegneria Meccatronica conseguita al Politecnico di Torino, "_Development of a Standard Architecture
