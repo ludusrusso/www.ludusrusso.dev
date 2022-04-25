@@ -17,7 +17,8 @@ path: "/hbr/spiderbot-cloud-con-controllo-vocale/"
 
 Una volta costruito lo SpiderBot come dalle istruzioni di Tiger, vi spiego come scrivere una semplice app per il controllo vocale! Il nostro SpiderBotCloud andrà avanti o indietro a seconda di ciò che direte!
 Leggetevi gli altri tutorial su questo sito per comprendere meglio le righe di codice che vi posterò qui.
-Una volta entrati in piattaforma da [qui](http://cloud.hotblackrobotics.com/cloud) e connesso il robot come spiegato [qui]({{ site.baseurl }}{% post_url /it/blog/2017-03-16-come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud %}), andate in Sketches. Create in nuovo programma con "New" dando il nome del codice che preferite (o potete anche modificarne uno già esistente) e copiate il seguente codice:
+Una volta entrati in piattaforma da [qui](http://cloud.hotblackrobotics.com/cloud) e connesso il robot come spiegato
+[qui](/it/blog/2017-03-16-come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud), andate in Sketches. Create in nuovo programma con "New" dando il nome del codice che preferite (o potete anche modificarne uno già esistente) e copiate il seguente codice:
 
 ```python
 

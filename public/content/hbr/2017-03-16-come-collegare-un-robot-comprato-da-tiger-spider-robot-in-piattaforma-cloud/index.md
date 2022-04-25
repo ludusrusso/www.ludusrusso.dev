@@ -41,7 +41,7 @@ Effettuate i collegamenti. Il filo rosso (+) lo inserite nel mammut del Motor A 
 
 ![](./ponteH.jpeg)
 
-Scaricate l'immagine per il Raspberry da [qui]({{ site.baseurl }}{% post_url /it/blog/2017-03-24-immagine-sd-per-la-cloud-e-configurazione %}) e copiate sull'SD del Raspberry. Configurate il Raspberry che si possa connettere in cloud come nei tutorial precedenti. Ora montate con delle fascette il Raspberry sul supporto verticale insieme alla batteria!
+Scaricate l'immagine per il Raspberry da [qui](/it/blog/2017-03-24-immagine-sd-per-la-cloud-e-configurazione) e copiate sull'SD del Raspberry. Configurate il Raspberry che si possa connettere in cloud come nei tutorial precedenti. Ora montate con delle fascette il Raspberry sul supporto verticale insieme alla batteria!
 
 ![](./Rasp.jpeg)
 

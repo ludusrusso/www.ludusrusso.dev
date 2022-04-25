@@ -62,4 +62,4 @@ Otterremo il seguente grafico
 
 ## Considerazioni
 
-Ho scoperto da poco questo interessantissimo tool, ho intenzione di utilizzarlo nel progetto di [fisica che sto realizzando per la mia scuola](http://www.ludusrusso.cc/posts/2017-01-04-arduino-python-lab-fisica-1)! Fatemi sapere se voi lo usate e se avete consigli!
+Ho scoperto da poco questo interessantissimo tool, ho intenzione di utilizzarlo nel progetto di [fisica che sto realizzando per la mia scuola](https://www.ludusrusso.dev/2017/01/04/un-laboratorio-di-fisica-con-arduino-e-python)! Fatemi sapere se voi lo usate e se avete consigli!

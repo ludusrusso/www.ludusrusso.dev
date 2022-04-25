@@ -70,9 +70,6 @@ I componenti presentati precedentemente sono stati implementati in [ROS](http://
 In Figura vediamo i nodi e i topics coinvolti nelle dinamiche di NTBD.
 ![ntbd-ros](./4_archrosgraph.png)
 
-<!--Per meglio individuare il ruolo di ogni nodo e topic, li suddividerò in categorie di attinenza.
- Nodi e Topic per il controllo del robot -->
-
 La tabella riportata qui sotto presenta i topics e i relativi tipi di [messaggi ROS](http://wiki.ros.org/Messages).
 
 **Note**:
@@ -264,7 +261,7 @@ I componenti astratti sono implementati nell'Immagine Docker _ntbd_manipulator_ 
 Sarà necessario scaricare il [progetto NTBD da github](https://github.com/HotBlackRobotics/ntbd) in modo tale da modificare i seguenti file prima di fare il build della nuova Immagine _ntbd_manipulator_:
 
 - [_joint_names_sibot_urdf.yaml_](https://github.com/HotBlackRobotics/ntbd/blob/devel/NTBD_manipulator/NTBD_abstract_nodes/manipulator_urdf/config/joint_names_sibot_urdf.yaml): in questo file sono definiti i nomi dei joint del braccio robotico, utili per lo scambio di messaggi ROS. Questa definizione è utile, per esempio, nel nodo [physical_2_visual](https://github.com/HotBlackRobotics/ntbd/blob/devel/NTBD_manipulator/NTBD_abstract_nodes/physical_2_visual), che deve quindi essere modificato di conseguenza.
-- [_/meshes/_](https://github.com/HotBlackRobotics/ntbd/tree/devel/NTBD_manipulator/NTBD_abstract_nodes/manipulator_urdf/meshes): questa cartella contiene le [meshes](https://it.wikipedia.org/wiki/Mesh_poligonale) per la visualizzazione del braccio robotico scelto, in formato [_STL_](<https://it.wikipedia.org/wiki/STL_(formato_di_file)>).
+- [_/meshes/_](https://github.com/HotBlackRobotics/ntbd/tree/devel/NTBD_manipulator/NTBD_abstract_nodes/manipulator_urdf/meshes): questa cartella contiene le [meshes](https://it.wikipedia.org/wiki/Mesh_poligonale) per la visualizzazione del braccio robotico scelto, in formato [_STL_](<[https://it.wikipedia.org/wiki/STL_(formato_di_file)](https://it.wikipedia.org/wiki/STL_(formato_di_file))>).
 - [siBOT_noEE.urdf](https://github.com/HotBlackRobotics/ntbd/blob/devel/NTBD_manipulator/NTBD_abstract_nodes/manipulator_urdf/urdf/siBOT_noEE.urdf): questo file deve contenere la definizione [URDF](http://sdk.rethinkrobotics.com/wiki/URDF) del nuovo manipolatore; può quindi essere rinominato a piacere con l'unico accorgimento di cambiare il nome anche nel launch file [NTBD_launch.launch](https://github.com/HotBlackRobotics/ntbd/blob/devel/NTBD_manipulator/launch/NTBD_launch.launch).
 - [index.html](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/web/index.html) e [ntbd_lm.html](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/web/ntbd_lm.html) definiscono le applicazioni Web e devono essere modificati a seconda della nuova configurazione (per esempio, con i nuovi limiti).
 - [IK](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/IK), [FK](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/FK), [motor_values](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/motors_values) e [physical_2_visual](https://github.com/HotBlackRobotics/ntbd/blob/06f5af9c35c814ff039fc60e410531724c96a11c/NTBD_manipulator/NTBD_abstract_nodes/physical_2_visual): questi file sono tutti dipendenti dalla scelta del braccio robotico; per ulteriori informazioni riguardo al loro ruolo .

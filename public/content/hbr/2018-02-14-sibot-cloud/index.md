@@ -17,7 +17,7 @@ image: "./cover.png"
 
 In questo tutorial vedremo come collegare il manipolatore antropomorfo, siBOT, alla piattaforma HBR.
 
-siBOT è l'insieme del design [EEZYBOT MK2](http://www.eezyrobots.it/eba_mk2.html), progetto italino Open Source, e del sistema di nodi ROS necessari a controllarlo. Ho utilizzato questo braccio per testare l'architettura sviluppata per il mio progetto di tesi, NTBD, di cui trovate maggiori informazioni in questo [post]({{ site.baseurl }}{% post_url /it/blog/2018-01-17-ntbd-guide-part-I %}).
+siBOT è l'insieme del design [EEZYBOT MK2](http://www.eezyrobots.it/eba_mk2.html), progetto italino Open Source, e del sistema di nodi ROS necessari a controllarlo. Ho utilizzato questo braccio per testare l'architettura sviluppata per il mio progetto di tesi, NTBD, di cui trovate maggiori informazioni in questo [post](/it/blog/2018-01-17-ntbd-guide-part-I).
 
 <p align="center">
     <image src="/assets/imgs/2018-01-17-ntbd/sibot.png"  height="250"/>

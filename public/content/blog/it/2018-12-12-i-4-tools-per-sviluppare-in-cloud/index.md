@@ -25,7 +25,7 @@ In questo post, vi voglio raccontare queli che sono i tool più importanti che o
 
 ![Docker](./docker.png)
 
-Ho [parlato di Docker](https://ludusrusso.cc/tags/#docker) in alcuni post in questo blog.
+Ho [parlato di Docker](https://ludusrusso.dev/tags/#docker) in alcuni post in questo blog.
 
 **Docker** è probabilmente il progetto Open Source che ha avuto più impatto nel mondo del Cloud Computing negli ultimi tempi, basti pensare che in meno di 5 anni (Docker è stato rilasciato nel 2013) è diventato uno standard di fatto accettato ed utilizzato da tutti i Big del mondo Cloud Computing, ma già in [meno di 2 anni dal rilascio](https://www.datacenterknowledge.com/archives/2014/08/22/docker-ceo-dockers-impact-data-center-industry-will-huge) era sotto il mirino dei vari cloud provider, per la sua capacità di impacchettare. spostare e distribuire applacazioni tra i vari ambienti Cloud.
 
@@ -45,7 +45,7 @@ Un piccolo bonus, prima di andare avanti, lo voglio dedicare al mondo IoT, che �
 
 Come ho già detto, i container molto leggeri con un overhead minimo. Per questo motivo, questa tecnologià sta avendo lo stesso impatto che ha avuto la Virtualizzazione all'interno dell IoT. I container Docker possono infatti essere tranquillamente eseguti all'interno di macchine ARM su Embedded Linux. Con i registry Docker, le immagini possono essere distruibuite come aggiornamenti su dispositivi IoT in produzione.
 
-Per approfondimenti, ho trattato il tema su questo blog nell'articolo [Buildare e usare container Docker per Raspberry Pi](https://ludusrusso.cc/2018/06/29/docker-raspberrypi/)
+Per approfondimenti, ho trattato il tema su questo blog nell'articolo [Buildare e usare container Docker per Raspberry Pi](https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi)
 
 ## 2. docker-compose
 

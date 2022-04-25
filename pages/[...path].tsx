@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteProps } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import Image from "next/image";
@@ -24,12 +24,12 @@ const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
   ssr: false,
 });
 
-export default function TestPage({
+export default function PathPage({
   source,
   frontmatter,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const components = {
-    img: ({ src, alt }: { src: string; alt: string }) => {
+  const components: MDXRemoteProps["components"] = {
+    img: ({ src, alt }) => {
       return <img alt={alt} src={path.join(frontmatter.imagePath, src!)} />;
     },
     AmazonAffiliationLink: ({ src }: { src: string }) => (
@@ -174,7 +174,10 @@ export async function getStaticProps({
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkMath as any],
-      rehypePlugins: [prism, rehypeKatex],
+      rehypePlugins: [
+        prism,
+        [rehypeKatex, { throwOnError: true, strict: true }],
+      ],
     },
   });
 

@@ -21,13 +21,13 @@ Hey! Se sei finito qui è perchè probabilmente ti interessa avere qualche info 
 
 ## Il robot che vedi alla mostra di Cesena
 
-{% include youtube.html id="9lyAfzyFcQQ" %}
+<YouTube videoId="9lyAfzyFcQQ" />
 
 ## Il tutorial per rifare questo robot e l'applicazione a casa tua
 
 Se hai dei problemi con questo tutorial o anche solo vuoi fare 4 chiacchiere scrivimi a ermacora.gabriele@gmail.com !!
 
-{% include youtube.html id="E9NX3vx4WSw" %}
+<YouTube videoId="E9NX3vx4WSw" />
 
 ## RECAP: come fare questa applicazione robotica a casa tua
 

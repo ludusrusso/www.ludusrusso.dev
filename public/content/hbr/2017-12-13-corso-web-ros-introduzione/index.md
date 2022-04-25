@@ -34,16 +34,16 @@ potete iscrivervi al gruppo facebook [Robot Developers Italiani](https://www.fac
 
 ### Introduzione a ROS e alla Robotica di Servizio
 
-{% include youtube.html id="ZcZC_LT916g" %}
+<YouTube videoId="ZcZC_LT916g" />
 
 ### Installazione di ROS su Linux Ubuntu
 
-{% include youtube.html id="Bk1h7rTMh7U" nav=True %}
+<YouTube videoId="Bk1h7rTMh7U" />
 
 ### Utilizzo base di ROS
 
-{% include youtube.html id="Gxx3iWTuc_U" %}
+<YouTube videoId="Gxx3iWTuc_U" />
 
 ### Ispezionare ROSGraph con RQT
 
-{% include youtube.html id="OFZzIRBf4LQ" %}
+<YouTube videoId="OFZzIRBf4LQ" />

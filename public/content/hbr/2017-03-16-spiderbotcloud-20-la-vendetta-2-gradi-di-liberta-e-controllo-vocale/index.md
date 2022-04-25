@@ -63,7 +63,8 @@ Ora collegate ogni alimentazione dei motori (motere A e motore B) ai rispettivi 
 Ora configurate il Raspberry come da [http://hotblackrobotics.github.io/forum/support/13](http://hotblackrobotics.github.io/forum/support/13).
 
 E siete pronti a partire!
-Se volete usare il controllo vocale copiate il codice da qui e usatelo tramite la Web App come spiegato [qui]({{ site.baseurl }}{% post_url /it/blog/2017-03-16-spiderbot-cloud-con-controllo-vocale %}).
+Se volete usare il controllo vocale copiate il codice da qui e usatelo tramite la Web App come spiegato
+[qui](/it/blog/2017-03-16-spiderbot-cloud-con-controllo-vocale).
 
 ```python
 

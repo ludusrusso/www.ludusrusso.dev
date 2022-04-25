@@ -162,7 +162,7 @@ Ho ripetuto lo stesso esperiendo però spegnendo la luce della camera, in modo d
 
 ![esopianeta simulato buio](./esopianeta_scuro_j7cp3b.png)
 
-Come potete vedere, nel primo caso il salto di luminosità nel momento di passaggio va da $35.5lux$ a $32.5lux$ (circa il $10%$), mentre nel secondo caso, il salto (in percentuale) è molto più elevato ($>50\%$) e la curva meno rumorosa. Ad ogni modo, da entrambi i grafici è possibilissimo stimare il periodo di rotazione della pallina.
+Come potete vedere, nel primo caso il salto di luminosità nel momento di passaggio va da $35.5lux$ a $32.5lux$ (circa il $10\%$), mentre nel secondo caso, il salto (in percentuale) è molto più elevato ($>50\%$) e la curva meno rumorosa. Ad ogni modo, da entrambi i grafici è possibilissimo stimare il periodo di rotazione della pallina.
 
 Che ve ne pare di questo esperimento? Avete provato a farlo? Ci siete riusciti? Non avremo certamente scoperto un nuovo esopianeta, ma in poco tempo e con pochissimo materiale siamo certamente riusciti a creare un interessantissimo esperimento didattico.
 

@@ -23,6 +23,7 @@ Come primo passo dobbiamo registrarci [qui](https://willbeddow.com/signup)
 
 Una volta registrati possiamo iniziare a scrivere il codice:
 
+```python
     import dotbot_ros
     import requests
     import json
@@ -41,29 +42,38 @@ Una volta registrati possiamo iniziare a scrivere il codice:
             print answer["text"]
             sys.stdout.flush()
             requests.post(url="{0}/api/end_session".format(server_url), data={"session_id": session_id})
+```
 
 _IMPORTANTE: ricordate di modificare il campo username e password inserendoli tra i doppi apici._
 
 **Analizziamo il codice**
 Come al solito, il nostro programma è composto da un nodo ROS, la funzione principale è la funzione setup, che si occupa di inizializzare il bot .
 
+```python
     server_url = "https://willbeddow.com"
     payload = dict(username="USER", password="PASS")
+```
 
 Server url è il link dove vengono inviate le richieste di tipo POST.
 Username e Password sono i dati necessari per l'autorizzazione.
 
+```python
     response = requests.post(url="{0}/api/start_session".format(server_url), data=payload).json()
     session_id = response["data"]["session_id"]
+```
 
 Inizio di una nuova sessione e creazione del session token.
 
+```python
        command_data = dict(session_id=session_id, command="What is the meaning of life?")
        answer = requests.post(url="{0}/api/command".format(server_url), data=command_data).json()
+```
 
 Chiamata del metodo POST , il quale invia la domanda e riceve la risposta in formato json.
 
+```python
     requests.post(url="{0}/api/end_session".format(server_url), data={"session_id": session_id})
+```
 
 Fine della sessione e disabilitazione del token session.
 
@@ -99,6 +109,7 @@ Possiamo iniziare finalmente a programmare :)
 
 Implementiamo il traduttore nel nostro programma:
 
+```python
     import dotbot_ros
     import requests
     import json
@@ -127,24 +138,33 @@ Implementiamo il traduttore nel nostro programma:
             print text
             sys.stdout.flush()
             requests.post(url="{0}/api/end_session".format(server_url), data={"session_id": session_id})
+```
 
 Come avete visto ci sono servite solo qualche righe di codice per tradurre la domanda dall'italiano in inglese.
 
+```python
     YATOKEN = "IL TUO YANDEX TOKEN"
+```
 
 Nella funzione setup il token viene chiamato da:
 
+```python
        translate = YandexTranslate(self.YATOKEN)
+```
 
 La variabile "domand" riceve un messaggio (tradotto dall'italiano in inglese) in formato Json e viene transformato in una stringa.
 
+```python
     domand = translate.translate(answer.encode('utf-8'), 'it-en')
     question = domand['text']
+```
 
 La stessa cosa è uguale per la risposta:
 
+```python
     risp = translate.translate(answ, 'en-it')
     risposta = risp['text']
+```
 
 La risposta viene tradotta dal inglese in italiano e viene trasformata in una stringa.
 
@@ -155,6 +175,7 @@ Una volta eseguito il codice abbiamo in output questa finestra:
 Per farlo basta creare un bot seguendo questa [guida](http://hotblackrobotics.github.io/blog/posts/2017-02-16-tutorial-sviluppiamo-un-bot-telegram-in-ros).
 A questo punto, ottenuto il Token , implementiamolo nel nostro codice.
 
+```python
     import dotbot_ros
     import telepot
     import sys
@@ -194,19 +215,25 @@ A questo punto, ottenuto il Token , implementiamolo nel nostro codice.
             self.bot.sendMessage(chat_id, text) #viene inviata la risposta
             print msg
             sys.stdout.flush()
+```
 
 **Analizziamo il codice:**
 
+```python
     self.bot = telepot.Bot(self.TOKEN)
+```
 
 Crea il bot utilizzando il token inizializzato
 
+```python
     self.bot.message_loop(self.handle)
+```
 
 Ogni volta che il bot riceve un messaggio , viene chiamata la funzione handle
 
 Alla funzione _handle_ viene passato il parametro msg.
 
+```python
     def handle(self, msg):
             content_type, chat_type, chat_id = telepot.glance(msg)
             nome = msg['from']['first_name']
@@ -228,17 +255,22 @@ Alla funzione _handle_ viene passato il parametro msg.
 
 
      content_type, chat_type, chat_id = telepot.glance(msg)
+```
 
 Questa riga si occupa di estrarre il chat_id che si occupa di gestire più chat contemporaneamente e content_type: il tipo di dati contenuti nell'messaggio.
 
+```python
     nome = msg['from']['first_name']
     domanda = msg['text']
+```
 
 Estraiamo il nome dell'utente che sta scrivendo al bot e la sua domanda.
 
 Una volta generata la risposta , viene inviata all'utente:
 
+```python
     self.bot.sendMessage(chat_id, text)
+```
 
 Lanciamo il codice completo e vediamo il suo funzionamento:
 ![enter image description here](./UiixahX.jpg)
@@ -246,6 +278,7 @@ Lanciamo il codice completo e vediamo il suo funzionamento:
 Ma se volessimo farlo pure muovere da telegram?
 Il nuovo codice implementato è il seguete:
 
+```python
     import dotbot_ros
     import telepot
     from gpiozero import Robot
@@ -325,16 +358,20 @@ Il nuovo codice implementato è il seguete:
 
             print msg
             sys.stdout.flush()
+```
 
 **Analizziamo il codice**
 
 Nella funzione setup abbiamo:
 
+```python
     self.robot = Robot(left=(9,10), right=(7,8))
+```
 
 Qui si crea un oggetto Robot, il quale permette di gestire i motori e quindi farli muovere.
 IMPORTANTE: ricordate di modificare i campi "(left=(9,10), right=(7,8))" con i vostri PIN dei motori.
 
+```python
     self.bot.sendMessage(chat_id, 'scegli una delle voci', reply_markup=ReplyKeyboardMarkup(
                             keyboard=[
                                 [KeyboardButton(text="/avanti"), KeyboardButton(text="/dietro")],
@@ -342,10 +379,12 @@ IMPORTANTE: ricordate di modificare i campi "(left=(9,10), right=(7,8))" con i v
                                 [KeyboardButton(text="/stop")]
                             ]
                         ))
+```
 
 Si occupa di dare i suggerimenti all'utente dei comandi disponibili.
 ![enter image description here](./dvq4HZy.jpg)
 
+```python
     elif domanda == '/avanti':
                     self.bot.sendMessage(chat_id, "ok, vado avanti")
                     self.robot.forward()
@@ -370,21 +409,27 @@ Si occupa di dare i suggerimenti all'utente dei comandi disponibili.
                     self.robot.stop()
                 else:
                     self.bot.sendMessage(chat_id, "scusa, non capisco questo comando")
+```
 
 Questa parte permette di muovere il bot nelle 4 direzioni.
 
+```python
     time.sleep(0.25)
     Gestisce il tempo dell'esecuzione del comando.
+```
 
 Se avete la **picam** e volete fare pure le foto attraverso il Raspberry , allora implementate questo piccolo codice:
 
+```python
     elif domanda == '/image':
     img_str = cv2.imencode('.jpg', self.img)[1].tostring()
     self.bot.sendPhoto(chat_id('image.jpg',StringIO.StringIO(img_str)))
+```
 
 Vediamo a questo punto il codice finale:
 
-    import dotbot_ros
+```python
+import dotbot_ros
     import telepot
     from gpiozero import Robot
     import sys
@@ -481,6 +526,7 @@ Vediamo a questo punto il codice finale:
 
             print msg
             sys.stdout.flush()
+```
 
 _Adesso il nostro bot riesce a rispondere a qualsiasi domanda, muoversi e infine fare foto._
 ![enter image description here](./YhOabRU.jpg)

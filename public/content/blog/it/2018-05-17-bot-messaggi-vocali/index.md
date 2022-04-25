@@ -49,7 +49,7 @@ Per prima cosa, implementiamo un semplice bot che sia in grado di inviare, come 
 
 Spostiamo il file nella stessa cartella in cui si trova il robot. A questo punto, possiamo utilizzare il metodo `.sendVoice()` che `telepot` mette a disposizione, la cui funzione è molto simile al classico `.sendMessage()`, con l'unica differenza che il primo prende in ingresso un oggetto di tipo file invece che un stringa, ed invia un messaggio vocale con il contenuto di questo file.
 
-Per utilizzarlo, andiamo ad implementare un semplicissimo bot (riprendo l'esempio del mio [primo articolo sul tema](https://ludusrusso.cc/2017/04/27/implementiamo-un-bot-telegram-con-python/)), come di seguito:
+Per utilizzarlo, andiamo ad implementare un semplicissimo bot (riprendo l'esempio del mio [primo articolo sul tema](https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python)), come di seguito:
 
 ```python
 # file bot.py
@@ -112,7 +112,7 @@ Per questo motivo, la soluzione migliore è quello di gestire il tutto in RAM.
 
 Ho già discusso questo problema in alcuni miei precedenti posto:
 
-1. Nel post [Sviluppiamo un bot Telegram che legge i codici a barre degli alimenti](https://ludusrusso.cc/2018/01/31/telegram-opencv-barcode/) ho discusso il problema inverso (che si risolve allo stesso modo), in cui l'utente invia un file (in quel caso un'immagine) al bot, e questo deve processare l'immagine senza salvarla su disco.
+1. Nel post [Sviluppiamo un bot Telegram che legge i codici a barre degli alimenti](https://www.ludusrusso.dev/2018/01/31/telegram-opencv-barcode) ho discusso il problema inverso (che si risolve allo stesso modo), in cui l'utente invia un file (in quel caso un'immagine) al bot, e questo deve processare l'immagine senza salvarla su disco.
 2. Nel mio posto [Implementiamo un bot Telegram in Python per leggere e creare QRCode](http://www.allafinedelpalo.it/implementiamo-un-bot-telegram-in-python-per-leggere-e-creare-qrcode/) ospitato nel blog **Alla Fine del Palo**, ho discusso di un problema simile per la creazione e l'invio di immagini da parte del bot verso l'utente.
 
 La soluzione, come già visto, è sfruttare la libraria `io` di Python3, ed in particolare l'oggetto `BytesIO`, che non fa altro che emulare un file gestito completamente in memoria RAM, quindi come una normale variabile.

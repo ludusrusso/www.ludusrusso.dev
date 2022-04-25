@@ -213,7 +213,7 @@ Notate che il sito realizzato sarà accessibile solo dal computer su cui il serv
 
 Note
 
-Trovate tutto il codice sviluppato fino ad ora al seguente link <https://github.com/ludusrusso/ludoblog/tree/p1>
+Trovate tutto il codice sviluppato fino ad ora al seguente link [https://github.com/ludusrusso/ludoblog/tree/p1](https://github.com/ludusrusso/ludoblog/tree/p1)
 
 # 2. Diamo una veste grafica all'applicazione
 
@@ -446,7 +446,7 @@ E riavviamo l'applicazione.
 
 ![](./indexfooter.png)
 
-> Trovate tutto il codice sviluppato fino ad ora al seguente link <https://github.com/ludusrusso/ludoblog/tree/p2>
+> Trovate tutto il codice sviluppato fino ad ora al seguente link [https://github.com/ludusrusso/ludoblog/tree/p2](https://github.com/ludusrusso/ludoblog/tree/p2)
 
 # 3. Configurazione e Database
 
@@ -1693,8 +1693,8 @@ document.addEventListener("DOMContentLoaded", function () {
   Typed.new(". jobs", {
     strings: ["Maker", "Robotico", "Roker!"],
     typeSpeed: 0,
-  })
-})
+  });
+});
 ```
 
 Essenzialmente, questo script aspetta che la pagina sia completamente caricata. Una volta caricata, cerca l'elemento html con classe `.jobs` e ne modifica il contenuto con le parole all'interno della lista `["Maker", "Robotico", "Roker!"]`, aggiungendo l'effetto typing da tastiera.

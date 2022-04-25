@@ -23,7 +23,7 @@ Prendo ispirazione da [questo post](http://www.lafucinadellescienze.it/wordpress
 
 In questo esperimento, misureremo la curva tensione corrente di alcuni diodi led colorati, verificandone l'andamento esponezione. In seguito, useremo i dati raccolti per misurare sperimentalmente il valore di una delle costanti fondamentali dalla fisica: la [**costante di Planck**](https://it.wikipedia.org/wiki/Costante_di_Planck) $h$.
 
-Per ulteriori informazioni su come utilizzare e installare **Spyder** e la libreria **nanpy** per il controllo seriale di Arduino, rimando al mio [precedente post](http://www.ludusrusso.cc/posts/2017-02-19-python-arduino-nanpy).
+Per ulteriori informazioni su come utilizzare e installare **Spyder** e la libreria **nanpy** per il controllo seriale di Arduino, rimando al mio [precedente post](https://www.ludusrusso.dev/2017/02/19/python-arduino-nanpy).
 
 ## Diodo LED
 

@@ -72,7 +72,7 @@ In particolare, dobbiamo collegare il PIN data del DHC (il secondo da sinistra) 
 
 Perfetto, a questo punto, siamo pronti a scrivere il nostro programma python per leggere i sensori.
 
-Ricordate, se non lo avete già fatto, di installare **Nanpy** come indicato [qui](http://www.ludusrusso.cc/posts/2017-02-19-python-arduino-nanpy).
+Ricordate, se non lo avete già fatto, di installare **Nanpy** come indicato [qui](https://www.ludusrusso.dev/2017/02/19/python-arduino-nanpy).
 
 A questo punto, possiamo implementare il codice. Sotto trovate un brevissimo esempio che vi mostra come leggere la temperatura dal Sensore.
 

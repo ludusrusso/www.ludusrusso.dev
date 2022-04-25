@@ -15,7 +15,7 @@ path: "/2017/01/13/simuliamo-il-moto-parabolico-in-python-e-spyder/"
 image: "./parabolico.png"
 ---
 
-Eccomi qui con un brevissimo tutorial su come possiamo utilizzare [**Spyder**](http://www.ludusrusso.cc/posts/2017-01-12-spyder-un-altra-alternativa-in-python-a-matlab) per fare delle semplici simulazioni di fisica meccanica.
+Eccomi qui con un brevissimo tutorial su come possiamo utilizzare [**Spyder**](hthttps://www.ludusrusso.dev/2017/01/12/spyder-un-altra-alternativa-in-python-a-matlab) per fare delle semplici simulazioni di fisica meccanica.
 
 Come primo esperimento ho scelto di lavorare sul moto parabolico, classico problema di fisica del liceo che voglio provare a risolvere e simulare in Python utilizzando il tool **Spyder**.
 
