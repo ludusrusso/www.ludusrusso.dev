@@ -75,8 +75,13 @@ async function copyBooksImages() {
   await fs.mkdir(dst, { recursive: true });
 
   const imgs = await getFiles(src + "/**/*.{jpg,jpeg,png}");
-  imgs.forEach((img) => {
-    fs.cp(img, img.replace(src, dst), { recursive: true });
+  imgs.forEach(async (img) => {
+    const imgDst = img.replace(src, dst);
+    const fldDst = path.dirname(imgDst);
+    try {
+      await fs.mkdir(fldDst, { recursive: true });
+    } catch {}
+    await fs.copyFile(img, imgDst);
   });
 }
 
