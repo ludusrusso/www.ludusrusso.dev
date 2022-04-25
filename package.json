@@ -22,7 +22,7 @@
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.0",
     "@trpc/client": "^9.16.0",
-    "@trpc/next": "^9.16.0",
+    "@trpc/next": "^9.22.0",
     "@trpc/react": "^9.16.0",
     "@trpc/server": "^9.16.0",
     "bcrypt": "^5.0.1",
