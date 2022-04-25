@@ -3,7 +3,6 @@ import { promises as fs } from "fs";
 import { glob } from "glob";
 import matter from "gray-matter";
 import path from "path";
-import { Participant } from "utils/graphql";
 
 const db = new PrismaClient();
 
@@ -146,7 +145,7 @@ const getFileData = async (file: string) => {
     data: Data;
     content: string;
   };
-  const [host, ...guests]: Participant[] = await Promise.all(
+  const [host, ...guests] = await Promise.all(
     data.guests.map((g: string) => getParticipant(g))
   );
   return await db.episode.create({

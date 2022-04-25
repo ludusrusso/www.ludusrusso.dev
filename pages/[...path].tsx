@@ -17,7 +17,6 @@ import { promises as fs } from "fs";
 import matter from "gray-matter";
 import { Mailchimp } from "components/mailchimp";
 import dynamic from "next/dynamic";
-// import prism from "remark-prism";
 // @ts-ignore
 import prism from "@mapbox/rehype-prism";
 
@@ -30,9 +29,9 @@ export default function TestPage({
   frontmatter,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
-    img: ({ src, alt }: { src: string; alt: string }) => (
-      <img alt={alt} src={path.join(frontmatter.imagePath, src)} />
-    ),
+    img: ({ src, alt }: { src: string; alt: string }) => {
+      return <img alt={alt} src={path.join(frontmatter.imagePath, src!)} />;
+    },
     AmazonAffiliationLink: ({ src }: { src: string }) => (
       <div className="m-auto">
         <iframe
@@ -174,7 +173,7 @@ export async function getStaticProps({
   const { content } = matter(md);
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkMath],
+      remarkPlugins: [remarkMath as any],
       rehypePlugins: [prism, rehypeKatex],
     },
   });

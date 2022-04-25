@@ -10,6 +10,8 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
+// @ts-ignore
+import prism from "@mapbox/rehype-prism";
 
 const EpisodePage = ({
   episode,
@@ -100,8 +102,8 @@ export const getStaticProps = async ({
 
   const mdxSource = await serialize(episode!.body, {
     mdxOptions: {
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
+      remarkPlugins: [remarkMath as any],
+      rehypePlugins: [prism, rehypeKatex],
     },
   });
 

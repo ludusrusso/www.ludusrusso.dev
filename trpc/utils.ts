@@ -33,10 +33,11 @@ export async function createContext({
   };
 }
 
-export const authMiddleware: MiddlewareFunction<Context, Context> = async ({
-  ctx,
-  next,
-}) => {
+export const authMiddleware: MiddlewareFunction<
+  Context,
+  Context,
+  any
+> = async ({ ctx, next }) => {
   if (!ctx.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
