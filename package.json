@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma generate && ts-node build-blog.ts && next build && next-sitemap  && ts-node build-feed.ts",
+    "vercel-build": "prisma generate && ts-node build-blog.ts && ts-node build-books.ts  && next build && next-sitemap  && ts-node build-feed.ts",
     "create-admin": "NODE_PATH='.' ts-node scripts/create-admin.ts"
   },
   "dependencies": {
