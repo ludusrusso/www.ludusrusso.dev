@@ -85,6 +85,7 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                               <a
                                 href={frontMatter.links.en}
                                 target="_blank"
+                                rel="noreferrer"
                                 className="text-gray-700 hover:text-gray-800"
                               >
                                 <span>Compra in Inglese 🇺🇸 </span>
@@ -95,6 +96,7 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                             {frontMatter.links.it && (
                               <a
                                 target="_blank"
+                                rel="noreferrer"
                                 href={frontMatter.links.it}
                                 className="text-gray-700 hover:text-gray-800"
                               >

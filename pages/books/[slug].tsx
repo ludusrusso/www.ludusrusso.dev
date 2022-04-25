@@ -61,6 +61,7 @@ export default function BookPage({
                 <a
                   href={frontmatter.links.en}
                   target="_blank"
+                  rel="noreferrer"
                   className="text-gray-700 hover:text-gray-800"
                 >
                   <span>Compra in Inglese 🇺🇸 </span>
@@ -69,6 +70,7 @@ export default function BookPage({
               {frontmatter.links.it && (
                 <a
                   target="_blank"
+                  rel="noreferrer"
                   href={frontmatter.links.it}
                   className="text-gray-700 hover:text-gray-800"
                 >
