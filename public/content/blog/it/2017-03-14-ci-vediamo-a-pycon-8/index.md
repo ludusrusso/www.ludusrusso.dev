@@ -14,7 +14,7 @@ image: "./Schermata_2017-03-15_alle_00.23.13_y0hexu.png"
 
 Chi mi segue, conosce la mia grande passione per il mondo dei Makers e per la programmazione (specialmente in Python).
 
-Da un po' di tempo, sto cercando di fondere le mie passioni, aprendo il [mio blog](http://www.ludusrusso.cc/) e con la mia startup [HotBlack Robotics](http://www.hotblackrobotics.com/).
+Da un po' di tempo, sto cercando di fondere le mie passioni, aprendo il [mio blog](https://www.ludusrusso.dev/) e con la mia startup [HotBlack Robotics](http://www.hotblackrobotics.com/).
 Cosa c'è di meglio quindi di una conferenza su Python per diffondere i miei interessi e per conoscerci?
 
 ![PyCon 8](./Schermata_2017-03-15_alle_00.23.13_y0hexu.png)

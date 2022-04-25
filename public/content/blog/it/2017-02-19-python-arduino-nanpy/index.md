@@ -102,6 +102,6 @@ Per spegnere il programma, basta premere i tasti CTRL-C!
 
 ## Conclusioni
 
-Ho fatto altri esperimenti con Nanpy che riporterò qui a breve. La mia idea, da qui in avanti, sarà di iniziare a sviluppare piccoli esperimenti di fisica utilizzando l'accoppiata Spyder e Arduino per mezzo della libreria Nanpy. Il primo esperimento (a cui sto già lavorando) che riporterò qui sarà lo stesso proposto in [questo post](http://www.ludusrusso.cc/posts/2017-01-04-arduino-python-lab-fisica-1) ma sviluppato sfruttando queste librerie!
+Ho fatto altri esperimenti con Nanpy che riporterò qui a breve. La mia idea, da qui in avanti, sarà di iniziare a sviluppare piccoli esperimenti di fisica utilizzando l'accoppiata Spyder e Arduino per mezzo della libreria Nanpy. Il primo esperimento (a cui sto già lavorando) che riporterò qui sarà lo stesso proposto in [questo post](https://www.ludusrusso.dev/2017/01/04/un-laboratorio-di-fisica-con-arduino-e-python) ma sviluppato sfruttando queste librerie!
 
 Come al solito, per domande e suggerimenti contattatemi tramite [facebook](https://www.facebook.com/ludusrusso.cc/?fref=ts)!

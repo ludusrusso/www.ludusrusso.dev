@@ -15,7 +15,7 @@ image: "./main.png"
 ---
 
 Per chi lavora e sviluppa su Raspberry Pi, sa bene che utilizzare la GUI del Raspberry per lo sviluppo risulta molto scomodo e lento.
-Il mio workflow abituale consiste, infatti, nello sviluppare [principalmente con Docker](https://ludusrusso.cc/2018/06/29/docker-raspberrypi/) e trasferire le immagini su Raspberry solo per test e quando il sistema è finito.
+Il mio workflow abituale consiste, infatti, nello sviluppare [principalmente con Docker](https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi) e trasferire le immagini su Raspberry solo per test e quando il sistema è finito.
 
 Mi sono quindi abituato a lavorare senza interfaccia grafica né monitor, avendo il Raspberry semplicemente connesso (via ethernet o wifi) al router e accedendoci via SSH, utilizzando come sistema operativo principale [Raspbian Lite](https://www.raspberrypi.org/downloads/raspbian/), cioè la versione di Rasbian senza interfaccia grafica installata.
 

@@ -24,8 +24,8 @@ Eccomi qui per la terza ed ultima parte di questo tutorial sulla misura della co
 
 Se vi siete persi le parti precedenti, le trovate ai seguenti link:
 
-- [Parte 1, modello dei Diodi in Python](http://www.ludusrusso.cc/posts/2017-02-22-misurare-la-costante-di-plank-con-arduino-e-python-parte-1)
-- [Parte 2, misura della caratteristica dei diodi](http://www.ludusrusso.cc/posts/2017-03-21-misurare-la-costante-di-plank-con-arduino-e-python-parte-2)
+- [Parte 1, modello dei Diodi in Python](https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1)
+- [Parte 2, misura della caratteristica dei diodi](https://www.ludusrusso.dev/2017/03/21/misurare-la-costante-di-planck-con-arduino-e-python-parte-2)
 
 Una volta modellata e misurata la caratteristica del led, come visto nei due tutorial precedenti, possiamo procedere alla stima della tensione di tensione di attivazione $V_D$ del singolo Led, e poi, alla misura della costante di Planck utilizzando la seguente approssimazione:
 

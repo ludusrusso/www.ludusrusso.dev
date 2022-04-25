@@ -19,7 +19,7 @@ Ecco qui la seconda parte del mio tutorial sull'utilizzo di Electron per svilupp
 
 ![Arduinoscope](./arduinoscope.png)
 
-Mentre nella [prima parte](http://www.ludusrusso.cc/posts/2017-06-26-sviluppiamo-un-app-in-electron-per-controllare-la-scheda-arduino-parte-1) abbiamo visto come creare la nostra applicazione ed impostare la grafica, in questo parte entremo nel dettaglio su come utilizzare **arduino-firmata** per far comunicare la nostra applicazione con Arduino.
+Mentre nella [prima parte](https://www.ludusrusso.dev/2017/06/26/sviluppiamo-un-app-in-electron-per-controllare-la-scheda-arduino-parte-1) abbiamo visto come creare la nostra applicazione ed impostare la grafica, in questo parte entremo nel dettaglio su come utilizzare **arduino-firmata** per far comunicare la nostra applicazione con Arduino.
 
 Ma prima di tutto, cerchiamo di capire cosa è **Firmata**.
 
@@ -71,7 +71,7 @@ Come anticipato nel precedente tutorial, lavoreremo principalmente nel processo 
 Apriamo il file `src/index.ts`. Per prima cosa, dobbiamo importare la libreria, aggiungendo la linea di codice all'inizio del programma (possiamo rimuovere il vecchio codice typescript che cambia il titolo al progetto):
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
+let ArduinoFirmata = require("arduino-firmata");
 ```
 
 Si noti che, invece di utilizzare il classico import TypeScript `import {ArduinoFirmata} from 'arduino-firmata'`, ho dovuto utilizzare il "vecchio" metodo `require`. Questo è il "trick" di cui accennavo poco fa per far funzionare un modulo JavaScript in TypeScript.
@@ -79,12 +79,12 @@ Si noti che, invece di utilizzare il classico import TypeScript `import {Arduino
 A questo punto, creiamo l'oggetto che si occuperà di comunicare con la scheda Arduino. Una volta creato, dobbiamo utilizzare il metodo `.connect` per connettere l'oggetto alla porta seriale.
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
+let ArduinoFirmata = require("arduino-firmata");
 
-let arduino = new ArduinoFirmata()
+let arduino = new ArduinoFirmata();
 
-let arduino_port = "/dev/cu.usbmodem1461"
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+arduino.connect(arduino_port);
 ```
 
 Ovviamente, dovete inzializzare la variabile `arduino_port` con il nome della porta a cui è collegata il vostro arduino, che (al 99%) sarà diversa dalla mia.
@@ -92,16 +92,16 @@ Ovviamente, dovete inzializzare la variabile `arduino_port` con il nome della po
 Come sapete, JavaScript (e quindi TypeScript), sono linguaggi fortemente orientati agli eventi. Come nel caso dell'applicazione electron, che chiama l'evento `ready`, anche in questo caso, possiamo iniziare ad utilizzare arduino una volta che si verifica l'evento `connect`, ed utilizzeremo di nuovo il metodo `on` ed una **callback**:
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
+let ArduinoFirmata = require("arduino-firmata");
 
-let arduino = new ArduinoFirmata()
+let arduino = new ArduinoFirmata();
 
-let arduino_port = "/dev/cu.usbmodem1461"
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+arduino.connect(arduino_port);
 
 arduino.on("connect", () => {
   // il codice da implementare va qui!
-})
+});
 ```
 
 All'interno della funzione, dobbiamo implementare le varie azioni da fare una volta che Arduino è connesso. Per prima cosa, stampiamo sulla console di Electron la versione di della scheda a cui siamo connessi:
@@ -110,9 +110,9 @@ All'interno della funzione, dobbiamo implementare le varie azioni da fare una vo
 // ...
 
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
   // ...
-})
+});
 ```
 
 Come ultima cosa, per verificare l'effettivo funzionamento del programma, programmiamo in TypeScript il classico **blink** di Arduino, facendo lampeggiare il led 13.
@@ -131,41 +131,41 @@ Utilizzo una variabile `status` per far cambiare lo stato del led. Sfruttiamo `s
 ```typescript
 // ...
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
 
-  arduino.pinMode(13, ArduinoFirmata.OUTPUT)
+  arduino.pinMode(13, ArduinoFirmata.OUTPUT);
 
-  let status = true
+  let status = true;
   setInterval(() => {
-    status = !status
-    arduino.digitalWrite(13, status)
-    if (status == true) console.log("stato led: acceso")
-    else console.log("stato led: spento")
-  }, 1000)
-})
+    status = !status;
+    arduino.digitalWrite(13, status);
+    if (status == true) console.log("stato led: acceso");
+    else console.log("stato led: spento");
+  }, 1000);
+});
 ```
 
 Ecco qui il codice completo appena sviluppato
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
+let ArduinoFirmata = require("arduino-firmata");
 
-let arduino_port = "/dev/cu.usbmodem1461"
-let arduino = new ArduinoFirmata()
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+let arduino = new ArduinoFirmata();
+arduino.connect(arduino_port);
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
 
-  arduino.pinMode(13, ArduinoFirmata.OUTPUT)
+  arduino.pinMode(13, ArduinoFirmata.OUTPUT);
 
-  let status = true
+  let status = true;
   setInterval(() => {
-    status = !status
-    arduino.digitalWrite(13, status)
-    if (status == true) console.log("stato led: acceso")
-    else console.log("stato led: spento")
-  }, 1000)
-})
+    status = !status;
+    arduino.digitalWrite(13, status);
+    if (status == true) console.log("stato led: acceso");
+    else console.log("stato led: spento");
+  }, 1000);
+});
 ```
 
 ### Test del codice... OPS, errore
@@ -175,13 +175,13 @@ Prima di testare il codice, configuriamo l'app in modo che apra all'avvio la il 
 Per farlo, aggiugiamo la riga di codice `mainWindow.toggleDevTools();` all'interno del file `app.ts`, che diventerà così:
 
 ```typescript
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow } from "electron";
 
 app.on("ready", () => {
-  let mainWindow = new BrowserWindow({ width: 800, height: 600 })
-  mainWindow.toggleDevTools() // <- Riga Aggiunta
-  mainWindow.loadURL("file://" + __dirname + "/index.html")
-})
+  let mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow.toggleDevTools(); // <- Riga Aggiunta
+  mainWindow.loadURL("file://" + __dirname + "/index.html");
+});
 ```
 
 Avendo cura che l'arduino sia collegato al nostro computer, lanciamo l'app con `npm start` e vediamo che succedere.
@@ -295,7 +295,7 @@ Il file completo `src/index.html` sarà quindi così
     </div>
   </body>
   <script>
-    require("./index.ts")
+    require("./index.ts");
   </script>
 </html>
 ```
@@ -303,15 +303,15 @@ Il file completo `src/index.html` sarà quindi così
 Apriamo quindi il file `src/index.ts`. Prima di tutto, dobbiamo importare gli oggetti `SmoothieChart` e `TimeSeries` dalla libreria `smoothie`:
 
 ```typescript
-import { SmoothieChart, TimeSeries } from "smoothie"
+import { SmoothieChart, TimeSeries } from "smoothie";
 ```
 
 A questo punto, creiamo un nuovo `SmoothieChart` (cioè un elemento grafico in cui visualizzare il plot) a partire dall'elemento con id `plotA0` appena creato
 
 ```typescript
-let plotter = new SmoothieChart({ responsive: true })
-let canvasPlot = document.getElementById("plotA0")
-plotter.streamTo(canvasPlot, 30)
+let plotter = new SmoothieChart({ responsive: true });
+let canvasPlot = document.getElementById("plotA0");
+plotter.streamTo(canvasPlot, 30);
 ```
 
 Il parametro di configurazione `{responsive: true}` che passiamo al costruttore `SmoothieChart` serve a far si che il grafico di adatti automaticamente alle dimensioni della pagina all'interno della quale si trova.
@@ -324,30 +324,30 @@ Notare che il metodo `streamTo` prende due parametri:
 Il file `src/index.ts` avrà quindi questa forma
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
-import { SmoothieChart, TimeSeries } from "smoothie"
+let ArduinoFirmata = require("arduino-firmata");
+import { SmoothieChart, TimeSeries } from "smoothie";
 
-let plotter = new SmoothieChart({ responsive: true })
-let canvasPlot = document.getElementById("plotA0")
-plotter.streamTo(canvasPlot, 30)
+let plotter = new SmoothieChart({ responsive: true });
+let canvasPlot = document.getElementById("plotA0");
+plotter.streamTo(canvasPlot, 30);
 
-let arduino_port = "/dev/cu.usbmodem1461"
-let arduino = new ArduinoFirmata()
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+let arduino = new ArduinoFirmata();
+arduino.connect(arduino_port);
 
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
 
-  arduino.pinMode(13, ArduinoFirmata.OUTPUT)
+  arduino.pinMode(13, ArduinoFirmata.OUTPUT);
 
-  let status = true
+  let status = true;
   setInterval(() => {
-    status = !status
-    arduino.digitalWrite(13, status)
-    if (status == true) console.log("stato led: acceso")
-    else console.log("stato led: spento")
-  }, 1000)
-})
+    status = !status;
+    arduino.digitalWrite(13, status);
+    if (status == true) console.log("stato led: acceso");
+    else console.log("stato led: spento");
+  }, 1000);
+});
 ```
 
 Una volta lanciata l'applicazione, dovremmo vedere un grafico (vuoto). Vediamo come inserire i dati da arduino al suo interno.
@@ -361,13 +361,13 @@ Vediamo adesso come leggere i dati da Arduino e creare un plot con questi dati.
 Per prima cosa, dobbiamo creare un oggetto `TimeSeries`. Questa classe rappresenta una linea da disegnare che varia nel tempo.
 
 ```typescript
-var plotline = new TimeSeries()
+var plotline = new TimeSeries();
 ```
 
 Una volta creato questo oggetto, dobbiamo informare l'oggetto `plotter`, creato prima, di disegnare i valori contenuti all'interno della `plotline`.
 
 ```typescript
-plotter.addTimeSeries(plotline)
+plotter.addTimeSeries(plotline);
 ```
 
 Perfetto, ora abbiamo una linea correttamente configurata, ma ancora senza dati. Usiamo l'oggetto `arduino` per inserire i dati a partire dai valori letti dal pin `A0`. Dato che la lettura dei dati deve essere periodica, utilizziamo nuovamente la funzione `setInterval`. Come prima, lavoreremo dentro la callback chiamata dell'eventi `connect`.
@@ -376,11 +376,11 @@ Perfetto, ora abbiamo una linea correttamente configurata, ma ancora senza dati.
 arduino.on("connect", () => {
   // ...
   setInterval(() => {
-    let v = (arduino.analogRead(0) * 5.0) / 1023
-    let time = new Date().getTime()
-    plotline.append(time, v)
-  }, 30)
-})
+    let v = (arduino.analogRead(0) * 5.0) / 1023;
+    let time = new Date().getTime();
+    plotline.append(time, v);
+  }, 30);
+});
 ```
 
 Come vedete, l'oggetto `plotline` presenta un metodo `append`, che vuole due valori: il tempo a cui è stato preso il dato `time`, ed il dato stesso `v`.
@@ -388,9 +388,9 @@ Come vedete, l'oggetto `plotline` presenta un metodo `append`, che vuole due val
 Il dato `v` è ottenuto leggendo il pin `A0` di arduino, e normalizzando la lettura nell'intervallo $[0 -- 5]V$. Il dato `time`, invece, viene ottenuto pendendo il tempo del sistema nel momento in cui è eseguita la funzione, utilizzando l'oggetto `Date()``.
 
 ```typescript
-let v = (arduino.analogRead(0) * 5.0) / 1023
-let time = new Date().getTime()
-plotline.append(time, v)
+let v = (arduino.analogRead(0) * 5.0) / 1023;
+let time = new Date().getTime();
+plotline.append(time, v);
 ```
 
 Queste tre operazioni vengono eseguite ogni 30ms, il tempo di refresh del plotter.
@@ -398,39 +398,39 @@ Queste tre operazioni vengono eseguite ogni 30ms, il tempo di refresh del plotte
 Il codice completo è riportato qui sotto
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
-import { SmoothieChart, TimeSeries } from "smoothie"
+let ArduinoFirmata = require("arduino-firmata");
+import { SmoothieChart, TimeSeries } from "smoothie";
 
-let plotter = new SmoothieChart({ responsive: true })
-let canvasPlot = document.getElementById("plotA0")
-plotter.streamTo(canvasPlot, 30)
+let plotter = new SmoothieChart({ responsive: true });
+let canvasPlot = document.getElementById("plotA0");
+plotter.streamTo(canvasPlot, 30);
 
-var plotline = new TimeSeries()
+var plotline = new TimeSeries();
 
-plotter.addTimeSeries(plotline)
+plotter.addTimeSeries(plotline);
 
-let arduino_port = "/dev/cu.usbmodem1461"
-let arduino = new ArduinoFirmata()
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+let arduino = new ArduinoFirmata();
+arduino.connect(arduino_port);
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
 
-  arduino.pinMode(13, ArduinoFirmata.OUTPUT)
+  arduino.pinMode(13, ArduinoFirmata.OUTPUT);
 
-  let status = true
+  let status = true;
   setInterval(() => {
-    status = !status
-    arduino.digitalWrite(13, status)
-    if (status == true) console.log("stato led: acceso")
-    else console.log("stato led: spento")
-  }, 1000)
+    status = !status;
+    arduino.digitalWrite(13, status);
+    if (status == true) console.log("stato led: acceso");
+    else console.log("stato led: spento");
+  }, 1000);
 
   setInterval(() => {
-    let v = (arduino.analogRead(0) * 5.0) / 1023
-    let time = new Date().getTime()
-    plotline.append(time, v)
-  }, 30)
-})
+    let v = (arduino.analogRead(0) * 5.0) / 1023;
+    let time = new Date().getTime();
+    plotline.append(time, v);
+  }, 30);
+});
 ```
 
 Lanciamo l'applicazione, e vedremo finalmente il grafico apparire all'interno dell'aria dedicata.
@@ -479,7 +479,7 @@ Entrambi sono definiti nel file ``src/index.html`, che diventerà così dopo le 
     </div>
   </body>
   <script>
-    require("./index.ts")
+    require("./index.ts");
   </script>
 </html>
 ```
@@ -518,7 +518,7 @@ let plotter = new SmoothieChart({
   responsive: true,
   minValue: -0.1,
   maxValue: 5.1,
-})
+});
 ```
 
 Per finire, diamo uno stile migliore alla linea `plotline`, settandone un colore e uno spessore.
@@ -534,47 +534,47 @@ plotter.addTimeSeries(plotline, {
 Il file `src/index.ts` diventerà quindi così
 
 ```typescript
-let ArduinoFirmata = require("arduino-firmata")
-import { SmoothieChart, TimeSeries } from "smoothie"
+let ArduinoFirmata = require("arduino-firmata");
+import { SmoothieChart, TimeSeries } from "smoothie";
 
 let plotter = new SmoothieChart({
   responsive: true,
   minValue: -0.1,
   maxValue: 5.1,
-})
+});
 
-let canvasPlot = document.getElementById("plotA0")
-plotter.streamTo(canvasPlot, 30)
+let canvasPlot = document.getElementById("plotA0");
+plotter.streamTo(canvasPlot, 30);
 
-var plotline = new TimeSeries()
+var plotline = new TimeSeries();
 
 plotter.addTimeSeries(plotline, {
   strokeStyle: "rgba(0, 124, 0, 1)",
   lineWidth: 4,
-})
+});
 
-let arduino_port = "/dev/cu.usbmodem1461"
-let arduino = new ArduinoFirmata()
-arduino.connect(arduino_port)
+let arduino_port = "/dev/cu.usbmodem1461";
+let arduino = new ArduinoFirmata();
+arduino.connect(arduino_port);
 arduino.on("connect", () => {
-  console.log("board version" + arduino.boardVersion)
+  console.log("board version" + arduino.boardVersion);
 
-  arduino.pinMode(13, ArduinoFirmata.OUTPUT)
+  arduino.pinMode(13, ArduinoFirmata.OUTPUT);
 
-  let status = true
+  let status = true;
   setInterval(() => {
-    status = !status
-    arduino.digitalWrite(13, status)
-    if (status == true) console.log("stato led: acceso")
-    else console.log("stato led: spento")
-  }, 1000)
+    status = !status;
+    arduino.digitalWrite(13, status);
+    if (status == true) console.log("stato led: acceso");
+    else console.log("stato led: spento");
+  }, 1000);
 
   setInterval(() => {
-    let v = (arduino.analogRead(0) * 5.0) / 1023
-    let time = new Date().getTime()
-    plotline.append(time, v)
-  }, 30)
-})
+    let v = (arduino.analogRead(0) * 5.0) / 1023;
+    let time = new Date().getTime();
+    plotline.append(time, v);
+  }, 30);
+});
 ```
 
 E questo è il risultato finale dell'applicazione

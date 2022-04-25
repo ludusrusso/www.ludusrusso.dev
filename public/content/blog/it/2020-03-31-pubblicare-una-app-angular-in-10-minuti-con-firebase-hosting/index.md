@@ -104,15 +104,15 @@ Dobbiamo importarli dalle relative librerie e poi inserirli all'interno della tu
 ```ts
 // app.module.ts
 
-import { NgModule } from "@angular/core"
-import { BrowserModule } from "@angular/platform-browser"
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
-import { AppRoutingModule } from "./app-routing.module"
-import { AppComponent } from "./app.component"
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { MatButtonModule } from "@angular/material/button"
-import { MatCardModule } from "@angular/material/card"
-import { MatToolbarModule } from "@angular/material/toolbar"
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [AppComponent],
@@ -152,7 +152,7 @@ A questo punto, mettiamo un po' di contenuti dentro `app.component.html`
       GitHub repo
     </a>
     <a
-      href="https://ludusrusso.cc/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting/"
+      href="https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting"
       target="_blank"
       mat-raised-button
       color="primary"

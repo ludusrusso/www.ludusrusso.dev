@@ -66,7 +66,7 @@ sudo apt-get install libzbar0
 
 Su Windows, la libreria viene automaticamente installata tramite **pyzbar**.
 
-A questo punto, installiamo **pyzbar** all'interno di un nuovo [ambiente virtuale](https://ludusrusso.cc/2017/11/06/virtualenv/)
+A questo punto, installiamo **pyzbar** all'interno di un nuovo [ambiente virtuale](https://www.ludusrusso.dev/2017/11/06/virtualenv/)
 
 ```bash
 (env)$ pip install pyzbar

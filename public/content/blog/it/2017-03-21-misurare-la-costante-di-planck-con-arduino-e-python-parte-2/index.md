@@ -21,7 +21,7 @@ Dopo una lunga pausa, dovuta principalmente al lavoro necessario per la consegna
 
 ![Misura della caratteristica di Led](./WhatsApp_Image_2017-03-22_at_00.29.13_qmfajj.jpg)
 
-Per chi si fosse perso la prima parte (più teorica), può trovarla [cliccando qui](http://www.ludusrusso.cc/posts/2017-02-22-misurare-la-costante-di-plank-con-arduino-e-python-parte-1). In questa seconda parte iniziamo con il vero smanettamente con Aruduino.
+Per chi si fosse perso la prima parte (più teorica), può trovarla [cliccando qui](https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1). In questa seconda parte iniziamo con il vero smanettamente con Aruduino.
 
 ## Misura della caratteristica dei Led con Arduino e Nanpy
 

@@ -72,7 +72,7 @@ Ancora quindi non ha troppo senso iniziare a guardarlo, ma certamente io lo far√
 
 Vi lascio con un video in cui spiego cosa ne penso e le prime impressioni a caldo dopo averlo provato!
 
-{% include youtube.html id="xi1TQMdXNWM" %}
+<YouTube videoId="xi1TQMdXNWM" />
 
 Le repo citate nel video sono le seguenti:
 

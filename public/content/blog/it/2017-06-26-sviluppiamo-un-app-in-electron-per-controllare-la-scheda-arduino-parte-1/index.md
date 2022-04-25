@@ -14,14 +14,14 @@ path: "/2017/06/26/sviluppiamo-un-app-in-electron-per-controllare-la-scheda-ardu
 image: "./gui_def.png"
 ---
 
-In un mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron) vi ho parlato di come creare una semplicissima applicazione sfruttando Electron e il nuovo linguaggio di programmazione TypeScript. In questo periodo, ho approfondito un po' queste tecnologie, ed oggi vi propongo qui un tutorial completo su come sviluppare un'applicazione in Electron per il controllo di una scheda Arduino connessa via USB al computer su cui gira l'applicazione.
+In un mio [precedente post](https://www.ludusrusso.dev/2017/06/04/primi-test-con-typescript-ed-electron) vi ho parlato di come creare una semplicissima applicazione sfruttando Electron e il nuovo linguaggio di programmazione TypeScript. In questo periodo, ho approfondito un po' queste tecnologie, ed oggi vi propongo qui un tutorial completo su come sviluppare un'applicazione in Electron per il controllo di una scheda Arduino connessa via USB al computer su cui gira l'applicazione.
 
 ![app grafica def](./gui_def.png)
 
 Il tutorial sarà diviso in due parti:
 
-- Nella prima parte (questa), imposteremo ed entreremo nel dettaglio dell'utilizzo di Electron. Questa parte può quindi essere considerata una versione riveduta e corretta del mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron).
-- [Nella seconda parte](http://www.ludusrusso.cc/posts/2017-06-28-sviluppiamo-un-app-in-electron-per-controllare-la-scheda-arduino-parte-2), ci interfacceremo ad Arduino da TypeScript, e svilupperemo una semplice (ma efficace ed estendibile) interfaccia di controllo per Arduino.
+- Nella prima parte (questa), imposteremo ed entreremo nel dettaglio dell'utilizzo di Electron. Questa parte può quindi essere considerata una versione riveduta e corretta del mio [precedente post](https://www.ludusrusso.dev/2017/06/04/primi-test-con-typescript-ed-electron).
+- [Nella seconda parte](https://www.ludusrusso.dev/2017/06/28/sviluppiamo-un-app-in-electron-per-controllare-la-scheda-arduino-parte-2), ci interfacceremo ad Arduino da TypeScript, e svilupperemo una semplice (ma efficace ed estendibile) interfaccia di controllo per Arduino.
 
 Questo tutorial si basa sul protocollo **Firmata** e sulla libreria **arduino-firmata** in Node.js. Vedremo nel dettaglio in seguito di cosa parliamo.
 
@@ -33,7 +33,7 @@ Vediamo come inizializzare il progetto ed installare le librerie necessarie.
 
 ### Inizializzazione del progetto Node
 
-Dopo aver scaricato **node.js**, come illustrato nel mio [precedente post](http://www.ludusrusso.cc/posts/2017-06-04-primi-test-con-typescript-ed-electron), creiamo un nuovo progetto chiamato `electron-arduino`:
+Dopo aver scaricato **node.js**, come illustrato nel mio [precedente post](https://www.ludusrusso.dev/2017/06/04/primi-test-con-typescript-ed-electron), creiamo un nuovo progetto chiamato `electron-arduino`:
 
 ```bash
 $ mkdir electron-arduino

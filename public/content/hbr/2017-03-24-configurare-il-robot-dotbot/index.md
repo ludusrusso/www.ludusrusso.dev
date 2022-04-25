@@ -19,7 +19,7 @@ path: "/hbr/configurare-il-robot-dotbot/"
 ## Getting started
 
 Questo piccolo tutorial spiega come configurare il robot la prima volta e attaccarsi in piattaforma!
-Prima cosa scaricate l'immagine da copiare su SD da [questo link]({{ site.baseurl }}{% post_url /it/blog/2017-03-24-immagine-sd-per-la-cloud-e-configurazione %}).
+Prima cosa scaricate l'immagine da copiare su SD da [questo link](/it/blog/2017-03-24-immagine-sd-per-la-cloud-e-configurazione).
 
 Estraete il file (ricordandovi il percorso) e copiate il .img (sui xx B) sulla vostra SD. Io uso in Windows un programma che si chiama Win32 Disk Imager e funziona bene ;) Il funzionamento del programma è semplicissimo, immettete il percorso della vostra immagine e premete "scrivi".
 

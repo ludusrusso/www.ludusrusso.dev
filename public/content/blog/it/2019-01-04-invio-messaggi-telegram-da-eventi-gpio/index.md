@@ -15,7 +15,7 @@ path: "/2019/01/04/invio-messaggi-telegram-da-eventi-gpio/"
 image: "./main.jpg"
 ---
 
-Il primo post di quest'anno è stato inspirato da una domanda di un utente su un [precedente articolo](https://ludusrusso.cc/2017/10/29/bot-telegram-telepot-2/), che mi chiedeva questo:
+Il primo post di quest'anno è stato inspirato da una domanda di un utente su un [precedente articolo](https://www.ludusrusso.dev/2017/10/29/bot-telegram-telepot-2), che mi chiedeva questo:
 
 > "ho implementato il bot senza problemi, mando un comando e mi restituisce quando mi serve, vorrei nel frattempo, monitorare un GPIO, il quale se cambia stato, manda un messaggio al bot senza che io abbia fatto esplicita richiesta con un comando, è possibile farlo ? grazie mille"
 
@@ -50,13 +50,13 @@ $ python3 -m venv env && source ./env/bin/activate
 (env)$ pip install telepot RPI.GPIO
 ```
 
-Notate che, a differenza di quello fatto nei miei [precedenti tutorial](https://ludusrusso.cc/2017/04/27/implementiamo-un-bot-telegram-con-python/), questa volta ho installato l'ambiente virtuale con il comando `python3 -m venv env`, e che stiamo usando Python 3 invece che Python 2.
+Notate che, a differenza di quello fatto nei miei [precedenti tutorial](https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python), questa volta ho installato l'ambiente virtuale con il comando `python3 -m venv env`, e che stiamo usando Python 3 invece che Python 2.
 
 ## Creiamo il BOT
 
 Creiamo un file chiamato `bot.py` (o come preferite) e apriamolo con un qualsiasi editor di testo (io uso `vim`, ma voi potete usare quello che volete).
 
-Come punto di partenza, prendiamo il codice che trovate nel mio [precedente tutorial](https://ludusrusso.cc/2017/04/27/implementiamo-un-bot-telegram-con-python/). Ho dovuto solo modificare la linea `print 'Listening ...'` con `print('Listening ...')` in quanto questa volta usiamo **Python3** invece che **Python2**.
+Come punto di partenza, prendiamo il codice che trovate nel mio [precedente tutorial](https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python). Ho dovuto solo modificare la linea `print 'Listening ...'` con `print('Listening ...')` in quanto questa volta usiamo **Python3** invece che **Python2**.
 
 ```python
 import telepot
@@ -78,7 +78,7 @@ while 1:
     time.sleep(10)
 ```
 
-Come sapete, questo bot è un semplicissimo bot che risponde a qualsiasi messaggio con un semplice `'ciao, sono un bot molto stupido!'`. Se volete più informazioni su come scrivere questo codice o sapere esattamente cosa fa vi consiglio di rileggere il mio [primo articolo su Telegram e Python](https://ludusrusso.cc/2017/04/27/implementiamo-un-bot-telegram-con-python/). Non credo sia necessario ripetermi qui.
+Come sapete, questo bot è un semplicissimo bot che risponde a qualsiasi messaggio con un semplice `'ciao, sono un bot molto stupido!'`. Se volete più informazioni su come scrivere questo codice o sapere esattamente cosa fa vi consiglio di rileggere il mio [primo articolo su Telegram e Python](https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python). Non credo sia necessario ripetermi qui.
 
 Altro consiglio, dato che questo bot è super testato, prima di andare avanti lanciatelo e provate almeno una volta che funziona. Saprete, in futuro, che se qualcosa non funziona è colpa di quello che avete aggiunto dopo :D
 

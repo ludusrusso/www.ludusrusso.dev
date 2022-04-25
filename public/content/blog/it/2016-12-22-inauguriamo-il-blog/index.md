@@ -19,4 +19,4 @@ Ciao a tutti, mi chiamo Ludovico e sono un **maker** e un **imprenditore**. Sott
 Io sono cocciuto, e ho una gran voglia di sperimentare nuove tecnologie e imparare nuove cose. Per questo motivo, quando mi hanno convinto a scrivere un blog, ho preso la parola "scrivere" forse troppo alla lettera, e da buon programmatore me lo sono implementato quasi da zero! Sono un amante di Python, e questo sito, completamente sviluppato da me, è stato scritto in Python con una libreria chiamata **Flask**.
 Vorrei utilizzare questo sito per condividere le cose che imparo, per questo motivo ho iniziato a scrivere dei tutorial su Flask e Python, che trovate al link sotto!
 
-<http://www.ludusrusso.cc/tutorial/python/flask/intro.html>
+[https://www.ludusrusso.dev/2016/12/27/tutorial-flask](https://www.ludusrusso.dev/2016/12/27/tutorial-flask)

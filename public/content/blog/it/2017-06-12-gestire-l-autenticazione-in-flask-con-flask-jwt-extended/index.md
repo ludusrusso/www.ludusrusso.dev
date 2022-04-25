@@ -14,7 +14,7 @@ path: "/2017/06/12/gestire-l-autenticazione-in-flask-con-flask-jwt-extended/"
 image: "./login1.png"
 ---
 
-Recentemente mi sto spostando sempre di più verso lo sviluppo di applicazioni Web single-page. A differenza del metodo classico che ho molto esplorato [in questo blog](http://www.ludusrusso.cc/tutorial/python/ludoblog/index.html), in questo tipo di architettura l'intera applicazione web viene scaricata la prima volta, quando si accede all'url principale del sito internet.
+Recentemente mi sto spostando sempre di più verso lo sviluppo di applicazioni Web single-page. A differenza del metodo classico che ho molto esplorato [in questo blog](https://www.ludusrusso.dev/2016/12/27/tutorial-flask), in questo tipo di architettura l'intera applicazione web viene scaricata la prima volta, quando si accede all'url principale del sito internet.
 In questo modo, il nostro server principale può scambiare solo i dati da visualizzare all'interno dell'applicazione, invece che dover mandare l'intera pagina da renderizzare ogni volta.
 
 Questo, come è possibile immaginare, semplifica e alleggerisce notevolmente il lavoro del server, rendendo di fatto le applicazioni più scalabili e più semplici da gestire. Inoltre, gestendo lo scambio dati con API basate su standard come JSON, è anche possibile poi sviluppare applicazioni Desktop/Mobile native che comunicano con le stesse API della webapp.

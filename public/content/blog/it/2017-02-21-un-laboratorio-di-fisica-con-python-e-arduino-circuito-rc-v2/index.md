@@ -17,11 +17,11 @@ path: "/2017/02/21/un-laboratorio-di-fisica-con-python-e-arduino-circuito-rc-v2/
 image: "./Schermata_2017-02-21_alle_03.09.44_gxveep.png"
 ---
 
-Come premesso, ripropongo oggi l'esperimento sul circuito $RC$ presentato in [questo post](http://www.ludusrusso.cc/posts/2017-01-04-arduino-python-lab-fisica-1) e rivisto utilizzando l'IDE di programmazione scientifica **Spyder** e la libreria per sviluppare programmi Arduino in Python **nanpy**.
+Come premesso, ripropongo oggi l'esperimento sul circuito $RC$ presentato in [questo post](https://www.ludusrusso.dev/2017/01/04/un-laboratorio-di-fisica-con-arduino-e-python) e rivisto utilizzando l'IDE di programmazione scientifica **Spyder** e la libreria per sviluppare programmi Arduino in Python **nanpy**.
 
 ![Spyder + Nanpy + RC](./Schermata_2017-02-21_alle_03.09.44_gxveep.png)
 
-Per info sull'accoppiata e su come installare il tutto, rimando al mio [precedente post](http://www.ludusrusso.cc/posts/2017-02-19-python-arduino-nanpy).
+Per info sull'accoppiata e su come installare il tutto, rimando al mio [precedente post](https://www.ludusrusso.dev/2017/02/19/python-arduino-nanpy).
 
 ## Teoria sul circuito $RC$
 

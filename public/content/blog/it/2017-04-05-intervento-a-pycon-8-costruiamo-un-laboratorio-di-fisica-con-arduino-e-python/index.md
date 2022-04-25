@@ -29,16 +29,16 @@ Questo post è da supporto al mio intervento del 6 Aprile alla conferenza [PyCon
 
 Questo training è basato sugli articoli che link qui sotto:
 
-- [Circuito RC](http://www.ludusrusso.cc/posts/2017-02-21-un-laboratorio-di-fisica-con-python-e-arduino-circuito-rc-v2)
-- [Led e Costante di Planck 1](http://www.ludusrusso.cc/posts/2017-02-22-misurare-la-costante-di-plank-con-arduino-e-python-parte-1)
-- [Led e Costante di Planck 2](http://www.ludusrusso.cc/posts/2017-03-21-misurare-la-costante-di-plank-con-arduino-e-python-parte-2)
-- [Led e Costante di Planck 3](http://www.ludusrusso.cc/posts/2017-03-23-misurare-la-costante-di-planck-con-arduino-e-python-parte-3)
-- [Esopianeti](http://www.ludusrusso.cc/posts/2017-03-26-come-vengono-scoperti-gli-esopianeti-un-semplice-esperimento-con-arduino-e-python)
+- [Circuito RC](hhttps://www.ludusrusso.dev/2017/02/21/un-laboratorio-di-fisica-con-python-e-arduino-circuito-rc-v2)
+- [Led e Costante di Planck 1](https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1)
+- [Led e Costante di Planck 2](https://www.ludusrusso.dev/2017/03/21/misurare-la-costante-di-planck-con-arduino-e-python-parte-2)
+- [Led e Costante di Planck 3](https://www.ludusrusso.dev/2017/03/23/misurare-la-costante-di-planck-con-arduino-e-python-parte-3)
+- [Esopianeti](https://www.ludusrusso.dev/2017/03/26/come-vengono-scoperti-gli-esopianeti-un-semplice-esperimento-con-arduino-e-python)
 
 ## Link Utili
 
 - [Corso Arduino Michele Maffucci](http://www.maffucci.it/area-studenti/arduino/)
-- [Introduzione a Spyder per il plot dei dati](http://www.ludusrusso.cc/posts/2017-04-06-breve-introduzione-all-utilizzo-di-spyder-per-il-plot-dei-dati-a-livello-scientifico)
+- [Introduzione a Spyder per il plot dei dati](https://www.ludusrusso.dev/2017/04/06/breve-introduzione-all-utilizzo-di-spyder-per-il-plot-dei-dati-a-livello-scientifico)
 
 ## Codice
 
