@@ -14,7 +14,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.6",
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/styled": "^11.8.1",
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
     "@mapbox/rehype-prism": "^0.8.0",
