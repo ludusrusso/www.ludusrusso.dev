@@ -70,7 +70,7 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                         <div className="text-lg leading-6 font-medium space-y-1">
                           <h3>{frontMatter.title}</h3>
                           <p>
-                            <span className="text-gray-600">Authore</span>{" "}
+                            <span className="text-gray-600">Autore</span>{" "}
                             <span className="text-indigo-600">
                               {frontMatter.author}
                             </span>
