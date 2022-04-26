@@ -109,7 +109,7 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                           <li>
                             <Link href={`/books/${slug}`}>
                               <a className="text-gray-800 underline">
-                                <span>Dettagli </span>
+                                <span>Cosa ne penso? 🧐</span>
                               </a>
                             </Link>
                           </li>
