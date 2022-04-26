@@ -79,34 +79,36 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                         <div className="text-lg">
                           {/* <p className="text-gray-500">{person.bio}</p> */}
                         </div>
-                        <ul role="list" className="flex flex-col space-y-1">
-                          <li>
-                            {frontMatter.links.en && (
+                        <ul role="list" className="flex flex-col space-y-2">
+                          {frontMatter.links.en && (
+                            <li>
                               <a
                                 href={frontMatter.links.en}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-gray-700 hover:text-gray-800"
+                                className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                               >
                                 <span>Compra in Inglese 🇺🇸 </span>
-                              </a>
-                            )}
-                          </li>
-                          <li>
-                            {frontMatter.links.it && (
+                              </a>{" "}
+                            </li>
+                          )}
+
+                          {frontMatter.links.it && (
+                            <li>
                               <a
                                 target="_blank"
                                 rel="noreferrer"
                                 href={frontMatter.links.it}
-                                className="text-gray-700 hover:text-gray-800"
+                                className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                               >
                                 <span>Compra in Italiano 🇮🇹 </span>
-                              </a>
-                            )}
-                          </li>
+                              </a>{" "}
+                            </li>
+                          )}
+
                           <li>
                             <Link href={`/books/${slug}`}>
-                              <a className="text-gray-800">
+                              <a className="text-gray-800 underline">
                                 <span>Dettagli </span>
                               </a>
                             </Link>

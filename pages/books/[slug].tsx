@@ -56,13 +56,13 @@ export default function BookPage({
             <p className="text-xl font-bold text-gray-900">
               by <span>{frontmatter.author}</span>
             </p>
-            <div className="flex space-x-1 text-lg text-gray-500">
+            <div className="flex space-x-2 mt-4 text-lg text-gray-500">
               {frontmatter.links.en && (
                 <a
                   href={frontmatter.links.en}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-gray-700 hover:text-gray-800"
+                  className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                 >
                   <span>Compra in Inglese 🇺🇸 </span>
                 </a>
@@ -72,7 +72,7 @@ export default function BookPage({
                   target="_blank"
                   rel="noreferrer"
                   href={frontmatter.links.it}
-                  className="text-gray-700 hover:text-gray-800"
+                  className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                 >
                   <span>Compra in Italiano 🇮🇹 </span>
                 </a>

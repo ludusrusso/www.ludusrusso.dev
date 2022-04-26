@@ -1,5 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Banner } from "components/banner";
 import { Mailchimp } from "components/mailchimp";
 import { NextEpisodeSection } from "components/next-episode";
 import { InferGetStaticPropsType } from "next";
@@ -21,6 +22,7 @@ export default function Home({
   return (
     <>
       <SEO title="Home" />
+      <Banner />
       <HeroSection />
 
       {nextEpisode && <NextEpisodeSection episode={nextEpisode} />}
