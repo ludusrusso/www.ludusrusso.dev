@@ -58,7 +58,7 @@
     "@types/react": "^17.0.38",
     "@types/react-mailchimp-subscribe": "^2.1.1",
     "autoprefixer": "^10.4.5",
-    "eslint": "^8.5.0",
+    "eslint": "^8.14.0",
     "eslint-config-next": "^12.1.5",
     "next-sitemap": "^2.1.5",
     "postcss": "^8.2.15",
