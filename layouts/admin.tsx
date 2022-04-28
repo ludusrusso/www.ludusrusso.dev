@@ -1,10 +1,10 @@
-import { AuthProvider, useAuth } from "admin/auth/auth.provider";
+import { useAuth } from "admin/auth/auth.provider";
 import { Footer } from "admin/components/footer";
 import { Nav } from "admin/components/nav";
-import { FC, useEffect } from "react";
 import Router from "next/router";
+import { ReactNode, useEffect } from "react";
 
-export const AdminLayout: FC = ({ children }) => {
+export const AdminLayout = ({ children }: { children: ReactNode }) => {
   const { currentUser } = useAuth();
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import {
   createContext,
   FC,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -18,7 +19,7 @@ const AuthContext = createContext<AuthContext>({ signOut: () => {} });
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider: FC = ({ children }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<Token | null | undefined>(undefined);
   const [token, setToken] = useState<string | null | undefined>(undefined);
 
