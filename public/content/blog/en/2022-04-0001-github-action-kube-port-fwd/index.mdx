@@ -31,10 +31,10 @@ This post has been mainly inspired from
 [How we connect to Kubernetes Pods from GitHub Actions](https://dev.to/richicoder1/how-we-connect-to-kubernetes-pods-from-github-actions-1mg):
 the instruction to create a custom service account with the only permission of
 enabling port forwarding to a kubernetes pod are practically the same of
-the original post, I just report them here to make this post self consistent.
+the original post. I've implemented a script to automate the creation of service account and kuneconfig file.
 
-Difference from the original posts are in the deply phase. While they suggest to perform port forwarding in the main action before doing any
-operation, I prefer running it within a container service as suggested but github action team.
+Difference from the original posts are in the deploy phase. While they suggest to perform port forwarding in the main action before doing any
+operation, I prefer running it within a container service as suggested by the github team.
 
 ## Creating a service account with port forwarding permission
 
