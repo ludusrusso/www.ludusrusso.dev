@@ -23,7 +23,7 @@
     "@trpc/react": "^9.23.0",
     "@trpc/server": "^9.23.0",
     "bcrypt": "^5.0.1",
-    "dayjs": "^1.10.7",
+    "dayjs": "^1.11.2",
     "disqus-react": "^1.1.2",
     "feed": "^4.2.2",
     "final-form": "^4.20.6",
