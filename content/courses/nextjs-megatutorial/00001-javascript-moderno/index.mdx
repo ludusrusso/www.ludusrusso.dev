@@ -1,0 +1,938 @@
+---
+title: Javascript Moderno
+description: JavaScript è in continua evoluzione, facciamo una breve carrellata delle feature di JavaScript moderno che andremo ad utilizzare in questo corso!
+published: true
+slug: javascript-moderno
+---
+
+Il linguaggio di programmazione JavaScript è evoluto tantissimo negli ultimi
+anni. Purtroppo, siccome i browser sono lenti ad adottare le nuove funzionalità e
+cambiamenti, molti sviluppatori non sono riusciti ad aggiornarsi sulle nuove funzionalità.
+
+React (e quindi NextJS) incoraggiano gli sviluppatori ad usare le funzioni moderne di JavaScript,
+per questo motivo questo capitolo è incentrato su un piccolo aggiornamento delle principali
+features di JavaScript moderno che andremo ad utilizzare durante questo corso.
+
+## ES5 vs ES6
+
+JavaScript è un linguaggio basato sulla specifica ECMAScript, mantenuta da [ECMA](https://www.ecma-international.org/), un'organizzazione
+non-profit che si occupa di mantenere e gestire standard legati al mondo dell'informatica e dei sistemi di telecomunicazione.
+
+Nel mondo JavaScript spesso vengono citati termini come _ES5_ e _ES6_ relative alla versioni
+del lingaggio. Questi termini si riferiscono rispettivamente alle versioni 5 e 6 della specifica ECMAscript
+definite da ECMA. _ES5_ è stata rilasciata nel 2009 ed è considerata attualmente
+la versione base delle varie implementazioni, in quanto è supportata da una stragande maggioranza
+di browser e sistemo mobile. _ES5_, invece, è stata rilasciata nel 2015. Questa versione introduce
+diverse migliorie significative alla versione pricedente, e rimane compabile con _ES5_ (cioè un
+quasiasi programma implementato in _ES5_ può essere eseguito da un interprete _ES6_, ma non viceversa).
+
+Dalla verisone _ES6_ in avanti, ECMA ha deciso di rilasciare aggiornamenti periodici (ogni anno)
+alle specifica, per questo motivo spesso con _ES6_ ci si riferisce a tutti i miglioramenti
+rilasciati dalla versione _ES6_ in avanti, quindi spesso il termine _ES6_ è usato non propriamente
+per indicare la versione _ES6_, ma per indicare tutte l'ultimo pacchetto di aggiornamenti rilasciati nell'anno in corso (si lo so,
+confonde un po').
+
+Come fanno quindi i Browser a stare dietro un'evoluzione tanto rapida? Non lo fanno e non potrebbero farlo. Le ultime
+feature rilasciate nelle versioni _ES6_ e i suoi aggiornamenti non sono garantiti essere implementati in tutti i browser.
+Per gli sviluppatori questo è un problema, perchè non hanno controllo sul tipo di browser su cui la loro applicazione
+verrà eseguita. Ci viene però incontro una tecnica chiamata [**transpiler**](https://en.wikipedia.org/wiki/Source-to-source_compiler),
+che consiste nel convertire programmi scritti in una versione moderna di JavaScript in una versione equivalente scritta
+utilizzando _ES5_ che garantisce una compatibilità con (quasi) tutti i browser. I transpiler sono integrati in tutti
+i principali framework moderni JavaScript (e quindi in React a NextJS che usere in questo corso), e grazie a questi
+gli sviluppatori hanno molti meno vincoli e possono tranquillamente utilizzare le ultime feature di _ES6_.
+
+## Una carrellata delle Features moderne di JavaScript
+
+Questo corso si basa su _ES6_, quindi mi sembra utile fare una breve carrellata, prima di iniziare, delle feature
+più importanti che useremo di JavaScript e delle convezioni (in questo caso mie prefernze) che useremo per scrivere
+i vari programmi in questo corso.
+
+### Semicolon (punto e virgola) `;`
+
+Le regole di JavaScript riguardo quando usare il `;` sono poco chiare e spesso
+confondono gli sviluppatori. Si dice che JavaScript, a differenza di altri linguaggi,
+non richieda l'uso dei `;` per separare le istruzioni. Questo non è propriamente
+vero. Sebbene non sia necessario la maggior parte delle volte, in specifici casi
+il loro utilizzo è richiesto, e questo spesso porta a bug o ad un codice che si
+comporta in modo diverso da quello che vogliamo.
+
+Per evitare questi problemi, io (e molti programmatori JavaScript) consiglio di
+usare sempre il `;` per chiudere le istruzioni. Non utilizzo il `;` dopo il
+simbolo `}` alla fine di una dichiarazione di funzione o di un blocco di codice di una
+struttura di controllo (come `if`, `for`, ecc.) in quanto è la prassi per molti
+altri linguaggi come `C/C++` e `Java`.
+
+Ecco alcuni esempi:
+
+```javascript
+const myVar = 1; // <- termine di un'istruzione di assegnazione
+
+function myFunc() {
+  console.log("funzione"); // <- termine di un'istruzione di esecuzione
+} // <- qui non serve perchè chiude una dichiarazione di funzione
+```
+
+Attenzione a quando viene assegnata una funzione anonima (arrow function) ad una variable, in questo caso
+il `;` è necessario dopo il `}` per chiudere l'assegnazione.
+
+```javascript
+const myFunc = () => {
+  console.log("funzione");
+}; // <- termine di un'istruzione di assegnazione
+```
+
+Ovviamente queste sono preferenze e consigli di stile adottati da molti sviluppatori (non tutti),
+quindi non è necessario che seguiate queste regole, ovviamente se sapete bene cosa state facendo.
+
+Non è nemmeno necessario ricordarle perfettamente, in quanto esistono tools, come prettier, che ci aiutano
+ad uniformare lo stile in fase di scrittura. Vedremo in futuro come usarle.
+
+### Trailing commas (virgole finali)
+
+Quando definiamo un oggetto o un array su più di una linea, è molto utile inserire una virgola
+anche dopo l'ultimo elemento.
+Questa sintassi può sembrare scorretta ma JavaScript (insieme a molti altri linguaggi come Go ad esempio)
+lo permettono.
+
+Ecco alcuni esempi:
+
+```javascript
+const myArr = [
+  1,
+  2,
+  3, // <- virgola qui
+];
+
+const myObj = {
+  name: "Ludovico",
+  age: 33, // <- virgola qui
+};
+```
+
+Ci sono due vantaggi ad usare questa sintassi:
+
+1. Possiamo spostare tutti gli elementi senza preoccuparti di rompere la sintassi,
+2. Quando dobbiamo aggiungere un nuovo elemento alla fine, lo possiamo fare senza preoccuparci di aggiungere la virgola all'elemento precedente.
+
+## Import ed export
+
+Se sei abituato a scrivere applicazioni _old-style_ in JavaScript per il browser, probabilmente
+non hai mai abuto bisogno di importare o esportare codice javascript. Potevi semplicemente
+richiedere al browser di caricare i file javascript usando il tag `<script>` in HTML.
+In questo modo tutte le definizioni e le funzioni dichiarate nel codice è accessibile
+tramite come scope _globale_ all'interno della pagina nel browser.
+Sebbene questo approccio funzioni, non è facilmente mantenibile e diventa un problema per
+grossi progetti.
+
+_ES6_ introduce il concetto di _modulo_, cioè un insieme di funzioni e variabili che sono accessibili
+tramite _import_ ed _export_ all'interno di altri file. Grazie ai moduli il programmatore può controllare
+il codice da esportare e mettere a disposizione ad altri programmatori dal codice interno al modulo stesso.
+
+Un modulo JavaScript non è altro che un file javascript che contiene una serie di definizioni di funzioni, variabili e altri oggetti.
+Di default tutto ciò che è dichiarato all'interno del modulo è privato, cioè non è accessibile dall'asterno.
+Se però vogliamo esportare (quindi rendere pubblico) una di queste definizioni possiamo usare al keyword `export`:
+
+```javascript
+// myModule.js
+
+export function myFunction() {
+  console.log("funzione esportata");
+}
+```
+
+E importarla (per usarla) in un altro file con la keywork `import`
+
+```javascript
+// main.js
+
+import { myFunction } from "./myModule";
+
+myFunction();
+```
+
+La sentassi che stiamo usando per importare si chiama _unpacking_, e ci permette di
+selezionare quali definizioni vogliamo importare dal modulo. Se sono più di una è possibile
+usare la virgola per listarle all'interno delle parentesi graffe.
+
+Javascript ci da anche la possibilità di esportare una definizione con la keyword `export default`,
+per ogni modulo possiamo solo esportare un oggetto usando `default`, e la sintassi per importarla
+non prevedere le parentesi, come in questo caso
+
+```javascript
+// secondoModule.js
+
+export default function mySecondFunction() {
+  console.log("funzione esportata usando default");
+}
+
+// main.js
+
+import mySecondFunction from "./secondModule";
+
+mySecondFunction();
+```
+
+In questo caso possiamo decidere arbitrariamente il nome della funzione quando la importiamo, ad esempio
+avremmo potuto scrivere
+
+```javascript
+// main.js
+
+import myFunc from "./secondModule";
+
+myFunc();
+```
+
+Possiamo anche usare contemporaneamente le due sintassi `export default` ed `export`, esattamente con le
+regole di prima.
+
+```javascript
+// multipleModule.js
+
+export const PI = 3.14;
+export const sqrt = (x) => {
+  return Math.sqrt(x);
+};
+
+export default function circleArea(r) {
+  return PI * r * r;
+}
+
+// main.js
+
+import circle, { PI, sqrt } from "./multipleModule";
+
+// oppure
+
+import circle from "./multipleModule";
+import { PI, sqrt } from "./multipleModule";
+```
+
+Chiamando la funzione `myFunc`. Alcune librerie e framework JavaScript (come React ad esempio),
+consigliano di utilizzare principalmente la sintassi con `export default`. Io in generale (ma questa è una mai
+preferenza) preferisco la sintassi con `export` normale, per due motivi:
+
+1. Ci permette di esportare più dichiarazioni dallo stesso file,
+2. Funziona meglio con tools di sviluppo che non supportano la sintassi `export default`.
+
+Se volete saperne di più, vi suggerisco di leggere le sezioni
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) ed
+[export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) della documentazione di JavaScript.
+
+## Variabili
+
+Ogni linguaggio di programmazione ha alla base il concetto di variabile, cioè simboli all'interno dei
+quali vengono salvate dei valori.
+
+Anche in questo caso, le versioni vecchie di JavaScript erano _incasinate_ (non so come dirlo in modo carino)
+sulla definizione di variabile. In particolare l'unico modo per definire una variabile era usare
+la keyword `var`, che però aveva un comportamento molto diverso rispetto agli altri principali linguaggi di
+programmazione. Non voglio entrare nel merito di questo, però l'utilizzo di `var` faceva si che il codice
+facesse come strane come dare la possibilità di utilizzare una variabile prima della dichiarazione, che ovviamente
+portava a bug e problemi di comportamento nei programmi.
+
+Per ovviare a questo, _ES6_ ha introdotto due nuovi keywords: `let` e `const`, per la definizione di variabile, lasciando
+`var` per ragioni di retrocompatiblità ma con la forte raccomandazione di non usare più questa keyword. In generale
+la community JavaScript è abbastanza d'accordo sul fatto che `var` non debba proprio essere usata all'interno dei programmi.
+
+Per definire una variable, usiamo quindi la keywork `let`:
+
+```javascript
+// definiamo la variabile a
+let a; // valore undefined
+
+a = 10; // valore 10
+
+// definiamo e assegnamo un valore alla variabile b
+let b = 1;
+```
+
+Se una variable è definita ma non assegnata con `let`, il suo valore di default sarà `undefined`.
+
+Una costante è una variabile che può essere assegnata solo nel momento della definizione, e non più dopo.
+Tentare di riassegnare una variabile definita con `const` porterà ad un errore.
+
+```javascript
+const c = 10;
+
+console.log(c);
+// Output: 10
+
+c = 11; // errore
+// Output: Uncaught TypeError: Assignment to constant variable.
+```
+
+Mi piace parlare comunque di variabile e non di costante, perchè è possibile assegnare oggetti mutabili (cioè il cui valore
+cambia nel tempo, ad una variabile definita con `const`). Questo può sembrare un po' confusionario le prime volte, quindi vediamo
+un esempio:
+
+```javascript
+const myArr = [1, 2, 3];
+
+myArr.push(4);
+
+console.log(myArr);
+// Output: [1,2,3,4]
+```
+
+Questo codice è lecito e funzionante, quello che non possiamo fare è riassegnare `myArr`. In generale
+una variable `const` in JavaScript non può mai stare (se non la prima volta) a sinistra dell'istruzione di assegnazione
+`=`, e quindi non può essere riassegnata.
+
+```javascript
+myArr = [1, 2]; // errore
+// Output: Uncaught TypeError: Assignment to constant variable.
+```
+
+Per maggiori informazioni potete consultare la documentazione di JavaScript per [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) e [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const).
+
+## Comparazioni in JavaScript
+
+Anche in questo caso, le versioni vecchie di JavaScript erano un casino per quanto riguarda le istruzioni di comparazione,
+e con _ES6_ si è riusciti (finalmente) a mettere un po' di ordine.
+
+In particolare, gli operatori originali di comparazione `==` e `!=` sono stati creati nuovi operatori: `===` e `!==`, che hanno un comportamente
+matematicamente molto più corretto.
+Gli operatori originali sono stati lasciati per retrocompatibilità, ma è consigliato usare gli operatori nuovi.
+
+Anche in questo caso non mi voglio dilungare troppo e vi dico solo di evitare sempre di usare `==` e `!=` per non
+incappare in bug e comportamente strani nel codice.
+
+Vediamo come usarli:
+
+```javascript
+const a = 1;
+
+console.log(a === 1); // Output: true
+console.log(a === "1"); // Output: false
+console.log(a !== 3); // Output: true
+```
+
+Siccome molti linguaggi di programmazione usano `==` e `!=` come operatori di comparazione,
+succede spesso di confonderli ed è quasi inevitale l'uso degli operatori originali nel codice.
+Per questo motivo consiglio vivamente (vedremo dopo come farlo) di installare un analizzatore di codice
+nel nostro editor di testo che ci avvertenga quando usiamo `==` e `!=`.
+
+Per ulteriori dettagli, consultate la documentazione di JavaScript per gli operatori [`===`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) e [`!==`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_inequality).
+
+## Interpolazione di Stringhe
+
+Quando dobbiamo costruire una string a partire dal valore contenuto in una variabile,
+possiamo usare un'utilizza funzione di _ES6_ chiamata _template literals_.
+
+Ecco un esempio:
+
+```javascript
+const name = "Ludovico";
+const saluti = `Ciao, ${name}!`;
+
+console.log(saluti);
+// Output: Ciao, Ludovico!
+```
+
+Questa sintassi si usa all'interno di una stringa definita con il carattere ``` (backtick).
+
+Purtroppo per noi italiani non è semplice digitarlo sulla tastiera, in quanto non è un carattere che
+solitamente usiamo. Sul mac (che uso io), si ottiene premente i tast `option + 9`, su linux possiamo usare
+`ALT + '` (ALT + apostrofo), mentre su windows digitando `ALT+96` (ALT e poi i caratteri `9` e `6`).
+
+Trovate più info sui _template literals_ sulla [doc apposita](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+## Cicli for
+
+In JavaScript, è possibile definire un ciclo for in modo simile agli altri linguaggi, usando la sintassi
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  console.log(`i = ${i}`);
+}
+// Output:
+// i = 0
+// i = 1
+// i = 2
+```
+
+Tuttavia, le versioni _ES6_ introduce un utile ciclo `for of`, che permette di iterare all'interno dei valori di un array
+
+```javascript
+const names = ["Ludo", "Silvia", "Carlo"];
+for (let name of names) {
+  console.log(`Ciao, ${name}!`);
+}
+// Output:
+// Ciao, Ludo!
+// Ciao, Silvia!
+// Ciao, Carlo!
+```
+
+Attenzione a non confonderlo con il `for in`, che itera all'interno delle `chiavi` un oggetto o array.
+
+```javascript
+const names = ["Ludo", "Silvia", "Carlo"];
+for (let id in names) {
+  console.log(`[${id}]: Ciao, ${names[id]}!`);
+}
+// Output:
+// [0]: Ciao, Ludo!
+// [1]: Ciao, Silvia!
+// [2]: Ciao, Carlo!
+```
+
+## Arrow function
+
+_ES6_ introduce una seconda per definire le funzioni, chiamate _arrow function_ o _fat arrow functions_.
+
+Per fare un esempio, consideriamo la funzione così definita:
+
+```javascript
+function mult(x, y) {
+  const res = x * y;
+  return res;
+}
+
+mult(2, 4); // Output: 8
+```
+
+Con la nuova sintassi possiamo definire la funzione in questo modo
+
+```javascript
+const mult = (x, y) => {
+  const res = x * y;
+  return res;
+};
+
+mult(2, 4); // Output: 8
+```
+
+Sebbene non sembri che cambi tanto, e i due modi possono sembrare ridondanti all'inizio. Questa seconda sintassi
+permette di scrivere codice più pulito e più conciso. Infatti, per funzioni che hanno una sola istruzione
+all'interno possiamo evitare le parentesi graffe e il `return`, riscrivendola così:
+
+```javascript
+const mult = (x, y) => x * y;
+
+mult(2, 4); // Output: 8
+```
+
+```javascript
+const PI = 3.14;
+const circleArea = (r) => PI * r * r;
+
+circleArea(2); // Output: 12.56
+```
+
+Inoltre, le arrow functions permettono di avere una sintassi molto più pulita quando sono usate
+come funzioni anonime passate come parametro ad altre funzioni. Per capire meglio facciamo un esempio.
+
+In JavaScript è possibile creare un array a partire da un array originale usando la funzione `map`. Questa
+funzione, di fatto, prende un array, esegue una seconda funziona a tutti gli elementi dell'array originale
+e ritorna un nuovo array con i risultati delle varie computazioni.
+
+Questa sintassi
+
+```javascript
+const nums = [1, 2, 3, 4, 5];
+
+const doubleNums = nums.map(function (n) {
+  return n * 2;
+});
+// Output: [2, 4, 6, 8, 10]
+```
+
+Può essere sostituita con la seguente che è molto più leggibile e concisa:
+
+```javascript
+const nums = [1, 2, 3, 4, 5];
+
+const doubleNums = nums.map((n) => n * 2);
+// Output: [2, 4, 6, 8, 10]
+```
+
+Per approfondire eccola la documentazione delle [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
+
+## Promise
+
+In JavaScript, quasi tutte le operazioni che coinvolgono la comunicazione con qualcosa di esterno al programma (una chiamata network,
+accesso al filesystem, ecc) sono asincrone. Il termine vuol dire che il programma non viene bloccato mentre
+aspetta la risposta e può continuare a fluire. Il meccanismo che usa JavaScript per modellare questo comportamento
+sono le _promise_.
+
+Una promise è un oggetto _proxy_ che viene ritornato da un'operazione asincrona. L'oggetto non contiene
+il risultato dell'operazione, ma ci permetterà di accedere al risultato una volta che l'operazione sarà terminata.
+
+L'accesso al risultato avviene tramite una funzione di callback, in particolare l'oggetto `Promise` mette a disposizione
+due metodi principali: `then()` e `catch()`. Entrambi i metodi richiedono come unico parametro una funzione di callback:
+
+- La funzione che passiamo tramite `then()` viene eseguita nel momento in cui il risultato risulta disponibile.
+- La funzione che passiamo tramite `catch()` viene invece eseguita se l'operazione fallisce, e ci permette di gestire l'errore.
+
+Tantissime librerie JavaScript (sia interne che di terze parti) fanno fortemente uso delle primise, per questo dobbiamo
+capire bene il loro meccanismo.
+
+Partiamo con un esempio: il browser ci mette a disposizione una funzione `fetch` per fare chiamate http ad URL specifici.
+Questa funzione ritorna una promise:
+
+```javascript
+fetch("https://jsonplaceholder.typicode.com/users/1").then((res) =>
+  console.log(res)
+);
+```
+
+Questa funzione esegue la chiamata `GET https://jsonplaceholder.typicode.com/users/1` in background (quindi senza bloccare il programma).
+Nel momento in cui la chiamata ritorna un risultato, questo risultato viene passato alla funzione di callback dichiarate nel `then()` che
+lo stampa a video.
+
+Le promesse possono essere eseguite in sequenza (si dice `chained` in inglese) ritornando un'altra promise
+nella funzione di callback. Un caso molto comune è il seguente:
+
+```javascript
+fetch("https://jsonplaceholder.typicode.com/users/1")
+  .then((r) => r.json())
+  .then((data) => console.log(data));
+```
+
+In questo caso la prima promise è la chiamata http, e la funzione di callback di questa esegue il metodo `r.json()`: questo
+metodo si occupa di convertire il risultato in un oggetto JSON e ritorna una promise per gestire il risultato una volta disponiible.
+Questa seconda Promise viene quindi gestire tramite il secondo `then()` che stampa a video il risultato.
+
+Per gestire l'errore, possiamo invece usare il metodo `catch()`, come in questo caso:
+
+```javascript
+fetch("https://jsonplaceholder.typicode.com/users/1")
+  .then((r) => r.json())
+  .then((data) => console.log(data));
+  .catch((err) => console.error(`Got and error: ${err}`));
+```
+
+Le promise mettono a disposizione anche altri metodi per gestirle ed eseguirne più di una contemporaneamente.
+Per maggiori informazioni vi lascio [alla documentazione](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+
+## `async` e `await`
+
+Le _promise_ offrono un'ottima astrazione per gestire le operazioni asincrone all'interno del codice JavaScript, ma
+il loro uso massiccio, specialmente in casi di una lunga catena di promises all'interno di varie chiamate del metodo `then()`,
+porta alla scrittura di codice difficile da capire e mantenere.
+
+Per questo, nel 2017, ECMAScript ha introdotto una nuova sintassi per gestire le promise, tramite le keywork `async` e `await`.
+Grazie alla nuova sintassi, possiamo definire una funzione come asincrona con la keywork `async`. Le funzione asincrone
+ritorneranno sempre una promise, e al loro interno è possibile usare la keyword `await` per attendere il risultato della promise senza
+usare il metodo then.
+
+Ecco un esempio del codice precedente gestiro con la nuova sintassi:
+
+```javascript
+async function fetchData() {
+  const r = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  const data = await r.json();
+  console.log(data);
+}
+```
+
+Con questa sintassi le chiamate asincrone possono essere eseguite in sequenza. Da notare che questa sintassi non
+permette comunque di bloccare un interno programma quando viene generata una promise, in quanto è limitata
+all'interno di una singola funzione.
+
+Gli errori nelle funzioni esincrone possono essere gestire con le istruzioni `try` e `catch`.
+
+```javascript
+async function fetchData() {
+  try {
+    const r = await fetch("https://jsonplaceholder.typicode.com/users/1");
+    const data = await r.json();
+    console.log(data);
+  } catch (err) {
+    console.error(`Got and error: ${err}`);
+  }
+}
+```
+
+Come detto prima, le funzioni asincrone ritorneranno sempre una primise, e quindi possono essere usate all'interno del codice
+con la sintassi vista prima:
+
+```javascript
+fetchData().then(() => console.log("Done!"));
+```
+
+O, in alternativa, possono essere usati all'interno di un'altra funzione asincrona:
+
+```javascript
+const g = async () => {
+  await fetchData();
+  console.log("done");
+};
+```
+
+La sezione [async and await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises#async_and_await)
+della documentazioen di JavaScript è un buon punto di partenza se si vuole approfondire.
+
+## Spread Operator
+
+Lo _spread operator_ `...` permette di espandere un array of un oggetto ed estrapolarne i suoi elementi.
+È difficile spiegare come funziona lato teorico, ma viene molto facile capirlo partendo da degli esempio.
+
+Supponiamo di avere un array di numeri e volerne calcolare il minimo. JavaScript ci mette a disposizione
+la funzione `Math.min()` che calcola il minimo tra più numeri passati come argomenti. Purtroppo min non prende
+un array, ma una lista di numeri, quindi non possiamo passargli direttamente l'array.
+
+```javascript
+const myArr = [1, 2, 3, 4];
+const min = Math.min(myArr[0], myArr[1], myArr[2], myArr[3]);
+```
+
+Grazie allo spread operator, possiamo estrapolare i valori all'interno dell'array e passarli alla funzione `Math.min()` in questo modo:
+
+```javascript
+const myArr = [1, 2, 3, 4];
+const min = Math.min(...myArr); // 4
+```
+
+L'operator può anche essere usato per concatenare o creare nuovi array a partire da uno o più array esistenti:
+
+```javascript
+const myArr = [1, 2, 3, 4];
+const myArr2 = [0, 3, ...myArr, 10]; // [0, 3, 1, 2, 3, 4, 10]
+```
+
+O per copare un array velocemente:
+
+```javascript
+const myCopy = [...myArr];
+```
+
+Possiamo usare lo spread operator anche per fare la stessa cosa sugli oggetti;
+
+```javascript
+const myObj = { name: "Ludovico" };
+const mySecondOby = { ...d, age: 33 }; // {name: 'Ludovico', age: 33}
+const myCopy = { ...d }; // {name: 'Ludovico'}
+```
+
+Un'interessante funzionalità è che ci permette di copiare un oggetto e ridefinirne alcune proprietà, come in questo esempio:
+
+```javascript
+const myObj = { name: "Ludovico", age: 32 };
+const myCopy = { ...myObj, age: 33 }; // {name: 'Ludovico', age: 33}
+```
+
+In questo caso, quando abbiamo collisioni sui nomi delle proprietà, il valore risolutate è ottenuto utilizzando l'ultima
+occorrenza della collisione (in questo caso `age:33` vince su `age:32` in quanto definito dopo).
+
+Come al solito vi consiglio di dare un'occhiata alla [documentazione ufficiale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) per approfondire.
+
+## Proprietà di oggetti: scorciatoie
+
+In modo simile agli spread operator, JavaScript ci mette a disposizione delle scorciatoie per definire velocemente
+degli oggetti. Consideriamo ad esempio il seguente codice:
+
+```javascript
+const name = "Ludovico";
+const age = 33;
+const user = { name: name, age: age }; // {name: 'Ludovico', age: 33}
+```
+
+In questo caso, la ripetizione di `age` e `name` può essere omessa, come in questo caso:
+
+```javascript
+const user = { name, age }; // {name: 'Ludovico', age: 33}
+```
+
+Le sue sintassi sono equivalenti e producono lo stesso risultato. In generale se vogliamo inserire all'interno di un oggetto
+una proprietà che ha lo stesso nome e lo stesso valore di una variabile possiamo usare questa sintassi abbreviata.
+
+Ovviamente, possiamo mixare le due sintassi, come in questo caso:
+
+```javascript
+const user = { name, age, active: true }; // {name: 'Ludovico', age: 33, active: true}
+```
+
+## Destructuring
+
+Il _Destructuring_ è un'altra scorciatoia sintattica per creare variabili a partire dal contenuto di un oggetto o di un array
+in modo veloce, ed è un po' il contrario di quello visto su.
+
+Ad esempio, supponiamo di avere una tupla (leggi array) e di voler prendere i primi due elementi e assegnarli a due variabile:
+
+```javascript
+const myTuple = [33, "Ludovico"];
+const age = myTuple[0];
+const name = myTuple[1];
+```
+
+Possiamo abbreviare questa sintassi in questo modo:
+
+```javascript
+const [age, name] = myTuple;
+```
+
+Cosa succede se il numero di elementi dell'array è diverso da quello delle varibili che assegnamo? In caso abbiamo più variabili
+a sinistra che elementi dell'array a destra, le variabili in più avranno valore `undefined`. In caso contrario, i valori dell'array
+eccedenti vengono semplicemente ignorati.
+
+Possiamo anche combinare questa sintassi con lo _spread operator_:
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const [a, b, ...c] = arr; // a = 1, b = 2, c = [3, 4, 5]
+```
+
+In questo caso lo spread operator deve essere sempre l'ultimo elemento definito.
+
+La stessa sintassi può essere usata per gli oggetti:
+
+```javascript
+const user = { name: "Ludovico", age: 32 };
+const { name, age } = user;
+```
+
+Questa sintassi non deve necessariamente essere usata solo nell'assegnazione diretta, ma anche all'interno degli argomenti di funzione.
+Ad esempio, possiamo semplificare questo codice:
+
+```javascript
+function f(user) {
+  console.log(user.name, user.age);
+}
+
+const user = { name: "susan", active: true, age: 20 };
+f(user);
+```
+
+In questo modo:
+
+```javascript
+function f({ name, age }) {
+  console.log(name, age);
+}
+
+const user = { name: "susan", active: true, age: 20 };
+f(user);
+```
+
+In questo caso, la funzione `f()` accetta un oggetto come argomento, ma invece di prenderlo interamente,
+prende solo le sue proprietà `name` e `age` scartando il resto.
+
+Come nel caso degli array, se le proprietà che vogliamo estrapolare non è definita gli viene assegnato il valore `undefined`.
+
+Potete approfondire questa sintassi in [questo articolo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) della documentazione.
+
+## Classi
+
+Rispetto ai moderni linguaggi di programmazione, JavaScript non prevedeva il contetto di classe fino alla versione _ES6_.
+Non useremo molto le classi in JavaScript in generale, ma mi sembrava un'omissione troppo importante non accennarne nemmeno.
+
+Ecco un esempio di cose si possono definire le classi in JavaScript:
+
+```javascript
+class User {
+  // constructor (chiamato con `new User()`)
+  constructor(name, age, active) {
+    this.name = name;
+    this.age = age;
+    this.active = active;
+  }
+
+  // standard method
+  isActive() {
+    return this.active;
+  }
+
+  // async method
+  async read() {
+    const r = await fetch(`https://example.org/user/${this.name}`);
+    const data = await r.json();
+    return data;
+  }
+}
+
+const user = new User("Ludovico", 33, true);
+```
+
+Per saperne di più, vi rimando alla documentazione ufficiale di JavaScript: [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
+
+## Estensioni di JavaScript: JSX e Typescript
+
+Fino ad adesso abbiamo parlato di feature all'interno del linguaggio JavaScript, quello che in gergo viene chiamato _Vanilla Javascript_.
+In questa e nella prossima sezione, invece, approfondiremo delle features che non fanno parte dello standard ECMAScript, e nemmeno
+sono pensate per esserle.
+
+In entrambi i casi si parla di estensioni non standard del linguaggio, che possono essere usate solo tramite appositi _transpiler_ e che
+probabilmente non verranno mai nativamente integrati nei browser e negli interpreti ufficiali: stiamo parlando di _JSX_ e _TypeScript_.
+
+### JSX
+
+[JSX](https://facebook.github.io/jsx/) sta per _JavaScript XML_, è un linguaggio ideato da Facebook ed alla base di _React_
+per rendere più semplice ed immediato la creazione di contenuto inline nel codice JavaScript, pensato specialmente
+per integrare HTML dentro i nostri programmi.
+
+Per esempio, se vogliamo creare un paragrafo HTML (`<p>`) in Vanilla JavaScript, possiamo usare le DOM API per fare una cosa
+del genere:
+
+```javascript
+const paragraph = document.createElement("p");
+paragraph.innerText = "Hello, world!";
+```
+
+Ovviamente, il codice diventa molto complesso se vogliamo genstire interi documenti HTML.
+
+In JSX, invece, possiamo usare un linguaggio ibrido tra Vanilla JavaScript e HTML:
+
+```jsx
+const paragraph = <p>Hello, world!</p>;
+```
+
+Che come vedete è molto più semplice e conciso.
+
+Ecco un esempio di JSX più complesso:
+
+```jsx
+const myTable = (
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>Ludovico</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>Silvia</td>
+      <td>20</td>
+    </tr>
+  </table>
+);
+```
+
+Che può anche essere migliorato usando un array e la funzione `map()`:
+
+```jsx
+const users = [
+  {
+    name: "Ludovico",
+    age: 33,
+  },
+  {
+    name: "Silvia",
+    age: 20,
+  },
+];
+const myTable = (
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    {users.map((user) => (
+      <tr>
+        <td>{user.name}</td>
+        <td>{user.age}</td>
+      </tr>
+    ))}
+  </table>
+);
+```
+
+JSX è una componente chiave di React (e quindi di NextJS). E avremmo modo di approfondirlo all'interno dei prossimi capitoli.
+
+### TypeScript
+
+Come JSX, anche TypeScript è un'estensione di JavaScript, o meglio un _superset_ del linguaggio JavaScript inventato da
+Microsoft per migliorare la produttività degli sviluppatori.
+
+JavaScript è un linguaggio di programmazione senza tipi, cioè all'interno di una stessa variabile possiamo inserire
+diversi tipi di dati, come numeri, array, stringhe o interi oggetti.
+
+In JavaScript, un codice di questo tipo è valido:
+
+```javascript
+let myNum = 2;
+
+myNum = "hello";
+```
+
+Il problema principale è che questo tipo di funzionalità porta alla generazione di codice non matenibile e diventa
+problematico in progetti che crescono. Un altro problema di JavaScript è dovuto al fatto che la mancanza di tipi rende
+molto più difficile documentare il codice. Ad esempio, se abbiamo una funzione di questo tipo:
+
+```javascript
+function f(a, b) {
+  // codice
+}
+```
+
+Dobbiamo leggere il codice per capire:
+
+1. Che tipi di dati devono essere `a` e `b`;
+2. Che tipo di dati la funzione torna (o anche se ha o no un valore di ritorno);
+
+In generale è possibile estrapolare dal contesto (o tramite commenti) questo informazioni. Ma a lungo andare gli sviluppatori
+perdono molto più tempo a ricordarsi o cercare di capire queste informazioni piuttosto che scrivere del codice.
+
+L'idea di TypeScript è quella di creare un linguaggio che estende le funzionalità di JavaScript limitando quello che può fare
+lo sviluppatore ma rendendo il processo di sviluppo del software più robusto, semplice ed autodocumentato. Lo fa introducendo i
+tipi nel linaggio (o meglio le _type annotation_ alle variabili, che permettono di specificare il tipo di una variabile), insieme
+ad una serie di tool e analizzatori in fase di sviluppo che aiutano il programmatore a sviluppare.
+
+Ad esempio, in TypeScript, la funzione precedente può essere scritta cosi:
+
+```ts
+function f(a: number, b: number): number {
+  // codice
+}
+```
+
+In questo caso, lo sviluppatore vede subito che `a` e `b` sono dei numeri e che la funzione ritorna un numero. Inoltre,
+se provassimo a chiamare la funzione in questo modo:
+
+```ts
+f("ciao", 45);
+```
+
+Riceveremmo immediatamente un errore di sintassi che ci avverte di un problema. In JavaScript avremmo dovuto eseguire il
+programma per evitarlo.
+
+TypeScript introduce tantissime features interessanti sul linguaggio, che velocizzano tantissimo il processo di sviluppo.
+Il linguaggio è diventato tanto popolare che ormai la maggiorparte dei progetti JavaScript sono in realtà sviluppati in
+TypeScript, e la popolarità è talmente alta nella community che si sta iniziando a parlare di introdurre alcune funzionalità
+di TypeScript nel linguaggio principale.
+
+Sebbene non siamo obbligati ad usare TypeScript in Next e ReactJS, entrabi i progetti sono fortemente integrati
+con TypeScript ed il consiglio generare è di usare TypeScript dal primo momento. Per questo motivo ho deciso di
+sviluppare interamente questo tutorial in TypeScript, e avremmo tempo di approfondire il linguaggio nel corso
+dei prossimi capitoli.
+
+### TypeScript + JSX = TSX
+
+Ovviamente, entrambi le estenzioni possono essere usate insieme, in questo caso si parla di _TSX_. Eccone un esempio:
+
+```jsx
+interface User {
+  name: string;
+  age: number;
+}
+
+const users: User[] = [
+  {
+    name: "Ludovico",
+    age: 33,
+  },
+  {
+    name: "Silvia",
+    age: 20,
+  },
+];
+
+const myTable = (
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    {users.map((user) => (
+      <tr>
+        <td>{user.name}</td>
+        <td>{user.age}</td>
+      </tr>
+    ))}
+  </table>
+);
+```

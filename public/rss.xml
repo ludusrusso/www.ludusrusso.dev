@@ -4,11 +4,19 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Thu, 28 Apr 2022 12:14:42 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 03 May 2022 11:38:38 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
         <copyright>2016 - 2022 Ludovico Russo. All rights reserved.</copyright>
+        <item>
+            <title><![CDATA[Qual è il miglior linguaggio di programmazione con cui iniziare a programmare?]]></title>
+            <link>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</link>
+            <guid>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</guid>
+            <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Questa è una domanda che ormai mi sono sentito ripetere molte volte, ma non è facile rispondere]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
         <item>
             <title><![CDATA[Database Backup on GitHub using GitHub Action]]></title>
             <link>https://www.ludusrusso.dev/2022/04/database-backup-on-github-actions</link>
