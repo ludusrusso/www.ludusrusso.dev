@@ -132,6 +132,24 @@ Il progetto dentro VSCode dovrebbe apparirvi in questo modo:
 
 Non ci addentremo in tutti i file del progetto, ma vediamo insieme i più importanti.
 
+#### Il file `README.md`
+
+Tutti i progetti che si rispettano hanno un file di documentazione che
+informa e ricorda agli sviluppatori come gestire il programma. NextJS ci prepara
+un template di questo file con dei comandi base di come iniziare ad usare il progetto
+NextJS.
+
+È buona prassi aggiungere qualcosa a questo file in modo da rendere più chiaro
+a cosa si riferisce il progetto. Potete scriverci quello che volete, per il momento
+io aggiungo queste poche righe all'inizio del file di documentazione:
+
+```md
+## Pair repo for NextJS Mega Tutorial
+
+Questa è una semplice applicazione implementata con NextJS e contiene il progetto
+NextJS sviluppato durante il corso.
+```
+
 #### Il file `package.json`
 
 Il file `package.json` è il principale file di ogni progetto node, all'interno
@@ -375,3 +393,54 @@ Lanciando il progetto con `npm run dev` vedremo a nel browser
 la nuova pagina modificata.
 
 ![First Site 2](./first-site2.png)
+
+## Setup di una Repository GitHub
+
+Sviluppare non vuol dire soltando saper usare un linguaggio
+di programmazione, ma anche saper usare una serie di strumenti
+che ci permettono di gestire un progetto.
+
+Tra questi, sicuramente [git](https://git-scm.com/) è tra i più essenziali,
+in quanto è così tanto integrato all'interno dei tool di sviluppo
+che ormai uno sviluppatore professionale che non sa usare git è
+un'assurdità. Per questo motivo git sarà alla base di tutti i progetti
+che svilupperemo all'interno di questa serie, e per ogni progetto
+che andremo a sviluppare ci sarà un'equivalente repository git
+per gestire l'evoluzione del codice.
+
+Mi aspetto quindi che, se segui questa guita, ti occuperai non soltando
+di sviluppare del codice ma anche di gestirlo e deployarlo tramite
+git su GitHub, cosa che faremo insieme alla fine di ogni capitilo in cui
+scriveremo del codice.
+
+Inoltre, con l'avvento della fisolofia _devops_ e _gitops_, git e github diventeranno
+anche strumenti essenziali per deployare il nostro codice e rendere il sito
+disponibile su internet. In uno dei prossimi capitoli vedremo come fare, per il momento
+occupiamoci di creare una repository github dove deployare il progetto.
+
+Per prima cosa dobbiamo creare un account su GitHub se non lo abbiamo già.
+A questo punto, possiamo creare una repository all'interno del nostro account, nel
+mio caso si chiama `ludusrusso/next-js-megatutorial`.
+
+![Creazione Repo GitHub](./creazione-repo-github.png)
+
+Da notare che il comando `create-next-app` ci ha già creato un progetto
+git sul nostro terminale, quindi non dobbiamo inizializzare git ma solo aggiungere
+e committare le modifiche fatte:
+
+```bash
+$ git add .
+$ git commit -am "feat: update index.tsx"
+```
+
+Per finire, possiamo deployare il nostro progetto sulla repository.
+Addiungiamo la nuova origin git al progetto con il comando e pushamo il progetto
+online.
+
+```bash
+$ git remote add origin git@github.com:<nome del repo>.git
+$ git push origin main
+```
+
+[Qui](https://github.com/ludusrusso/next-js-megatutorial/tree/c1-v1.0.0) trovate lo stato
+del mio progetto alla fine di questo capitolo.
