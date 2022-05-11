@@ -85,7 +85,7 @@ const createCourseChapterData = async (file: string) => {
 const replacePath = (file: string, p: string) => {
   return path.join(
     "/",
-    file.replace(process.cwd() + "../content/courses", "/courses"),
+    file.replace(process.cwd() + "/content/courses", "/courses"),
     "..",
     p
   );
@@ -115,9 +115,9 @@ async function getCourseChaptersFiles(cpath: string) {
   });
 }
 
-async function copyBooksImages() {
-  const src = path.resolve(__dirname, "content/books");
-  const dst = path.resolve(__dirname, "public/books");
+async function copyCoursesImages() {
+  const src = path.resolve(__dirname, "../content/courses");
+  const dst = path.resolve(__dirname, "../public/courses");
   try {
     await fs.rm(dst, { recursive: true });
   } catch {}
@@ -154,7 +154,7 @@ function readingTime(text: string) {
 
 async function build() {
   const data = await getCourseData();
-  await copyBooksImages();
+  await copyCoursesImages();
 
   await fs.writeFile(
     __dirname + "/../data/courses.ts",
