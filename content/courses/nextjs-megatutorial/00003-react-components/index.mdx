@@ -1,6 +1,101 @@
 ---
-title: React Components
-description: Iniziamo a usare React e NextJS creando un semplice progetto
+title: Introduzione ai React Components
+description: Come funzionano i React Components e come possiamo usarli per costrire la nostra applicazione
 published: false
-slug: primi-passi-con-nextjs
+slug: react-components
 ---
+
+Il cuore di ogni progetto NextJS è React, ed il cuore di ogni progetto React sono i _React Components_.
+Per capire meglio come muoverci all'interno dello sviluppo di un sito NextJS (o comunque di un'app React in generale)
+dobbiamo sapere come funzionano e come possiamo usare i _React Compoents_. Questo capito è dedicato
+a questo.
+
+L'idea di _React_ è semplice. Invece di scrivere il nostro codice HTML interamente come un unico documento, possiamo
+dividerlo in semplici componenti (i component appunto) che possono poi essere composti per
+creare la nostra applicazione finale. In generale un component in React è una parte di UI (con le sue interazioni)
+che può essere creato a partire da altri componenti (creati da noi o componenti HTML base come `<div>` e `<p>`).
+
+React permette di definire un component in due modi. Utilizzando un **Class Component** (che modella il component)
+come una classe, o utilizzando un **Fuctional Component**, che lo modella come una funzione.
+
+I Class Component sono il modo originale che React usava per modellare i componenti. Attualmente il loro utilizzo è molto
+limitato in quanto **Fuctional Component** sono molto più semplici da implementare ed utilizzare. In questa serie
+useremo solamente i functional component.
+
+Per definire un component, quindi, basta creare una funzione che ritorna del codice `HTML` o meglio `jsx`, come in questo caso:
+
+```tsx
+const MyComponent = () => {
+  return <h1> Ciao </h1>;
+};
+```
+
+Possiamo poi usare il nostro component da qualche altra parte in questo modo
+
+```tsx
+<MyComponent />
+```
+
+I component possono ricevere in ingresso un oggetto, chiamato `Props`, che contiene delle variabili
+che possono essere usate per renderizzare il componente stesso, ad esempio in questo modo:
+
+```tsx
+interface MyComponentProps {
+  name: string;
+}
+
+const MyComponent = ({ name }: MyComponentProps) => {
+  return <h1> Ciao, {name}! </h1>;
+};
+
+<MyComponent name="Ludovico" />;
+// Render: <h1> Ciao, Ludovico! </h1>
+```
+
+In questo caso abbiamo usato una interfaccia `typescript`, che è il modo in typescript per definire
+il tipo di un oggetto. Facendo così il compilatore ci informerà, anche in fase di rendering, che
+dobbiamo passare come props al component la variabile `name` che è di tipo stringa.
+
+La definizione precedente può essere abbreviata come segue:
+
+```tsx
+const MyComponent = ({ name }: { name: string }) => {
+  return <h1> Ciao, {name}! </h1>;
+};
+
+<MyComponent name="Ludovico" />;
+// Render: <h1> Ciao, Ludovico! </h1>
+```
+
+Ma per componenti con tante proprietà consiglio di usare il formato più esplicito, in quanto più semplice da leggere.
+
+In react, i componenti possono avere una proprietà particolare chiamata children, che deve essere di tipo `ReactElement`.
+All'interno della props `children` troveremo il contenuto `jsx` passato come figlio al componente in fase di utilizzo, come
+in questo esempio.
+
+```tsx
+interface MyComponentProps {
+  name: string;
+  children: ReactElement;
+}
+
+const MyComponent = ({ name, children }: MyComponentProps) => {
+  return (
+    <div>
+      <h1> Ciao, {name}! </h1>
+      <div> {children} </div>
+    </div>
+  );
+};
+
+<MyComponent name="Ludovico">
+  <h2> Sono un componente figlio </h2>
+</MyComponent>;
+// Render:
+// <div>
+//   <h1> Ciao, Ludovico! </h1>
+//   <div> <h2> Sono un componente figlio </h2> </div>
+// </div>
+```
+
+## Iniziamo ad usare i components
