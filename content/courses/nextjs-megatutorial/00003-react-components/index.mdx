@@ -375,7 +375,7 @@ questo codice.
 Ad esempio, se volessimo stampare sulla console del browser il valore di `value` ogni volta che questo cambia,
 possiamo aggiungere il seguente codice al nostro progetto:
 
-```tsx
+```diff
 - import { useState } from "react";
 + import { useEffect, useState } from "react";
 
@@ -616,11 +616,53 @@ Ed ecco il risultato:
 
 ![Lista di post](./posts.png)
 
+## Organizzare i componenti in differenti file
+
+Per il momento abbiamo scritto del codice molto disordinato, inserendo tutte le definizioni di componenti all'interno dello stesso file.
+Spesso è una cosa utile e veloce da fare, ma in caso di componenti da usare in più punti (e diverse pagine) della nostra applicazione
+dobbiamo pensare ad un modo per strutturare il progetto in modo più organizzato.
+
+Il modo suggerito da NextJS, nonchè quello che io seguo principalmente, è quello di creare una cartella `components/` dentro il
+quale definire un file per ognuno di questi componenti. Alcune programmatori sono molto seri nell'applicare questo principio, mentre io
+proferisco essere più pigro e spostare i componenti all'interno di questa cartella solo quando so che mi serviranno in più di una pagina.
+
+In generale, cerchiamo di tenere all'interno di questa cartella un componente per ogni file che definiamo.
+
+Quindi, come possiamo migliorare l'organizzazione del codice? Per il momento siamo sicuri solo che i nostri componenti `Nav` e `Footer`
+saranno usati più o meno da tutte le parti della nostra applicazione, quindi possiamo spostarli in file separati, rispettivamente in
+`components/nav.tsx` e `components/footer.tsx`.
+
+```tsx
+// components/nav.tsx
+export const Nav = () => {
+  return <nav>React Megaturial Navigation</nav>;
+};
+```
+
+```tsx
+// components/footer.tsx
+export const Footer = () => {
+  return <footer>React Megaturial; all right reserverd</footer>;
+};
+```
+
+A questo punto, ricordiamo di importarli nella nostra pagina per poterli utilizzare:
+
+```diff
+// pages/experiments.tsx
+import { useEffect, useState } from "react";
++ import { Footer } from "../components/footer";
++ import { Nav } from "../components/nav";
+
+// ...
+```
+
 ## Cosa abbiamo imparato?
 
-- Cosa sono i Componet React e come possono essere utilizzati
-- Come scomporre l'applicazione in diversi componenti indipendenti
-- Come usare manipolare lo stato dentro un componente tramite gli Hook `useState` e `useEffect`
-- Come usare le props di un componente per renderizzare dati diversi
+- Cosa sono i Componet React e come possono essere utilizzati;
+- Come scomporre l'applicazione in diversi componenti indipendenti;
+- Come usare manipolare lo stato dentro un componente tramite gli Hook `useState` e `useEffect`;
+- Come usare le props di un componente per renderizzare dati diversi;
+- Come organizzare i componenti riutilizzabili in file diversi;
 
-Il codice di questo capitolo lo [trovate su github](https://github.com/ludusrusso/next-js-megatutorial/tree/c2-v1.0.0).
+Il codice di questo capitolo lo [trovate su github](https://github.com/ludusrusso/next-js-megatutorial/tree/c2).

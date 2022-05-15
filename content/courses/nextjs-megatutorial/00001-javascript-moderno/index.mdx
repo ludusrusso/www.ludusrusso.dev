@@ -114,7 +114,7 @@ Ci sono due vantaggi ad usare questa sintassi:
 1. Possiamo spostare tutti gli elementi senza preoccuparti di rompere la sintassi,
 2. Quando dobbiamo aggiungere un nuovo elemento alla fine, lo possiamo fare senza preoccuparci di aggiungere la virgola all'elemento precedente.
 
-## Import ed export
+### Import ed export
 
 Se sei abituato a scrivere applicazioni _old-style_ in JavaScript per il browser, probabilmente
 non hai mai abuto bisogno di importare o esportare codice javascript. Potevi semplicemente
@@ -219,7 +219,7 @@ Se volete saperne di più, vi suggerisco di leggere le sezioni
 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) ed
 [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) della documentazione di JavaScript.
 
-## Variabili
+### Variabili
 
 Ogni linguaggio di programmazione ha alla base il concetto di variabile, cioè simboli all'interno dei
 quali vengono salvate dei valori.
@@ -286,7 +286,7 @@ myArr = [1, 2]; // errore
 
 Per maggiori informazioni potete consultare la documentazione di JavaScript per [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) e [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const).
 
-## Comparazioni in JavaScript
+### Comparazioni in JavaScript
 
 Anche in questo caso, le versioni vecchie di JavaScript erano un casino per quanto riguarda le istruzioni di comparazione,
 e con _ES6_ si è riusciti (finalmente) a mettere un po' di ordine.
@@ -315,7 +315,7 @@ nel nostro editor di testo che ci avvertenga quando usiamo `==` e `!=`.
 
 Per ulteriori dettagli, consultate la documentazione di JavaScript per gli operatori [`===`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) e [`!==`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_inequality).
 
-## Interpolazione di Stringhe
+### Interpolazione di Stringhe
 
 Quando dobbiamo costruire una string a partire dal valore contenuto in una variabile,
 possiamo usare un'utilizza funzione di _ES6_ chiamata _template literals_.
@@ -338,7 +338,7 @@ solitamente usiamo. Sul mac (che uso io), si ottiene premente i tast `option + 9
 
 Trovate più info sui _template literals_ sulla [doc apposita](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
-## Cicli for
+### Cicli for
 
 In JavaScript, è possibile definire un ciclo for in modo simile agli altri linguaggi, usando la sintassi
 
@@ -378,7 +378,7 @@ for (let id in names) {
 // [2]: Ciao, Carlo!
 ```
 
-## Arrow function
+### Arrow function
 
 _ES6_ introduce una seconda per definire le funzioni, chiamate _arrow function_ o _fat arrow functions_.
 
@@ -450,7 +450,7 @@ const doubleNums = nums.map((n) => n * 2);
 
 Per approfondire eccola la documentazione delle [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).
 
-## Promise
+### Promise
 
 In JavaScript, quasi tutte le operazioni che coinvolgono la comunicazione con qualcosa di esterno al programma (una chiamata network,
 accesso al filesystem, ecc) sono asincrone. Il termine vuol dire che il programma non viene bloccato mentre
@@ -507,7 +507,7 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
 Le promise mettono a disposizione anche altri metodi per gestirle ed eseguirne più di una contemporaneamente.
 Per maggiori informazioni vi lascio [alla documentazione](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
-## `async` e `await`
+### `async` e `await`
 
 Le _promise_ offrono un'ottima astrazione per gestire le operazioni asincrone all'interno del codice JavaScript, ma
 il loro uso massiccio, specialmente in casi di una lunga catena di promises all'interno di varie chiamate del metodo `then()`,
@@ -565,7 +565,7 @@ const g = async () => {
 La sezione [async and await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises#async_and_await)
 della documentazioen di JavaScript è un buon punto di partenza se si vuole approfondire.
 
-## Spread Operator
+### Spread Operator
 
 Lo _spread operator_ `...` permette di espandere un array of un oggetto ed estrapolarne i suoi elementi.
 È difficile spiegare come funziona lato teorico, ma viene molto facile capirlo partendo da degli esempio.
@@ -619,7 +619,7 @@ occorrenza della collisione (in questo caso `age:33` vince su `age:32` in quanto
 
 Come al solito vi consiglio di dare un'occhiata alla [documentazione ufficiale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) per approfondire.
 
-## Proprietà di oggetti: scorciatoie
+### Proprietà di oggetti: scorciatoie
 
 In modo simile agli spread operator, JavaScript ci mette a disposizione delle scorciatoie per definire velocemente
 degli oggetti. Consideriamo ad esempio il seguente codice:
@@ -645,7 +645,7 @@ Ovviamente, possiamo mixare le due sintassi, come in questo caso:
 const user = { name, age, active: true }; // {name: 'Ludovico', age: 33, active: true}
 ```
 
-## Destructuring
+### Destructuring
 
 Il _Destructuring_ è un'altra scorciatoia sintattica per creare variabili a partire dal contenuto di un oggetto o di un array
 in modo veloce, ed è un po' il contrario di quello visto su.
@@ -714,7 +714,7 @@ Come nel caso degli array, se le proprietà che vogliamo estrapolare non è defi
 
 Potete approfondire questa sintassi in [questo articolo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) della documentazione.
 
-## Classi
+### Classi
 
 Rispetto ai moderni linguaggi di programmazione, JavaScript non prevedeva il contetto di classe fino alla versione _ES6_.
 Non useremo molto le classi in JavaScript in generale, ma mi sembrava un'omissione troppo importante non accennarne nemmeno.
@@ -936,3 +936,8 @@ const myTable = (
   </table>
 );
 ```
+
+## Cosa abbiamo imparato?
+
+In questo capitolo abbiamo visto insieme alcune funzionalità di JavaScript insieme a due estensioni del linguaggio: JSX e TypeScript.
+Il prossimo capitolo sarà dedicato alla creazione del primo progetto NextJS.
