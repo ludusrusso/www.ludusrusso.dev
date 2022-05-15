@@ -19,6 +19,7 @@ import { Mailchimp } from "components/mailchimp";
 import dynamic from "next/dynamic";
 // @ts-ignore
 import prism from "@mapbox/rehype-prism";
+import { TrackerApp } from "components/apps/tracker";
 
 const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
   ssr: false,
@@ -46,6 +47,7 @@ export default function PathPage({
       <YouTube className="w-full aspect-video" videoId={videoId} />
     ),
     pre: (props: any) => <pre {...props} className="no-prose" />,
+    TrackerApp: TrackerApp,
   };
 
   return (
