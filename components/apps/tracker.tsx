@@ -6,9 +6,7 @@ import { useReactToPrint } from "react-to-print";
 export const TrackerApp = () => {
   return (
     <>
-      <div className="m-10">
-        <TrackerForm />
-      </div>
+      <TrackerForm />
     </>
   );
 };
@@ -105,7 +103,7 @@ const TrackerForm = () => {
       <Form<FormData>
         onSubmit={handlePrint}
         initialValues={{}}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, invalid }) => (
           <form
             onSubmit={handleSubmit}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -145,7 +143,10 @@ const TrackerForm = () => {
             <FormSpy
               render={({ values, valid }) => {
                 if (!valid || !values?.name || !values?.habitsList) {
-                  return null;
+                  values = {
+                    name: "",
+                    habitsList: "",
+                  };
                 }
                 const h = {
                   name: values?.name,
@@ -165,7 +166,8 @@ const TrackerForm = () => {
 
             <button
               type="submit"
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              disabled={invalid}
+              className="mt-4 bg-blue-500 hover:bg-blue-700 disabled:bg-blue-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Stampa il tuo Tracker
             </button>
