@@ -4,3 +4,107 @@ description: Lo stile dei componenti è un'attività essenziale ma molto comples
 published: false
 slug: component-styling
 ---
+
+Nei capitoli precedenti abbiamo iniziato a muoverci all'intenro del progetto NextJS e iniato a creare pagine e
+componenti sfruttando la libreria ReactJS, su cui NextJS si basa.
+
+Prima di iniziare a lavorare veramente su un progetto, ci manca un punto fondamentale: come stilizziamo i nostri componenti?
+
+Purtroppo su questo tema entriamo in una giungla di soluzioni e tecnologie diverse, in quanto attualmente all'interno della
+community ReactJS, non si è trovata una tecnologia (o un gruppo di tecnologie) abbastanza orizzontale sui vari proggetti, invece
+esistono diversi approcci (anche moldi diversi tra loro) e diverse preferenze tra gli sviluppatori.
+
+Lo stile in HTML si basa sull'utilizzo della tecnologia CSS. L'idea di base di HTML e CSS è quella di definire separatamente
+il contenuto di un documento (HTML) dal modo in cui viene visualizzato (CSS). Sebbena questa idea in teoria sia molto valida,
+nella pratica ci si rende subito conto che non è tanto semplice da portare avanti. Anche in caso di organizzazione perfetta
+del nostro HTML, ci troveremo comunque a doverne modificare l'organizzazione in base ad esigenze di stile e viceversa.
+
+Per questo motivo, si è visto che l'approccio standard di definire CSS e HTML in posti e file diversi tra loro semplicemente
+non funziona, e in progetti grandi (ma anche medi) porta a codice difficile da mantenere e capirne il funzionamento?
+
+Come fare quindi? In React esistono tante soluzioni diverse per risolvere questo problema, proviamo a classificarle:
+
+#### Standard CSS e HTML
+
+Standard CSS e HTML. Questo è l'approccio base, che abbiamo visto che non funziona molto bene. Ovviamente però React lo supporta e
+nel progetto NextJS che abbiamo creato è la soluzione standard. Ha il vantaggio di non richiedere tool e dipendenze aggiuntive,
+ed essendo nativo è anche molto efficace. Purtroppo porta a codice che diventa difficile da mantenere in poco tempo.
+
+#### React Style Props
+
+Questo è un secondo approccio nativo React, che di fatto ci permette di aggiungere una props `style`
+ai nostri componenti. Questa props viene interpretata dal browser e viene utilizzata per definire il CSS. Sebbene sia nativo e semplice
+da usare, ha comunque il problema che dobbiamo passare un oggetto cone le proprietà CSS che vogliamo settare, e
+in generale la development experimence non è molto semplice.
+
+```tsx
+const MyComponent = () => (
+  <div
+    styles={{
+      backgroundColor: "red",
+      color: "white",
+      fontSize: "1.5em",
+    }}
+  >
+    Hello World
+  </div>
+);
+```
+
+#### Librerie grafiche
+
+Sono delle librerie React che mettono a disposizione di noi sviluppatori dei componenti stilizzati che possiamo usare
+per creare componenti. Tra le più famose ci sono [Material UI](https://mui.com/) e [React Bootstra](https://react-bootstrap.github.io/).
+Sono solitamente librerie molto semplici da usare per creare interfacce grafiche base, ma diventano complesse quando si vuole
+fare qualcosa che va oltre quello che gli sviluppatori della libreria hanno pensato. In generale le evito in quanto, essendo
+abbastanza mainstream, rendono le nostre applicazioni abbastanza monotone ed in generale troppo simili ad altre applicazioni
+sparse per il web.
+
+#### CSS in JS
+
+Questa tecnologia consiste nell'usare CSS nativamente ma all'interno del codice HTML. Questo approccio è molto potente
+e semplice da usare, in quanto ci permette di scrivere nativamente stili in CSS ma di metterlo il più vicino possibile al posto dove lo
+stiamo utilizzando. Possiamo creare, nel pratico, dei componenti React con lo stile incorporato, come nel seguente esempio:
+
+```tsx
+const StyledDiv = styled.div`
+  heigth: 100px;
+  width: 200px;
+  background-color: red;
+`;
+```
+
+Tra le librerie più famose che ci permettono di scrivere CSS in JS troviamo [emotions](https://emotion.sh/) e [styled components](https://www.styled-components.com/).
+
+#### Utility CSS
+
+Utility CSS. In questo caso l'idea è molto semplice: quella di creare una serie di classi CSS che non contengono informazioni
+semantiche (ad esempio `.card` o `.btn`) ma informazioni puramente relative allo stile che stanno per applicare (`text-red-400`, `bg-white` etc.).
+Il vantaggio di questo tipo di approccio è di nuovo quello di avere una serie di piccole classi che possono essere sfruttate
+per costruire lo stile dell'HTML nello stesso posto dove definiamo l'HTML stesso. Tra le tecnologie più famose e promettenti
+su questo tema troviamo [`tailwindcss`](https://tailwindcss.com/), che neglio ultimi anni si è distinta tantissmo grazie
+non solo alla libreria in se ma ad una serie di tool e strumenti che migliorano notevolmente la nostra development experience.
+
+Quindi esistono tantissime tecnologie, quale possiamo usare? Non ho una risposto a questa domanda, perchè come ho detto ci sono tantissimi
+pareri diversi tra gli sviluppatori ed una tecnologia che piace a me può non piacere a qualcun'altro, o viceversa.
+
+Vi esorto quindi ad esplorarli tutti e cercare di decidere in autonomia cosa è meglio per voi,
+una conoscenza di tutti gli aprocci sarebbe ideale, ma ovviamente dobbiamo fare una scelta per questa guida, e dopo
+averci pensato un po' credo che la cosa migliore sia continuare con l'approccio che conosco meglio, perchè permetterà
+a questo corso di essere il più completo possibile e non dirò (troppe) castronerie 😜!
+
+Personalmente, nei miei progetti uso un mix di TailwindUI (quindi una libreria di utility CSS) e Styled component (CSS in JS).
+Credo che tailwind sia veramente ottima e semplice da usare, ma ha dei limiti, specialmente per quanto riguarda
+la creazione di layout complessi, che invece sono facilmente compensabili con un po' di CSS in JS. In questo capito, ed in generale
+nei prossimi, useremo principalmente TailindUI e un po' di CSS in JS con [emotions css](https://emotion.sh/docs/introduction) quando diventa troppo complesso usare Tailwind.
+
+### Come trarre al meglio da questa guida?
+
+A differenza della parte di scrittura del codice, dove è abbastanza semplice spiegare il perchè di certe scelte
+sintattiche, la creazione e la definizione di stili grafice è un processo che richiede molto più feedback, trial and error ed
+interazione con l'applicazione. In questo capitolo sarà molto difficile per me spiegare il perchè di alcune scelte
+o da dove viene fuori un certo codice, e non credo sia possibile per me essere più specifico di quanto ho fatto.
+
+Per trarre meglio da questo capitolo suggerisco di approfondire guarda la versione video dello stesso, ed in generale vi metterò
+alla fine del capitolo una serie di risorse utilissime per capire ed imparare l'approccio che dobbiamo avere nello
+stilizzare un componente.
