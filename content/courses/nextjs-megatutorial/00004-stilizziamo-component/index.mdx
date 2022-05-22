@@ -108,3 +108,97 @@ o da dove viene fuori un certo codice, e non credo sia possibile per me essere p
 Per trarre meglio da questo capitolo suggerisco di approfondire guarda la versione video dello stesso, ed in generale vi metterò
 alla fine del capitolo una serie di risorse utilissime per capire ed imparare l'approccio che dobbiamo avere nello
 stilizzare un componente.
+
+## Stilizziamo i componenti con emotions
+
+Partiamo subito con la libreria di css-in-js chiamata [emotions](https://emotion.sh/docs/introduction) ed iniziamo a stilizzare la nostra navbar.
+Per farlo, per prima cosa dobbiamo installare la libreria, dato che, come abbiamo detto, vogliamo utilizzare gli styled components, dovremmo
+installare due pacchetti: `@emotion/styled` e `@emotion/react`:
+
+```bash
+$ npm i @emotion/styled @emotion/react
+
+added 72 packages, and audited 302 packages in 20s
+
+71 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+Con questa libreria andremo a stilizzare la navbar della nostra applicazione, cioè il file che abbiamo chiamato `components/nav.tsx`, di cui
+riporto il contenuto attuale.
+
+```tsx
+export const Nav = () => {
+  return <nav>React Megaturial Navigation</nav>;
+};
+```
+
+La navbar dovrà contenere una lista di link posizionati in vertiale, insieme ad un titolo della nostra appliazioche che ci rimanda
+alla home del sito. Per finire, vogliamo che in modalità mobile la navbar collassi a solo il titolo insieme ad un pulsante che apre un menu.
+
+In fase di design, applicare uno stile di sviluppo chiamato **mobile first**, dove l'idea di base è quella di creare per prima cosa
+il layout per cellulari (mobile appunto), e poi estenderlo alla visualizzazione desktop. Partiamo quindi a stilizzare la navbar
+collassato con solo il menu e il titolo.
+
+Partiamo prima di tutto dal contenuto. Il nostro componente `<nav>` dovrà contenere un `<div>` con all'interno due componenti,
+il titolo ed un bottono:
+
+```tsx
+export const Nav = () => {
+  return (
+    <nav>
+      <div>
+        <span>RMT</span>
+        <button> menu </button>
+      </div>
+    </nav>
+  );
+};
+```
+
+Siamo pronti quindi a stilizzare il componente.
+
+La cosa che faccio di solito è creare un componente interno dove inserire lo style utilizzando `@emotions/styled`. Dato che il momponente
+princiaple della nostra navbar è l'oggetto html `<nav>`, partirò da questo per generare l'oggetto stilizzato.
+
+```tsx
+import styled from "@emotion/styled";
+
+export const Nav = () => {
+  return (
+    <NavStyled>
+      <div>
+        <span>RMT</span>
+        <button> menu </button>
+      </div>
+    </NavStyled>
+  );
+};
+
+const NavStyled = styled.nav`
+  height: 60px;
+  background-color: #ccc;
+  color: white;
+`;
+```
+
+Come vedete il componente `NavStyled` non è altro che un classico componente `<nav>` HTML a cui abbiamo _appiccicato_ dello style
+con styled componente. Per farlo abbiamo importato la libreriea `styled` da `@emtion/styled` e abbiamo
+usato una speciale sintassi in JavaScript chiamata [**tag functions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals?retiredLocale=it#tagged_templates) (o **tagged templates**),
+che non sono altro che delle speciali funzioni seguite da un template literal.
+
+`@emotion/styled` è molto potente in quello che ci permette di fare, ed in generare è possibile creare styled component
+anche a partire da componenti custom React, con una sintassi di questo tipo:
+
+```tsx
+const MyCompoent = () => <div></div>;
+
+const MyComponentStyled = styled(MyCompoent)`
+  background-color: #ccc;
+`;
+```
+
+ma non mi voglio addentrare in questi dettagli. In questa guida useremo soltanto la sintassi che abbiamo visto con i componenti
+nativi HTML.
