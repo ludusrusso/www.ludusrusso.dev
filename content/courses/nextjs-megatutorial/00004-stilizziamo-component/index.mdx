@@ -85,6 +85,8 @@ per costruire lo stile dell'HTML nello stesso posto dove definiamo l'HTML stesso
 su questo tema troviamo [`tailwindcss`](https://tailwindcss.com/), che neglio ultimi anni si è distinta tantissmo grazie
 non solo alla libreria in se ma ad una serie di tool e strumenti che migliorano notevolmente la nostra development experience.
 
+#### Quali usare?
+
 Quindi esistono tantissime tecnologie, quale possiamo usare? Non ho una risposto a questa domanda, perchè come ho detto ci sono tantissimi
 pareri diversi tra gli sviluppatori ed una tecnologia che piace a me può non piacere a qualcun'altro, o viceversa.
 
@@ -93,7 +95,11 @@ una conoscenza di tutti gli aprocci sarebbe ideale, ma ovviamente dobbiamo fare 
 averci pensato un po' credo che la cosa migliore sia continuare con l'approccio che conosco meglio, perchè permetterà
 a questo corso di essere il più completo possibile e non dirò (troppe) castronerie 😜!
 
-Personalmente, nei miei progetti uso un mix di TailwindUI (quindi una libreria di utility CSS) e Styled component (CSS in JS).
+Personalmente, nei miei progetti uso un mix di TailwindUI (quindi una libreria di utility CSS), Styled component (CSS in JS) insieme
+alla libreria [headlessui](https://headlessui.dev/). Quest'ultima è un progetto degli stessi autori ci tailwind
+che mette a disposizione una serie di componenti React base per interazioni standard (select, menu, etc), ma con nessuna
+imposizione di stile. L'utilizzo di questa libreria in combo con tailwincss o styled component è quindi molto vantaggiosa.
+
 Credo che tailwind sia veramente ottima e semplice da usare, ma ha dei limiti, specialmente per quanto riguarda
 la creazione di layout complessi, che invece sono facilmente compensabili con un po' di CSS in JS. In questo capito, ed in generale
 nei prossimi, useremo principalmente TailindUI e un po' di CSS in JS con [emotions css](https://emotion.sh/docs/introduction) quando diventa troppo complesso usare Tailwind.
@@ -108,6 +114,138 @@ o da dove viene fuori un certo codice, e non credo sia possibile per me essere p
 Per trarre meglio da questo capitolo suggerisco di approfondire guarda la versione video dello stesso, ed in generale vi metterò
 alla fine del capitolo una serie di risorse utilissime per capire ed imparare l'approccio che dobbiamo avere nello
 stilizzare un componente.
+
+## Stilizziamo i componenti con TailwindCSS
+
+Partiamo quindi subito con Tailwind e vediamo come possiamo usarla per stilizzare i componenti. Per installare e abilitare tailwind
+dobbiamo fare un po' di cose sul nostro progetto. Fortunatamente, tailwind è ben documentato e ci viene in auto una guida
+per [inizializzare tailwind dentro un progetto NextJS](https://tailwindcss.com/docs/guides/nextjs).
+
+### Installazione e configurazione di Tailwind
+
+Installiamo quindi le dipendenze:
+
+```bash
+$ npm install -D tailwindcss postcss autoprefixer
+
+added 33 packages, changed 1 package, and audited 335 packages in 2s
+
+79 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+E inizializziamo tailwind con il comando:
+
+```bash
+$ npx tailwindcss init -p
+
+Created Tailwind CSS config file: tailwind.config.js
+Created PostCSS config file: postcss.config.js
+```
+
+Quest'ultimo comando ci ha creato due file importanti, il primo è `postcss.config.js`, una dipendenza di tailwind
+che a noi non interessa troppo. Sappiate che esiste e che senza questo tailwind non potrebbe funzionare.
+
+Il secondo è il file di configurazione di tailwind: `tailwind.config.js`, al cui interno possiamo inserire tutte
+le personalizzazioni al progetto che vogliamo.
+
+```js
+// tailwind.config.js
+
+module.exports = {
+  content: [],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Dentro questo file dobbiamo dire a tailwind in quali file ci aspettiamo di usare le classi che tailwind ci mette a disposizione.
+Questo è essenziale per il funzionamento di tailwind, perchè il server tailwind monitorerà tutti i file che inseriamo qui dentro
+e genererà il codice CSS in base alle classi che vogliamo usare. Quest'idea di tailwind ha un duplice vantaggio:
+
+1. non creare codice CSS per utility class che non stiamo usando. Questo è imporntate perchè tailwind mette a disposizione
+   tantissime permutazioni di classi (vedremo dopo come), e generarle tutto creerebbe file css pesantissimi che renderebbero molto
+   lento il nostro progetto.
+2. ci permette di utilizzare classi non previste (custom) con una sintassi particolare e generare al volo codice css per queste classi.
+
+Dobbiamo quindi modificare questo file come segue:
+
+```diff
+// tailwind.config.js
+
+module.exports = {
+- content: [],
++ content: [
++   "./pages/**/*.{js,ts,jsx,tsx}",
++   "./pages/**/*.{js,ts,jsx,tsx}",
++ ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Come vedete così facendo diciamo a tailwind di monitorare tutti i file `.js`, `.ts`, `.jsx` e `.tsx` che ci troviamo dentro
+le cartelle `/pages` e `/components`. Se strutturate il vostro progetto in modo diverso da questo non è un problema, ma ricordatevi
+di modificare questo file altrimeti potreste avere problemi con il funzionamento di tailwind.
+
+A questo punto dobbiamo creare un file chiamato `./styles/globals.css` in cui andiamo a creare le definizioni di stili globali di tailwind.
+
+Da notare che NextJS ci ha già creato questo file, con all'interno una serie di stili di default.
+Possiamo cancellare tutto e, sempre d'accordo con la guida di tailwind,
+andremo a mettere 3 direttive (attenzione all'ordine che è importante):
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Queste utility non sono css standard, vengono parsate da tailwind per creare poi il vero file css.
+
+Dato che ci siamo, cancelliamo il file `Home.module.css` che nextjs ci ha gentilmente creato che adesso non ci servirà più.
+
+### Hello Tailwind
+
+A questo punto siamo pronti a lanciare il progetto. Ma prima possiamo iniziare a lavorare sulla pagina iniziale `./index.tsx`.
+Possiamo rimuovere tutto il contenuto della pagina e sostituirlo con quello che segue:
+
+```tsx
+const Home = () => {
+  return (
+    <div className="h-screen w-screen bg-red-300">
+      <h1 className="text-red-800 text-xl text-center">Hello tailwind</h1>
+    </div>
+  );
+};
+
+export default Home;
+```
+
+Lanciando il server, a questo punto, dovremmo vedere una pagina rossa con la scritta `Hello tailwind` anch'essa rossa.
+
+![Hello Tailwind](./hello-tailwind.png)
+
+<InfoBox>
+
+Tailwind non è solamente un sistema di utility classes molto versatile. La sua popolarità è dovuta anche tantissimo
+ad una serie di progetti che rendono fenomenale la developer experience. Per utilizzarlo al meglio, vi suggerisco di
+installare il pacchetto VSCode [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+che vi permette di esplorare le classi di tailwind in una forma più semplice.
+
+</InfoBox>
+
+Ma cosa abbiamo fatto? Nella nostra pagina abbiamo creato un container div con altezza (`h-screen`) e larghezza (`w-screen`)
+settate alle dimensioni dello schermo, e colore di background a _red-300_ (`bg-red-300`). All'interno di questo
+componente abbiamo creato un titolo (`h1`) con il testo `Hello tailwind`, colore di testo _ted-800_ (`text-red-800`), centrato (`text-center`)
+e di dimensioni _xl_ (`text-xl`). Tailwind mette a disposizione tantissime classi e tantissime gradazioni di colori, ci vuole
+un attiamo per prendere familiarità con tutto (noi vederemo piano piano le utility che ci mette a disposizione).
+Se volete avere più info su Tailwind, visitate il sito [tailwindcss.com](https://tailwindcss.com/) e la [documentazione](https://tailwindcss.com/docs/utility-first/).
 
 ## Stilizziamo i componenti con emotions
 
@@ -189,6 +327,7 @@ con styled componente. Per farlo abbiamo importato la libreriea `styled` da `@em
 usato una speciale sintassi in JavaScript chiamata [**tag functions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals?retiredLocale=it#tagged_templates) (o **tagged templates**),
 che non sono altro che delle speciali funzioni seguite da un template literal.
 
+<InfoBox>
 `@emotion/styled` è molto potente in quello che ci permette di fare, ed in generare è possibile creare styled component
 anche a partire da componenti custom React, con una sintassi di questo tipo:
 
@@ -202,3 +341,19 @@ const MyComponentStyled = styled(MyCompoent)`
 
 ma non mi voglio addentrare in questi dettagli. In questa guida useremo soltanto la sintassi che abbiamo visto con i componenti
 nativi HTML.
+
+</InfoBox>
+
+Ora che abbiamo la base del nostro componente possiamo lanciare il server `npm run dev` e accedere al solito link `http://localhost:3000/experiments`
+per vedere il risultato.
+
+![Nav 1](./nav1.png)
+
+Il risultato è un po' bruttino, ma almeno abbiamo un componente che può essere stilizzato.
+
+<InfoBox>
+Siccome stiamo lavorando in mobile mode, conviene mettere il browser in visualizzazione mobile per avere una view simile a quella di un telefono.
+Per farlo basta aprire l'inspector del browser e cliccare sull'icona a forma di telefono/tablet che trovate in alto a sinistra dell'
+inspector, all'inizio della navbar principale
+
+</InfoBox>

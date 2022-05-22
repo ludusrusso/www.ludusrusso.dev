@@ -3,6 +3,7 @@ import prism from "@mapbox/rehype-prism";
 import { CourseToc } from "components/courses";
 import { Footer } from "components/footer";
 import { Mailchimp } from "components/mailchimp";
+import { InfoBox } from "components/mdx/info";
 import { Nav } from "components/nav";
 import { SEO } from "components/seo";
 import { getCourse, getCourseChapter, getCourses } from "data/courses";
@@ -28,6 +29,7 @@ const CoursePage = ({ course, chapter, source }: Props) => {
       <YouTube className="w-full aspect-video" videoId={videoId} />
     ),
     pre: (props: any) => <pre {...props} className="no-prose" />,
+    InfoBox: InfoBox,
   };
   return (
     <div>
