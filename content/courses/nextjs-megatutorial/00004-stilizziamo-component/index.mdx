@@ -247,6 +247,428 @@ e di dimensioni _xl_ (`text-xl`). Tailwind mette a disposizione tantissime class
 un attiamo per prendere familiarità con tutto (noi vederemo piano piano le utility che ci mette a disposizione).
 Se volete avere più info su Tailwind, visitate il sito [tailwindcss.com](https://tailwindcss.com/) e la [documentazione](https://tailwindcss.com/docs/utility-first/).
 
+### Creiamo una NavBar avanzata con Tailwind
+
+Siamo finalmente pronti a lavorare ad un componente. Per questo ho scelto di creare con tailwind la NavBar del nostro sito,
+che può sembrare un componente semplice ma in realtà nasconde un po' di insidie come farlo collassare in modalità mobile
+e gestire il menu a scomparsa.
+
+Per la NavBar, quindi, insieme a Tailwind useremo altre due librerie che spesso vengono usate in coppia:
+
+- [headlessui](https://headlessui.dev/), di cui abbiamo già parlato, che ci mette a disposizie una serie di componenti
+  non stilizzati e che funziona molto bene con tailwind.
+- [heroicons](https://heroicons.com/), una libreria di icone creata utile per le varie icone del sito.
+
+Per prima cosa installiamo le librerie:
+
+```bash
+$ npm i @headlessui/react @heroicons/react
+
+added 2 packages, and audited 337 packages in 5s
+
+79 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+Siamo quindi pronti per partire.
+
+Riprediamo per prima cosa il componente `Nav` che abbiamo abbozzato precedentemente, cioè il file che abbiamo chiamato `components/nav.tsx`, di cui
+riporto il contenuto attuale:
+
+```tsx
+export const Nav = () => {
+  return <nav>React Megaturial Navigation</nav>;
+};
+```
+
+Per vederne il risultato, aggiungiamolo alla pagina `./index.tsx` (a cui possiamo a questo punto rimuovere il colore di background ed il testo):
+
+```tsx
+import { Nav } from "../components/nav";
+
+const Home = () => {
+  return (
+    <div className="">
+      <Nav />
+    </div>
+  );
+};
+```
+
+Possiamo quindi finalmente spostarci nel file `Nav` ed iniziare a lavorare da qui.
+
+La navbar dovrà contenere una lista di link posizionati in vertiale, insieme ad una icona della nostra applicazione (in teoria il nostro logo
+ma non avendorlo useremo l'icona delle casa) che ci rimanda
+alla home del sito. Per finire, vogliamo che in modalità mobile la navbar collassi a solo il titolo insieme ad un pulsante che apre un menu.
+
+In fase di design, applicare uno stile di sviluppo chiamato **mobile first**, dove l'idea di base è quella di creare per prima cosa
+il layout per cellulari (mobile appunto), e poi estenderlo alla visualizzazione desktop. Partiamo quindi a stilizzare la navbar
+collassato con solo il menu e il titolo.
+
+Partiamo dalla navbar, dobbiamo farla alta 64px `h-16` (non so perchè, ma è lo standard di molte navbar in giro) e di un colore
+che ci piace. Partiamo quindi da dare questo stile al componente principale. Possiamo anche togliere il contenuto per
+il momento.
+
+```tsx
+export const Nav = () => {
+  return <nav className="h-16 bg-green-600"></nav>;
+};
+```
+
+Andiamo quindi a posizionare all'interno di questa nav il nostro componente che si vedrà
+quando la navbar è collassata (quindi in formato mobile). Per ora facciamo finta che ci sia solo questo.
+
+Questo componente dovrà mostrare a sinistra l'icona delle casa e a destra quella del menu. Troviamo entrambe
+le icone in `@heroicons/react/outline`.
+
+```tsx
+import { HomeIcon, MenuIcon } from "@heroicons/react/outline";
+
+export const Nav = () => {
+  return (
+    <nav className="h-16 bg-green-600">
+      <div className="h-full flex justify-between items-center px-4 text-green-100">
+        <a>
+          <HomeIcon className="h-8 w-8"></HomeIcon>
+        </a>
+        <button>
+          <MenuIcon className="h-8 w-8"></MenuIcon>
+        </button>
+      </div>
+    </nav>
+  );
+};
+```
+
+Da notare che le due icone sono state wrappate la prima in un componente `<a>` (cioè un link, infatti
+deve essere un semplice link a home), mentre la seconda in un componente `<button>`, perchè appunto
+al click dovrà aprire il menu.
+
+Se le cose sono state fatte bene, lanciando il server, dovreste vedere qualcosa simile a questo:
+
+![Nav 1](./nav1.png)
+
+#### Navigazione con `next/link`
+
+Il componente `<a>` dovrà rimandare alla home page del sito. Questo normalmente si sarebbe fatto
+in HTML con la props `href="/"`, ma NextJS ci mette a disposizione un compoente speciale
+per ottimizzare la navigazione interna al sito: `Link`.
+
+Questo componente deve sempre wrappare `<a>`, e il link `href` lo imposteremo a lui, non al componente `<a>` originale.
+
+Questa sintassi permette a NextJS di essere più veloce a renderizzare la navigazione.
+
+```tsx
+import { HomeIcon, MenuIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+
+export const Nav = () => {
+  return (
+    <nav className="h-16 bg-green-600">
+      <div className="h-full flex justify-between items-center px-4 text-green-100">
+        <Link href="/">
+          <a>
+            <HomeIcon className="h-8 w-8"></HomeIcon>
+          </a>
+        </Link>
+        <button>
+          <MenuIcon className="h-8 w-8"></MenuIcon>
+        </button>
+      </div>
+    </nav>
+  );
+};
+```
+
+#### Apertura e chiusura del menu
+
+Per la gestione del menu le cose iniziano ad essere più complesse, fortunatamente troviamo dentro `@headlessui` il
+componente [`Popover`](https://headlessui.dev/react/popover) che può essere usato, appunto, per la creazione di menu.
+
+Partiamo quindi ad usare il Pupover per creare il nostro menu, il componente base da cui partire è questo (preso dalla documentazione):
+
+```tsx
+import { Popover } from "@headlessui/react";
+
+const Menu = () => {
+  return (
+    <Popover className="relative">
+      <Popover.Button>
+        <MenuIcon className="h-8 w-8" />
+      </Popover.Button>
+
+      <Popover.Panel className="absolute z-10">
+        <div className="grid grid-cols-2">
+          <a href="/analytics">Analytics</a>
+          <a href="/engagement">Engagement</a>
+          <a href="/security">Security</a>
+          <a href="/integrations">Integrations</a>
+        </div>
+      </Popover.Panel>
+    </Popover>
+  );
+};
+```
+
+Dove, come vedete, ho inserito il bottone ` <MenuIcon className="h-8 w-8" />` all'intenro del componente `<Popover.Button>`.
+
+Possiamo usare il nostro menu in questo modo all'interno del componente `Nav`:
+
+```tsx
+export const Nav = () => {
+  return (
+    <nav className="h-16 bg-green-600">
+      <div className="h-full flex justify-between items-center px-4 text-green-100">
+        <Link href="/">
+          <a>
+            <HomeIcon className="h-8 w-8"></HomeIcon>
+          </a>
+        </Link>
+        <button>
+          <Menu />
+        </button>
+      </div>
+    </nav>
+  );
+};
+```
+
+Il menu a questo punto funziona, potete provare ad aprirlo e chiderlo senza problemi, ma vi renderete subito conto che la
+parte grafica non è per niente ottimale. Iniziamo a stilizzarlo megli (in modo che almeno sia visibile) come seguie:
+
+```tsx
+const Menu = () => {
+  return (
+    <Popover>
+      <Popover.Button>
+        <MenuIcon className="h-8 w-8" />
+      </Popover.Button>
+
+      <Popover.Panel className="absolute z-10 inset-x-0 ">
+        <div className="flex flex-col bg-slate-100 shadow-xl m-2 text-black">
+          <a href="/analytics">Analytics</a>
+          <a href="/engagement">Engagement</a>
+          <a href="/security">Security</a>
+          <a href="/integrations">Integrations</a>
+        </div>
+      </Popover.Panel>
+    </Popover>
+  );
+};
+```
+
+Il cui risultato dovrebbe essere simile a quello che segue:
+
+![Nav 2](./nav2.png)
+
+#### Conditional Rendering con gli operatori `&&` e `?:`
+
+Una cosa interessante che possiamo fare è cambiare l'icona del menu in base al fatto che sia aperto o chiuso. Per fare questo dobbiamo
+per prima cosa estrapolare una variabile che ci dice se il menu è aperto e chiuso, e per farlo possiamo usare questa sintassi:
+
+```tsx
+const Menu = () => {
+  return (
+    <Popover>
+      {({ open }) => (
+        <>
+          <Popover.Button>
+            {open ? (
+              <XIcon className="h-8 w-8" />
+            ) : (
+              <MenuIcon className="h-8 w-8" />
+            )}
+          </Popover.Button>
+
+          {open && (
+            <Popover.Panel className="absolute z-10 inset-x-0 ">
+              <div className="flex flex-col bg-slate-100 shadow-xl m-2 text-black">
+                <a href="/analytics">Analytics</a>
+                <a href="/engagement">Engagement</a>
+                <a href="/security">Security</a>
+                <a href="/integrations">Integrations</a>
+              </div>
+            </Popover.Panel>
+          )}
+        </>
+      )}
+    </Popover>
+  );
+};
+```
+
+Come vedete, il children del pophover non è più un componente ma un render template, cioè una funzione che prende dei
+parametri e ritorna un componente.
+
+In particolare ci interessa il parametro `open`, che appunto ci dice se il popover è aperto o chiuso.
+`open` cambia valore nel momento in cui cambiamo il bottone, o premiamo esc, ad ogni modo il suo
+comportamento è gestito dal componente `Popover`. Il nostro compito è di usare questo componente per
+far funzionare correttamente il menu.
+
+Per prima cosa, notate che si rende necessario dire al componente quando renderizzare il `Popover.Panel`.
+Quando passiamo direttamente `Popover.Panel` come children al componente `Popver`, infatti,
+è quest'ultimo che sa come e quando renderizzarlo, ma se adottiamo la sintassi con il templace children,
+come stiamo facendo adesso, il componente `Popover`non prende più decisioni e siamo noi che dobbiamo
+dirgli di renderizzare il componente `Popover.Panel` quando `open` è a `true`.
+
+Per farlo usiamo questa sintassi `{open && <Popover.Panel />}`, che si chiama conditional rendering. L'operatore
+`&&` semplicemente valuta se il primo valore è `true` (o equivalente) e, in caso, ritorna il
+secondo valore, altrimenti ritorna `null` (che in react vuol dire non renderizzare niente). Questa è
+una sintassi molto comune in React e quindi preparatevi a trovarla spesso in giro per i progetti.
+
+Un altro esempio di operatore condizionale è quello che abbiamo usato per renderizzare le icone:
+
+```tsx
+open ? <XIcon className="h-8 w-8" /> : <MenuIcon className="h-8 w-8" />;
+```
+
+In questo caso abbiamo usato il ternary operator `?:`, che non è altro che un `if else` condensato. L'operatore
+valuta il valore del primo elemento (`open`). Se è vero ritorna il secondo elemento, altrimenti il terzo.
+Quindi questa operazione si legge così:
+
+> Se il pannello è vero (`open==true)` allora renderizza l'icona `<XIcon />`, altrimenti l'icona `<MenutIcon />`.
+
+Se provate a il componente a questo punto vedrete che l'icona cambia se questo è aperto o chiuso.
+
+#### Props del componente
+
+A questo punto dobbiamo fare in modo da passare dall'esterno la lista di link al menu, questo è imporante perchè ricordiamo che dovremo renderizzare il menu in due modi diversi in base alla dimensione
+dello schermo, quindi abbiamo bisogno di non dover duplicare i dati che passiamo al componente (questo è uno dei principi
+base dello sviluppo informatico chiamato **DRY** (don't repeat yourself), cioè _non ripetere te stesso_).
+
+Lo possiamo fare
+definendo una props all'interno del nostro componente Menu:
+
+```tsx
+interface MenuElement {
+  href: string;
+  label: string;
+}
+
+interface MenuProps {
+  menu: MenuElement[];
+}
+```
+
+Da usare all'iterno del nostro menu:
+
+```tsx
+const Menu = ({ menu }: MenuProps) => {
+  return (
+    <Popover>
+      {({ open }) => (
+        <>
+          <Popover.Button>
+            {open ? (
+              <XIcon className="h-8 w-8" />
+            ) : (
+              <MenuIcon className="h-8 w-8" />
+            )}
+          </Popover.Button>
+
+          {open && (
+            <Popover.Panel className="absolute z-10 inset-x-0 ">
+              <div className="flex flex-col bg-slate-100 shadow-xl m-2 text-black">
+                {menu.map((item, idx) => (
+                  <Link key={idx} href={item.href}>
+                    <a>{item.label}</a>
+                  </Link>
+                ))}
+              </div>
+            </Popover.Panel>
+          )}
+        </>
+      )}
+    </Popover>
+  );
+};
+```
+
+Quello che abbiamo fatto è stato usare la lista `menu` per renderizzare i link con l'espressione `menu.map()`, che ricordo ci permette
+di creare una lista di elementi (in questo caso `<Link />`) a partire da una lista di partenza (contenente i dati).
+
+Invece di listare quindi i link come facevamo prima
+
+```tsx
+<a href="/analytics">Analytics</a>
+<a href="/engagement">Engagement</a>
+<a href="/security">Security</a>
+<a href="/integrations">Integrations</a>
+```
+
+adesso facciamo un loop all'interno di `menu` (che ci arriva da fuori) e generiamo un oggetto `<Link />` per ognuno di questi elementi.
+
+Per usare il nuovo componente, dobbiamo creare la lista:
+
+```tsx
+const MenuElements: MenuElement[] = [
+  {
+    href: "/blog",
+    label: "Blog",
+  },
+  {
+    href: "/about",
+    label: "About",
+  },
+];
+```
+
+E passarla in fase di renderizzazione al componente:
+
+```tsx
+<Menu menu={MenuElements} />
+```
+
+ed il risultato dovrebbe essere il seguente:
+
+![nav 3](./nav3.png)
+
+#### Creare nuove pagine
+
+Siamo pronti a testare che la navigazione funzioni, ma per farlo ci servono nuove pagine. La creazione delle nuove pagine
+`/about` e `/blog` è semplicissima: basta creare due file `pages/about.tsx` e `pages/blog.tsx`, con il seguente contenuto:
+
+```tsx
+// pages/about.tsx
+import { Nav } from "../components/nav";
+
+const About = () => {
+  return (
+    <div className="">
+      <Nav />
+      <h1> About</h1>
+    </div>
+  );
+};
+
+export default About;
+```
+
+```tsx
+// pages/blog.tsx
+import { Nav } from "../components/nav";
+
+const Blog = () => {
+  return (
+    <div className="">
+      <Nav />
+      <h1> Blog</h1>
+    </div>
+  );
+};
+
+export default Blog;
+```
+
+Fatto questo, dovremmo poter essere in grado di navigare tranquillamente all'intenro della nostra app!
+
+#### Modalità Desktop
+
+Ora che la modalità mobile funziona bene, dobbiamo creare l'applicazione in modo che il menu venga visualizzato diversamente
+in modalità desktop. Per farlo, dobbiamo introdurre il concetto di breakpoin in Tailwind.
+
 ## Stilizziamo i componenti con emotions
 
 Partiamo subito con la libreria di css-in-js chiamata [emotions](https://emotion.sh/docs/introduction) ed iniziamo a stilizzare la nostra navbar.
