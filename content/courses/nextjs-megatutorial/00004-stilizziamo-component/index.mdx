@@ -426,9 +426,9 @@ export const Nav = () => {
             <HomeIcon className="h-8 w-8"></HomeIcon>
           </a>
         </Link>
-        <button>
+        <div>
           <Menu />
-        </button>
+        </div>
       </div>
     </nav>
   );
@@ -664,12 +664,93 @@ export default Blog;
 
 Fatto questo, dovremmo poter essere in grado di navigare tranquillamente all'intenro della nostra app!
 
-#### Modalità Desktop
+#### Breakpoints e Modalità Desktop
 
 Ora che la modalità mobile funziona bene, dobbiamo creare l'applicazione in modo che il menu venga visualizzato diversamente
 in modalità desktop. Per farlo, dobbiamo introdurre il concetto di breakpoin in Tailwind.
 
+Un breakpoint non è altro che una dimensione dello schermo in larghezza per cui una pagina può cambiare layout.
+Tailwind mette a disposizione di default una [serie di breakpoint](https://tailwindcss.com/docs/responsive-design), chiamate `xl`, `sm`, `md` e `lg` etc.
+Questi breakpoint si traducono in modificatori delle classi css che ci permettono di cambiare il layour in base
+alla dimensione dello schermo. Vediamo come usarli.
+
+L'idea di base dei modificatori di tailwind è che possiamo applicare nuovi template sovrascrivendo le classi a brackpoint diverse.
+Facciamo un esempio per capire meglio: supponiamo di voler nascondere il menu del nostro header quando lo schermo è a breackpoint `md` (medium)
+o superiori, per farlo basta usare questa sintassi:
+
+```tsx
+<div className="md:hidden">
+  <Menu menu={MenuElements} />
+</div>
+```
+
+Il bottone sarà mostrano normalemnte fino al breackpoint `md`, e poi verrà applicato la classe `hidden` che non lo farà più vedere.
+
+Per fare il contrario, dobbiamo creare un componente `hidden` di base e poi mostrarlo al breackpoint `md`:
+
+```tsx
+<div className="hidden md:block">Visibile la breakpoing</div>
+```
+
+Mettendo insieme questi due componenti, vedrete che quando il primo sparisce il secondo appare!
+
+#### Creazione della navbar estesa
+
+Andiamo quindi a sfruttare questa funzionalità per creare la navbar estesa, che metteremo all'interno del nostro `<div>` visibile
+solo in modalità desktop.
+
+```tsx
+const DesktopMenu = ({ menu }: MenuProps) => {
+  return (
+    <ul className="flex gap-2">
+      {menu.map((item, idx) => (
+        <li key={idx}>
+          <Link href={item.href}>
+            <a>{item.label}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
+```
+
+Il componente prende le stesse props di `<Menu />`, ma invece di renderizzare il bottone con il popup, renderizza una
+semplice list di `<Link />` orizzonatale.
+
+Il componente `Nav` finale, quindi, risulta essere il seguente:
+
+```tsx
+export const Nav = () => {
+  return (
+    <nav className="h-16 bg-green-600">
+      <div className="h-full flex justify-between items-center px-4 text-green-100">
+        <Link href="/">
+          <a>
+            <HomeIcon className="h-8 w-8"></HomeIcon>
+          </a>
+        </Link>
+        <div className="hidden md:block">
+          <DesktopMenu menu={MenuElements} />
+        </div>
+        <button className="md:hidden">
+          <Menu menu={MenuElements} />
+        </button>
+      </div>
+    </nav>
+  );
+};
+```
+
+Questo dovrebbe essere il risultato finale:
+
+![Desktop Nav](./desktop.png)
+![Mobile Nav](./mobile.png)
+
 ## Stilizziamo i componenti con emotions
+
+Abbiamo visto come usare TailwindCSS e le sue funzionalità per creare una navbar in grado di collassare. Facciamo anche un accenno
+agli styled component che potremmo trovare
 
 Partiamo subito con la libreria di css-in-js chiamata [emotions](https://emotion.sh/docs/introduction) ed iniziamo a stilizzare la nostra navbar.
 Per farlo, per prima cosa dobbiamo installare la libreria, dato che, come abbiamo detto, vogliamo utilizzare gli styled components, dovremmo
