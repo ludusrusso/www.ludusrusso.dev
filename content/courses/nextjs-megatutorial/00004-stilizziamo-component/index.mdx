@@ -1,7 +1,7 @@
 ---
 title: Stilizziamo i componenti
 description: Lo stile dei componenti è un'attività essenziale ma molto complessa. In questa guida non voglio insegnarvi ad usare lo stile, ma presentarvi alcune tecniche molto utili per iniziare ad aggiungere stile ai nostri component.
-published: false
+published: true
 slug: component-styling
 ---
 
@@ -349,6 +349,13 @@ al click dovrà aprire il menu.
 Se le cose sono state fatte bene, lanciando il server, dovreste vedere qualcosa simile a questo:
 
 ![Nav 1](./nav1.png)
+
+<InfoBox>
+Siccome stiamo lavorando in mobile mode, conviene mettere il browser in visualizzazione mobile per avere una view simile a quella di un telefono.
+Per farlo basta aprire l'inspector del browser e cliccare sull'icona a forma di telefono/tablet che trovate in alto a sinistra dell'
+inspector, all'inizio della navbar principale
+
+</InfoBox>
 
 #### Navigazione con `next/link`
 
@@ -749,10 +756,15 @@ Questo dovrebbe essere il risultato finale:
 
 ## Stilizziamo i componenti con emotions
 
-Abbiamo visto come usare TailwindCSS e le sue funzionalità per creare una navbar in grado di collassare. Facciamo anche un accenno
-agli styled component che potremmo trovare
+Abbiamo visto come usare TailwindCSS e le sue funzionalità per creare una navbar in grado di collassare.
+Sebbene quella vista su è il modo principale con gestiremo lo stile della nostra applciazione, vorrei fare anche
+un accenno agli styled component che possiamo usarli (in combo con Tailwind) per stilizzare i component.
 
-Partiamo subito con la libreria di css-in-js chiamata [emotions](https://emotion.sh/docs/introduction) ed iniziamo a stilizzare la nostra navbar.
+In questa seconda parte del capitolo, quindi, ci occuperemo di usare styled components per creare il footer della nostra applicazione.
+Non useremo solo styled componente, in quanto credo fermamente che tailwind sia molto funzionate specialmente nella gestione dei colori, quindi
+vedremo come usare insieme queste due tecnologie.
+
+Partiamo subito con la libreria di css-in-js chiamata [emotions](https://emotion.sh/docs/introduction) ed iniziamo a stilizzare il nostro footer.
 Per farlo, per prima cosa dobbiamo installare la libreria, dato che, come abbiamo detto, vogliamo utilizzare gli styled components, dovremmo
 installare due pacchetti: `@emotion/styled` e `@emotion/react`:
 
@@ -767,66 +779,90 @@ added 72 packages, and audited 302 packages in 20s
 found 0 vulnerabilities
 ```
 
-Con questa libreria andremo a stilizzare la navbar della nostra applicazione, cioè il file che abbiamo chiamato `components/nav.tsx`, di cui
+Con questa libreria andremo a stilizzare il footer della nostra applicazione, cioè il file che abbiamo chiamato `components/footer.tsx`, di cui
 riporto il contenuto attuale.
 
 ```tsx
-export const Nav = () => {
-  return <nav>React Megaturial Navigation</nav>;
+export const Footer = () => {
+  return <footer>React Megaturial; all right reserverd</footer>;
 };
 ```
 
-La navbar dovrà contenere una lista di link posizionati in vertiale, insieme ad un titolo della nostra appliazioche che ci rimanda
-alla home del sito. Per finire, vogliamo che in modalità mobile la navbar collassi a solo il titolo insieme ad un pulsante che apre un menu.
+Il footer dovrà contenere un poccolo disclaimer con il nome del sito e l'autore e una lista di link ai social network.
 
-In fase di design, applicare uno stile di sviluppo chiamato **mobile first**, dove l'idea di base è quella di creare per prima cosa
-il layout per cellulari (mobile appunto), e poi estenderlo alla visualizzazione desktop. Partiamo quindi a stilizzare la navbar
-collassato con solo il menu e il titolo.
+Anche in questo caso adotteremo lo stile **mobile first**, quindi partiamo dalla visualizzazione mobile.
 
-Partiamo prima di tutto dal contenuto. Il nostro componente `<nav>` dovrà contenere un `<div>` con all'interno due componenti,
-il titolo ed un bottono:
+#### Layout e contenuto del nostro Footer
+
+Partiamo dal contenuto, dovremmo creare due div, la prima contenente il disclaimer mentra la seconda che contiene la lista di link social.
 
 ```tsx
-export const Nav = () => {
+import Link from "next/link";
+
+export const Footer = () => {
   return (
-    <nav>
+    <footer>
       <div>
-        <span>RMT</span>
-        <button> menu </button>
+        <p>
+          NextJS MegaTutorial; all right reserved {new Date().getFullYear()}
+        </p>
       </div>
-    </nav>
+      <div>
+        <ul>
+          {socials.map((item, idx) => (
+            <li key={idx}>
+              <Link href={item.href}>
+                <a target="_blank">{item.label}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </footer>
   );
 };
+
+const socials = [
+  {
+    label: "twitter",
+    href: "https://twitter.com",
+  },
+  {
+    label: "youtube",
+    href: "https://youtube.com",
+  },
+  {
+    label: "github",
+    href: "https://github.com",
+  },
+];
 ```
+
+Come vedete abbiamo di nuovo esternalizzato i dati dei social per fare un loop all'interno dell'array. Come nel caso precedente, questa soluzione
+ci permette di scrivere codice più pulito.
+
+#### Creiamo un component `FooterStyled`
 
 Siamo pronti quindi a stilizzare il componente.
 
 La cosa che faccio di solito è creare un componente interno dove inserire lo style utilizzando `@emotions/styled`. Dato che il momponente
-princiaple della nostra navbar è l'oggetto html `<nav>`, partirò da questo per generare l'oggetto stilizzato.
+princiaple della nostra navbar è l'oggetto html `<footer>`, partirò da questo per generare l'oggetto stilizzato.
 
 ```tsx
-import styled from "@emotion/styled";
-
-export const Nav = () => {
-  return (
-    <NavStyled>
-      <div>
-        <span>RMT</span>
-        <button> menu </button>
-      </div>
-    </NavStyled>
-  );
+export const Footer = () => {
+  return <FooterStyled>{/* ... */}</FooterStyled>;
 };
 
-const NavStyled = styled.nav`
-  height: 60px;
-  background-color: #ccc;
-  color: white;
+const FooterStyled = styled.footer`
+  padding: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
 `;
 ```
 
-Come vedete il componente `NavStyled` non è altro che un classico componente `<nav>` HTML a cui abbiamo _appiccicato_ dello style
-con styled componente. Per farlo abbiamo importato la libreriea `styled` da `@emtion/styled` e abbiamo
+Come vedete il componente `FooterStyled` non è altro che un classico componente `<footer>` HTML a cui abbiamo _appiccicato_ dello style
+con styled component. Per farlo abbiamo importato la libreriea `styled` da `@emtion/styled` e abbiamo
 usato una speciale sintassi in JavaScript chiamata [**tag functions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals?retiredLocale=it#tagged_templates) (o **tagged templates**),
 che non sono altro che delle speciali funzioni seguite da un template literal.
 
@@ -847,16 +883,274 @@ nativi HTML.
 
 </InfoBox>
 
-Ora che abbiamo la base del nostro componente possiamo lanciare il server `npm run dev` e accedere al solito link `http://localhost:3000/experiments`
+Ora che abbiamo la base del nostro componente possiamo lanciare il server `npm run dev` e accedere al solito link `http://localhost:3000/`
 per vedere il risultato.
 
-![Nav 1](./nav1.png)
+Ricordiamoci prima di tutto di aggiungere il nostro componente alle pagina, io vi riporto `pages/index.tsx`, ricordatevi di farlo da tutte
+le parti:
+
+```diff
++ import { Footer } from "../components/footer";
+import { Nav } from "../components/nav";
+
+const Home = () => {
+  return (
+    <div className="">
+      <Nav />
+      <h1> Home </h1>
++     <Footer />
+    </div>
+  );
+};
+
+export default Home;
+```
+
+![Footer 1](./footer1.png)
 
 Il risultato è un po' bruttino, ma almeno abbiamo un componente che può essere stilizzato.
 
-<InfoBox>
-Siccome stiamo lavorando in mobile mode, conviene mettere il browser in visualizzazione mobile per avere una view simile a quella di un telefono.
-Per farlo basta aprire l'inspector del browser e cliccare sull'icona a forma di telefono/tablet che trovate in alto a sinistra dell'
-inspector, all'inizio della navbar principale
+#### Social Icons e SVG
 
+Purtroppo la libreria heroicons non mette a disposizione icone social o di brand, quindi dobbiamo trovare
+una soluzione per inserire questo tipo di contenuti (per i social). La cosa che possiamo fare è di trovare
+online direttamente il codice SVG delle icone che ci interessano ed usarlo all'interno del nostro progetto.
+Tra le varie librerie online che esistono per questo tipo di operazione, credo che la migliore sia
+[**Font Awesome**](https://fontawesome.com/). Una libreria di tantissime icone semplici da usare.
+
+Font Awesome mette a disposizione una libreria React che potremmo installare ed utilizzare, ma
+possiamo anche sfogliare il sito e scaricare direttamente l'SVG che possiamo usare nel codice React, che è quello che faremo.
+
+Per farlo andiamo quindi su [**Font Awesome**](https://fontawesome.com/), cerchiamo l'icona che ci interessa (in questo caso twitter)
+e clicchiamo sul link **Copia SVG Code** che ci permette di copiare l'SVG nella clipboard.
+
+![Fontawesome](./fontawesome.png)
+
+Vi copio il contenuto di seguito (notare che ho rimosso il commento contenuto nel codice copiato)
+
+```tsx
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+</svg>
+```
+
+A questo punto possiamo creare un nuovo componente `<TwitterIcon` /> come segue:
+
+```tsx
+const TwitterIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+  </svg>
+);
+```
+
+Dobbiamo fare un paio di modifiche al componente: per prima cosa, dobbiamo essere in grado di passargli una `className`, in modo da
+poterlo stilizzale con tailwind o in generale con una classe CSS. In secondo luogo, gli aggiungiamo una property chiamata
+`fill="currentColor"` che ci permette di cambiare il colore dell'icona utilizzando la proprietà `color` CSS (cioè il colore del testo).
+
+Per permettere di riutilizzare queste icone, le definisco all'interno di un file `components/icons.tsx` da cui potremmo importarle.
+
+```tsx
+export interface IconProps {
+  className?: string;
+}
+
+export const TwitterIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
+    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+  </svg>
+);
+```
+
+Facciamo lo stesso lavoro per gli altri social che voglilamo usare, nel mio caso GitHub e YouTube, in modo da avere tutto quello che ci
+serve per usarli nel nostro footer.
+
+<InfoBox type="warn">
+  FontAwesome non è completamente gratuito, e propone delle icone **Pro** che
+  possono essere usate a pagamento. Non preoccupatevi troppo però se non volete
+  acquistare una licenza, tutte le icone dei brand (a meno che non cerchiate
+  stili particolari) sono gratuite, in ogni caso FontAwesome non vi permetterà
+  di copiare codice di icone Pro, quindi nessun problema se temete di violare la
+  licenza senza accorgervene.
 </InfoBox>
+
+A questo punto, possiamo inserire le icone all'interno della nostra lista `socials` dentro il file `footer.tsx`:
+
+```tsx
+const socials = [
+  {
+    label: "twitter",
+    href: "https://twitter.com",
+    Icon: TwitterIcon,
+  },
+  {
+    label: "youtube",
+    href: "https://youtube.com",
+    Icon: YoutubeIcon,
+  },
+  {
+    label: "facebook",
+    href: "https://facebook.com",
+    Icon: GithubIcon,
+  },
+];
+```
+
+e utlizzarlo come segue:
+
+```tsx
+<ul>
+  {socials.map(({ Icon, href, label }, idx) => (
+    <li key={idx}>
+      <Link href={href}>
+        <a target="_blank">
+          <span className="sr-only">{label}</span>
+          <Icon className="w-8 h-8" />
+        </a>
+      </Link>
+    </li>
+  ))}
+</ul>
+```
+
+Notare che nel map ho usato il destructoring `({ Icon, href, label }, idx)` per accedere alle proprietà dell'oggetto `{Icon, href, label}`
+direttamente. Inoltre sto usando del codice tailwindCSS per stilizzare le icone, perchè in questo caso viene molto più semplice
+che usare styled components.
+
+<InfoBox>
+  Il tag `<span className="sr-only">{label}</span>` usa una classe di tailwind
+  `sr-only` che ci permette di nascondere un testo mantenendolo visibili agli
+  screen reader. Questa è una buona pratica di accessibilità importante
+  specialmente quando si lavora con link visibile tramite icone, in modo da dare
+  la possibilità di capire il contenuto del link anche a persone ipovedenti.
+</InfoBox>
+
+Adesso il contenuto del Footer è il seguente:
+
+![Footer 2](./footer2.png)
+
+#### Stilizziamo il componente
+
+Siamo finalmente pronti per aggiungere un po' di stile. Possiamo creare due styled component che andranno a sostituire i due div
+che wrappano la lista dei social e il copyright.
+
+```tsx
+const SocialsContainer = styled.div`
+  padding: 20px;
+  ul {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+  }
+`;
+
+const CopyContainer = styled.div`
+  padding: 20px;
+`;
+```
+
+Da usare nel componente principale
+
+```tsx
+export const Footer = () => {
+  return (
+    <FooterStyled>
+      <CopyContainer>
+        <p>
+          NextJS MegaTutorial; all right reserved {new Date().getFullYear()}
+        </p>
+      </CopyContainer>
+      <SocialsContainer>
+        <ul>
+          {socials.map(({ Icon, href, label }, idx) => (
+            <li key={idx}>
+              <Link href={href}>
+                <a target="_blank">
+                  <span className="sr-only">{label}</span>
+                  <Icon className="h-8" />
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </SocialsContainer>
+    </FooterStyled>
+  );
+};
+```
+
+![Footer 3](./footer3.png)
+
+Possiamo anche definire nuovi stili aggiuntivi allo styled component usando tailwindcss, ad esempio per cambiare colori:
+
+```tsx
+export const Footer = () => {
+  return (
+    <FooterStyled>
+      <CopyContainer className="text-gray-800">
+        <p>
+          NextJS MegaTutorial; all right reserved {new Date().getFullYear()}
+        </p>
+      </CopyContainer>
+      <SocialsContainer className="text-green-500">
+        <ul>
+          {socials.map(({ Icon, href, label }, idx) => (
+            <li key={idx}>
+              <Link href={href}>
+                <a target="_blank">
+                  <span className="sr-only">{label}</span>
+                  <Icon className="h-8" />
+                </a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </SocialsContainer>
+    </FooterStyled>
+  );
+};
+```
+
+![Footer 4](./footer4.png)
+
+#### Visualizzazione Desktop
+
+L'ultima cosa che ci manca da fare, quindi, è modificare il footer in modo che sia visibile in modalità desktop con un layout differente.
+
+Per farlo possiamo usare direttamente le [media query css](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
+all'inteno dello styled component!
+
+```tsx
+const FooterStyled = styled.footer`
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+```
+
+Notare che abbiamo settato come breackpoint `768px`, il breakpoin `md` di tailwind.
+
+Il risultato finale è il seguente:
+
+![Footer 5](./footer5.png)
+
+## Cosa abbiamo imparato?
+
+- Ci sono molte soluzioni diverse per stilizzare i componenti in React;
+- Come usare TailwindCSS per definire lo stile dei componenti;
+- Come usare `@headlessui` e `@heroicons`;
+- Come usare gli styled component con `@emotions` per stilizzare componenti;
+- Come utilizzare SVG all'inteno delle applicazioni React;
+- Come sfruttare la metodologia di sviluppo **mobile first**;
+
+Il codice di questo capitolo lo [trovate su github](https://github.com/ludusrusso/next-js-megatutorial/tree/c3).
