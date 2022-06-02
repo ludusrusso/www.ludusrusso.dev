@@ -56,7 +56,11 @@ export const MentoringLanding = () => {
 
         <p>
           Guarda le mie disponibilità su{" "}
-          <a href="https://calendly.com/ludusrusso/one2one" target="_blank">
+          <a
+            href="https://calendly.com/ludusrusso/one2one"
+            target="_blank"
+            rel="noreferrer"
+          >
             Calendly
           </a>{" "}
           Avremmo a disposizione <span className="font-bold">~30 minuti</span>{" "}
@@ -90,7 +94,11 @@ export const MentoringLanding = () => {
         <ul>
           <li>
             Aggiungimi su{" "}
-            <a href="https://www.linkedin.com/in/ludusrusso/" target="_blank">
+            <a
+              href="https://www.linkedin.com/in/ludusrusso/"
+              rel="noreferrer"
+              target="_blank"
+            >
               Linkedin
             </a>{" "}
             e scrivi una <strong>recommendation</strong> sul mio profilo. Questo
@@ -104,6 +112,7 @@ export const MentoringLanding = () => {
             <a
               href="https://www.paypal.com/paypalme/ludusrusso/"
               target="_blank"
+              rel="noreferrer"
             >
               Qualcosa da bere
             </a>
@@ -116,7 +125,7 @@ export const MentoringLanding = () => {
 
         <p className="text-lg  mt-20 font-bold text-center">
           Grazie a<a href="https://jagasantagostino.com/mentoring"> Jaga </a>
-          per l'idea!{" "}
+          per l&apos;idea!{" "}
           <span role="img" aria-label="face">
             😆
           </span>
