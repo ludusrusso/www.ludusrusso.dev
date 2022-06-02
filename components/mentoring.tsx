@@ -22,12 +22,6 @@ export const MentoringLanding = () => {
         </a>
       </Link>
 
-      {/* <img
-        className="mt-10 max-w-full m-auto shadow"
-        src={data.mentoringImg.childImageSharp.fixed.src}
-        alt="Mentoring"
-      /> */}
-
       <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">
         <p>
           La condivisione della conoscenza è cruciale nel mondo tech è una cosa
@@ -65,7 +59,7 @@ export const MentoringLanding = () => {
           <a href="https://calendly.com/ludusrusso/one2one" target="_blank">
             Calendly
           </a>{" "}
-          Avremmo a disposizione <span className="font-bold">~45 minuti</span>{" "}
+          Avremmo a disposizione <span className="font-bold">~30 minuti</span>{" "}
           per parlare o fare pair programming!
         </p>
 
@@ -98,7 +92,7 @@ export const MentoringLanding = () => {
             Aggiungimi su{" "}
             <a href="https://www.linkedin.com/in/ludusrusso/" target="_blank">
               Linkedin
-            </a>
+            </a>{" "}
             e scrivi una <strong>recommendation</strong> sul mio profilo. Questo
             mi aiuterà a trovare altre persone da aiutare!
           </li>
