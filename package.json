@@ -19,7 +19,7 @@
     "@mapbox/rehype-prism": "^0.8.0",
     "@prisma/client": "^3.13.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@trpc/client": "^9.23.0",
+    "@trpc/client": "^9.24.0",
     "@trpc/next": "^9.23.0",
     "@trpc/react": "^9.23.0",
     "@trpc/server": "^9.23.0",
