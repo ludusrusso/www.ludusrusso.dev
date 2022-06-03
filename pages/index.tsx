@@ -51,6 +51,7 @@ export default function Home({
           </div>
         </div>
       </div>
+      <Quote />
 
       <MentoringLanding />
       <Mailchimp title="Ti piacciono i miei contenuti?" />
@@ -103,6 +104,15 @@ const icons: {
   href: string;
   icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 }[] = [
+  {
+    name: "Linkedin",
+    href: "https://www.linkedin.com/in/ludusrusso/",
+    icon: (props) => (
+      <svg fill="currentColor" viewBox="0 0 448 512" {...props}>
+        <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+      </svg>
+    ),
+  },
   {
     name: "Twitter",
     href: "https://twitter.com/ludusrusso",
@@ -260,6 +270,62 @@ const HeroSection = () => {
           src="/ludusrusso.jpg"
           alt=""
         />
+      </div>
+    </div>
+  );
+};
+
+const Quote = () => {
+  return (
+    <div className="bg-white pt-16 lg:py-24">
+      <div className="pb-16 bg-green-600 lg:pb-0 lg:z-10 lg:relative">
+        <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
+          <div className="relative lg:-my-8">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-1/2 bg-white lg:hidden"
+            />
+            <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:p-0 lg:h-full">
+              <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
+                <img
+                  className="object-cover lg:h-full lg:w-full"
+                  src="/ludusrusso2.jpg"
+                  alt="Ludovico Russo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
+            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
+              <blockquote>
+                <div>
+                  <svg
+                    className="h-12 w-12 text-white opacity-25"
+                    fill="currentColor"
+                    viewBox="0 0 32 32"
+                    aria-hidden="true"
+                  >
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                  </svg>
+                  <p className="mt-6 text-2xl font-medium text-white">
+                    La condivisione della conoscenza è cruciale nel mondo dello
+                    sviluppo software. Per questo motivo, offro delle sessione
+                    gratuite di mentoring 1-to-1 sugli argomenti che mi
+                    appassionano.
+                  </p>
+                </div>
+                <footer className="mt-6">
+                  <p className="text-base font-medium text-white">
+                    Ludovico Russo
+                  </p>
+                  <p className="text-base font-medium text-green-100">
+                    🚀 Fullstack Developer
+                  </p>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
