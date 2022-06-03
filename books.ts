@@ -42,7 +42,7 @@ const books = [
   {
     "file": "/Users/ludusrusso/develop/github.com/ludusrusso/www.ludusrusso.dev/content/books/00003-rich-dad-poor-dad/index.mdx",
     "content": "\nHo scoperto essere un classico che mi era sfuggito fino al Novembre scorso. Ammetto di non averne mai sentito\nparlare prima anche se forse avrei dovuto farlo.\n\n**Padre Ricco Padre Povero** parla di finanza personale e di come è imporatante avere la\ngiusta mentalità ed un piano per raggiongere la _ricchezza_ o indipendenza economica,\nche per l'autore non si tratta di guadagnare un milione, 10 milioni o 100 milioni di € ma di\nriuscire ad ottenere un flusso di cassa costante tramite investimenti che ci permette di fare in\nmodo che i nostri soldi lavorino per noi.\n\nMolti spunti sono super interessanti, e sicuramente è uno dei libro che rileggerò nel 2022 per approfondirlo meglio.\n",
-    "slug": "influence-cialdini",
+    "slug": "rick-dad-kiyosaki",
     "frontMatter": {
       "author": "Robert Kiyosaki",
       "links": {
@@ -51,7 +51,7 @@ const books = [
       },
       "title": "Rich Dad Pood Dad",
       "readTime": 1,
-      "href": "/books/influence-cialdini",
+      "href": "/books/rick-dad-kiyosaki",
       "image": "/books/00003-rich-dad-poor-dad/rich-dad-poor-dad.jpg",
       "imagePath": "/books/00003-rich-dad-poor-dad"
     }

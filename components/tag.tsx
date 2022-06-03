@@ -1,6 +1,6 @@
 export const Tag = ({ tag }: { tag: string }) => {
   return (
-    <a href="#" className="inline`b`lock " key={tag}>
+    <div key={tag}>
       <span
         className={classNames(
           `inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-pink-100 text-pink-800`,
@@ -9,7 +9,7 @@ export const Tag = ({ tag }: { tag: string }) => {
       >
         {tag}
       </span>
-    </a>
+    </div>
   );
 };
 
