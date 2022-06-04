@@ -20,6 +20,7 @@ import dynamic from "next/dynamic";
 // @ts-ignore
 import prism from "@mapbox/rehype-prism";
 import { TrackerApp } from "components/apps/tracker";
+import Link from "next/link";
 
 const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
   ssr: false,
@@ -115,7 +116,11 @@ export default function PathPage({
 
         <div className="m-auto w-full mt-3 flex gap-2 justify-center">
           {frontmatter.tags.map((tag) => (
-            <Tag key={tag} tag={tag} />
+            <Link href={`/blog/tags#${tag}`}>
+              <a>
+                <Tag key={tag} tag={tag} />
+              </a>
+            </Link>
           ))}
         </div>
 

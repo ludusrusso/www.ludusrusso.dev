@@ -76,7 +76,7 @@ const getBlogData = async () => {
           published: new Date(data.date),
           publishedReadable: printDate(new Date(data.date)),
           featured: Boolean(data.featured) || false,
-          tags: data.tags || [],
+          tags: data.tags?.map((t) => t.toLowerCase()) || [],
           title: data.title,
           description: data.description,
           lang: data.lang || "it",
