@@ -12,7 +12,7 @@ import { Nav } from "../components/nav";
 import { SEO } from "../components/seo";
 import { Tag } from "../components/tag";
 import { config } from "../utils/config";
-import { getBlogData } from "../utils/getBlogData";
+import { getBlogData, PostData } from "../utils/getBlogData";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
 import { Mailchimp } from "components/mailchimp";
@@ -21,6 +21,7 @@ import dynamic from "next/dynamic";
 import prism from "@mapbox/rehype-prism";
 import { TrackerApp } from "components/apps/tracker";
 import Link from "next/link";
+import { InfoBox } from "components/mdx/info";
 
 const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
   ssr: false,
@@ -29,6 +30,7 @@ const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
 export default function PathPage({
   source,
   frontmatter,
+  similarPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components: MDXRemoteProps["components"] = {
     img: ({ src, alt }) => {
@@ -49,6 +51,7 @@ export default function PathPage({
     ),
     pre: (props: any) => <pre {...props} className="no-prose" />,
     TrackerApp: TrackerApp,
+    InfoBox: InfoBox,
   };
 
   return (
@@ -144,6 +147,7 @@ export default function PathPage({
       </main>
       <Mailchimp title="Ti è piaciuto questo post?" />
 
+      <SimilarPosts posts={similarPosts} />
       <Footer />
     </>
   );
@@ -176,6 +180,14 @@ export async function getStaticProps({
     throw new Error("post not found????");
   }
 
+  const similarPosts = getBlogData().filter((p) => {
+    for (let tag of post.frontMatter.tags) {
+      if (p.frontMatter.tags.includes(tag)) {
+        return p.frontMatter.path !== post.frontMatter.path;
+      }
+    }
+  });
+
   const md = await fs.readFile(post!.file);
   const { content } = matter(md);
   const mdxSource = await serialize(content, {
@@ -192,6 +204,40 @@ export async function getStaticProps({
     props: {
       source: mdxSource,
       frontmatter: post!.frontMatter,
+      similarPosts: similarPosts,
     },
   };
 }
+
+const SimilarPosts = ({ posts }: { posts: PostData[] }) => {
+  if (posts.length === 0) {
+    return null;
+  }
+  return (
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto py-16 px-4 divide-y-2 divide-gray-200 sm:py-24 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-extrabold text-gray-900">
+          Ti potrebbe anche interessare
+        </h2>
+        <div className="mt-6 pt-10">
+          <dl className="space-y-10 md:space-y-0 md:grid md:gap-x-8 md:gap-y-12">
+            {posts.map((post) => (
+              <div key={post.frontMatter.href}>
+                <dt className="text-lg leading-6 font-medium text-gray-900">
+                  <Link href={post.frontMatter.href}>
+                    <a className="hover:text-green-800 underline">
+                      {post.frontMatter.title}
+                    </a>
+                  </Link>
+                </dt>
+                <dd className="mt-2 text-base text-gray-500">
+                  {post.frontMatter.description}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -14,6 +14,13 @@ path: "/2017/04/27/implementiamo-un-bot-telegram-con-python/"
 image: "./chatbotIntro.png"
 ---
 
+<InfoBox>
+Questo articolo è un po' vecchiotto e molte cose probabilmente non funzionano più! Scuatemi!
+
+In attesa che lo aggiorni, potete accedere ad una seconda serie di articoli che sto scrivendo:
+[Creare un Bot Telegram in Node.js](/2022/06/telegram-bot-node)
+</InfoBox>
+
 Da un po' di tempo ho scoperto la bellezza ed il divertimento di implementare bot telegram, cioè chatbot automatici che possono essere programmati per rispondere in modo semplice (o complesso) a messaggi da utenti reali.
 
 Chi mi segue su questo blog o su [HotBlack Robotics](http://www.hotblackrobotics.com/) sa bene che mi diletto non poco con questa tecnologia. Vi propongo oggi quindi una brevissima introduzione allo sviluppo di chatbot utilizzando _Python_ e la libreria _Telepot_.

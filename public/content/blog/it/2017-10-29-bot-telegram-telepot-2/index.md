@@ -15,6 +15,13 @@ path: "/2017/10/29/bot-telegram-telepot-2/"
 image: "./main.jpeg"
 ---
 
+<InfoBox>
+Questo articolo è un po' vecchiotto e molte cose probabilmente non funzionano più! Scuatemi!
+
+In attesa che lo aggiorni, potete accedere ad una seconda serie di articoli che sto scrivendo:
+[Creare un Bot Telegram in Node.js](/2022/06/telegram-bot-node)
+</InfoBox>
+
 Dato il grande interesse riscontrato sul [mio precedente post](/2017/04/27/implementiamo-un-bot-telegram-con-python/) riguardo lo sviluppo
 di bot Telegram usando **Python** e la libreria **telepot**, ho deciso di continuare
 a scrivere post riguardo questo argomento.
