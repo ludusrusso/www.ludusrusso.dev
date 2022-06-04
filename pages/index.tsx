@@ -66,7 +66,7 @@ export async function getStaticProps() {
     .filter((p) => {
       return p.file.includes("/blog/");
     })
-    .filter((_, idx) => idx < 6)
+    .filter((_, idx) => idx < 9)
     .map((d) => {
       const { frontMatter } = d;
       return {
