@@ -116,9 +116,9 @@ export default function PathPage({
 
         <div className="m-auto w-full mt-3 flex gap-2 justify-center">
           {frontmatter.tags.map((tag) => (
-            <Link href={`/blog/tags#${tag}`}>
+            <Link href={`/blog/tags#${tag}`} key={tag}>
               <a>
-                <Tag key={tag} tag={tag} />
+                <Tag tag={tag} />
               </a>
             </Link>
           ))}
