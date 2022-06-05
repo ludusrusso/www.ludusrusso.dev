@@ -1,7 +1,8 @@
 export const Tag = ({ tag }: { tag: string }) => {
   return (
-    <div key={tag}>
+    <div className="flex items-center">
       <span
+        key={tag}
         className={classNames(
           `inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-pink-100 text-pink-800`,
           getColor(tag)

@@ -72,7 +72,7 @@ const getBlogData = async () => {
           path: postPath,
           author,
           draft: data.draft || false,
-          readTime: readTime === 1 ? "1 min" : `${readTime} mins`,
+          readTime: readTime === 1 ? "1 minuto" : `${readTime} minuti`,
           published: new Date(data.date),
           publishedReadable: printDate(new Date(data.date)),
           featured: Boolean(data.featured) || false,

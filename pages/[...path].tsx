@@ -112,7 +112,7 @@ export default function PathPage({
                 {frontmatter.publishedReadable}
               </time>
               <span aria-hidden="true">&middot;</span>
-              <span>{frontmatter.readTime} min read</span>
+              <span>lettura in {frontmatter.readTime}</span>
             </div>
           </div>
         </div>

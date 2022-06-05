@@ -62,7 +62,7 @@ export const PostPreview = ({ post }: PostPreviewProps) => {
                   {post.publishedReadable}
                 </time>
                 <span aria-hidden="true">&middot;</span>
-                <span>{post.readTime} read</span>
+                <span>{post.readTime}</span>
               </div>
             </div>
           </div>
