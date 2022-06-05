@@ -22,7 +22,7 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <SEO title="Home" />
+      <SEO description="Mi piace sperimentare e scoprire nuove tecnologie. Faccio molti esperimenti online in livestream, seguimi per scoprire ogni giorno qualcosa di nuovo insieme a tanti programmatore esperti!" />
       <Banner />
       <HeroSection />
 
@@ -61,18 +61,13 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  const blogData = await getBlogData();
+  const blogData = getBlogData();
   const posts = blogData
     .filter((p) => {
       return p.file.includes("/blog/");
     })
     .filter((_, idx) => idx < 9)
-    .map((d) => {
-      const { frontMatter } = d;
-      return {
-        frontMatter,
-      };
-    });
+    .map(({ frontMatter }) => ({ frontMatter }));
 
   const nextEpisode = await db.episode.findFirst({
     where: {
