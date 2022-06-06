@@ -1,0 +1,218 @@
+---
+title: Creare un Bot Telegram in Node.js - I comandi
+date: "2022-06-06"
+tags:
+  - node
+  - telegram
+category: "blog"
+author: "ludusrusso"
+description: Continua lo sviluppo del nostro Bot Telegram con JavaScript e TypeScript in Node.js
+image: "./main.png"
+---
+
+Nel [procedente articolo](/2022/06/telegram-bot-node) abbiamo visto come creare in modo semplice
+e veloce un progetto Node e Typescript per programmare un semplice bot Telegram usando la
+libreria `telegraf`. Oggi mi voglio concentrare sull'esplorare questa libreria ed iniziare
+a dare un po' di intelligenza al nostro bot.
+
+### Una semplice risposta automatica
+
+Nel progetto precedente abbiamo visto come creare un bot Telegram che risponde in modo
+abbastanza stupido ad ogni messaggio ricevuto. In realtà la potenza di `telegraf` ci
+permette di creare bot intelligenti in modo molto semplice e veloce.
+
+Partiamo però dal codice sviluppato precedentemente:
+
+```ts
+import { Telegraf } from "telegraf";
+
+const bot = new Telegraf("<INSERITE IL VOSTRO TOKE QUI>");
+
+bot.on("text", (ctx) => {
+  const msg = ctx.message;
+  ctx.reply(`Ciao ${msg.from.first_name}, sono un bot molto stupido!`);
+  ctx.reply(`Ho ricevuto questo: ${msg.text}!`);
+  console.log(msg);
+});
+
+bot.launch();
+```
+
+### `.start()` e `.help()`
+
+Telegraf ci mette a disposizione due funzioni (start e help) che ci permettono di programmare
+il comportamento del bot al primo accesso e alla richiesta di aiuto fatta dall'utente dal bot.
+
+Per usare le funzioni è molto semplice:
+
+```ts
+bot.start((ctx) => {
+  ctx.reply("Bevenuto! Io sono @ludusrusso_bot!");
+});
+```
+
+```ts
+bot.help((ctx) => {
+  ctx.reply("Sono @ludusrusso_bot, ma al momento non so fare quasi nulla!");
+});
+```
+
+Queste due funzioni rispondono a due comandi predisposti da telegra: rispettivamente `/start` (che viene inviato in automatico
+quando si inizia una chat con un nuovo bot) e `/help`.
+
+### Comandi personalizzati
+
+In modo molto semplice, possiamo anche creare il nostro comando personalizzato, ad esempio il seguente:
+
+```ts
+bot.command("ciao", (ctx) => {
+  ctx.reply(`Ciao! ${ctx.message.from.first_name}`);
+});
+```
+
+che risponderà al comando specifico `/ciao` salutando il mettende del messagio con il suo nome.
+
+### Parsare i comandi
+
+Ovvaimente il caso che abbiamo fatto adesso è molto semplice e banale. In applicazioni reali, solitamente,
+oltre al comando all'interno del messaggio vengono passate altre informazioni agiuntive, ed è nostro compito
+parsarle ed eleborarle nel modo che ci sembra più opportuno.
+
+Ad esempio, supponiamo di voler fare un comando `/stats` in grado di calcolare alcune statistiche su dei numeri
+che vengono passate, come media e somma.
+
+Ad esemio, il comando `/stats 1 2 3 4 5` risponderà con `Media: 3.0, Somma: 15`. Per farlo, ovviamente, dobbiamo
+parsare il contenuto del messaggio dopo il comando e poi agire di conseguenza, vediamo come fare.
+
+Per prima di tutto possiamo creare una funzione che ci aiuterà a fare il parsing, questa funzione estrarrà
+il cotenuto del messaggio e lo trasformerà in un array di numeri. Per farlo possiamo sfruttare la funzione `split`
+ed poi eliminare le stringhe che non sono convertibili in numeri:
+
+```ts
+const parseStats = (msg: string) => {
+  return msg
+    .split(" ")
+    .map((s) => parseFloat(s))
+    .filter((n) => !isNaN(n));
+};
+```
+
+Questa funzione divide l'array nelle parole usando `.split(" ")` e poi converte ogni stringa in numero usando `parseInt`.
+`parseFloat` ritorna un numero o `NaN` se la stringa non è convertibile in numero. Per finire, eliminiamo tutti i non
+numeri usando `.filter((n) => !isNaN(n))`.
+
+A questo punto possiamo creare il nostro comando:
+
+```ts
+bot.command("stats", (ctx) => {
+  const numbers = parseStats(ctx.message.text);
+  if (numbers.length === 0) {
+    ctx.reply("Non mi hai passato nessun numero!");
+    return;
+  }
+  const sum = numbers.reduce((a, b) => a + b, 0);
+  const mean = sum / numbers.length;
+  ctx.reply("La media è: " + mean);
+  ctx.reply("La somma è: " + sum);
+});
+```
+
+Notare che ho fatto un primo check per vedere se l'utente ha passato almeno un numero al robot, altrimenti ritorno
+un messaggio di errore.
+
+Se i numeri vengono passati, calcolo la loro somma e la loro media:
+
+```ts
+const sum = numbers.reduce((a, b) => a + b, 0);
+const mean = sum / numbers.length;
+```
+
+E li invio all'utente.
+
+### Alias dei comandi
+
+Un'altra cosa molto utile che la libreria `telegraf` ci permette di fare è di associare la stessa funzione di callback
+a comandi diversi, ad esempio per creare alias o abbraviazioni. Possiamo per esempio associare la funzione precedente
+ai comandi `/stats`, `/stat` e `/st` semplicemente passando un array invece che una stringa
+
+```ts
+bot.command(["stats", "stat", "st"], (ctx) => {
+  // ...
+});
+```
+
+### Rispondere a messaggi inaspettati
+
+Se il bot non capisce cosa gli ha inviato l'utente possaimo rispondere ad un messaggio di errore, per farlo,
+basta inserire la funzione `bot.on('text', ...)` vista nel precedente articolo **alla fine della lista di comandi**.
+
+```ts
+bot.on("text", (ctx) => {
+  const msg = ctx.message;
+  ctx.reply(`Ciao ${msg.from.first_name}, sono un bot molto stupido!`);
+  ctx.reply(`Non ho capito quello che mia hai detto. Prova con /help o /stats`
+  console.log(msg);
+});
+```
+
+Attenzione: è molto importante che questa funzione sia l'ultima ad essere definita altrimenti avrà priorità sulle funzioni
+definite dopo.
+
+### Cosa abbiamo imparato
+
+1. Come gestire i comandi `/start` e `/help` in `telegraf`,
+2. Come creare comandi custom,
+3. Come parsare stringhe per gestire i parametri dei comandi,
+4. Come creare una funzione di callback che risponde in caso niente matchi con le funzioni precedenti.
+
+Spero che questa guida possa esservi stata utile, nelle prossime inizieremo a
+vedere come e devo possiamo deployare il nostro bot Telegram.
+
+Intanto vi lascio con il codice completo qui sotto!
+
+```ts
+import { Telegraf } from "telegraf";
+
+const bot = new Telegraf("<INSERITE IL VOSTRO TOKE QUI>");
+
+bot.start((ctx) => {
+  ctx.reply("Bevenuto! Io sono @ludusrusso_bot!");
+});
+
+bot.help((ctx) => {
+  ctx.reply("Sono @ludusrusso_bot, ma al momento non so fare quasi nulla!");
+});
+
+bot.command("ciao", (ctx) => {
+  console.log(ctx.message);
+  ctx.reply(`Ciao! ${ctx.message.from.first_name}`);
+});
+
+bot.command(["stats", "stat", "st"], (ctx) => {
+  const numbers = parseStats(ctx.message.text);
+  if (numbers.length === 0) {
+    ctx.reply("Non mi hai passato nessun numero!");
+    return;
+  }
+  const sum = numbers.reduce((a, b) => a + b, 0);
+  const mean = sum / numbers.length;
+  ctx.reply("La media è: " + mean);
+  ctx.reply("La somma è: " + sum);
+});
+
+bot.on("text", (ctx) => {
+  const msg = ctx.message;
+  ctx.reply(`Ciao ${msg.from.first_name}, sono un bot molto stupido!`);
+  ctx.reply(`Ho ricevuto questo: ${msg.text}!`);
+  console.log(msg);
+});
+
+const parseStats = (msg: string) => {
+  return msg
+    .split(" ")
+    .map((s) => parseFloat(s))
+    .filter((n) => !isNaN(n));
+};
+
+bot.launch();
+```
