@@ -172,8 +172,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ path: string[] }>) {
-  const post = getBlogData().find((p) =>
-    p.frontMatter.path.includes(params!.path.join("/"))
+  const post = getBlogData().find(
+    (p) => p.frontMatter.path == params!.path.join("/")
   );
 
   if (!post) {

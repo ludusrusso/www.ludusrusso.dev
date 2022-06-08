@@ -65,7 +65,7 @@ const getBlogData = async () => {
       };
       const author = authors.find((a) => a.id === data.author) || authors[0];
       const readTime = readingTime(content);
-      const postPath = data.path || extractPathFromFile(file);
+      const postPath = getPath(data, file);
       return {
         file,
         frontMatter: {
@@ -97,6 +97,20 @@ const getBlogData = async () => {
     })
   );
   return datas.filter((d) => !d.frontMatter.draft);
+};
+
+const getPath = (data: Data, file: string) => {
+  if (!data.path) {
+    return extractPathFromFile(file);
+  }
+  let path = data.path;
+  if (data.path.startsWith("/")) {
+    path = path.substring(1);
+  }
+  if (data.path.endsWith("/")) {
+    path = path.slice(0, -1);
+  }
+  return path;
 };
 
 const extractPathFromFile = (file: string) => {
