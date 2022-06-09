@@ -34,7 +34,13 @@ export default function PathPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components: MDXRemoteProps["components"] = {
     img: ({ src, alt }) => {
-      return <img alt={alt} src={path.join(frontmatter.imagePath, src!)} />;
+      return (
+        <img
+          className="m-auto"
+          alt={alt}
+          src={path.join(frontmatter.imagePath, src!)}
+        />
+      );
     },
     AmazonAffiliationLink: ({ src }: { src: string }) => (
       <div className="m-auto">
