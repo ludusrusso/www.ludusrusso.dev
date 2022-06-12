@@ -31,6 +31,7 @@ export default function Blog({
             {posts.map((post) => (
               <PostPreview
                 post={post.frontMatter}
+                author={post.author}
                 key={post.frontMatter.title}
               />
             ))}
@@ -44,14 +45,9 @@ export default function Blog({
 
 export async function getStaticProps() {
   const blogData = getBlogData();
-  const posts = blogData
-    .filter((p) => p.file.includes("/hbr/"))
-    .map((d) => {
-      const { frontMatter } = d;
-      return {
-        frontMatter,
-      };
-    });
+  const posts = blogData.filter((p) => {
+    return p.frontMatter._raw.flattenedPath.startsWith("blog/hbr");
+  });
 
   return {
     props: { posts },

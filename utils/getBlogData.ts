@@ -1,19 +1,16 @@
-import { data } from "blog";
+import { authors } from "../authors";
+import { allBlogPosts } from "contentlayer/generated";
 
 export const getBlogData = () => {
-  return data
-    .map((d) => ({
-      ...d,
-      frontMatter: {
-        ...d.frontMatter,
-        published: new Date(d.frontMatter.published),
-      },
+  return allBlogPosts
+    .map(({ body, ...frontMatter }) => ({
+      frontMatter,
+      author: authors.find((a) => a.id === frontMatter.author) || authors[0],
     }))
-    .filter(
-      (d) =>
-        d.frontMatter.published <= new Date() && d.frontMatter.draft === false
-    );
+    .sort(
+      (a, b) =>
+        new Date(b.frontMatter.date).getTime() -
+        new Date(a.frontMatter.date).getTime()
+    )
+    .filter((post) => !post.frontMatter.draft);
 };
-
-export type PostData = ReturnType<typeof getBlogData>[number];
-export type PostFrontMatter = PostData["frontMatter"];

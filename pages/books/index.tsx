@@ -1,7 +1,7 @@
-import { getBooks } from "books";
 import { Footer } from "components/footer";
 import { Nav } from "components/nav";
 import { SEO } from "components/seo";
+import { allBooks } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 
@@ -28,10 +28,9 @@ const BookPage = ({
 export default BookPage;
 
 export const getStaticProps = () => {
-  const books = getBooks();
   return {
     props: {
-      books: books,
+      books: allBooks,
     },
   };
 };
@@ -55,24 +54,24 @@ const BookList = ({ books }: Pick<Props, "books">) => {
               role="list"
               className="space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0"
             >
-              {books.map(({ frontMatter, slug }) => (
-                <li key={slug} className="sm:py-8">
+              {books.map((book) => (
+                <li key={book.slug} className="sm:py-8">
                   <div className="space-y-4 sm:grid sm:grid-cols-6 sm:items-start sm:gap-6 sm:space-y-0">
                     <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
                       <img
                         className="object-cover w-32 shadow-lg rounded-lg"
-                        src={frontMatter.image}
+                        src={book.imageUrl}
                         alt=""
                       />
                     </div>
                     <div className="sm:col-span-5">
                       <div className="space-y-4">
                         <div className="text-lg leading-6 font-medium space-y-1">
-                          <h3>{frontMatter.title}</h3>
+                          <h3>{book.title}</h3>
                           <p>
                             <span className="text-gray-600">Autore</span>{" "}
                             <span className="text-indigo-600">
-                              {frontMatter.author}
+                              {book.author}
                             </span>
                           </p>
                         </div>
@@ -80,10 +79,10 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                           {/* <p className="text-gray-500">{person.bio}</p> */}
                         </div>
                         <ul role="list" className="flex flex-col space-y-2">
-                          {frontMatter.links.en && (
+                          {book.links.en && (
                             <li>
                               <a
-                                href={frontMatter.links.en}
+                                href={book.links.en}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
@@ -93,12 +92,12 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                             </li>
                           )}
 
-                          {frontMatter.links.it && (
+                          {book.links.it && (
                             <li>
                               <a
                                 target="_blank"
                                 rel="noreferrer"
-                                href={frontMatter.links.it}
+                                href={book.links.it}
                                 className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                               >
                                 <span>Compra in Italiano 🇮🇹 </span>
@@ -107,7 +106,7 @@ const BookList = ({ books }: Pick<Props, "books">) => {
                           )}
 
                           <li>
-                            <Link href={`/books/${slug}`}>
+                            <Link href={`/books/${book.slug}`}>
                               <a className="text-gray-800 underline">
                                 <span>Cosa ne penso? 🧐</span>
                               </a>

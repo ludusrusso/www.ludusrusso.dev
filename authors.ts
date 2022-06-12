@@ -1,0 +1,39 @@
+export interface Author {
+  id: string;
+  name: string;
+  bio: string;
+  profile: string;
+}
+
+export const authors: Author[] = [
+  {
+    id: "ludusrusso",
+    name: "Ludovico Russo",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/ludusrusso.jpg",
+  },
+  {
+    id: "sgabello",
+    name: "Gabriele Ermacora",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/sgabello.jpg",
+  },
+  {
+    id: "pietrochirio",
+    name: "Pietro Chiro",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/pietrochirio.jpg",
+  },
+  {
+    id: "fiorellazza",
+    name: "Fiorella Sibona",
+    bio: "Aspiring roboticist",
+    profile: "/imgs/authors/fiorellazza.jpg",
+  },
+  {
+    id: "ruslan",
+    name: "Ruslan",
+    bio: "Dev Passionate",
+    profile: "/imgs/authors/ruslan.jpg",
+  },
+];

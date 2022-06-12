@@ -153,7 +153,6 @@ const days = [
 
 const date2EventCoverTime = (d: string | Date) => {
   const date = new Date(d);
-  console.log("date.getDay() - 1", date.getDay());
   return `${days[date.getDay()]} ${date.getDate()} ${
     mounths[date.getMonth()]
   } ${date.getFullYear()} - ${padTime(date.getHours())}.${padTime(
