@@ -4,7 +4,7 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Sun, 12 Jun 2022 15:38:23 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 18 Jun 2022 08:49:57 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
@@ -55,22 +55,6 @@
             <guid>https://www.ludusrusso.dev/2022/04/database-backup-on-github-actions</guid>
             <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Backup a small database on github is super simple with github actions.]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[La robotica: la scienza che sta rivoluzionando il mondo]]></title>
-            <link>https://www.ludusrusso.dev/robotica/001-introduzione-robotica</link>
-            <guid>https://www.ludusrusso.dev/robotica/001-introduzione-robotica</guid>
-            <pubDate>Wed, 10 Jan 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Iniziamo insieme un viaggio alla scoperta dei robot e della robotica!]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Robotica di Servizio, ROS e Cloud Robotics]]></title>
-            <link>https://www.ludusrusso.dev/robotica/002-introduzione-robotica-servizio</link>
-            <guid>https://www.ludusrusso.dev/robotica/002-introduzione-robotica-servizio</guid>
-            <pubDate>Wed, 10 Jan 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Iniziamo insieme un viaggio alla scoperta dei robot e della robotica!]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -130,14 +114,6 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Tutorial - Usiamo la piattaforma di Cloud Robotics per sviluppare un semplice assistente personale Robotico]]></title>
-            <link>https://www.ludusrusso.dev/hbr/tutorial-usiamo-la-piattaforma-di-cloud-robotics-per-sviluppare-un-semplice-assistente-personale-robotico</link>
-            <guid>https://www.ludusrusso.dev/hbr/tutorial-usiamo-la-piattaforma-di-cloud-robotics-per-sviluppare-un-semplice-assistente-personale-robotico</guid>
-            <pubDate>Fri, 10 Feb 2017 17:48:31 GMT</pubDate>
-            <description><![CDATA[Usiamo la piattaforma di Cloud Robotics per sviluppare un semplice assistente personale Robotico]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Tutorial hardware - Come costruire il robot Dotbot]]></title>
             <link>https://www.ludusrusso.dev/hbr/tutorial-hardware-come-costruire-il-robot-dotbot</link>
             <guid>https://www.ludusrusso.dev/hbr/tutorial-hardware-come-costruire-il-robot-dotbot</guid>
@@ -145,10 +121,11 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Come creare una semplice Web App per interagire con il vostro robot]]></title>
-            <link>https://www.ludusrusso.dev/hbr/come-creare-una-semplice-web-app-per-interagire-con-il-vostro-robot</link>
-            <guid>https://www.ludusrusso.dev/hbr/come-creare-una-semplice-web-app-per-interagire-con-il-vostro-robot</guid>
-            <pubDate>Mon, 20 Feb 2017 18:03:13 GMT</pubDate>
+            <title><![CDATA[Tutorial - Usiamo la piattaforma di Cloud Robotics per sviluppare un semplice assistente personale Robotico]]></title>
+            <link>https://www.ludusrusso.dev/hbr/tutorial-usiamo-la-piattaforma-di-cloud-robotics-per-sviluppare-un-semplice-assistente-personale-robotico</link>
+            <guid>https://www.ludusrusso.dev/hbr/tutorial-usiamo-la-piattaforma-di-cloud-robotics-per-sviluppare-un-semplice-assistente-personale-robotico</guid>
+            <pubDate>Fri, 10 Feb 2017 17:48:31 GMT</pubDate>
+            <description><![CDATA[Usiamo la piattaforma di Cloud Robotics per sviluppare un semplice assistente personale Robotico]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -159,10 +136,10 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Il fondamento della piattaforma di Cloud Robotics: Robotics Operating System ]]></title>
-            <link>https://www.ludusrusso.dev/hbr/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system</link>
-            <guid>https://www.ludusrusso.dev/hbr/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system</guid>
-            <pubDate>Tue, 14 Mar 2017 22:54:50 GMT</pubDate>
+            <title><![CDATA[Come creare una semplice Web App per interagire con il vostro robot]]></title>
+            <link>https://www.ludusrusso.dev/hbr/come-creare-una-semplice-web-app-per-interagire-con-il-vostro-robot</link>
+            <guid>https://www.ludusrusso.dev/hbr/come-creare-una-semplice-web-app-per-interagire-con-il-vostro-robot</guid>
+            <pubDate>Mon, 20 Feb 2017 18:03:13 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -173,10 +150,10 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Iniziamo a programmare!]]></title>
-            <link>https://www.ludusrusso.dev/hbr/iniziamo-a-programmare</link>
-            <guid>https://www.ludusrusso.dev/hbr/iniziamo-a-programmare</guid>
-            <pubDate>Thu, 16 Mar 2017 22:00:37 GMT</pubDate>
+            <title><![CDATA[Il fondamento della piattaforma di Cloud Robotics: Robotics Operating System ]]></title>
+            <link>https://www.ludusrusso.dev/hbr/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system</link>
+            <guid>https://www.ludusrusso.dev/hbr/il-fondamento-della-piattaforma-di-cloud-robotics-robotics-operating-system</guid>
+            <pubDate>Tue, 14 Mar 2017 22:54:50 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -184,6 +161,13 @@
             <link>https://www.ludusrusso.dev/hbr/come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud-</link>
             <guid>https://www.ludusrusso.dev/hbr/come-collegare-un-robot-comprato-da-tiger-spider-robot-in-piattaforma-cloud-</guid>
             <pubDate>Thu, 16 Mar 2017 22:09:28 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Iniziamo a programmare!]]></title>
+            <link>https://www.ludusrusso.dev/hbr/iniziamo-a-programmare</link>
+            <guid>https://www.ludusrusso.dev/hbr/iniziamo-a-programmare</guid>
+            <pubDate>Thu, 16 Mar 2017 22:00:37 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -279,17 +263,17 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Rilascio HBrain v0.5.2]]></title>
-            <link>https://www.ludusrusso.dev/hbr/rilascio-hbrain-v052</link>
-            <guid>https://www.ludusrusso.dev/hbr/rilascio-hbrain-v052</guid>
-            <pubDate>Tue, 23 May 2017 11:32:38 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Accedere al Terminale Linux di HBrain da Browser]]></title>
             <link>https://www.ludusrusso.dev/hbr/accedere-al-terminale-linux-di-hbrain-da-browser</link>
             <guid>https://www.ludusrusso.dev/hbr/accedere-al-terminale-linux-di-hbrain-da-browser</guid>
             <pubDate>Tue, 23 May 2017 13:37:19 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Rilascio HBrain v0.5.2]]></title>
+            <link>https://www.ludusrusso.dev/hbr/rilascio-hbrain-v052</link>
+            <guid>https://www.ludusrusso.dev/hbr/rilascio-hbrain-v052</guid>
+            <pubDate>Tue, 23 May 2017 11:32:38 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -315,17 +299,17 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Webapp per il controllo del robot via frecce su WebApp]]></title>
-            <link>https://www.ludusrusso.dev/hbr/webapp-per-il-controllo-del-robot-via-frecce-su-webapp</link>
-            <guid>https://www.ludusrusso.dev/hbr/webapp-per-il-controllo-del-robot-via-frecce-su-webapp</guid>
-            <pubDate>Fri, 23 Jun 2017 14:31:31 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Implementare un motore d'intelligenza artificale sul vostro bot]]></title>
             <link>https://www.ludusrusso.dev/hbr/implementare-un-motore-dintelligenza-artificale-sul-vostro-bot</link>
             <guid>https://www.ludusrusso.dev/hbr/implementare-un-motore-dintelligenza-artificale-sul-vostro-bot</guid>
             <pubDate>Fri, 16 Jun 2017 07:59:40 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Webapp per il controllo del robot via frecce su WebApp]]></title>
+            <link>https://www.ludusrusso.dev/hbr/webapp-per-il-controllo-del-robot-via-frecce-su-webapp</link>
+            <guid>https://www.ludusrusso.dev/hbr/webapp-per-il-controllo-del-robot-via-frecce-su-webapp</guid>
+            <pubDate>Fri, 23 Jun 2017 14:31:31 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -336,17 +320,17 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Un robot al museo - MuFant e HotBlack Robotics]]></title>
-            <link>https://www.ludusrusso.dev/hbr/un-robot-al-museo-mufant-e-hotblack-robotics</link>
-            <guid>https://www.ludusrusso.dev/hbr/un-robot-al-museo-mufant-e-hotblack-robotics</guid>
-            <pubDate>Tue, 31 Oct 2017 09:55:34 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Annunciamo il programma di Beta Testing di HBR Cloud API]]></title>
             <link>https://www.ludusrusso.dev/hbr/annunciamo-il-programma-di-beta-testing-di-hbr-cloud-api</link>
             <guid>https://www.ludusrusso.dev/hbr/annunciamo-il-programma-di-beta-testing-di-hbr-cloud-api</guid>
             <pubDate>Sat, 07 Oct 2017 08:13:27 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Un robot al museo - MuFant e HotBlack Robotics]]></title>
+            <link>https://www.ludusrusso.dev/hbr/un-robot-al-museo-mufant-e-hotblack-robotics</link>
+            <guid>https://www.ludusrusso.dev/hbr/un-robot-al-museo-mufant-e-hotblack-robotics</guid>
+            <pubDate>Tue, 31 Oct 2017 09:55:34 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -454,6 +438,22 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[La robotica: la scienza che sta rivoluzionando il mondo]]></title>
+            <link>https://www.ludusrusso.dev/robotica/001-introduzione-robotica</link>
+            <guid>https://www.ludusrusso.dev/robotica/001-introduzione-robotica</guid>
+            <pubDate>Wed, 10 Jan 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[Iniziamo insieme un viaggio alla scoperta dei robot e della robotica!]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Robotica di Servizio, ROS e Cloud Robotics]]></title>
+            <link>https://www.ludusrusso.dev/robotica/002-introduzione-robotica-servizio</link>
+            <guid>https://www.ludusrusso.dev/robotica/002-introduzione-robotica-servizio</guid>
+            <pubDate>Wed, 10 Jan 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[Iniziamo insieme un viaggio alla scoperta dei robot e della robotica!]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Inauguriamo il Blog]]></title>
             <link>https://www.ludusrusso.dev/2016/12/22/inauguriamo-il-blog</link>
             <guid>https://www.ludusrusso.dev/2016/12/22/inauguriamo-il-blog</guid>
@@ -548,18 +548,18 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Misurare la costante di Planck con Arduino e Python - Parte 1]]></title>
-            <link>https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1</link>
-            <guid>https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1</guid>
-            <pubDate>Wed, 22 Feb 2017 00:00:00 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Utilizzo di Nanpy con il sensore di temperatura/umidità della famiglia DHT]]></title>
             <link>https://www.ludusrusso.dev/2017/03/13/utilizzo-di-nanpy-con-il-sensore-di-temperatura-umidita-della-famiglia-dht</link>
             <guid>https://www.ludusrusso.dev/2017/03/13/utilizzo-di-nanpy-con-il-sensore-di-temperatura-umidita-della-famiglia-dht</guid>
             <pubDate>Mon, 13 Mar 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Come utilizzare Nanpy col sensore DHT di temperatura e Umidità]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Misurare la costante di Planck con Arduino e Python - Parte 1]]></title>
+            <link>https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1</link>
+            <guid>https://www.ludusrusso.dev/2017/02/22/misurare-la-costante-di-planck-con-arduino-e-python-parte-1</guid>
+            <pubDate>Wed, 22 Feb 2017 00:00:00 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -579,17 +579,17 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Misurare la costante di Planck con Arduino e Python - Parte 3]]></title>
-            <link>https://www.ludusrusso.dev/2017/03/23/misurare-la-costante-di-planck-con-arduino-e-python-parte-3</link>
-            <guid>https://www.ludusrusso.dev/2017/03/23/misurare-la-costante-di-planck-con-arduino-e-python-parte-3</guid>
-            <pubDate>Thu, 23 Mar 2017 00:00:00 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Misurare la costante di Planck con Arduino e Python - Parte 2]]></title>
             <link>https://www.ludusrusso.dev/2017/03/21/misurare-la-costante-di-planck-con-arduino-e-python-parte-2</link>
             <guid>https://www.ludusrusso.dev/2017/03/21/misurare-la-costante-di-planck-con-arduino-e-python-parte-2</guid>
             <pubDate>Tue, 21 Mar 2017 00:00:00 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Misurare la costante di Planck con Arduino e Python - Parte 3]]></title>
+            <link>https://www.ludusrusso.dev/2017/03/23/misurare-la-costante-di-planck-con-arduino-e-python-parte-3</link>
+            <guid>https://www.ludusrusso.dev/2017/03/23/misurare-la-costante-di-planck-con-arduino-e-python-parte-3</guid>
+            <pubDate>Thu, 23 Mar 2017 00:00:00 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -739,19 +739,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[4 (+1) Libri su Python (in Inglese) da cui imparare]]></title>
-            <link>https://www.ludusrusso.dev/2017/11/02/libri-python</link>
-            <guid>https://www.ludusrusso.dev/2017/11/02/libri-python</guid>
-            <pubDate>Thu, 02 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Una lista di libri su Python (in Inglese) da cui ho imparato a programmare]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[PARLOMA]]></title>
             <link>https://www.ludusrusso.dev/2017/10/31/parloma</link>
             <guid>https://www.ludusrusso.dev/2017/10/31/parloma</guid>
             <pubDate>Tue, 31 Oct 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Un sistema di comunicazione remota per Sordociechi]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[4 (+1) Libri su Python (in Inglese) da cui imparare]]></title>
+            <link>https://www.ludusrusso.dev/2017/11/02/libri-python</link>
+            <guid>https://www.ludusrusso.dev/2017/11/02/libri-python</guid>
+            <pubDate>Thu, 02 Nov 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[Una lista di libri su Python (in Inglese) da cui ho imparato a programmare]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -787,6 +787,14 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[Leggere i codici a barre con OpenCV e zbar in Python]]></title>
+            <link>https://www.ludusrusso.dev/2018/01/22/opencv-barcode-reader</link>
+            <guid>https://www.ludusrusso.dev/2018/01/22/opencv-barcode-reader</guid>
+            <pubDate>Mon, 22 Jan 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[Come usare Python per leggere i codici a barre degli alimenti e ricavarne alcune informazioni utili]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[TDD con Flask e PyTest per lo sviluppo di API REST. Parte 2]]></title>
             <link>https://www.ludusrusso.dev/2018/01/25/tdd-flask-pytest-2</link>
             <guid>https://www.ludusrusso.dev/2018/01/25/tdd-flask-pytest-2</guid>
@@ -800,14 +808,6 @@
             <guid>https://www.ludusrusso.dev/2018/01/31/telegram-opencv-barcode</guid>
             <pubDate>Wed, 31 Jan 2018 00:00:00 GMT</pubDate>
             <description><![CDATA[Implementiamo un bot Telegram in grado di leggere ed analizzare le immagini per la lettura ed interpretazione dei codici a barre]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Leggere i codici a barre con OpenCV e zbar in Python]]></title>
-            <link>https://www.ludusrusso.dev/2018/01/22/opencv-barcode-reader</link>
-            <guid>https://www.ludusrusso.dev/2018/01/22/opencv-barcode-reader</guid>
-            <pubDate>Mon, 22 Jan 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Come usare Python per leggere i codici a barre degli alimenti e ricavarne alcune informazioni utili]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -851,14 +851,6 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[I chatbot possono Parlare? Sviluppiamo un bot telegram che manda messaggi vocali]]></title>
-            <link>https://www.ludusrusso.dev/2018/05/17/bot-messaggi-vocali</link>
-            <guid>https://www.ludusrusso.dev/2018/05/17/bot-messaggi-vocali</guid>
-            <pubDate>Thu, 17 May 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Usiamo le API di sintesi vocale di google per creare un bot in grado di mandare messaggi vocali]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Robotica di Servizio in Pillole]]></title>
             <link>https://www.ludusrusso.dev/2018/06/11/pillole-robotica-servizio</link>
             <guid>https://www.ludusrusso.dev/2018/06/11/pillole-robotica-servizio</guid>
@@ -867,27 +859,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[I chatbot possono Parlare? Sviluppiamo un bot telegram che manda messaggi vocali]]></title>
+            <link>https://www.ludusrusso.dev/2018/05/17/bot-messaggi-vocali</link>
+            <guid>https://www.ludusrusso.dev/2018/05/17/bot-messaggi-vocali</guid>
+            <pubDate>Thu, 17 May 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[Usiamo le API di sintesi vocale di google per creare un bot in grado di mandare messaggi vocali]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Robot Open Source - Docker e Raspberry]]></title>
             <link>https://www.ludusrusso.dev/2018/06/30/videocorso-robot-open-source-docker-raspberry</link>
             <guid>https://www.ludusrusso.dev/2018/06/30/videocorso-robot-open-source-docker-raspberry</guid>
             <pubDate>Sat, 30 Jun 2018 00:00:00 GMT</pubDate>
             <description><![CDATA[È disponibile il video "Docker e Raspberry".]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Buildare e usare container Docker per Raspberry Pi]]></title>
-            <link>https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi</link>
-            <guid>https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi</guid>
-            <pubDate>Fri, 29 Jun 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[In questa guida vediamo come buildare ed utilizzare Docker su Raspberry Pi (ed in generale sistemi Linux Embedded) per velocizzare la produzione di applicazioni Linux Embedded]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Setup Wifi super semplice per Raspbian Lite]]></title>
-            <link>https://www.ludusrusso.dev/2018/07/01/raspberry-pi-wifi-setup-super-semplice</link>
-            <guid>https://www.ludusrusso.dev/2018/07/01/raspberry-pi-wifi-setup-super-semplice</guid>
-            <pubDate>Sun, 01 Jul 2018 00:00:00 GMT</pubDate>
-            <description><![CDATA[Vi propongo un trucchetto per gestire in modo semplicissimo il WiFi su Raspbian (Lite).]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -907,6 +891,14 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[Setup Wifi super semplice per Raspbian Lite]]></title>
+            <link>https://www.ludusrusso.dev/2018/07/01/raspberry-pi-wifi-setup-super-semplice</link>
+            <guid>https://www.ludusrusso.dev/2018/07/01/raspberry-pi-wifi-setup-super-semplice</guid>
+            <pubDate>Sun, 01 Jul 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[Vi propongo un trucchetto per gestire in modo semplicissimo il WiFi su Raspbian (Lite).]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Un bot telegram che invia messaggi al verificarsi di eventi sui GPIO del Raspberry Pi]]></title>
             <link>https://www.ludusrusso.dev/2019/01/04/invio-messaggi-telegram-da-eventi-gpio</link>
             <guid>https://www.ludusrusso.dev/2019/01/04/invio-messaggi-telegram-da-eventi-gpio</guid>
@@ -915,11 +907,11 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Firebase Hosting: dalla creazione del progetto al sito online in 10 minuti]]></title>
-            <link>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</link>
-            <guid>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</guid>
-            <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Vediamo come possiamo pubblicare un'app Angular dopo 10 minuti dalla creazione del progetto sfruttando firebase hosting]]></description>
+            <title><![CDATA[Buildare e usare container Docker per Raspberry Pi]]></title>
+            <link>https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi</link>
+            <guid>https://www.ludusrusso.dev/2018/06/29/docker-raspberrypi</guid>
+            <pubDate>Fri, 29 Jun 2018 00:00:00 GMT</pubDate>
+            <description><![CDATA[In questa guida vediamo come buildare ed utilizzare Docker su Raspberry Pi (ed in generale sistemi Linux Embedded) per velocizzare la produzione di applicazioni Linux Embedded]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -931,19 +923,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[Firebase Hosting: dalla creazione del progetto al sito online in 10 minuti]]></title>
+            <link>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</link>
+            <guid>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</guid>
+            <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Vediamo come possiamo pubblicare un'app Angular dopo 10 minuti dalla creazione del progetto sfruttando firebase hosting]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Migriamo il blog su GatsbyJS]]></title>
             <link>https://www.ludusrusso.dev/2020/12/01/migriamo-blog-su-gatsby-js</link>
             <guid>https://www.ludusrusso.dev/2020/12/01/migriamo-blog-su-gatsby-js</guid>
             <pubDate>Tue, 01 Dec 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Questo blog è ormai diventato un po' anzianotto! Quindi ho deciso di riprendo ed aggiornarlo un pochettino con le nuove tenconologie che nel frattempo ho scoperto!]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Kubernetes dei Poveri]]></title>
-            <link>https://www.ludusrusso.dev/2020/12/05/k8s-dei-poveri</link>
-            <guid>https://www.ludusrusso.dev/2020/12/05/k8s-dei-poveri</guid>
-            <pubDate>Sat, 05 Dec 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Creiamo un cluster k8s per gestire i nostri side project senza spendere un patrimonio!]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -963,6 +955,14 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[Kubernetes dei Poveri]]></title>
+            <link>https://www.ludusrusso.dev/2020/12/05/k8s-dei-poveri</link>
+            <guid>https://www.ludusrusso.dev/2020/12/05/k8s-dei-poveri</guid>
+            <pubDate>Sat, 05 Dec 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Creiamo un cluster k8s per gestire i nostri side project senza spendere un patrimonio!]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Ho rifatto il blog (di nuovo)!]]></title>
             <link>https://www.ludusrusso.dev/2022/01/ho-rifatto-il-blog</link>
             <guid>https://www.ludusrusso.dev/2022/01/ho-rifatto-il-blog</guid>
@@ -971,19 +971,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[I libri più interessanti che ho letto nel 2021]]></title>
-            <link>https://www.ludusrusso.dev/2022/01/migliori-libri-2021</link>
-            <guid>https://www.ludusrusso.dev/2022/01/migliori-libri-2021</guid>
-            <pubDate>Tue, 18 Jan 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Questa è la mia personalissima lista dei libri più belli ed interessanti che ho letto nel 2021]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Implementiamo un semplice codegenerator in golang]]></title>
             <link>https://www.ludusrusso.dev/2022/01/code-generator-in-golang</link>
             <guid>https://www.ludusrusso.dev/2022/01/code-generator-in-golang</guid>
             <pubDate>Fri, 28 Jan 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Ecco il mio primo test nello scrivere un codegenerator in golang]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[I libri più interessanti che ho letto nel 2021]]></title>
+            <link>https://www.ludusrusso.dev/2022/01/migliori-libri-2021</link>
+            <guid>https://www.ludusrusso.dev/2022/01/migliori-libri-2021</guid>
+            <pubDate>Tue, 18 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Questa è la mia personalissima lista dei libri più belli ed interessanti che ho letto nel 2021]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -1003,19 +1003,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Qual è il miglior linguaggio di programmazione con cui iniziare a programmare?]]></title>
-            <link>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</link>
-            <guid>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</guid>
-            <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Questa è una domanda che ormai mi sono sentito ripetere molte volte, ma non è facile rispondere]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Costruire Abitudini durature con un Habit Tracking]]></title>
             <link>https://www.ludusrusso.dev/2022/05/habit-tracker</link>
             <guid>https://www.ludusrusso.dev/2022/05/habit-tracker</guid>
             <pubDate>Sun, 15 May 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Habit Tracking, come possiamo costruire le nostre abitudini per raggiungere il successo?]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Qual è il miglior linguaggio di programmazione con cui iniziare a programmare?]]></title>
+            <link>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</link>
+            <guid>https://www.ludusrusso.dev/2022/05/primo-linguaggio-programmazione</guid>
+            <pubDate>Tue, 03 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Questa è una domanda che ormai mi sono sentito ripetere molte volte, ma non è facile rispondere]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -1048,6 +1048,22 @@
             <guid>https://www.ludusrusso.dev/2022/06/come-sono-diventato-sviluppatore</guid>
             <pubDate>Thu, 09 Jun 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Questa è la storia di come, con un po' di difficoltà, sono riuscito a trovare un lavoro che adoro!]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Creare un Bot Telegram in Node.js - Prepariamoci per il Deploy]]></title>
+            <link>https://www.ludusrusso.dev/2022/06/telegram-bot-node-3</link>
+            <guid>https://www.ludusrusso.dev/2022/06/telegram-bot-node-3</guid>
+            <pubDate>Sat, 18 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Come possiamo preparare il nostro codice per la produzione? Quali sono gli step necessari per fare il modo che il nostro progetto Telegram sia deployabile?]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Creare un Bot Telegram in Node.js - Prepariamoci per il Deploy]]></title>
+            <link>https://www.ludusrusso.dev/2022/06/telegram-bot-node-4</link>
+            <guid>https://www.ludusrusso.dev/2022/06/telegram-bot-node-4</guid>
+            <pubDate>Thu, 23 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[In quest'ultimo articolo legato alla serie telegram bot e nodejs vedremo come]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
     </channel>
