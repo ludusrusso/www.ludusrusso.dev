@@ -1,6 +1,6 @@
 import { Feed } from "feed";
 import { promises as fs } from "fs";
-import { allBlogPosts } from "contentlayer/generated";
+import { getBlogData } from "utils/getBlogData";
 
 export const generateRSSFeed = async () => {
   const baseUrl = "https://www.ludusrusso.dev";
@@ -24,8 +24,8 @@ export const generateRSSFeed = async () => {
   });
 
   // Add each article to the feed
-  allBlogPosts.forEach((post) => {
-    const { postPath, date, description, title } = post;
+  getBlogData().forEach((post) => {
+    const { postPath, date, description, title } = post.frontMatter;
     const url = `${baseUrl}/${postPath}`;
 
     feed.addItem({

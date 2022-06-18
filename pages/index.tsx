@@ -1,12 +1,10 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { authors } from "authors";
 import { generateRSSFeed } from "build-feed";
 import { Banner } from "components/banner";
 import { Mailchimp } from "components/mailchimp";
 import { MentoringLanding } from "components/mentoring";
 import { NextEpisodeSection } from "components/next-episode";
-import { allBlogPosts } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { Fragment, SVGProps } from "react";
