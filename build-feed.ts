@@ -1,8 +1,8 @@
-import { data as articles } from "./blog";
 import { Feed } from "feed";
 import { promises as fs } from "fs";
+import { allBlogPosts } from "contentlayer/generated";
 
-const generateRSSFeed = async () => {
+export const generateRSSFeed = async () => {
   const baseUrl = "https://www.ludusrusso.dev";
   const author = {
     name: "Ludovico Russo",
@@ -24,11 +24,9 @@ const generateRSSFeed = async () => {
   });
 
   // Add each article to the feed
-  articles.forEach((post) => {
-    const {
-      frontMatter: { path, published, description, title },
-    } = post;
-    const url = `${baseUrl}/${path}`;
+  allBlogPosts.forEach((post) => {
+    const { postPath, date, description, title } = post;
+    const url = `${baseUrl}/${postPath}`;
 
     feed.addItem({
       title,
@@ -36,11 +34,9 @@ const generateRSSFeed = async () => {
       link: url,
       description,
       author: [author],
-      date: new Date(published),
+      date: new Date(date),
     });
   });
 
-  await fs.writeFile(__dirname + "/public/rss.xml", feed.rss2());
+  await fs.writeFile("./public/rss.xml", feed.rss2());
 };
-
-generateRSSFeed().then(() => console.log("done"));

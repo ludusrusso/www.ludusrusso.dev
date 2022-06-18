@@ -1,9 +1,9 @@
 import { InferGetStaticPropsType } from "next";
+import { getBlogData } from "utils/getBlogData";
 import { Footer } from "../components/footer";
 import { Nav } from "../components/nav";
 import { PostPreview } from "../components/post-preview";
 import { SEO } from "../components/seo";
-import { getBlogData } from "../utils/getBlogData";
 
 export default function Blog({
   posts,
@@ -30,6 +30,7 @@ export default function Blog({
             {posts.map((post) => (
               <PostPreview
                 post={post.frontMatter}
+                author={post.author}
                 key={post.frontMatter.title}
               />
             ))}
@@ -42,19 +43,10 @@ export default function Blog({
 }
 
 export async function getStaticProps() {
-  const blogData = await getBlogData();
-  const posts = blogData
-    .filter((p) => p.file.includes("public/content/blog"))
-    .sort(
-      (a, b) =>
-        b.frontMatter.published.getTime() - a.frontMatter.published.getTime()
-    )
-    .map((d) => {
-      const { frontMatter } = d;
-      return {
-        frontMatter,
-      };
-    });
+  const posts = getBlogData().filter(({ frontMatter }) => {
+    const p = frontMatter._raw.flattenedPath;
+    return p.startsWith("blog/it") || p.startsWith("blog/en");
+  });
 
   return {
     props: { posts },

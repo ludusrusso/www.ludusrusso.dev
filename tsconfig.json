@@ -15,14 +15,27 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".contentlayer/generated",
+    "next.config.js"
+  ],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS",
-      "baseUrl": "."
+      "module": "commonjs",
+      "baseUrl": ".",
+      "paths": {
+        "utils": ["./utils"],
+        "contentlayer/generated": ["./.contentlayer/generated"]
+      }
     }
   }
 }

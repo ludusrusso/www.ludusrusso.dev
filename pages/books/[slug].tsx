@@ -1,25 +1,19 @@
-// @ts-ignore
-import prism from "@mapbox/rehype-prism";
-import { getBook, getBooks } from "books";
 import { Mailchimp } from "components/mailchimp";
+import { allBooks } from "contentlayer/generated";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
+import { useMDXComponent } from "next-contentlayer/hooks";
 import path from "path";
 import YouTube from "react-youtube";
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
 import { Footer } from "../../components/footer";
 import { Nav } from "../../components/nav";
 import { SEO } from "../../components/seo";
 
 export default function BookPage({
-  source,
-  frontmatter,
+  book,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const components: MDXRemoteProps["components"] = {
-    img: ({ src, alt }) => {
-      return <img alt={alt} src={path.join(frontmatter.imagePath, src!)} />;
+  const components = {
+    img: ({ src, alt }: { src: string; alt: string }) => {
+      return <img alt={alt} src={path.join(book.imagePath, src!)} />;
     },
     YouTube: ({ videoId }: { videoId: string }) => (
       <YouTube className="w-full aspect-video" videoId={videoId} />
@@ -27,12 +21,13 @@ export default function BookPage({
     pre: (props: any) => <pre {...props} className="no-prose" />,
   };
 
+  const MdxSection = useMDXComponent(book.body.code);
   return (
     <>
       <SEO
-        title={frontmatter.title}
-        description={frontmatter.title}
-        image={frontmatter.image}
+        title={book.title}
+        description={book.title}
+        image={book.imageUrl}
         type="article"
       />
 
@@ -40,13 +35,13 @@ export default function BookPage({
 
       <main className="wrapper py-10">
         <h1 className="text-3xl md:text-4xl text-center py-4 px-4 sm:py-0 max-w-[900px] m-auto font-bold mt-10">
-          {frontmatter.title}
+          {book.title}
         </h1>
 
         <div className="mt-4 m-auto grid place-content-center">
           <img
             className="object-cover w-32 shadow-lg rounded-lg"
-            src={frontmatter.image}
+            src={book.imageUrl}
             alt=""
           />
         </div>
@@ -54,12 +49,12 @@ export default function BookPage({
         <div className="flex flex-col items-center mt-10">
           <div className="text-center">
             <p className="text-xl font-bold text-gray-900">
-              by <span>{frontmatter.author}</span>
+              by <span>{book.author}</span>
             </p>
             <div className="flex space-x-2 mt-4 text-lg text-gray-500">
-              {frontmatter.links.en && (
+              {book.links.en && (
                 <a
-                  href={frontmatter.links.en}
+                  href={book.links.en}
                   target="_blank"
                   rel="noreferrer"
                   className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
@@ -67,11 +62,11 @@ export default function BookPage({
                   <span>Compra in Inglese 🇺🇸 </span>
                 </a>
               )}
-              {frontmatter.links.it && (
+              {book.links.it && (
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href={frontmatter.links.it}
+                  href={book.links.it}
                   className="text-gray-700 hover:text-green-200 hover:bg-green-700 px-2 py-1 bg-green-200 rounded-lg"
                 >
                   <span>Compra in Italiano 🇮🇹 </span>
@@ -82,7 +77,7 @@ export default function BookPage({
         </div>
 
         <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">
-          <MDXRemote {...source} components={components} />
+          <MdxSection components={components} />
         </div>
       </main>
 
@@ -94,8 +89,7 @@ export default function BookPage({
 }
 
 export async function getStaticPaths() {
-  const blogData = getBooks();
-  const paths = blogData.map((d) => {
+  const paths = allBooks.map((d) => {
     return {
       params: {
         slug: d.slug,
@@ -113,26 +107,15 @@ export async function getStaticProps({
   params,
 }: GetStaticPropsContext<{ slug: string }>) {
   const slug = params!.slug;
-  const book = getBook(slug);
+  const book = allBooks.find((b) => b.slug === slug);
 
   if (!book) {
     throw new Error("book not found????");
   }
 
-  const mdxSource = await serialize(book.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkMath as any],
-      rehypePlugins: [
-        prism,
-        [rehypeKatex, { throwOnError: true, strict: true }],
-      ],
-    },
-  });
-
   return {
     props: {
-      source: mdxSource,
-      frontmatter: book.frontMatter,
+      book,
     },
   };
 }

@@ -1,19 +1,22 @@
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { authors } from "authors";
+import { generateRSSFeed } from "build-feed";
 import { Banner } from "components/banner";
 import { Mailchimp } from "components/mailchimp";
 import { MentoringLanding } from "components/mentoring";
 import { NextEpisodeSection } from "components/next-episode";
+import { allBlogPosts } from "contentlayer/generated";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { Fragment, SVGProps } from "react";
 import { db } from "services/db";
 import { datePlusHours } from "utils/dates";
+import { getBlogData } from "utils/getBlogData";
 import { Footer } from "../components/footer";
 import { BlogIcon } from "../components/icon";
 import { PostPreview } from "../components/post-preview";
 import { SEO } from "../components/seo";
-import { getBlogData } from "../utils/getBlogData";
 import { navigation } from "../utils/nav";
 
 export default function Home({
@@ -44,6 +47,7 @@ export default function Home({
           <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
             {posts.map((post) => (
               <PostPreview
+                author={post.author}
                 post={post.frontMatter}
                 key={post.frontMatter.title}
               />
@@ -61,13 +65,12 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  const blogData = getBlogData();
-  const posts = blogData
+  await generateRSSFeed();
+  const posts = getBlogData()
     .filter((p) => {
-      return p.file.includes("/blog/");
+      return p.frontMatter._raw.sourceFilePath.startsWith("blog");
     })
-    .filter((_, idx) => idx < 9)
-    .map(({ frontMatter }) => ({ frontMatter }));
+    .filter((_, idx) => idx < 9);
 
   const nextEpisode = await db.episode.findFirst({
     where: {
