@@ -5,17 +5,17 @@ published: true
 slug: component-styling
 ---
 
-Nei capitoli precedenti abbiamo iniziato a muoverci all'intenro del progetto NextJS e iniato a creare pagine e
+Nei capitoli precedenti abbiamo iniziato a muoverci all'interno del progetto NextJS e iniziato a creare pagine e
 componenti sfruttando la libreria ReactJS, su cui NextJS si basa.
 
 Prima di iniziare a lavorare veramente su un progetto, ci manca un punto fondamentale: come stilizziamo i nostri componenti?
 
 Purtroppo su questo tema entriamo in una giungla di soluzioni e tecnologie diverse, in quanto attualmente all'interno della
-community ReactJS, non si è trovata una tecnologia (o un gruppo di tecnologie) abbastanza orizzontale sui vari proggetti, invece
-esistono diversi approcci (anche moldi diversi tra loro) e diverse preferenze tra gli sviluppatori.
+community ReactJS, non si è trovata una tecnologia (o un gruppo di tecnologie) abbastanza orizzontale sui vari progetti, invece
+esistono diversi approcci (anche molti diversi tra loro) e diverse preferenze tra gli sviluppatori.
 
 Lo stile in HTML si basa sull'utilizzo della tecnologia CSS. L'idea di base di HTML e CSS è quella di definire separatamente
-il contenuto di un documento (HTML) dal modo in cui viene visualizzato (CSS). Sebbena questa idea in teoria sia molto valida,
+il contenuto di un documento (HTML) dal modo in cui viene visualizzato (CSS). Sebbene questa idea in teoria sia molto valida,
 nella pratica ci si rende subito conto che non è tanto semplice da portare avanti. Anche in caso di organizzazione perfetta
 del nostro HTML, ci troveremo comunque a doverne modificare l'organizzazione in base ad esigenze di stile e viceversa.
 
@@ -35,7 +35,7 @@ ed essendo nativo è anche molto efficace. Purtroppo porta a codice che diventa 
 Questo è un secondo approccio nativo React, che di fatto ci permette di aggiungere una props `style`
 ai nostri componenti. Questa props viene interpretata dal browser e viene utilizzata per definire il CSS. Sebbene sia nativo e semplice
 da usare, ha comunque il problema che dobbiamo passare un oggetto cone le proprietà CSS che vogliamo settare, e
-in generale la development experimence non è molto semplice.
+in generale la development experience non è molto semplice.
 
 ```tsx
 const MyComponent = () => (
@@ -54,7 +54,7 @@ const MyComponent = () => (
 #### Librerie grafiche
 
 Sono delle librerie React che mettono a disposizione di noi sviluppatori dei componenti stilizzati che possiamo usare
-per creare componenti. Tra le più famose ci sono [Material UI](https://mui.com/) e [React Bootstra](https://react-bootstrap.github.io/).
+per creare componenti. Tra le più famose ci sono [Material UI](https://mui.com/) e [React Bootstrap](https://react-bootstrap.github.io/).
 Sono solitamente librerie molto semplici da usare per creare interfacce grafiche base, ma diventano complesse quando si vuole
 fare qualcosa che va oltre quello che gli sviluppatori della libreria hanno pensato. In generale le evito in quanto, essendo
 abbastanza mainstream, rendono le nostre applicazioni abbastanza monotone ed in generale troppo simili ad altre applicazioni
@@ -68,7 +68,7 @@ stiamo utilizzando. Possiamo creare, nel pratico, dei componenti React con lo st
 
 ```tsx
 const StyledDiv = styled.div`
-  heigth: 100px;
+  height: 100px;
   width: 200px;
   background-color: red;
 `;
@@ -82,33 +82,33 @@ Utility CSS. In questo caso l'idea è molto semplice: quella di creare una serie
 semantiche (ad esempio `.card` o `.btn`) ma informazioni puramente relative allo stile che stanno per applicare (`text-red-400`, `bg-white` etc.).
 Il vantaggio di questo tipo di approccio è di nuovo quello di avere una serie di piccole classi che possono essere sfruttate
 per costruire lo stile dell'HTML nello stesso posto dove definiamo l'HTML stesso. Tra le tecnologie più famose e promettenti
-su questo tema troviamo [`tailwindcss`](https://tailwindcss.com/), che neglio ultimi anni si è distinta tantissmo grazie
+su questo tema troviamo [`tailwindcss`](https://tailwindcss.com/), che negli ultimi anni si è distinta tantissimo grazie
 non solo alla libreria in se ma ad una serie di tool e strumenti che migliorano notevolmente la nostra development experience.
 
 #### Quali usare?
 
-Quindi esistono tantissime tecnologie, quale possiamo usare? Non ho una risposto a questa domanda, perchè come ho detto ci sono tantissimi
+Quindi esistono tantissime tecnologie, quale possiamo usare? Non ho una risposto a questa domanda, perché come ho detto ci sono tantissimi
 pareri diversi tra gli sviluppatori ed una tecnologia che piace a me può non piacere a qualcun'altro, o viceversa.
 
 Vi esorto quindi ad esplorarli tutti e cercare di decidere in autonomia cosa è meglio per voi,
-una conoscenza di tutti gli aprocci sarebbe ideale, ma ovviamente dobbiamo fare una scelta per questa guida, e dopo
-averci pensato un po' credo che la cosa migliore sia continuare con l'approccio che conosco meglio, perchè permetterà
+una conoscenza di tutti gli approcci sarebbe ideale, ma ovviamente dobbiamo fare una scelta per questa guida, e dopo
+averci pensato un po' credo che la cosa migliore sia continuare con l'approccio che conosco meglio, perché permetterà
 a questo corso di essere il più completo possibile e non dirò (troppe) castronerie 😜!
 
 Personalmente, nei miei progetti uso un mix di TailwindUI (quindi una libreria di utility CSS), Styled component (CSS in JS) insieme
 alla libreria [headlessui](https://headlessui.dev/). Quest'ultima è un progetto degli stessi autori ci tailwind
 che mette a disposizione una serie di componenti React base per interazioni standard (select, menu, etc), ma con nessuna
-imposizione di stile. L'utilizzo di questa libreria in combo con tailwincss o styled component è quindi molto vantaggiosa.
+imposizione di stile. L'utilizzo di questa libreria in combo con tailwindcss o styled component è quindi molto vantaggiosa.
 
 Credo che tailwind sia veramente ottima e semplice da usare, ma ha dei limiti, specialmente per quanto riguarda
 la creazione di layout complessi, che invece sono facilmente compensabili con un po' di CSS in JS. In questo capito, ed in generale
-nei prossimi, useremo principalmente TailindUI e un po' di CSS in JS con [emotions css](https://emotion.sh/docs/introduction) quando diventa troppo complesso usare Tailwind.
+nei prossimi, useremo principalmente TailwindUI e un po' di CSS in JS con [emotions css](https://emotion.sh/docs/introduction) quando diventa troppo complesso usare Tailwind.
 
 ### Come trarre al meglio da questa guida?
 
-A differenza della parte di scrittura del codice, dove è abbastanza semplice spiegare il perchè di certe scelte
-sintattiche, la creazione e la definizione di stili grafice è un processo che richiede molto più feedback, trial and error ed
-interazione con l'applicazione. In questo capitolo sarà molto difficile per me spiegare il perchè di alcune scelte
+A differenza della parte di scrittura del codice, dove è abbastanza semplice spiegare il perché di certe scelte
+sintattiche, la creazione e la definizione di stili grafiche è un processo che richiede molto più feedback, trial and error ed
+interazione con l'applicazione. In questo capitolo sarà molto difficile per me spiegare il perché di alcune scelte
 o da dove viene fuori un certo codice, e non credo sia possibile per me essere più specifico di quanto ho fatto.
 
 Per trarre meglio da questo capitolo suggerisco di approfondire guarda la versione video dello stesso, ed in generale vi metterò
@@ -164,10 +164,10 @@ module.exports = {
 ```
 
 Dentro questo file dobbiamo dire a tailwind in quali file ci aspettiamo di usare le classi che tailwind ci mette a disposizione.
-Questo è essenziale per il funzionamento di tailwind, perchè il server tailwind monitorerà tutti i file che inseriamo qui dentro
+Questo è essenziale per il funzionamento di tailwind, perché il server tailwind monitorerà tutti i file che inseriamo qui dentro
 e genererà il codice CSS in base alle classi che vogliamo usare. Quest'idea di tailwind ha un duplice vantaggio:
 
-1. non creare codice CSS per utility class che non stiamo usando. Questo è imporntate perchè tailwind mette a disposizione
+1. non creare codice CSS per utility class che non stiamo usando. Questo è importante perché tailwind mette a disposizione
    tantissime permutazioni di classi (vedremo dopo come), e generarle tutto creerebbe file css pesantissimi che renderebbero molto
    lento il nostro progetto.
 2. ci permette di utilizzare classi non previste (custom) con una sintassi particolare e generare al volo codice css per queste classi.
@@ -181,7 +181,7 @@ module.exports = {
 - content: [],
 + content: [
 +   "./pages/**/*.{js,ts,jsx,tsx}",
-+   "./pages/**/*.{js,ts,jsx,tsx}",
++   "./components/**/*.{js,ts,jsx,tsx}",
 + ],
   theme: {
     extend: {},
@@ -192,7 +192,7 @@ module.exports = {
 
 Come vedete così facendo diciamo a tailwind di monitorare tutti i file `.js`, `.ts`, `.jsx` e `.tsx` che ci troviamo dentro
 le cartelle `/pages` e `/components`. Se strutturate il vostro progetto in modo diverso da questo non è un problema, ma ricordatevi
-di modificare questo file altrimeti potreste avere problemi con il funzionamento di tailwind.
+di modificare questo file altrimenti potreste avere problemi con il funzionamento di tailwind.
 
 A questo punto dobbiamo creare un file chiamato `./styles/globals.css` in cui andiamo a creare le definizioni di stili globali di tailwind.
 
@@ -244,7 +244,7 @@ Ma cosa abbiamo fatto? Nella nostra pagina abbiamo creato un container div con a
 settate alle dimensioni dello schermo, e colore di background a _red-300_ (`bg-red-300`). All'interno di questo
 componente abbiamo creato un titolo (`h1`) con il testo `Hello tailwind`, colore di testo _ted-800_ (`text-red-800`), centrato (`text-center`)
 e di dimensioni _xl_ (`text-xl`). Tailwind mette a disposizione tantissime classi e tantissime gradazioni di colori, ci vuole
-un attiamo per prendere familiarità con tutto (noi vederemo piano piano le utility che ci mette a disposizione).
+un attimo per prendere familiarità con tutto (noi vederemo piano piano le utility che ci mette a disposizione).
 Se volete avere più info su Tailwind, visitate il sito [tailwindcss.com](https://tailwindcss.com/) e la [documentazione](https://tailwindcss.com/docs/utility-first/).
 
 ### Creiamo una NavBar avanzata con Tailwind
@@ -255,7 +255,7 @@ e gestire il menu a scomparsa.
 
 Per la NavBar, quindi, insieme a Tailwind useremo altre due librerie che spesso vengono usate in coppia:
 
-- [headlessui](https://headlessui.dev/), di cui abbiamo già parlato, che ci mette a disposizie una serie di componenti
+- [headlessui](https://headlessui.dev/), di cui abbiamo già parlato, che ci mette a disposizione una serie di componenti
   non stilizzati e che funziona molto bene con tailwind.
 - [heroicons](https://heroicons.com/), una libreria di icone creata utile per le varie icone del sito.
 
@@ -274,12 +274,12 @@ found 0 vulnerabilities
 
 Siamo quindi pronti per partire.
 
-Riprediamo per prima cosa il componente `Nav` che abbiamo abbozzato precedentemente, cioè il file che abbiamo chiamato `components/nav.tsx`, di cui
+Riprendiamo per prima cosa il componente `Nav` che abbiamo abbozzato precedentemente, cioè il file che abbiamo chiamato `components/nav.tsx`, di cui
 riporto il contenuto attuale:
 
 ```tsx
 export const Nav = () => {
-  return <nav>React Megaturial Navigation</nav>;
+  return <nav>React Megatutorial Navigation</nav>;
 };
 ```
 
@@ -299,15 +299,15 @@ const Home = () => {
 
 Possiamo quindi finalmente spostarci nel file `Nav` ed iniziare a lavorare da qui.
 
-La navbar dovrà contenere una lista di link posizionati in vertiale, insieme ad una icona della nostra applicazione (in teoria il nostro logo
-ma non avendorlo useremo l'icona delle casa) che ci rimanda
+La navbar dovrà contenere una lista di link posizionati in verticale, insieme ad una icona della nostra applicazione (in teoria il nostro logo
+ma non avendolo useremo l'icona delle casa) che ci rimanda
 alla home del sito. Per finire, vogliamo che in modalità mobile la navbar collassi a solo il titolo insieme ad un pulsante che apre un menu.
 
 In fase di design, applicare uno stile di sviluppo chiamato **mobile first**, dove l'idea di base è quella di creare per prima cosa
 il layout per cellulari (mobile appunto), e poi estenderlo alla visualizzazione desktop. Partiamo quindi a stilizzare la navbar
 collassato con solo il menu e il titolo.
 
-Partiamo dalla navbar, dobbiamo farla alta 64px `h-16` (non so perchè, ma è lo standard di molte navbar in giro) e di un colore
+Partiamo dalla navbar, dobbiamo farla alta 64px `h-16` (non so perché, ma è lo standard di molte navbar in giro) e di un colore
 che ci piace. Partiamo quindi da dare questo stile al componente principale. Possiamo anche togliere il contenuto per
 il momento.
 
@@ -343,7 +343,7 @@ export const Nav = () => {
 ```
 
 Da notare che le due icone sono state wrappate la prima in un componente `<a>` (cioè un link, infatti
-deve essere un semplice link a home), mentre la seconda in un componente `<button>`, perchè appunto
+deve essere un semplice link a home), mentre la seconda in un componente `<button>`, perché appunto
 al click dovrà aprire il menu.
 
 Se le cose sono state fatte bene, lanciando il server, dovreste vedere qualcosa simile a questo:
@@ -360,7 +360,7 @@ inspector, all'inizio della navbar principale
 #### Navigazione con `next/link`
 
 Il componente `<a>` dovrà rimandare alla home page del sito. Questo normalmente si sarebbe fatto
-in HTML con la props `href="/"`, ma NextJS ci mette a disposizione un compoente speciale
+in HTML con la props `href="/"`, ma NextJS ci mette a disposizione un componente speciale
 per ottimizzare la navigazione interna al sito: `Link`.
 
 Questo componente deve sempre wrappare `<a>`, e il link `href` lo imposteremo a lui, non al componente `<a>` originale.
@@ -419,7 +419,7 @@ const Menu = () => {
 };
 ```
 
-Dove, come vedete, ho inserito il bottone ` <MenuIcon className="h-8 w-8" />` all'intenro del componente `<Popover.Button>`.
+Dove, come vedete, ho inserito il bottone ` <MenuIcon className="h-8 w-8" />` all'interno del componente `<Popover.Button>`.
 
 Possiamo usare il nostro menu in questo modo all'interno del componente `Nav`:
 
@@ -442,8 +442,8 @@ export const Nav = () => {
 };
 ```
 
-Il menu a questo punto funziona, potete provare ad aprirlo e chiderlo senza problemi, ma vi renderete subito conto che la
-parte grafica non è per niente ottimale. Iniziamo a stilizzarlo megli (in modo che almeno sia visibile) come seguie:
+Il menu a questo punto funziona, potete provare ad aprirlo e chiederlo senza problemi, ma vi renderete subito conto che la
+parte grafica non è per niente ottimale. Iniziamo a stilizzarlo meglio (in modo che almeno sia visibile) come segue:
 
 ```tsx
 const Menu = () => {
@@ -506,7 +506,7 @@ const Menu = () => {
 };
 ```
 
-Come vedete, il children del pophover non è più un componente ma un render template, cioè una funzione che prende dei
+Come vedete, il children del popover non è più un componente ma un render template, cioè una funzione che prende dei
 parametri e ritorna un componente.
 
 In particolare ci interessa il parametro `open`, che appunto ci dice se il popover è aperto o chiuso.
@@ -515,7 +515,7 @@ comportamento è gestito dal componente `Popover`. Il nostro compito è di usare
 far funzionare correttamente il menu.
 
 Per prima cosa, notate che si rende necessario dire al componente quando renderizzare il `Popover.Panel`.
-Quando passiamo direttamente `Popover.Panel` come children al componente `Popver`, infatti,
+Quando passiamo direttamente `Popover.Panel` come children al componente `Popover`, infatti,
 è quest'ultimo che sa come e quando renderizzarlo, ma se adottiamo la sintassi con il templace children,
 come stiamo facendo adesso, il componente `Popover`non prende più decisioni e siamo noi che dobbiamo
 dirgli di renderizzare il componente `Popover.Panel` quando `open` è a `true`.
@@ -535,13 +535,13 @@ In questo caso abbiamo usato il ternary operator `?:`, che non è altro che un `
 valuta il valore del primo elemento (`open`). Se è vero ritorna il secondo elemento, altrimenti il terzo.
 Quindi questa operazione si legge così:
 
-> Se il pannello è vero (`open==true)` allora renderizza l'icona `<XIcon />`, altrimenti l'icona `<MenutIcon />`.
+> Se il pannello è vero (`open==true)` allora renderizza l'icona `<XIcon />`, altrimenti l'icona `<MenuIcon />`.
 
 Se provate a il componente a questo punto vedrete che l'icona cambia se questo è aperto o chiuso.
 
 #### Props del componente
 
-A questo punto dobbiamo fare in modo da passare dall'esterno la lista di link al menu, questo è imporante perchè ricordiamo che dovremo renderizzare il menu in due modi diversi in base alla dimensione
+A questo punto dobbiamo fare in modo da passare dall'esterno la lista di link al menu, questo è importante perché ricordiamo che dovremo renderizzare il menu in due modi diversi in base alla dimensione
 dello schermo, quindi abbiamo bisogno di non dover duplicare i dati che passiamo al componente (questo è uno dei principi
 base dello sviluppo informatico chiamato **DRY** (don't repeat yourself), cioè _non ripetere te stesso_).
 
@@ -674,15 +674,15 @@ Fatto questo, dovremmo poter essere in grado di navigare tranquillamente all'int
 #### Breakpoints e Modalità Desktop
 
 Ora che la modalità mobile funziona bene, dobbiamo creare l'applicazione in modo che il menu venga visualizzato diversamente
-in modalità desktop. Per farlo, dobbiamo introdurre il concetto di breakpoin in Tailwind.
+in modalità desktop. Per farlo, dobbiamo introdurre il concetto di breakpoint in Tailwind.
 
 Un breakpoint non è altro che una dimensione dello schermo in larghezza per cui una pagina può cambiare layout.
 Tailwind mette a disposizione di default una [serie di breakpoint](https://tailwindcss.com/docs/responsive-design), chiamate `xl`, `sm`, `md` e `lg` etc.
-Questi breakpoint si traducono in modificatori delle classi css che ci permettono di cambiare il layour in base
+Questi breakpoint si traducono in modificatori delle classi css che ci permettono di cambiare il layout in base
 alla dimensione dello schermo. Vediamo come usarli.
 
-L'idea di base dei modificatori di tailwind è che possiamo applicare nuovi template sovrascrivendo le classi a brackpoint diverse.
-Facciamo un esempio per capire meglio: supponiamo di voler nascondere il menu del nostro header quando lo schermo è a breackpoint `md` (medium)
+L'idea di base dei modificatori di tailwind è che possiamo applicare nuovi template sovrascrivendo le classi a breakpoint diverse.
+Facciamo un esempio per capire meglio: supponiamo di voler nascondere il menu del nostro header quando lo schermo è a breakpoint `md` (medium)
 o superiori, per farlo basta usare questa sintassi:
 
 ```tsx
@@ -691,12 +691,12 @@ o superiori, per farlo basta usare questa sintassi:
 </div>
 ```
 
-Il bottone sarà mostrano normalemnte fino al breackpoint `md`, e poi verrà applicato la classe `hidden` che non lo farà più vedere.
+Il bottone sarà mostrano normalmente fino al breakpoint `md`, e poi verrà applicato la classe `hidden` che non lo farà più vedere.
 
-Per fare il contrario, dobbiamo creare un componente `hidden` di base e poi mostrarlo al breackpoint `md`:
+Per fare il contrario, dobbiamo creare un componente `hidden` di base e poi mostrarlo al breakpoint `md`:
 
 ```tsx
-<div className="hidden md:block">Visibile la breakpoing</div>
+<div className="hidden md:block">Visibile la breakpoint</div>
 ```
 
 Mettendo insieme questi due componenti, vedrete che quando il primo sparisce il secondo appare!
@@ -723,7 +723,7 @@ const DesktopMenu = ({ menu }: MenuProps) => {
 ```
 
 Il componente prende le stesse props di `<Menu />`, ma invece di renderizzare il bottone con il popup, renderizza una
-semplice list di `<Link />` orizzonatale.
+semplice list di `<Link />` orizzontale.
 
 Il componente `Nav` finale, quindi, risulta essere il seguente:
 
@@ -784,17 +784,17 @@ riporto il contenuto attuale.
 
 ```tsx
 export const Footer = () => {
-  return <footer>React Megaturial; all right reserverd</footer>;
+  return <footer>React Megatutorial; all right reserved</footer>;
 };
 ```
 
-Il footer dovrà contenere un poccolo disclaimer con il nome del sito e l'autore e una lista di link ai social network.
+Il footer dovrà contenere un piccolo disclaimer con il nome del sito e l'autore e una lista di link ai social network.
 
 Anche in questo caso adotteremo lo stile **mobile first**, quindi partiamo dalla visualizzazione mobile.
 
 #### Layout e contenuto del nostro Footer
 
-Partiamo dal contenuto, dovremmo creare due div, la prima contenente il disclaimer mentra la seconda che contiene la lista di link social.
+Partiamo dal contenuto, dovremmo creare due div, la prima contenente il disclaimer mentre la seconda che contiene la lista di link social.
 
 ```tsx
 import Link from "next/link";
@@ -845,8 +845,8 @@ ci permette di scrivere codice più pulito.
 
 Siamo pronti quindi a stilizzare il componente.
 
-La cosa che faccio di solito è creare un componente interno dove inserire lo style utilizzando `@emotions/styled`. Dato che il momponente
-princiaple della nostra navbar è l'oggetto html `<footer>`, partirò da questo per generare l'oggetto stilizzato.
+La cosa che faccio di solito è creare un componente interno dove inserire lo style utilizzando `@emotions/styled`. Dato che il componente
+principale della nostra navbar è l'oggetto html `<footer>`, partirò da questo per generare l'oggetto stilizzato.
 
 ```tsx
 export const Footer = () => {
@@ -862,7 +862,7 @@ const FooterStyled = styled.footer`
 ```
 
 Come vedete il componente `FooterStyled` non è altro che un classico componente `<footer>` HTML a cui abbiamo _appiccicato_ dello style
-con styled component. Per farlo abbiamo importato la libreriea `styled` da `@emtion/styled` e abbiamo
+con styled component. Per farlo abbiamo importato la libreria `styled` da `@emtion/styled` e abbiamo
 usato una speciale sintassi in JavaScript chiamata [**tag functions**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals?retiredLocale=it#tagged_templates) (o **tagged templates**),
 che non sono altro che delle speciali funzioni seguite da un template literal.
 
@@ -871,9 +871,9 @@ che non sono altro che delle speciali funzioni seguite da un template literal.
 anche a partire da componenti custom React, con una sintassi di questo tipo:
 
 ```tsx
-const MyCompoent = () => <div></div>;
+const MyComponent = () => <div></div>;
 
-const MyComponentStyled = styled(MyCompoent)`
+const MyComponentStyled = styled(MyComponent)`
   background-color: #ccc;
 `;
 ```
@@ -967,7 +967,7 @@ export const TwitterIcon = ({ className }: IconProps) => (
 );
 ```
 
-Facciamo lo stesso lavoro per gli altri social che voglilamo usare, nel mio caso GitHub e YouTube, in modo da avere tutto quello che ci
+Facciamo lo stesso lavoro per gli altri social che vogliamo usare, nel mio caso GitHub e YouTube, in modo da avere tutto quello che ci
 serve per usarli nel nostro footer.
 
 <InfoBox type="warn">
@@ -1019,7 +1019,7 @@ e utlizzarlo come segue:
 ```
 
 Notare che nel map ho usato il destructoring `({ Icon, href, label }, idx)` per accedere alle proprietà dell'oggetto `{Icon, href, label}`
-direttamente. Inoltre sto usando del codice tailwindCSS per stilizzare le icone, perchè in questo caso viene molto più semplice
+direttamente. Inoltre sto usando del codice tailwindCSS per stilizzare le icone, perché in questo caso viene molto più semplice
 che usare styled components.
 
 <InfoBox>
@@ -1124,7 +1124,7 @@ export const Footer = () => {
 L'ultima cosa che ci manca da fare, quindi, è modificare il footer in modo che sia visibile in modalità desktop con un layout differente.
 
 Per farlo possiamo usare direttamente le [media query css](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
-all'inteno dello styled component!
+all'interno dello styled component!
 
 ```tsx
 const FooterStyled = styled.footer`
@@ -1138,7 +1138,7 @@ const FooterStyled = styled.footer`
 `;
 ```
 
-Notare che abbiamo settato come breackpoint `768px`, il breakpoin `md` di tailwind.
+Notare che abbiamo settato come breakpoint `768px`, il breakpoint `md` di tailwind.
 
 Il risultato finale è il seguente:
 
@@ -1150,7 +1150,7 @@ Il risultato finale è il seguente:
 - Come usare TailwindCSS per definire lo stile dei componenti;
 - Come usare `@headlessui` e `@heroicons`;
 - Come usare gli styled component con `@emotions` per stilizzare componenti;
-- Come utilizzare SVG all'inteno delle applicazioni React;
+- Come utilizzare SVG all'interno delle applicazioni React;
 - Come sfruttare la metodologia di sviluppo **mobile first**;
 
 Il codice di questo capitolo lo [trovate su github](https://github.com/ludusrusso/next-js-megatutorial/tree/c3).
