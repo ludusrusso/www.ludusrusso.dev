@@ -153,6 +153,112 @@ export const BlogPost = defineDocumentType(() => ({
   },
 }));
 
+export const Course = defineDocumentType(() => ({
+  name: "BlogPost",
+  filePathPattern: `courses/**/*.(md|mdx)`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      description: "The title of the post",
+      required: true,
+    },
+    description: {
+      type: "string",
+      description: "The description of the post",
+      required: true,
+    },
+    category: {
+      type: "string",
+      description: "The category of the post",
+      default: "blog",
+    },
+    tags: {
+      type: "list",
+      description: "The tags of the post",
+      of: {
+        type: "string",
+      },
+      default: [],
+    },
+    date: {
+      type: "date",
+      description: "published date",
+      required: true,
+    },
+    author: {
+      type: "string",
+      required: true,
+      description: "User author",
+      default: "ludusrusso",
+    },
+    image: {
+      type: "string",
+      required: true,
+      description: "featured image",
+    },
+    headerImage: {
+      type: "boolean",
+      default: false,
+      description: "show image in post",
+    },
+    path: {
+      type: "string",
+      description: "path of the post",
+      required: false,
+    },
+    lang: {
+      type: "string",
+      default: "it",
+      description: "language of the post",
+    },
+    slug: {
+      type: "string",
+    },
+    draft: {
+      type: "boolean",
+      default: false,
+    },
+  },
+  computedFields: {
+    imagePath: {
+      type: "string",
+      resolve: (book) => path.join("/.content", book._raw.sourceFileDir),
+    },
+    imageUrl: {
+      type: "string",
+      resolve: (book) =>
+        path.join("/.content", book._raw.sourceFileDir, book.image),
+    },
+    readTime: {
+      type: "number",
+      resolve: (post) => {
+        const readTime = readingTime(post.body.raw);
+        return readTime;
+      },
+    },
+    publishedReadable: {
+      type: "string",
+      resolve: (post) => {
+        return printDate(new Date(post.date));
+      },
+    },
+    postPath: {
+      type: "string",
+      resolve: (post) => {
+        return getPath(post.path, post._raw.sourceFilePath);
+      },
+    },
+    href: {
+      type: "string",
+      resolve: (post) => {
+        const postPath = getPath(post.path, post._raw.sourceFilePath);
+        return path.join("/", postPath);
+      },
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "content",
   documentTypes: [Book, BlogPost],

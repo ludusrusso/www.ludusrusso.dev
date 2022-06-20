@@ -85,7 +85,7 @@ const createCourseChapterData = async (file: string) => {
 const replacePath = (file: string, p: string) => {
   return path.join(
     "/",
-    file.replace(process.cwd() + "/content/courses", "/courses"),
+    file.replace(process.cwd() + "/courses", "/courses"),
     "..",
     p
   );
@@ -93,7 +93,7 @@ const replacePath = (file: string, p: string) => {
 
 async function getCoursesFiles() {
   return new Promise<string[]>((resolve, reject) => {
-    const contentDir = path.resolve(__dirname, "../content/courses");
+    const contentDir = path.resolve(__dirname, "../courses");
     glob(contentDir + "/*/index.{md,mdx}", (err, files) => {
       if (err) {
         return reject(err);
@@ -116,7 +116,7 @@ async function getCourseChaptersFiles(cpath: string) {
 }
 
 async function copyCoursesImages() {
-  const src = path.resolve(__dirname, "../content/courses");
+  const src = path.resolve(__dirname, "../courses");
   const dst = path.resolve(__dirname, "../public/courses");
   try {
     await fs.rm(dst, { recursive: true });
