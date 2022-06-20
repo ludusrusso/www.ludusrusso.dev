@@ -61,7 +61,7 @@ export default function PathPage({
       <SEO
         title={post.title}
         description={post.description}
-        image={post.image}
+        image={post.imageUrl}
         author={author.name}
         date={new Date(post.date)}
         type="article"
