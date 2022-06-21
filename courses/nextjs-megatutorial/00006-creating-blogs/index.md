@@ -1,7 +1,7 @@
 ---
 title: Iniziamo a costruire il nostro blog con Content Layer
 description: Abbiamo finalmente tutti i componenti per iniziare a costruire il nostro blog
-published: false
+published: true
 slug: creating-blogs
 ---
 
@@ -308,7 +308,7 @@ wait  - compiling...
 event - compiled client and server successfully in 303 ms (125 modules)
 ```
 
-## Accdere ai nostri post
+## Accedere ai nostri post
 
 Accedere ai post è facilissimo, possiamo farlo all'interno di `getStaticsProps` di `index.tsx` in modo da
 farli vedere all'interno della pagina:
@@ -368,7 +368,271 @@ utili in alcuni casi.
 
 ## Ottimizziamo i dati
 
-NextJS inserisce all'interno di un file json che salva come cache tutti i dati che esportiamo dalla funzioen `getStaticProps`,
-anche se questi non vengono effettivamente utilizzati dalla pagina. Questo può essere un problema specialmente nel caso
-di blog post molto lunghi, in quanto, per quello che abbiamo fatto ora, anche i corpi dei post sono inviati
-al frontend.
+NextJS inserisce all'interno di un file json che salva come cache tutti i dati che esportiamo dalla funzioen `getStaticProps`, anche se questi non vengono effettivamente utilizzati dalla pagina. Questo può essere un problema specialmente nel caso
+di blog post molto lunghi, in quanto, per quello che abbiamo fatto ora, anche i corpi dei post sono inviati al frontend.
+
+Per questo motivo è molto importante e conveniente esportare tramite props solamente i dati che effettivamente servono che vengono utilizzati dal frontend. Possiamo farlo tramite una semplice map dei file.
+
+```ts
+export const getStaticProps = async () => {
+  // ...
+  const posts = allBlogPosts.map((post) => ({
+    title: post.title,
+    description: post.description,
+    date: post.date,
+  }));
+  // ...
+};
+```
+
+In questo modo esportiamo solamente i dati che effettivamente ci interessa usare, cioè i metadati del post (quello che in gatsby e in altri tool di questo tipo solitamente viene chiamato `frontMatter`).
+
+Ed ecco il nuovo risultato, decisamente più pulito, non credete?
+
+![Home Simple](./home-simple.png)
+
+## Un po' di refactoring
+
+Il nostro blog inizia a prendere forma, ma occorre fare un po' di refactoring e ottimizzazione del codice per migliorare la gestione di alcune cose. Abbiamo parlato di `frontMatter`, che in generale rappresenta tutti i metadati di un blog post che definiamo
+all'interno della cartella. Dato che questa informazioni adrà usata in vari punti, perchè non iniziamo a preparare una serie di funzioni utili per estrapolare questi dati?
+
+Questa sarà la scusa per fare anche un po' di esperienza con alcune funzionalità avanzate di typescript. Vediamo come fare.
+
+Iniziamo creando un nuovo cartella `models/posts.ts` all'interno del quale andremo ad inserire un po' di strumenti utili per prendere e gestire i nostri post.
+
+All'inteno di questo file inziamo a creare una funzione che estrapola il `frontMatter` dal post, in questo modo:
+
+```ts
+import type { BlogPost } from "contentlayer/generated";
+
+export const getPostFrontmatter = (post: BlogPost) => {
+  return {
+    title: post.title,
+    description: post.description,
+    date: post.date,
+  };
+};
+```
+
+Questa funzione fa il suo lavoro, ma ha un problema di base: ogni volta che aggiungiamo un nuovo parametro al nostro oggetto `BlogPost` dobbiamo modificarla per aggiungere le nuove informazioni.
+
+Per fortuna, però, possiamo usare in modo furbo l'unpacking di JavaScript per risolvere questo problema, vediamo come:
+
+```ts
+import type { BlogPost } from "contentlayer/generated";
+
+export const getPostFrontmatter = ({
+  _raw,
+  body,
+  ...frontMatter
+}: BlogPost) => {
+  return frontMatter;
+};
+```
+
+In questo modo, usando la sintassi
+
+```ts
+{_raw, body, ...frontMatter}: BlogPost
+```
+
+abbiamo estratto le informazioni base del blogPost e inserite all'interno della variabile `frontMatter`, esculdendo `_raw` e `body` che invece vengono gestire a parte, a questo
+punto possiamo ritornare dalla funzione solamente il contenuto di `frontMatter`.
+
+Sicuramente ci servirà anche avere esportato un tipo `BlogPostFrontMatter` da utilizzare all'interno dei vari componenti, e possiamo farlo in vari modi. Il primo è usare una type function di typescript chiamata `Omit`, che ci permette, appunto, di rimuovere alcuni campi da un oggetto, e possiamo farlo in questo modo:
+
+```ts
+export type BlogPostFrontMatter = Omit<BlogPost, "_raw" | "body">;
+```
+
+Ma esiste anche un medoto molto più veloce che ci permette, anche in questo caso, di ripeterci, la type function `ReturnType`, che ci permette di estrapolare il tipo di ritorno da una funzione che gli passiamo:
+
+```ts
+export type BlogPostFrontMatter = ReturnType<typeof getPostFrontmatter>;
+```
+
+Se mettete il mouse in VSCode sopra questo nuovo tipo che abbiamo definito, vedrete che conterrà solamente i dati che abbiamo esportato nel `frontMatter`
+
+```ts
+type BlogPostFrontMatter = {
+  _id: string;
+  type: "BlogPost";
+  title: string;
+  description: string;
+  date?: string | undefined;
+};
+```
+
+Per finire, possiamo usare la nuova funzione creata all'interno di `getStaticProps`
+
+```ts
+import { getPostFrontmatter } from "models/posts";
+// ...
+
+export const getStaticProps = async () => {
+  // ...
+  const posts = allBlogPosts.map(getPostFrontmatter);
+  // ...
+};
+```
+
+Ottenendo esattamente lo stesso risultato di prima, ma sicuramente con minore effort.
+
+## Preview dei BlogPost
+
+L'ultima attività di questo capitolo è quella di renderizzare un po' meglio la lista dei post, che al
+momento renderizziamo direttamente come JSON all'interno della homepage del nostro sito.
+
+Per farlo, andiamo a creare un nuovo componente nel file `components/post-preview.ts`, a cui passeremo
+il frontMatter del post e all'interno del quale andremo a mostrare, in modo graficamente carino, l'anteprima
+del nostro blog, con tutte le informazioni utili del caso.
+
+```tsx
+// components/post-preview.ts
+
+import type { BlogPostFrontMatter } from "models/posts";
+
+export const PostPreview = (frontmatter: BlogPostFrontMatter) => {
+  return (
+    <div>
+      <h2>{frontmatter.title}</h2>
+      {frontmatter.date && (
+        <time dateTime={frontmatter.date}>{frontmatter.date}</time>
+      )}
+      <p>{frontmatter.description}</p>
+    </div>
+  );
+};
+```
+
+Possiamo quindi usare il nuovo componente all'interno della pagina principale
+
+```tsx
+// pages/index.tsx
+
+import { PostPreview } from "components/post-preview";
+
+// ...
+
+const Home = ({ renderedTime, posts }: HomeProps) => {
+  return (
+    <div className="">
+      <Nav />
+      <h1> Home </h1>
+      <p>Renderizzato in data: {renderedTime}</p>
+
+      <h2> Tutti i miei post</h2>
+      {posts.map((post) => (
+        <PostPreview key={post._id} {...post} />
+      ))}
+      <Footer />
+    </div>
+  );
+};
+```
+
+Da cui il risultato è il seguente:
+
+![Home post preview](./home3.png)
+
+Che ovviamente non è super bello da vedere, ma abbiamo un punto di partenza e ora possiamo lavorare di stile con Tailwind.
+
+Non starò qui a spiegarvi nel dettaglio come rendere più carino con tailwind questo progetto, ma ecco il risultato finale di un po' di stili aggiunti:
+
+![Home 4](./home4.png)
+
+Ed il relarivo codice:
+
+```ts
+// pages/index.tsx
+
+// ...
+
+const Home = ({ renderedTime, posts }: HomeProps) => {
+  return (
+    <div className="">
+      <Nav />
+      <h1> Home </h1>
+      <p>Renderizzato in data: {renderedTime}</p>
+
+      <div className="max-w-2xl m-auto">
+        <h2 className="text-center font-bold text-2xl mt-5">
+          Tutti i miei post
+        </h2>
+        <div className="mt-4 grid gap-2 md:grid-cols-2 grid-cols-1">
+          {posts.map((post) => (
+            <PostPreview key={post._id} {...post} />
+          ))}
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+```
+
+```ts
+import type { BlogPostFrontMatter } from "models/posts";
+
+export const PostPreview = (frontmatter: BlogPostFrontMatter) => {
+  return (
+    <div className="shadow-md p-2 hover:ring-2 rounded-md">
+      <h2 className="text-lg font-semibold">{frontmatter.title}</h2>
+      {frontmatter.date && (
+        <time className="text-sm font-light" dateTime={frontmatter.date}>
+          {frontmatter.date}
+        </time>
+      )}
+      <p className="italic mt-2">{frontmatter.description}</p>
+    </div>
+  );
+};
+```
+
+Per finire, l'unica cosa che ci manca è aggiustare la data, vedete che il timestamp in questo modo non è dei migliori.
+
+Ci sono vari modi per farlo, possiamo usare delle librerie che ci permettono di fare parsing, ma io preferisco sempre usare la funzione `toLocaleDateString()` di date:
+
+```tsx
+export const PostPreview = (frontmatter: BlogPostFrontMatter) => {
+  return (
+    <div className="shadow-md p-2 hover:ring-2 rounded-md">
+      <h2 className="text-lg font-semibold">{frontmatter.title}</h2>
+      {frontmatter.date && (
+        <time className="text-sm font-light" dateTime={frontmatter.date}>
+          {formatDate(new Date(frontmatter.date))}
+        </time>
+      )}
+      <p className="italic mt-2">{frontmatter.description}</p>
+    </div>
+  );
+};
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("it-IT", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+```
+
+Da cui otteniamo questo risultato
+
+![Home 5](./home5.png)
+
+## Cosa abbiamo imparato
+
+Questo è stato decisamnete un capitolo impegnativo, in cui abbiamo imparato un po' di cose:
+
+1. Come organizzare i contenuti all'interno del nostro blog
+2. Cosa sono Markdown e MDX
+3. Come sfruttare ContentLayer per gestire i nostri contenuti
+4. Come estrapolare le informazioni da un oggetto sfruttando TypeScript
+
+Nel prossimo capito continueremo ad esplorare il mondo di NextJS e MDX per creare
+le pagine che mostrano il contenuto dei nostri post.
+
+Vi aspetto al prossimo capitolo!
+
+Il codice scritto in questo capito è disponibile su [GitHub](https://github.com/ludusrusso/next-js-megatutorial/tree/c5)

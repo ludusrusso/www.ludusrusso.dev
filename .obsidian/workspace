@@ -1,0 +1,96 @@
+{
+  "main": {
+    "id": "1e7a73994ae65b7a",
+    "type": "split",
+    "children": [
+      {
+        "id": "258c2602133fbda8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bfb83a5853c076e6",
+    "type": "split",
+    "children": [
+      {
+        "id": "30c731bd6e45439e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ddc82beb65ad8454",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "a04cd2c83453afd6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "31de3ce749f11789",
+    "type": "split",
+    "children": [
+      {
+        "id": "14e22f5d71983ca6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c1b45ca1ccb9dbaf",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "258c2602133fbda8",
+  "lastOpenFiles": [
+    "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
+    "courses/nextjs-megatutorial/00006-creating-blogs/home-simple.png",
+    "courses/nextjs-megatutorial/00006-creating-blogs/home.png"
+  ]
+}
