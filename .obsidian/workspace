@@ -4,15 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "258c2602133fbda8",
+        "id": "513f31c2cae1e151",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -53,7 +49,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 490.5
   },
   "right": {
     "id": "31de3ce749f11789",
@@ -69,7 +65,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -87,8 +82,11 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "258c2602133fbda8",
+  "active": "513f31c2cae1e151",
   "lastOpenFiles": [
+    "content/blog/it/2022-06-0004-telegram-bot-node-4/main.png",
+    "content/blog/it/2022-06-0004-telegram-bot-node-preparazione-deploy/index.md",
+    "content/blog/it/2022-06-0004-telegram-bot-node-preparazione-deploy/main.jpg",
     "courses/nextjs-megatutorial/00006-creating-blogs/index.md",
     "courses/nextjs-megatutorial/00006-creating-blogs/home-simple.png",
     "courses/nextjs-megatutorial/00006-creating-blogs/home.png"

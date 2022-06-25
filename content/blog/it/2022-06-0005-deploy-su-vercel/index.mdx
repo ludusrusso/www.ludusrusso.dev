@@ -1,0 +1,60 @@
+---
+title: Creare un Bot Telegram in Node.js - Deploy su Vercel
+date: "2022-06-23"
+tags:
+  - node
+  - telegram
+category: "blog"
+author: "ludusrusso"
+description: Come deployare il nostro Telegram bot GRATUITAMENTE su Vercel
+image: "./main.png"
+draft: true
+---
+
+Nel capitolo precedente abbiamo reso il nostro bot pronto per il deploy, e abbiamo visto come lanciarlo
+in ascolto in locale sul nostro computer o anche su un Raspberry Pi. Ovviamente questa soluzione
+è funzionale ma non va bene se il nostro bot deve essere sempre e costantemente connesso. Infatti un qualsiasi
+problema di casa, come internet che non va, o un blackout temporaneo (cosa successa a me ieri), è una causa
+di malfunzionamento e di un bot che non risponde.
+
+Fortunatamente, ormai, con
+
+Questa soluzione è più complicata ma più stabile, e potremmo sfruttare Vercel che è un servizio gratuito.
+Attenzione però, perchè Vercel è serverless e il bot si spegnerà automaticamente quando non ci saranno richieste per un po' di tempo.
+
+Questo vuole anche dire che alla prima richiesta ci metterà un po' (qualche secondo) a rispondere. Non è un grosso problema
+ma dobbiamo tenerne conto.
+
+Altro problema è il seguente: Vercel è un software freemium, in caso di molte richieste dovremmo pagarlo. Fortunatamente il
+piano gratuito è molto generoso e a meno di grandi numeri difficilmente riusciremo a superarlo.
+
+Ma per prima cosa dobbiamo fare un po' di lavoro.
+
+##### Step 1: registrazione a vercel
+
+Andiamo su [vercel.com](https://vercel.com/) e registriamoci. Vi consiglio, dato che avete già un account GitHub, di
+usare la registrazione con GitHub per rendere poi il collegamento con la nostra repo più immediata.
+
+##### Step 2: creiamo un nuovo progetto vercel
+
+Sulla nostra dashboard di Vercel dobbiamo creare un nuovo progetto cliccando sull'apposito tasto
+**New Project**
+
+![Vercel 1](./vercel1.png)
+
+Ci chiederà quindi di importare il progetto da una repository GitHub. Avendo
+fatto la registrazione con GitHub non dobbiamo fare
+altre cose, basta selezionare la nostra repository del nostro bot e cliccare su **Import**.
+
+![Vercel 2](./vercel2.png)
+
+A questo punto dobbiamo fornire alcune info al progetto.
+Non essendo un progetto con un framework noto, come può essere
+**NextJS**, Vercel ha bisogno di un piccolo aiuto per
+compiarlo e lanciarlo. Gli dobbiamo quindi dire che
+
+1. Per compilare il progetto deve usare il comando `npm run build`,
+2. La cartella di destinazione è `dist`,
+3. Per installare le dipendenze deve usare `npm install`,
+
+![Vercel 3](./vercel3.png)
