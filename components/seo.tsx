@@ -21,7 +21,7 @@ export const SEO = ({
   const siteTitle = title ? `${title} | ${config.title}` : config.title;
   image = image || config.image;
   if (!image.startsWith("http")) {
-    image = new URL(image, "https://" + config.baseUrl).href;
+    image = new URL(image, config.baseUrl).href;
   }
   description = description || config.description;
 
