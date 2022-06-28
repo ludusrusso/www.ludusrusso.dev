@@ -59,76 +59,97 @@ deployare il bot in modalità ascolto o webhook in base alle configurazioni. Use
 le variabili d'ambiente, che ci permettono in modo semplice e veloce di passare delle configurazioni al
 nostro codice dall'esterno in fase di esecuzione.
 
-Per fare questo, dobbiamo fare due cose:
+La mia idea è la seguente, creiamo due file di run, uno per il launch in loop ascolto e il secondo per la modalità webhook.
 
-Decidere quale variabile d'ambiente il nostro codice deve aspettarsi di ricevere, ed in particolare abbiamo bisogno di due variabili:
-
-- `TELEGRAM_BOT_TOKEN` (obbligatorio): il token del bot telegram e
-- `WEBHOOK_BASE_URL` (opzionale): l'url che dovremo usare per inviare le richieste al nostro bot.
-
-La mia idea è la segunete: in caso il `WEBHOOK_BASE_URL` non venga passato, possiamo lanciare il nostro bot in modalità ascolto, altrimenti
-lo lanciamo in modalità webhook, in questo modo non dobbiamo vedere dei codici diversi per gestire entrambe le modalità.
-
-In Node, possiamo accedere a valore di una variabile d'ambiente usando il comando `process.env.VARIABLE_NAME`. Quindi iniziamo ad aggiustare il codice
-che abbiamo protto in modo da gestire queste bariabili. Per il token, possiamo fare questo:
-
-#### Gestire il token del bot tramite variabile d'ambiente
+Per farlo, possiamo spostare la creazione del bot all'intero di un file separato (`src/bot.ts`) e poi esportarlo ed importarlo all'interdo di uno dei due file.
+Inoltre, per non dover leggere le variabili d'ambiente direttamente dal file `bot.ts`, possiamo wrappare tutto all'interno di una funzione che crea il bot, in questo modo:
 
 ```ts
+import { Telegraf } from "telegraf";
+
+export const createBot = (token: string): Telegraf => {
+  const bot = new Telegraf(token);
+  // configure bot
+  return bot;
+};
+```
+
+### `launch.ts` file
+
+Nel file `src/launch.ts` lanceremo il bot in modalità ascolto, con la funzione `bot.launch()`. Dobbiamo anche preparare il bot a leggere il token del bot tramite variabile d'ambiente `TELEGRAM_BOT_TOKEN`. Dobbiamo prima di tutto controllare che la variabile
+sia stata settata, in caso contrario generare un errore. E a quel punto possiamo creare e lanciare il nostro bot
+
+```ts
+import { createBot } from "./bot";
+
 const botToken = process.env.TELEGRAM_BOT_TOKEN;
 if (!botToken) {
   console.error("TELEGRAM_BOT_TOKEN not set");
   process.exit(1);
 }
-const bot = new Telegraf(botToken);
+
+const bot = createBot(botToken);
+bot.launch().then(() => console.log("🚀 Bot launched!"));
 ```
 
-Notare che in caso di token non creato, il nostro programma semplicetemente termina stampanto un messaggio di errore.
+### `wh.ts` file
 
-#### Gestire se deployare il bot usando webhooks o in ascolto
+In questo file dobbiamo lanciare il bot in ascolto tramite webhooks. Telegraf non ci mette a disposizione un web
+server già pronto, ma possiamo usarne uno di quelli che già esistono in rete come pacchetto npm. Io ho scelto in questo caso
+[fastify](https://www.fastify.io/).
 
-In questo cosa dobbiamo essenzialmente controllare la presenza di `WEBHOOK_BASE_URL` ed agire di conseguenze.
-
-```ts
-const whBaseUrl = process.env.WEBHOOK_BASE_URL;
-if (whBaseUrl) {
-  runWithWebhook(whBaseUrl); // dobbiamo creare questa funzione
-} else {
-  bot.launch();
-}
-```
-
-Per lanciare il bot tramite webhook abbiamo bisogno di un webserver, e per crearlo
-possiamo usare la libreria [fastify](https://www.fastify.io/).
-
-Quindi installiamola
+Per prima cosa installiamolo con il comando
 
 ```bash
 $ npm i fastify
 ```
 
-E a questo punto possiamo creare la funzione `runWithWebhook()` come segue:
+Per far funzioare il bot, dobbiamo dirgli a che URL deve rimanere in ascolto. Per farlo possiamo sfruttare una seconda variabile d'ambiente `WEBHOOK_BASE_URL`.
 
 ```ts
-function runWithWebhook(whBaseUrl: string) {
-  const path = `/telegraf/${bot.secretPathComponent()}`;
-  const url = new URL(path, whBaseUrl).href;
+import fastify from "fastify";
 
-  bot.telegram.setWebhook(url).then(() => {
-    logger.info({ url }, "Webhook is set!");
-  });
+import { createBot } from "./bot";
 
-  app.post(path, (req, rep) => bot.handleUpdate(req.body as any, rep.raw));
-
-  app
-    .listen({
-      host: "0.0.0.0",
-      port: appConfig.port,
-    })
-    .then(() => {
-      logger.info("🚀 Listening on port: " + appConfig.port);
-    });
+const botToken = process.env.TELEGRAM_BOT_TOKEN;
+if (!botToken) {
+  console.error("TELEGRAM_BOT_TOKEN not set");
+  process.exit(1);
 }
+
+const whBaseUrl = process.env.WEBHOOK_BASE_URL;
+if (!whBaseUrl) {
+  console.error("WEBHOOK_BASE_URL not set");
+  process.exit(1);
+}
+
+const port = Number(process.env.PORT) || 3000;
+
+const bot = createBot(botToken);
+
+const app = fastify();
+
+const path = `/telegraf/${bot.secretPathComponent()}`;
+const url = new URL(path, whBaseUrl).href;
+
+bot.telegram.setWebhook(url).then(() => {
+  console.log("Webhook is set!: ", url);
+});
+
+export default function handler(req: any, res: any) {
+  bot.handleUpdate(req.body as any, rep.raw));
+}
+
+app.post(path, (req, rep) => bot.handleUpdate(req.body as any, rep.raw));
+
+app
+  .listen({
+    host: "0.0.0.0",
+    port: port,
+  })
+  .then(() => {
+    console.log("🚀 Listening on port: " + port);
+  });
 ```
 
 #### Compiliamo il codice
@@ -203,7 +224,7 @@ comando `export`, e poi possiamo lanciare il bot con node.
 
 ```bash
 $ export TELEGRAM_BOT_TOKEN=<token>
-$ node ./dist/main.js
+$ node ./dist/launch.js
 ```
 
 Il bot inizierà ad ascoltare e a rispondere ai comandi!

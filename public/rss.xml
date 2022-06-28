@@ -4,11 +4,19 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Sat, 25 Jun 2022 13:41:10 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 28 Jun 2022 18:40:11 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
         <copyright>2016 - 2022 Ludovico Russo. All rights reserved.</copyright>
+        <item>
+            <title><![CDATA[Creare un Bot Telegram in Node.js - Deploy su Vercel]]></title>
+            <link>https://www.ludusrusso.dev/2022/06/deploy-su-vercel</link>
+            <guid>https://www.ludusrusso.dev/2022/06/deploy-su-vercel</guid>
+            <pubDate>Thu, 23 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Come deployare il nostro Telegram bot GRATUITAMENTE su Vercel]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
         <item>
             <title><![CDATA[Creare un Bot Telegram in Node.js - Prepariamoci per il Deploy]]></title>
             <link>https://www.ludusrusso.dev/2022/06/telegram-bot-node-preparazione-deploy</link>
