@@ -4,7 +4,7 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Tue, 28 Jun 2022 18:46:55 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 02 Jul 2022 14:09:02 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
@@ -458,19 +458,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Maker Faire 2017]]></title>
-            <link>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</link>
-            <guid>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</guid>
-            <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Ci vediamo alla Maker Faire, pav.6 B.01]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Un Video Corso di ROS]]></title>
             <link>https://www.ludusrusso.dev/2017/11/24/videocorso-web-ros</link>
             <guid>https://www.ludusrusso.dev/2017/11/24/videocorso-web-ros</guid>
             <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Il mio video corso su come utilizzare ROS è disponibile]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Maker Faire 2017]]></title>
+            <link>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</link>
+            <guid>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</guid>
+            <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ci vediamo alla Maker Faire, pav.6 B.01]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
