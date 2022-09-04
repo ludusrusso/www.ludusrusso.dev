@@ -28,6 +28,9 @@ export default function PathPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const components = {
     img: ({ src, alt }: { src: string; alt: string }) => {
+      if (src.startsWith("http")) {
+        return <img className="m-auto" alt={alt} src={src} />;
+      }
       return (
         <img
           className="m-auto"
