@@ -21,7 +21,7 @@ image: "./main.png"
 
 😱 Il problema però è che ad un certo punto un conto lo devi pagare, e ho imparato a mie spese che più il piano di ingresso gratuito è generoso più saranno i costi quando questo piano lo superi (come è giusto che sia). E ho anche imparato (come sta succedendo adesso per heroku) che anche i servizi migliori e più apprezzati possono cambiare policy e lasciarti a casa se non paghi.
 
-💪 Nel tempo però, facendo team up con altri sviluppatori che hanno lo stesso problema ([Jaga Santagostino](https://jagasantagostino.com/)) e sfruttando il mondo di #Kubernetes e della #CNCF, siamo riusciti a creare una soluzione a basso costo self hostata che ci costa poco (18€/mese) e che ci da tutte le feature di un sistema serverless professionale, in cui essenzialmente posso avere db a comando, deplorare servizi in pochi click, avere l’aggiornamento automatico delle mie repo quando la repo git si aggiorna ecc. ecc.
+💪 Nel tempo però, facendo team up con altri sviluppatori che hanno lo stesso problema ([Jaga Santagostino](https://jagasantagostino.com/)) e sfruttando il mondo di #Kubernetes e della #CNCF, siamo riusciti a creare una soluzione a basso costo self hostata che ci costa poco (18€/mese) e che ci da tutte le feature di un sistema serverless professionale, in cui essenzialmente posso avere db a comando, deployare servizi in pochi click, avere l’aggiornamento automatico delle mie repo quando la repo git si aggiorna ecc. ecc.
 
 Questa cosa la chiamiamo **kubernello**, ed il mio è ormai online da più di tre anni senza mai un down e hosta 3 servizi che ho sviluppato negli ultimi due anni di cui vado molto fiero:
 
@@ -40,12 +40,12 @@ da terminale entrare e gestire le risorse.
 
 [![asciicast](https://asciinema.org/a/sdD7s6keMpOz0fY6fe6Z0Bb5b.svg)](https://asciinema.org/a/sdD7s6keMpOz0fY6fe6Z0Bb5b)
 
-Grazie a questo posso usare qualsiasi soluzione open source nell'ecosistema kubernetes per monitorare e gestire il cluster, oltre a k9s (il mio proferito)
+Grazie a questo posso usare qualsiasi soluzione open source nell'ecosistema kubernetes per monitorare e gestire il cluster, oltre a k9s (il mio preferito)
 esistono anche progetti grafici con un'interfaccia grafica molto più carica come [lens](https://k8slens.dev/).
 
 ### Database
 
-Una delle ansie più grandi a gestire un servizio internamente da me è la gestione del DB, ma anche qui con Kubernetes e Help creare un database
+Una delle ansie più grandi a gestire un servizio è sicuramente il database, ma anche qui con Kubernetes e Help creare un database
 postgres è un attimo, e mi sono scritto un piccolo progetto che periodicamente backuppa il database su Google Storage, per essere sicuro di non
 perdere i dati. Attualmente nel mio cluster girano 3 istanze separate di postgre, tutte backuppate e senza che nessuna mi desse mai problemi.
 
