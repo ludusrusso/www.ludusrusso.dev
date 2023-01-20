@@ -4,7 +4,7 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Fri, 20 Jan 2023 09:20:29 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Jan 2023 10:32:19 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
@@ -474,19 +474,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Maker Faire 2017]]></title>
-            <link>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</link>
-            <guid>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</guid>
-            <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Ci vediamo alla Maker Faire, pav.6 B.01]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Un Video Corso di ROS]]></title>
             <link>https://www.ludusrusso.dev/2017/11/24/videocorso-web-ros</link>
             <guid>https://www.ludusrusso.dev/2017/11/24/videocorso-web-ros</guid>
             <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Il mio video corso su come utilizzare ROS è disponibile]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Maker Faire 2017]]></title>
+            <link>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</link>
+            <guid>https://www.ludusrusso.dev/2017/11/24/maker-faire-2017</guid>
+            <pubDate>Fri, 24 Nov 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ci vediamo alla Maker Faire, pav.6 B.01]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -723,18 +723,18 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Corso Arduino al Liceo Stampacchia - Grazie a tutti]]></title>
-            <link>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</link>
-            <guid>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</guid>
-            <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Accendere led con Arduino e Telegram]]></title>
             <link>https://www.ludusrusso.dev/2017/04/15/accendere-led-con-arduino-e-telegram</link>
             <guid>https://www.ludusrusso.dev/2017/04/15/accendere-led-con-arduino-e-telegram</guid>
             <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Un bot telegram in grado di controllare Arduino realizzato da 3 ragazzi del Liceo Stampacchia]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Corso Arduino al Liceo Stampacchia - Grazie a tutti]]></title>
+            <link>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</link>
+            <guid>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</guid>
+            <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>

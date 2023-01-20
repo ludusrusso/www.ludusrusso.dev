@@ -11,11 +11,11 @@ interface PostPreviewProps {
 
 export const PostPreview = ({ post, author }: PostPreviewProps) => {
   return (
-    (<Link
+    <Link
       href={post.href}
       key={post.title}
-      className="flex flex-col rounded-lg shadow overflow-hidden hover:shadow-xl hover:ring-2 cursor-pointer">
-
+      className="flex flex-col rounded-lg shadow overflow-hidden hover:shadow-xl hover:ring-2 cursor-pointer"
+    >
       <div className="flex-shrink-0">
         <Image
           height={250}
@@ -36,9 +36,7 @@ export const PostPreview = ({ post, author }: PostPreviewProps) => {
             ))}
           </div>
           <div className="block mt-2">
-            <p className="text-xl font-semibold text-gray-900">
-              {post.title}
-            </p>
+            <p className="text-xl font-semibold text-gray-900">{post.title}</p>
             <p className="mt-3 text-base text-gray-500">{post.description}</p>
           </div>
         </div>
@@ -69,8 +67,7 @@ export const PostPreview = ({ post, author }: PostPreviewProps) => {
           </div>
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
 

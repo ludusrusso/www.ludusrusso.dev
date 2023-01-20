@@ -25,7 +25,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
-    "next.config.js"
+    "next.config.js",
+    "paths.js"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

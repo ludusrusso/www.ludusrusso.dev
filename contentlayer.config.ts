@@ -147,7 +147,7 @@ export const BlogPost = defineDocumentType(() => ({
       type: "string",
       resolve: (post) => {
         const postPath = getPath(post.path, post._raw.sourceFilePath);
-        return path.join("/", postPath);
+        return path.join("/blog", postPath);
       },
     },
   },

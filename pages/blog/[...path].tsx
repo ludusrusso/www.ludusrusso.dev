@@ -5,11 +5,11 @@ import Head from "next/head";
 import Image from "next/image";
 import path from "path";
 import YouTube from "react-youtube";
-import { Footer } from "../components/footer";
-import { Nav } from "../components/nav";
-import { SEO } from "../components/seo";
-import { Tag } from "../components/tag";
-import { config } from "../utils/config";
+import { Footer } from "../../components/footer";
+import { Nav } from "../../components/nav";
+import { SEO } from "../../components/seo";
+import { Tag } from "../../components/tag";
+import { config } from "../../utils/config";
 import { TrackerApp } from "components/apps/tracker";
 import { InfoBox } from "components/mdx/info";
 import { allBlogPosts, BlogPost } from "contentlayer/generated";
@@ -17,7 +17,7 @@ import Link from "next/link";
 import { authors } from "authors";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
-const DiscussionEmbed = dynamic(() => import("../components/disquss"), {
+const DiscussionEmbed = dynamic(() => import("../../components/disquss"), {
   ssr: false,
 });
 
@@ -59,101 +59,101 @@ export default function PathPage({
 
   const MdxSection = useMDXComponent(post.body.code);
 
-  return <>
-    <SEO
-      title={post.title}
-      description={post.description}
-      image={post.imageUrl}
-      author={author.name}
-      date={new Date(post.date)}
-      type="article"
-    />
-
-    <Head>
-      <title>{post.title} | @ludusrusso </title>
-      <meta name="description" content={post.description} />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
-        integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
-        crossOrigin="anonymous"
+  return (
+    <>
+      <SEO
+        title={post.title}
+        description={post.description}
+        image={post.imageUrl}
+        author={author.name}
+        date={new Date(post.date)}
+        type="article"
       />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism-dark.min.css"
-      />
-    </Head>
-    <Nav />
 
-    <main className="wrapper py-10">
-      <h1 className="text-4xl md:text-6xl text-center py-2 sm:py-0 max-w-[900px] m-auto font-bold mt-10">
-        {post.title}
-      </h1>
+      <Head>
+        <title>{post.title} | @ludusrusso </title>
+        <meta name="description" content={post.description} />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css"
+          integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism-dark.min.css"
+        />
+      </Head>
+      <Nav />
 
-      <div className="flex flex-col items-center mt-10">
-        <div className="flex-shrink-0">
-          <a href={"#"}>
-            <span className="sr-only">{author.name}</span>
-            <Image
-              width={60}
-              height={60}
-              className="rounded-full"
-              src={author.profile}
-              alt=""
-            />
-          </a>
-        </div>
-        <div className="text-center">
-          <p className="text-sm font-medium text-gray-900">
-            <a href={"#"}>{author.name}</a>
-          </p>
-          <div className="flex space-x-1 text-sm text-gray-500">
-            <time dateTime={new Date(post.date).toISOString()}>
-              {post.publishedReadable}
-            </time>
-            <span aria-hidden="true">&middot;</span>
-            <span>lettura in {readTime(post.readTime)}</span>
+      <main className="wrapper py-10">
+        <h1 className="text-4xl md:text-6xl text-center py-2 sm:py-0 max-w-[900px] m-auto font-bold mt-10">
+          {post.title}
+        </h1>
+
+        <div className="flex flex-col items-center mt-10">
+          <div className="flex-shrink-0">
+            <a href={"#"}>
+              <span className="sr-only">{author.name}</span>
+              <Image
+                width={60}
+                height={60}
+                className="rounded-full"
+                src={author.profile}
+                alt=""
+              />
+            </a>
+          </div>
+          <div className="text-center">
+            <p className="text-sm font-medium text-gray-900">
+              <a href={"#"}>{author.name}</a>
+            </p>
+            <div className="flex space-x-1 text-sm text-gray-500">
+              <time dateTime={new Date(post.date).toISOString()}>
+                {post.publishedReadable}
+              </time>
+              <span aria-hidden="true">&middot;</span>
+              <span>lettura in {readTime(post.readTime)}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="m-auto w-full mt-3 flex gap-2 justify-center">
-        {post.tags.map((tag) => (
-          (<Link href={`/blog/tags#${tag}`} key={tag}>
+        <div className="m-auto w-full mt-3 flex gap-2 justify-center flex-wrap">
+          {post.tags.map((tag) => (
+            <Link href={`/blog/tags#${tag}`} key={tag}>
+              <Tag tag={tag} />
+            </Link>
+          ))}
+        </div>
 
-            <Tag tag={tag} />
+        <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">
+          <MdxSection components={components} />
+        </div>
 
-          </Link>)
-        ))}
-      </div>
+        <div className="prose prose-lg m-auto px-4 md:px-0">
+          {process.env.NODE_ENV === "production" && (
+            <DiscussionEmbed
+              shortname={config.disqus.shortname}
+              config={{
+                url: "https://" + path.join(config.hostname, post.postPath),
+                identifier: post.path,
+                title: post.title,
+                language: "it",
+              }}
+            />
+          )}
+        </div>
+      </main>
+      <Mailchimp title="Ti è piaciuto questo post?" />
 
-      <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">
-        <MdxSection components={components} />
-      </div>
-
-      <div className="prose prose-lg m-auto px-4 md:px-0">
-        {process.env.NODE_ENV === "production" && (
-          <DiscussionEmbed
-            shortname={config.disqus.shortname}
-            config={{
-              url: "https://" + path.join(config.hostname, post.postPath),
-              identifier: post.path,
-              title: post.title,
-              language: "it",
-            }}
-          />
-        )}
-      </div>
-    </main>
-    <Mailchimp title="Ti è piaciuto questo post?" />
-
-    <SimilarPosts posts={similarPosts} />
-    <Footer />
-  </>;
+      <SimilarPosts posts={similarPosts} />
+      <Footer />
+    </>
+  );
 }
 
 export async function getStaticPaths() {
@@ -212,10 +212,11 @@ const SimilarPosts = ({ posts }: { posts: BlogPost[] }) => {
             {posts.map((post) => (
               <div key={post.href}>
                 <dt className="text-lg leading-6 font-medium text-gray-900">
-                  <Link href={post.href} className="hover:text-green-800 underline">
-
+                  <Link
+                    href={post.href}
+                    className="hover:text-green-800 underline"
+                  >
                     {post.title}
-
                   </Link>
                 </dt>
                 <dd className="mt-2 text-base text-gray-500">
