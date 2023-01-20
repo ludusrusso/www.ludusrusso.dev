@@ -4,7 +4,7 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Fri, 20 Jan 2023 09:11:51 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Jan 2023 09:20:29 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
@@ -210,19 +210,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[GDG Cloud Milano - Live Code: CI/CD con Gitlab-CI e Kubernetes]]></title>
-            <link>https://www.ludusrusso.dev/2020/03/31/webminar-ci-cd-con-gitlabci-k8s</link>
-            <guid>https://www.ludusrusso.dev/2020/03/31/webminar-ci-cd-con-gitlabci-k8s</guid>
-            <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Il primo WebMeetup di GDG Cloud Milano è dedicato al mondo Kuberntes e Continuos Integration!]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Firebase Hosting: dalla creazione del progetto al sito online in 10 minuti]]></title>
             <link>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</link>
             <guid>https://www.ludusrusso.dev/2020/03/31/pubblicare-una-app-angular-in-10-minuti-con-firebase-hosting</guid>
             <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Vediamo come possiamo pubblicare un'app Angular dopo 10 minuti dalla creazione del progetto sfruttando firebase hosting]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[GDG Cloud Milano - Live Code: CI/CD con Gitlab-CI e Kubernetes]]></title>
+            <link>https://www.ludusrusso.dev/2020/03/31/webminar-ci-cd-con-gitlabci-k8s</link>
+            <guid>https://www.ludusrusso.dev/2020/03/31/webminar-ci-cd-con-gitlabci-k8s</guid>
+            <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Il primo WebMeetup di GDG Cloud Milano è dedicato al mondo Kuberntes e Continuos Integration!]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -699,19 +699,19 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
-            <title><![CDATA[Pillole di Python: pyscreenshot]]></title>
-            <link>https://www.ludusrusso.dev/2017/04/27/pillole-di-python-pyscreenshot</link>
-            <guid>https://www.ludusrusso.dev/2017/04/27/pillole-di-python-pyscreenshot</guid>
-            <pubDate>Thu, 27 Apr 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[Una semplice tutorial che mostra il funzionamento della libreria pyscreenshot]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
             <title><![CDATA[Implementiamo un bot Telegram con Python]]></title>
             <link>https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python</link>
             <guid>https://www.ludusrusso.dev/2017/04/27/implementiamo-un-bot-telegram-con-python</guid>
             <pubDate>Thu, 27 Apr 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Una semplice guida per iniziare a muovere i primi passi nello sviluppo di chatbot Telegram con Python]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
+            <title><![CDATA[Pillole di Python: pyscreenshot]]></title>
+            <link>https://www.ludusrusso.dev/2017/04/27/pillole-di-python-pyscreenshot</link>
+            <guid>https://www.ludusrusso.dev/2017/04/27/pillole-di-python-pyscreenshot</guid>
+            <pubDate>Thu, 27 Apr 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[Una semplice tutorial che mostra il funzionamento della libreria pyscreenshot]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
@@ -723,18 +723,18 @@
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>
+            <title><![CDATA[Corso Arduino al Liceo Stampacchia - Grazie a tutti]]></title>
+            <link>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</link>
+            <guid>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</guid>
+            <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Accendere led con Arduino e Telegram]]></title>
             <link>https://www.ludusrusso.dev/2017/04/15/accendere-led-con-arduino-e-telegram</link>
             <guid>https://www.ludusrusso.dev/2017/04/15/accendere-led-con-arduino-e-telegram</guid>
             <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Un bot telegram in grado di controllare Arduino realizzato da 3 ragazzi del Liceo Stampacchia]]></description>
-            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
-        </item>
-        <item>
-            <title><![CDATA[Corso Arduino al Liceo Stampacchia - Grazie a tutti]]></title>
-            <link>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</link>
-            <guid>https://www.ludusrusso.dev/2017/04/15/corso-arduino-al-liceo-stampacchia-grazie-a-tutti</guid>
-            <pubDate>Sat, 15 Apr 2017 00:00:00 GMT</pubDate>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
         <item>

@@ -19,7 +19,7 @@ export default function BookPage({
       <YouTube className="w-full aspect-video" videoId={videoId} />
     ),
     pre: (props: any) => <pre {...props} className="no-prose" />,
-  };
+  } as any;
 
   const MdxSection = useMDXComponent(book.body.code);
   return (

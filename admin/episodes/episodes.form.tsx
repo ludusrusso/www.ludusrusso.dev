@@ -1,5 +1,5 @@
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import type { Participant } from "@prisma/client";
 import { LabeledTextField } from "admin/components/text-field";
 import { zodValidate } from "admin/utils/zodValidation";
@@ -144,7 +144,7 @@ export default function SelectUserProps({
                       <span className="block truncate"> select one </span>
                     )}
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                      <SelectorIcon
+                      <ChevronUpDownIcon
                         className="h-5 w-5 text-stone-400"
                         aria-hidden="true"
                       />

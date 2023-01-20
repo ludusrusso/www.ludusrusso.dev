@@ -15,7 +15,7 @@ const EpisodesIndexPage = () => {
         {data?.episodes.map((e) => (
           <li key={e.id} className="ml-9">
             <Link href={`./episodes/${e.id}`}>
-              <a>{e.title}</a>
+              {e.title}
             </Link>
           </li>
         ))}

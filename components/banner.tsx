@@ -38,10 +38,12 @@ const BannerWithProps = ({ long, btn, short, Icon, href }: BannterProps) => {
               </p>
             </div>
             <div className="mt-0  w-auto flex-shrink-0">
-              <Link href={href}>
-                <a className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-teal-600 shadow-sm hover:bg-cyan-50">
-                  {btn}
-                </a>
+              <Link
+                href={href}
+                className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-teal-600 shadow-sm hover:bg-cyan-50">
+
+                {btn}
+
               </Link>
             </div>
           </div>

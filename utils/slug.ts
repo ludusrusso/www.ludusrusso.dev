@@ -13,12 +13,10 @@ export function slug(string: string) {
     .normalize()
     .split("")
     .reduce(function (result, ch) {
-      return (
-        result +
-        (charMap[ch] || (ch === replacement ? " " : ch)).replace(
-          /[^\w\s$*_+~.()'"!\-:@]+/g,
-          ""
-        )
+      return result +
+      (charMap[ch] || (ch === replacement ? " " : ch)).replace(
+        /[^\w\s$*_+~.()'"!\-:@]+/g,
+        ""
       );
     }, "");
 

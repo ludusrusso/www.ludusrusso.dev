@@ -76,14 +76,13 @@ export const NextEpisodeSection = ({ episode }: NextEpisodeProps) => {
             >
               Seguimi su Twitch
             </a>
-            <Link href="/episodes">
-              <a
-                type="button"
-                className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                href={`https://twitch.tv/${episode.twitch}`}
-              >
+            <Link
+              href="/episodes"
+              type="button"
+              className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              
                 Guarda Lista episodi
-              </a>
+              
             </Link>
           </div>
         </div>

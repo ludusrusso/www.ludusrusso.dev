@@ -12,14 +12,14 @@ export const MentoringLanding = () => {
         </p>
       </div>
 
-      <Link href="https://calendly.com/ludusrusso/one2one">
-        <a
-          rel="noreferrer"
-          target="_blank"
-          className="inline-block my-10 px-4 py-2 w-full bg-green-500 text-white text-xl font-bold text-center rounded hover:bg-green-700"
-        >
+      <Link
+        href="https://calendly.com/ludusrusso/one2one"
+        rel="noreferrer"
+        target="_blank"
+        className="inline-block my-10 px-4 py-2 w-full bg-green-500 text-white text-xl font-bold text-center rounded hover:bg-green-700">
+        
           Schedule a one2one session
-        </a>
+        
       </Link>
 
       <div className="prose prose-lg m-auto mt-6 px-4 md:px-0">

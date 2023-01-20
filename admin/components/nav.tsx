@@ -44,26 +44,27 @@ export const Nav = () => {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center text-indigo-600">
                   <Link href="/">
-                    <a>
-                      <BlogIcon size={32} />
-                    </a>
+
+                    <BlogIcon size={32} />
+
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   {navigation.map((nav) => (
-                    <Link href={nav.href} key={nav.href}>
-                      <a
-                        className={classNames(
-                          "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
-                          linkActive(nav.href)
-                            ? "border-indigo-500 text-gray-900"
-                            : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                        )}
-                      >
-                        {nav.name}
-                      </a>
-                    </Link>
+                    (<Link
+                      href={nav.href}
+                      key={nav.href}
+                      className={classNames(
+                        "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
+                        linkActive(nav.href)
+                          ? "border-indigo-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      )}>
+
+                      {nav.name}
+
+                    </Link>)
                   ))}
                 </div>
               </div>

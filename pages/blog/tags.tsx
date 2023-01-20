@@ -55,10 +55,10 @@ const TagInfo = (tag: TagPorps) => {
             {tag.posts.map((post) => (
               <div key={post.frontMatter.href}>
                 <dt className="text-lg leading-6 font-medium text-gray-900">
-                  <Link href={post.frontMatter.href}>
-                    <a className="hover:text-green-800 underline">
-                      {post.frontMatter.title}
-                    </a>
+                  <Link href={post.frontMatter.href} className="hover:text-green-800 underline">
+
+                    {post.frontMatter.title}
+
                   </Link>
                 </dt>
                 <dd className="mt-2 text-base text-gray-500">
