@@ -4,9 +4,8 @@ import Router from "next/router";
 import { trpc } from "utils/trpc";
 
 const NewParticipantPage = () => {
-  const { mutateAsync: createParticipant } = trpc.useMutation(
-    "participants.create"
-  );
+  const { mutateAsync: createParticipant } = trpc.participants.create.useMutation(
+);
 
   return (
     <AdminLayout>

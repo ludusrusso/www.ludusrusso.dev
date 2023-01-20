@@ -55,7 +55,7 @@ export default function PathPage({
     pre: (props: any) => <pre {...props} className="no-prose" />,
     TrackerApp: TrackerApp,
     InfoBox: InfoBox,
-  };
+  } as any;
 
   const MdxSection = useMDXComponent(post.body.code);
 

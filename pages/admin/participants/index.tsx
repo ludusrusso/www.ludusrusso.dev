@@ -3,10 +3,7 @@ import Link from "next/link";
 import { trpc } from "utils/trpc";
 
 const ParticipantsIndexPage = () => {
-  const { data, isLoading, error } = trpc.useQuery([
-    "participants.getAll",
-    { skip: 0, take: 100 },
-  ]);
+  const { data, isLoading, error } = trpc.participants.getAll.useQuery({ skip: 0, take: 100 });
   if (isLoading) {
     return <p>loading</p>;
   }

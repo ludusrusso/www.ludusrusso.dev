@@ -1,11 +1,8 @@
-import { withTRPC } from "@trpc/next";
-import { AuthProvider } from "admin/auth/auth.provider";
-import { authCli } from "admin/services/auth.service";
 import { AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { AppRouter } from "trpc/server";
+import { trpc } from "utils/trpc";
 import { SEO } from "../components/seo";
 import "../styles/globals.css";
 import * as ga from "../utils/ga";
@@ -28,7 +25,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, [router.events]);
 
   return (
-    <AuthProvider>
+    <>
       <Head>
         <meta
           name="description"
@@ -113,25 +110,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </Head>
       <SEO />
       <Component {...pageProps} />
-    </AuthProvider>
+    </>
   );
 };
 
-export default withTRPC<AppRouter>({
-  config({ ctx }) {
-    // const url = process.env.VERCEL_URL
-    //   ? `https://${process.env.VERCEL_URL}/api/trpc`
-    //   : "http://localhost:3000/api/trpc";
-
-    return {
-      url: "/api/trpc",
-      headers: async () => {
-        const { token } = authCli.currentUser;
-        return {
-          authorization: token ? `Bearer ${token}` : "",
-        };
-      },
-    };
-  },
-  ssr: false,
-})(MyApp);
+export default trpc.withTRPC(MyApp);

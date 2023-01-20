@@ -13,12 +13,9 @@ const EpisodePage = () => {
   const router = useRouter();
 
   const episodeId = router.query.episodeId as string;
-  const { data } = trpc.useQuery(["participants.getAll", {}]);
-  const { data: episode } = trpc.useQuery([
-    "episodes.getById",
-    { id: episodeId },
-  ]);
-  const { mutateAsync: createEpisode } = trpc.useMutation("episodes.create");
+  const { data } = trpc.participants.getAll.useQuery({});
+  const { data: episode } = trpc.episodes.getById.useQuery({ id: episodeId });
+  const { mutateAsync: createEpisode } = trpc.episodes.create.useMutation();
   const coverRef = useRef<HTMLDivElement>(null);
   return (
     <AdminLayout>

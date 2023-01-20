@@ -3,10 +3,7 @@ import Link from "next/link";
 import { trpc } from "utils/trpc";
 
 const EpisodesIndexPage = () => {
-  const { data, isLoading } = trpc.useQuery([
-    "episodes.getAll",
-    { skip: 0, take: 100 },
-  ]);
+  const { data, isLoading } = trpc.episodes.getAll.useQuery({ skip: 0, take: 100 });
   if (isLoading) {
     return <p>loading</p>;
   }

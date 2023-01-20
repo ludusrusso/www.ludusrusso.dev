@@ -4,8 +4,8 @@ import Router from "next/router";
 import { trpc } from "utils/trpc";
 
 const NewEpisodePage = () => {
-  const { data } = trpc.useQuery(["participants.getAll", {}]);
-  const { mutateAsync: createEpisode } = trpc.useMutation("episodes.create");
+  const { data } = trpc.participants.getAll.useQuery({});
+  const { mutateAsync: createEpisode } = trpc.episodes.create.useMutation();
 
   return (
     <AdminLayout>
