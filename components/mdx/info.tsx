@@ -11,7 +11,7 @@ export const InfoBox = ({
 }) => {
   const t = types[type];
   return (
-    <div className={`${t.bgColor} px-4 rounded-lg shadow-lg pb-2`}>
+    <div className={`${t.bgColor} px-4 rounded-lg pb-2`}>
       <div className="not-prose flex pt-4">
         <span>
           <InformationCircleIcon className={`h-8 w-8 ${t.iconColor}`} />
@@ -27,7 +27,7 @@ export const InfoBox = ({
 const types = {
   info: {
     icon: InformationCircleIcon,
-    bgColor: "bg-blue-200",
+    bgColor: "bg-blue-100",
     iconColor: "text-blue-400",
   },
   warn: {

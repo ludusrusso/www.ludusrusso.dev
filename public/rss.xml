@@ -4,16 +4,24 @@
         <title>Blog di Ludovico Russo</title>
         <link>https://www.ludusrusso.dev</link>
         <description>Il mio blog sulle mie sperimentazioni</description>
-        <lastBuildDate>Sun, 04 Sep 2022 13:33:16 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Jan 2023 07:57:59 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>it</language>
         <copyright>2016 - 2022 Ludovico Russo. All rights reserved.</copyright>
         <item>
+            <title><![CDATA[How to use kannon to send transactional emails in Space Hackability]]></title>
+            <link>https://www.ludusrusso.dev/2023/01/kannon-hackability</link>
+            <guid>https://www.ludusrusso.dev/2023/01/kannon-hackability</guid>
+            <pubDate>Fri, 20 Jan 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Kannon is my new side project to send transactional emails. In this post I show you how to use it to send emails in Space Hackability.]]></description>
+            <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
+        </item>
+        <item>
             <title><![CDATA[Kubernello - Il mio cloud personale lowcost]]></title>
             <link>https://www.ludusrusso.dev/2022/09/kubernello</link>
             <guid>https://www.ludusrusso.dev/2022/09/kubernello</guid>
-            <pubDate>Thu, 01 Sep 2022 00:00:00 GMT</pubDate>
+            <pubDate>Sun, 04 Sep 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Come ho costruito un cloud personale low cost usando kubernetes e un VPS]]></description>
             <author>ludovico@ludusrusso.space (Ludovico Russo)</author>
         </item>
