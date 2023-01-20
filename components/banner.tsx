@@ -1,4 +1,4 @@
-import { BookOpenIcon, XIcon } from "@heroicons/react/outline";
+import { BookOpenIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { ComponentProps, FC } from "react";
 

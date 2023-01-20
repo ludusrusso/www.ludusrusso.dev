@@ -321,10 +321,10 @@ Andiamo quindi a posizionare all'interno di questa nav il nostro componente che 
 quando la navbar è collassata (quindi in formato mobile). Per ora facciamo finta che ci sia solo questo.
 
 Questo componente dovrà mostrare a sinistra l'icona delle casa e a destra quella del menu. Troviamo entrambe
-le icone in `@heroicons/react/outline`.
+le icone in `@heroicons/react/24/outline`.
 
 ```tsx
-import { HomeIcon, MenuIcon } from "@heroicons/react/outline";
+import { HomeIcon, Bars3Icon } from "@heroicons/react/24/outline";
 
 export const Nav = () => {
   return (
@@ -334,7 +334,7 @@ export const Nav = () => {
           <HomeIcon className="h-8 w-8"></HomeIcon>
         </a>
         <button>
-          <MenuIcon className="h-8 w-8"></MenuIcon>
+          <Bars3Icon className="h-8 w-8"></Bars3Icon>
         </button>
       </div>
     </nav>
@@ -368,7 +368,7 @@ Questo componente deve sempre wrappare `<a>`, e il link `href` lo imposteremo a 
 Questa sintassi permette a NextJS di essere più veloce a renderizzare la navigazione.
 
 ```tsx
-import { HomeIcon, MenuIcon } from "@heroicons/react/outline";
+import { HomeIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export const Nav = () => {
@@ -381,7 +381,7 @@ export const Nav = () => {
           </a>
         </Link>
         <button>
-          <MenuIcon className="h-8 w-8"></MenuIcon>
+          <Bars3Icon className="h-8 w-8"></Bars3Icon>
         </button>
       </div>
     </nav>
@@ -403,7 +403,7 @@ const Menu = () => {
   return (
     <Popover className="relative">
       <Popover.Button>
-        <MenuIcon className="h-8 w-8" />
+        <Bars3Icon className="h-8 w-8" />
       </Popover.Button>
 
       <Popover.Panel className="absolute z-10">
@@ -419,7 +419,7 @@ const Menu = () => {
 };
 ```
 
-Dove, come vedete, ho inserito il bottone ` <MenuIcon className="h-8 w-8" />` all'interno del componente `<Popover.Button>`.
+Dove, come vedete, ho inserito il bottone ` <Bars3Icon className="h-8 w-8" />` all'interno del componente `<Popover.Button>`.
 
 Possiamo usare il nostro menu in questo modo all'interno del componente `Nav`:
 
@@ -450,7 +450,7 @@ const Menu = () => {
   return (
     <Popover>
       <Popover.Button>
-        <MenuIcon className="h-8 w-8" />
+        <Bars3Icon className="h-8 w-8" />
       </Popover.Button>
 
       <Popover.Panel className="absolute z-10 inset-x-0 ">
@@ -483,9 +483,9 @@ const Menu = () => {
         <>
           <Popover.Button>
             {open ? (
-              <XIcon className="h-8 w-8" />
+              <XMarkIcon className="h-8 w-8" />
             ) : (
-              <MenuIcon className="h-8 w-8" />
+              <Bars3Icon className="h-8 w-8" />
             )}
           </Popover.Button>
 
@@ -528,14 +528,14 @@ una sintassi molto comune in React e quindi preparatevi a trovarla spesso in gir
 Un altro esempio di operatore condizionale è quello che abbiamo usato per renderizzare le icone:
 
 ```tsx
-open ? <XIcon className="h-8 w-8" /> : <MenuIcon className="h-8 w-8" />;
+open ? <XMarkIcon className="h-8 w-8" /> : <Bars3Icon className="h-8 w-8" />;
 ```
 
 In questo caso abbiamo usato il ternary operator `?:`, che non è altro che un `if else` condensato. L'operatore
 valuta il valore del primo elemento (`open`). Se è vero ritorna il secondo elemento, altrimenti il terzo.
 Quindi questa operazione si legge così:
 
-> Se il pannello è vero (`open==true)` allora renderizza l'icona `<XIcon />`, altrimenti l'icona `<MenuIcon />`.
+> Se il pannello è vero (`open==true)` allora renderizza l'icona `<XMarkIcon />`, altrimenti l'icona `<Bars3Icon />`.
 
 Se provate a il componente a questo punto vedrete che l'icona cambia se questo è aperto o chiuso.
 
@@ -569,9 +569,9 @@ const Menu = ({ menu }: MenuProps) => {
         <>
           <Popover.Button>
             {open ? (
-              <XIcon className="h-8 w-8" />
+              <XMarkIcon className="h-8 w-8" />
             ) : (
-              <MenuIcon className="h-8 w-8" />
+              <Bars3Icon className="h-8 w-8" />
             )}
           </Popover.Button>
 
