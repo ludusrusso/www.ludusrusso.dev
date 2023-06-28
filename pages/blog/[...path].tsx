@@ -191,7 +191,7 @@ export async function getStaticProps({
   return {
     props: {
       post: post,
-      author: authors.find((a) => a.name === post.author) || authors[0],
+      author: authors.find((a) => a.id === post.author) || authors[0],
       similarPosts: similarPosts,
     },
   };
