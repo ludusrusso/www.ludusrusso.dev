@@ -1,6 +1,4 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { db } from "services/db";
-
 import React from "react";
 import { SEO } from "components/seo";
 import { Nav } from "components/nav";
@@ -12,6 +10,7 @@ import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
 // @ts-ignore
 import prism from "@mapbox/rehype-prism";
+import { episodes } from "episodes";
 
 const EpisodePage = ({
   episode,
@@ -76,8 +75,7 @@ const EpisodePage = ({
 export default EpisodePage;
 
 export const getStaticPaths = async () => {
-  const episodes = await db.episode.findMany();
-  const paths = episodes.map((episode) => {
+  const paths = episodes().map((episode) => {
     return {
       params: {
         episodeId: episode.id,
@@ -96,9 +94,7 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<{
   episodeId: string;
 }>) => {
-  const episode = await db.episode.findUnique({
-    where: { id: params!.episodeId! },
-  });
+  const episode = episodes().find((e) => e.id === params?.episodeId);
 
   const mdxSource = await serialize(episode!.body, {
     mdxOptions: {

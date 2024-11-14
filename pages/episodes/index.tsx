@@ -1,8 +1,8 @@
 import { Footer } from "components/footer";
 import { Nav } from "components/nav";
 import { SEO } from "components/seo";
+import { episodes } from "episodes";
 import { InferGetStaticPropsType } from "next";
-import { db } from "services/db";
 import { formatDate } from "utils/episodeDate";
 import { getParticipantImage } from "utils/participants";
 
@@ -80,23 +80,9 @@ const EpisodeLink = ({ episode }: { episode: Episode }) => {
 export default EpisodesPage;
 
 export const getStaticProps = async () => {
-  const episodes = await db.episode.findMany({
-    orderBy: {
-      scheduledTime: "desc",
-    },
-    include: {
-      host: true,
-      guests: {
-        include: {
-          guest: true,
-        },
-      },
-    },
-  });
-
   return {
     props: {
-      episodes,
+      episodes: episodes(),
     },
     revalidate: 60 * 60,
   };

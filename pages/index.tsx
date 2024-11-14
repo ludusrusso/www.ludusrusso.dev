@@ -4,12 +4,9 @@ import { generateRSSFeed } from "build-feed";
 import { Banner } from "components/banner";
 import { Mailchimp } from "components/mailchimp";
 import { MentoringLanding } from "components/mentoring";
-import { NextEpisodeSection } from "components/next-episode";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { Fragment, SVGProps } from "react";
-import { db } from "services/db";
-import { datePlusHours } from "utils/dates";
 import { getBlogData } from "utils/getBlogData";
 import { Footer } from "../components/footer";
 import { BlogIcon } from "../components/icon";
@@ -19,15 +16,12 @@ import { navigation } from "../utils/nav";
 
 export default function Home({
   posts,
-  nextEpisode,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <SEO description="Mi piace sperimentare e scoprire nuove tecnologie. Faccio molti esperimenti online in livestream, seguimi per scoprire ogni giorno qualcosa di nuovo insieme a tanti programmatore esperti!" />
       <Banner />
       <HeroSection />
-
-      {nextEpisode && <NextEpisodeSection episode={nextEpisode} />}
 
       <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
         <div className="absolute inset-0">
@@ -70,27 +64,8 @@ export async function getStaticProps() {
     })
     .filter((_, idx) => idx < 9);
 
-  const nextEpisode = await db.episode.findFirst({
-    where: {
-      scheduledTime: {
-        gte: datePlusHours(-1.5),
-      },
-    },
-    orderBy: {
-      scheduledTime: "asc",
-    },
-    include: {
-      host: true,
-      guests: {
-        include: {
-          guest: true,
-        },
-      },
-    },
-  });
-
   return {
-    props: { posts, nextEpisode: nextEpisode || undefined },
+    props: { posts },
     revalidate: 10 * 60,
   };
 }
@@ -175,14 +150,13 @@ const HeroSection = () => {
                 </div>
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                   {navigation.map((item) => (
-                    (<Link
+                    <Link
                       key={item.name}
                       href={item.href}
-                      className="font-medium text-gray-500 hover:text-gray-900">
-
+                      className="font-medium text-gray-500 hover:text-gray-900"
+                    >
                       {item.name}
-
-                    </Link>)
+                    </Link>
                   ))}
                 </div>
               </nav>

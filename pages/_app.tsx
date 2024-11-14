@@ -2,7 +2,6 @@ import { AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { trpc } from "utils/trpc";
 import { SEO } from "../components/seo";
 import "../styles/globals.css";
 import * as ga from "../utils/ga";
@@ -114,4 +113,4 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   );
 };
 
-export default trpc.withTRPC(MyApp);
+export default MyApp;
