@@ -1,0 +1,146 @@
+---
+title: Testing Background Task in Golang
+slug: testing-background-task-go
+date: 2024-11-14
+description: How to test background tasks using golang and testify.
+image: ./main.jpg
+author: ludusrusso
+tags:
+  - golang
+  - goroutine
+  - testing
+  - testify
+lang: en
+---
+
+In recent times, I’ve been working on developing tools in Golang to manage tasks that happen in the background.  
+The main idea is to use a database table to store the tasks that need to be executed, and then run parallel goroutines to process them.
+
+Testing the processing of a single task is quite straightforward: just run the processing function within the test and check the result. However, I’ve encountered some difficulties in testing the entire process, especially when it comes to the task processing lifecycle.
+
+In this article, I’ll share my experiments with this type of testing and the solution I’m currently using (after several iterations) that has proven effective.
+
+## The Runnable Interface
+
+I have an interface called `Runnable` that represents an infinite loop—a routine that runs indefinitely until it’s stopped externally.
+
+```go
+type Runnable interface {
+  Run(context.Context) error
+}
+```
+
+As you can see, the interface is very simple, and I use it like this:
+
+```go
+package main
+
+func main() {
+  ctx, cancel := context.WithCancel(context.Background())
+
+  // manage here in some way the closure of the program that calls cancel
+
+  r := NewMyRunner(...)
+  err := r.Run(ctx)
+  if err != nil {
+    panic(err)
+  }
+}
+```
+
+What my interface does is listen for events (usually those that populate a specific column in the database) and then process the generated data.
+
+This is achieved by implementing at least two separate loops:
+- The first loop is responsible for preparing the data and inserting it into a queue (a channel in Go).
+- The second loop picks the data one by one from the channel and processes it.
+
+I have multiple objects that implement the `Runnable` interface, each managing multiple infinite loops within that perform specific operations.
+
+The challenge arises when I want to write a test that can verify the functionality of a `Runnable`, as the interface provides no way of knowing the status of the tasks in advance.
+
+## Testing the Runnable Interface
+
+### Using a Timeout
+
+The first approach I tried to test the `Runnable` interface was to stop the runnable after a set amount of time and check if the process executed correctly.  
+This approach works but is not very reliable because the waiting time is arbitrary, which can lead to flaky tests or unnecessarily long test durations.
+
+Here’s an example:
+
+```go
+func TestRunnableWithTimeout(t *testing.T) {
+  ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+  defer cancel()
+
+  r := NewMyRunner(...)
+  err := r.Run(ctx)
+ 
+  // assert the result
+}
+```
+
+### Using a Completion Guard Goroutine
+
+The second approach was to run a background goroutine that checks if the background task has been executed and then stops the runnable interface.  
+This way, I don’t need to wait for a set amount of time and can stop the runnable as soon as the task is completed.
+
+Unfortunately, this approach is quite complex to write and maintain.
+
+```go
+func TestRunnableWithCompletionGuard(t *testing.T) {
+  ctx, cancel := context.WithCancel(context.Background())
+  defer cancel()
+
+  go func() {
+    for {
+      // check if the task is completed
+      if isCompleted() {
+        cancel()
+        return
+      }
+      time.Sleep(100 * time.Millisecond)
+    }
+  }()
+
+  r := NewMyRunner(...)
+  err := r.Run(ctx)
+ 
+  // assert the result
+}
+```
+
+### Using Testify with assert.EventuallyWithT
+
+The solution I’m using now is to use the `assert.EventuallyWithT` function from the [Testify library](https://github.com/stretchr/testify).
+
+This function allows me to check if a certain condition is met within a specified time, running the test function repeatedly until the condition is met or the time expires.
+
+In this approach, I can simply run the `Runnable` interface in a goroutine and then check if the task is completed.
+
+```go
+func TestRunnableWithEventually(t *testing.T) {
+  ctx, cancel := context.WithCancel(context.Background())
+  defer cancel()
+
+  r := NewMyRunner(...)
+  go func() {
+    err := r.Run(ctx)
+    if err != nil {
+      t.Errorf("error: %v", err)
+    }
+  }()
+
+  assert.EventuallyWithT(t, func(t *testing.T) {
+    // assert the result
+  }, 5 * time.Second, 100 * time.Millisecond)
+}
+```
+
+This approach is both simple and reliable, and I can use it in all my tests.
+
+## Wrapping Up
+
+In this article, I’ve shown how to test a background task in Golang using the Testify library.  
+I covered three different approaches, and the final one is the method I’m currently using.
+
+I hope this article helps you with your tests, and if you have any suggestions or improvements, please let me know in the comments below.
