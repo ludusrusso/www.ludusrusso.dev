@@ -1,14 +1,9 @@
 import styled from "@emotion/styled";
-import { Episode, EpisodeGuest, Participant } from "@prisma/client";
+import { Episode, EpisodeParticipant } from "episodes";
 import { getParticipantImage } from "utils/participants";
 
 export interface EventCoverProps {
-  episode: Episode & {
-    host: Participant;
-    guests: (EpisodeGuest & {
-      guest: Participant;
-    })[];
-  };
+  episode: Episode;
 }
 
 export const EventCover = ({ episode }: EventCoverProps) => {
@@ -80,7 +75,7 @@ const CoverStyled = styled.div`
   transform: matrix(-1, 0, 0, 1, 0, 0);
 `;
 
-const SmallUser = ({ guest }: { guest: Participant }) => {
+const SmallUser = ({ guest }: { guest: EpisodeParticipant }) => {
   return (
     <div className="flex flex-col items-center">
       <div className="w-[200px] aspect-square overflow-hidden rounded-full border-[6px] border-solid border-green-500">
@@ -102,7 +97,7 @@ const SmallUser = ({ guest }: { guest: Participant }) => {
   );
 };
 
-const BigUser = ({ guest }: { guest: Participant }) => {
+const BigUser = ({ guest }: { guest: EpisodeParticipant }) => {
   return (
     <div className="flex flex-col items-center ">
       <div className="rounded-full w-[300px] aspect-square overflow-hidden block border-[6px] border-solid border-green-500">

@@ -1,7 +1,7 @@
-import { Participant } from "@prisma/client";
+import { type EpisodeParticipant } from "episodes";
 
 export const getParticipantImage = (
-  participant: Pick<Participant, "github" | "avatar">,
+  participant: Pick<EpisodeParticipant, "github" | "avatar">,
   size: number = 500
 ) => {
   if (!participant.avatar) {

@@ -1,4 +1,32 @@
-export function episodes() {
+export type EpisodeParticipant = {
+  id: string;
+  name: string;
+  email: string;
+  github: string | null;
+  bio: string;
+  avatar: string | null;
+  twitter?: string | null;
+  linkedin?: string | null;
+  updatedAt: string;
+};
+
+export type Episode = {
+  id: string;
+  title: string;
+  description: string;
+  body: string;
+  resources: string | null;
+  image: string | null;
+  hostId: string;
+  youtube: string | null;
+  twitch: string;
+  category: string;
+  scheduledTime: Date;
+  host: EpisodeParticipant;
+  guests: { guest: EpisodeParticipant }[];
+};
+
+export function episodes(): Episode[] {
   return [
     {
       id: "cl1xs4jmb006009l0te2teq9y",
